@@ -1,0 +1,16 @@
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+header{
+    background-color: var(--card-bg);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
+}
+
+.listPackageContainer{
+    margin: 50px 0;
+}

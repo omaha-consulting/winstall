@@ -1,3 +1,12 @@
+:root {
+    --main-bg: #fff;
+    --card-bg: #e9eaed;
+    --textColor: #333;
+    --altTextColor: #fff;
+}
+
 body{
     font-family: 'Nunito', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--textColor);
 }
