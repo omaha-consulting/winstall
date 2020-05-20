@@ -10,7 +10,7 @@ let PopularApps = ({selectApp}) => {
   useEffect(() => {
       if(randomPopularApps.length != 0) return;
 
-      let generatePopularApps = shuffleArray(Object.entries(PopularAppsList)).slice(0, 6);
+      let generatePopularApps = shuffleArray(Object.values(PopularAppsList)).slice(0, 6);
 
       setRandomPopularApps(generatePopularApps);
   })
@@ -22,10 +22,9 @@ let PopularApps = ({selectApp}) => {
       <ul className="appList">
         {randomPopularApps.map((app) => (
           <SingleApp
-            key={app[0]}
-            name={app[1].name}
-            img={app[1].img}
-            moniker={app[0]}
+            key={app.id}
+            name={app.name}
+            img={app.img}
             onClick={(isSelected) => selectApp(app, isSelected)}
           />
         ))}

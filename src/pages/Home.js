@@ -33,7 +33,7 @@ function Home() {
     if(isSelected){
       setSelectedApps([...selectedApps, app]);
     } else{
-      let findIndex = selectedApps.findIndex(i => i.name === app.name)
+      let findIndex = selectedApps.findIndex(i => i.id === app.id)
       let updatedSelectedApps = selectedApps.filter(
         (a, index) => index !== findIndex
       );

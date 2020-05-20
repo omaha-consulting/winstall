@@ -1,62 +1,72 @@
 {
     "tweeten": {
         "img": "https://raw.githubusercontent.com/MehediH/Tweeten/master/inc/images/logo-b.png",
-        "name": "Tweeten"
+        "name": "Tweeten",
+        "id": "MehediHassan.Tweeten" 
     },
     "spotify": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1200px-Spotify_logo_without_text.svg.png",
-        "name": "Spotify"
+        "name": "Spotify",
+        "id": "Spotify.Spotify"
     },
     "discord": {
         "img": "https://discord.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg",
-        "name": "Discord"
+        "name": "Discord",
+        "id": "Discord.Discord"
     },
     "vscode": {
         "img": "https://code.visualstudio.com/assets/updates/1_35/logo-stable.png",
-        "name": "Visual Studio Code"
+        "name": "Visual Studio Code",
+        "id": "Microsoft.VisualStudioCode"
     },
     "chrome": {
         "img": "https://vignette.wikia.nocookie.net/logopedia/images/c/ca/Google_Chrome_for_Android_Icon_2016.svg/revision/latest/scale-to-width-down/200?cb=20160305053723",
-        "name": "Google Chrome"
+        "name": "Google Chrome",
+        "id": "Google.Chrome"
     },
     "firefox": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png",
-        "name": "Mozilla Firefox"
+        "name": "Mozilla Firefox",
+        "id": "Mozilla.Firefox"
     },
     "notion": {
         "img": "https://upload.wikimedia.org/wikipedia/en/4/45/Notion_app_logo.png",
-        "name" : "Notion"
+        "name" : "Notion",
+        "id": "Notion.Notion"
     },
     "python": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png",
-        "name" : "python"
+        "name" : "python",
+        "id": "Python.Python"
     },
     "whatsapp": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/662px-WhatsApp.svg.png",
-        "name" : "WhatsApp"
+        "name" : "WhatsApp",
+        "id": "WhatsApp.WhatsApp"
     },
     "zoom": {
         "img": "https://zoom.us/docs/ent/media-assets/img/desktop-logo-zoombrand.png",
-        "name" : "zoom"
+        "name" : "zoom",
+        "id": "Zoom.Zoom"
     },
     "dropbox": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Dropbox_Icon.svg/1200px-Dropbox_Icon.svg.png",
-        "name" : "Dropbox"
-    },
-    "lastpass": {
-        "img": "https://lastpass.com/images/lp-logo-2016.png",
-        "name" : "LastPass"
+        "name" : "Dropbox",
+        "id": "Dropbox.Dropbox"
     },
     "npp": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Notepad%2B%2B_Logo.svg/1200px-Notepad%2B%2B_Logo.svg.png",
-        "name" : "Notepad++"
+        "name" : "Notepad++",
+        "id": "Notepad++.Notepad++"
     },
     "node": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png",
-        "name" : "Node.js"
+        "name" : "Node.js",
+        "id": "OpenJS.Nodejs"
     },
     "obsstudio": {
         "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/OBS_Studio_Logo.svg/1200px-OBS_Studio_Logo.svg.png",
-        "name" : "OBS Studio"
+        "name" : "OBS Studio",
+        "id": "BSProject.OBSStudio"
     }
 }
