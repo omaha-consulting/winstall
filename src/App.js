@@ -33,7 +33,7 @@ function App() {
         lastRehydrate = new Date(lastRehydrate);
         let timeDiffernece = Math.abs(lastRehydrate - timeNow) / 36e5;
 
-        if (timeDiffernece >= 24) {
+        if (timeDiffernece >= 1) {
           localStorage.setItem("winstallRehydro", timeNow)
           resolve(true)
         } else {
@@ -45,13 +45,26 @@ function App() {
       }
     })
 
+    let getSha = async () => {
+      let sha = "";
+
+      await fetch("https://api.github.com/repos/microsoft/winget-pkgs/git/trees/master").then(res => res.json()).then((data) => {
+        let manifest = data.tree.find(files => files.path === "manifests");
+        sha = manifest.sha;
+      })
+
+      return sha;
+    }
+
     let loadData = (needsRehydration=false) => {
       localData.getAll().then(async (items) => {
         // if we don't have any data on the IndexedDB, we go to GitHub and ask for the 
         // list of packages
         if (items.length === 0 || needsRehydration) {
+          console.log("Rehydrating...")
+          let manifsetSha = await getSha();
           fetch(
-            "https://api.github.com/repos/microsoft/winget-pkgs/git/trees/03bc547854f08f73900b22471ddd99b4397a9373?recursive=1"
+            `https://api.github.com/repos/microsoft/winget-pkgs/git/trees/${manifsetSha}?recursive=1`
           ).then(res => res.json()).then(async (data) => {
             localData.clear();
 
