@@ -4,14 +4,14 @@ const dbConfig = {
   objectStoresMeta: [
     {
       store: "packages",
-      storeConfig: { autoIncrement: false },
+      storeConfig: { ketPath: "packages", autoIncrement: false },
       storeSchema: [
-        { name: "name" },
-        { name: "id", options: { unique: true } },
-        { name: "publisher",  },
-        { name: "path", options: { unique: false } },
-        { name: "yamlStore", options: { unique: false } },
-        { name: "contents", options: { unique: false } },
+        { name: "name", keyPath: "name", options: { unique: false } },
+        { name: "id", keyPath: "id", options: { unique: true } },
+        { name: "publisher", keyPath: "publisher", options: { unique: false } },
+        { name: "path", keyPath: "path", options: { unique: false } },
+        { name: "yamlStore", keyPath: "yamlStore", options: { unique: false } },
+        { name: "contents", keyPath: "contents", options: { unique: false } },
       ],
     },
   ],

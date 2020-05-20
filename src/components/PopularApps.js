@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import PopularAppsList from "../utils/popularApps.json";
 import SingleApp from "../components/SingleApp";
+import ListPackages from "../components/ListPackages";
 import { shuffleArray } from "../utils/helpers";
 
-let PopularApps = ({selectApp}) => {
+let PopularApps = () => {
   const [randomPopularApps, setRandomPopularApps] = useState([]);
 
   useEffect(() => {
@@ -19,16 +20,11 @@ let PopularApps = ({selectApp}) => {
     <div className="popular">
       <h2>Popular apps</h2>
       <h3>Click to include them on your install script</h3>
-      <ul className="appList">
+      <ListPackages showImg={true}>
         {randomPopularApps.map((app) => (
-          <SingleApp
-            key={app.id}
-            name={app.name}
-            img={app.img}
-            onClick={(isSelected) => selectApp(app, isSelected)}
-          />
+          <SingleApp app={app} key={app.id}/>
         ))}
-      </ul>
+      </ListPackages>
     </div>
   );
 };

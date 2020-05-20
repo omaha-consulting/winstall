@@ -8,13 +8,16 @@
     "@testing-library/user-event": "^7.1.2",
     "fuse.js": "^6.0.0",
     "fuzzysort": "^1.1.4",
+    "js-yaml": "^3.13.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.1",
     "react-indexed-db": "^1.0.12",
+    "react-loading-skeleton": "^2.0.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "yamljs": "^0.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -21,10 +21,12 @@ body{
 
 .popular{
     padding: 20px 0;
+    padding-bottom: 50px;
 
     h2{
         font-size: 30px;
         margin-bottom: 0px;
+        margin-top: 0px;
     }
 
     h3{
@@ -32,13 +34,6 @@ body{
     }
 }
 
-.appList{
-    list-style-type: none;
-    padding: 0px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 15px;
-}
 
 .bottomBar{
     position: fixed;
@@ -49,6 +44,8 @@ body{
     background-color: #9b2eff; 
     color: #fff;
     line-height: 50px;
+    box-shadow: -3px -6px 20px rgba(0, 0, 0, 0.18);
+
 
     .inner{
         padding: 0px;
@@ -78,4 +75,8 @@ body{
         padding: 0px;
         margin: 0px;
     }
+}
+
+#gsc{
+    display: none;
 }

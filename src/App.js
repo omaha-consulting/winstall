@@ -11,10 +11,14 @@ import addToLocalDB from "./utils/addToLocalDB";
 
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
+import SelectedContext from './utils/SelectedContext';
 
 initDB(dbConfig);
 
 function App() {
+  const [selectedApps, setSelectedApps] = useState([]);
+  const selectedAppValue = { selectedApps, setSelectedApps };
+
   let [packageData, setPackageData] = useState();
 
   let localData = useIndexedDB("packages")
@@ -45,6 +49,7 @@ function App() {
       }
     })
 
+    // we need to get the SHA for the manifest to be able to query the github api
     let getSha = async () => {
       let sha = "";
 
@@ -61,14 +66,14 @@ function App() {
         // if we don't have any data on the IndexedDB, we go to GitHub and ask for the 
         // list of packages
         if (items.length === 0 || needsRehydration) {
-          console.log("Rehydrating...")
           let manifsetSha = await getSha();
+
           fetch(
             `https://api.github.com/repos/microsoft/winget-pkgs/git/trees/${manifsetSha}?recursive=1`
           ).then(res => res.json()).then(async (data) => {
             localData.clear();
 
-            let filteredData = data.tree.filter((item) => item.path.includes(".yaml")); // we are only interested in the manifest files
+            let filteredData = data.tree.filter((item) => item.path.toLowerCase().includes(".yaml")); // we are only interested in the manifest files
 
             addToLocalDB(localData, filteredData) // this cleans up the data, makes sure there's only a single entry for an app
 
@@ -94,8 +99,10 @@ function App() {
     <Router>
       <Switch>
         <PackageContext.Provider value={packageData}>
-            <Nav/>
-            <Route exact path="/" component={Home} />
+            <SelectedContext.Provider value={selectedAppValue}>
+              <Nav/>
+              <Route exact path="/" component={Home} />
+            </SelectedContext.Provider>
         </PackageContext.Provider>
       </Switch>
     </Router>

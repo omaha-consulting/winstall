@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "../styles/home.module.scss";
+import styles from "../styles/appList.module.scss";
 
 function ListPackages(props){
     return (
-        <div className={styles.listPackageContainer}>
+        <ul className={props.showImg ? styles.appListImg : styles.appList}>
             {props.children}
-        </div>
+        </ul>
     )
 }
 

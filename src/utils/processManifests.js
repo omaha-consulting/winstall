@@ -1,15 +1,16 @@
-const processManifests =  (packageData) => {
-    // we only care about the manifest files within the tree
-    packageData = packageData.tree.filter((item) => item.path.includes(".yaml"));
+import YAML from "yamljs";
 
-    packageData.map((item) => {
-        //  fetch(item.url).then(res => res.json()).then(data => {
-        //     let contents = new Buffer(data.contents, "base64")
-        //     console.log(contents.toString())
-        //  })
-    })
-
-    return packageData;
+const processManifests = (app) => {
+    console.log("Requesting manifest...", app.path)
+    return new Promise((resolve) => {
+        fetch(app.yamlStore)
+          .then((res) => res.json())
+          .then((data) => {
+            let manifestContents = window.atob(data.content);
+            let parsedManifest = YAML.parse(manifestContents);
+            resolve(parsedManifest);
+          });
+    });
 };
 
 export default processManifests;

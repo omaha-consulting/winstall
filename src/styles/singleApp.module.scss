@@ -3,7 +3,6 @@ li{
     padding: 20px;
     border: 5px solid var(--card-bg);
     border-radius: 10px;
-    padding-bottom: 0px;
     cursor: pointer;
     transition: 0.3s all ease-in-out;
 
@@ -24,7 +23,7 @@ li{
             transform: translate(-50%, -50%);
         }
     }
-    
+
     p{
         text-align: center;
         font-size: 18px;
@@ -33,9 +32,33 @@ li{
     }
 
     &:hover{
-        // transform: translateY(-3px);
+       opacity: 0.75;
     }
+
+    span{
+        height: 100%;
+        min-height: 150px;
+    }
+
+    h3, h4{
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    h4{
+        margin-top: 0px;
+        margin-bottom: 5px;
+        opacity: 0.75;
+    }
+
+    em{
+        font-style: normal;
+        font-size: 15px;
+        opacity: 0.75;
+    }
+    
 }
+
 
 .selected{
     border: 5px solid var(--accent);
