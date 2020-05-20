@@ -1,23 +1,15 @@
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
-
+import React from "react";
 
 import styles from "../styles/home.module.scss";
 
 import Search from "../components/Search";
 import PopularApps from "../components/PopularApps";
-
+import SelectionBar from "../components/SelectionBar";
 import Error from "../components/Error";
-import SelectedContext from "../utils/SelectedContext";
 
 import laptop from "../assets/hero.png";
 
 function Home() {
-  const history = useHistory();
-  const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-
-  // TODO: show a loading element
-
 
   return (
     <div className="container">
@@ -33,16 +25,7 @@ function Home() {
 
       <PopularApps />
 
-      {selectedApps.length != 0 && (
-        <div className="bottomBar">
-          <div className="container inner">
-            <p>Selected {selectedApps.length} apps so far</p>
-            <button onClick={() => history.push("/generate")}>
-              Generate script
-            </button>
-          </div>
-        </div>
-      )}
+      <SelectionBar/>
     </div>
   );
 }

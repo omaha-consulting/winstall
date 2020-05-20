@@ -6,7 +6,7 @@ import SelectedContext from "../utils/SelectedContext";
 import { DebounceInput } from "react-debounce-input";
 import fuzzysort from "fuzzysort"
 
-import Error from "../components/Error";
+import SelectionBar from "../components/SelectionBar";
 
 import SingleApp from "../components/SingleApp";
 import processManifests from "../utils/processManifests";
@@ -125,7 +125,8 @@ function All() {
                     <LoadApp app={app} key={app.path}/>
                 ))}
             </ul>
-             
+            
+            <SelectionBar/>
         </div>
     );
 }
