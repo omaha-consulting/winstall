@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
-import { DebounceInput } from "react-debounce-input";
 
 import PackageContext from "../utils/PackageContext";
 
 import styles from "../styles/home.module.scss";
 
 import ListPackages from "../components/ListPackages";
+import Search from "../components/Search";
 import PopularApps from "../components/PopularApps";
 
 import Error from "../components/Error";
 
 function Home() {
   const packageData = useContext(PackageContext);
-  const [searchInput, setSearchInput] = useState();
+
   const [selectedApps, setSelectedApps] = useState([]);
 
   // TODO: show a loading element
@@ -41,35 +41,19 @@ function Home() {
     }
   }
 
-  let SearchResults = () => {
-    return (
-      <div className={styles.searchResults}>
-        <h1>Showing search results for {searchInput}</h1>
-      </div>
-    )
-  }
-
-  const handleSearchInput = (e) => {
-    setSearchInput(e.target.value)
-  }
+  
 
   return (
     <div className="container">
       <div className={styles.intro}>
         <h1>Bulk install Windows apps quickly with a single-click.</h1>
 
-        <DebounceInput
-          minLength={2}
-          debounceTimeout={300}
-          onChange={(e) => handleSearchInput(e)}
-          placeholder="Search for apps here"
-        />
+        <Search />
       </div>
 
-      {searchInput ? <SearchResults /> : <></>}
 
       <PopularApps
-        selectApp={(app, isSelected ) => selectApp(app, isSelected)}
+        selectApp={(app, isSelected) => selectApp(app, isSelected)}
       />
 
       {selectedApps.length != 0 && (

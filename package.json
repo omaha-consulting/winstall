@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "fuse.js": "^6.0.0",
+    "fuzzysort": "^1.1.4",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-debounce-input": "^3.2.2",
