@@ -1,0 +1,42 @@
+li{
+    background-color: var(--card-bg);
+    padding: 20px;
+    border: 5px solid var(--card-bg);
+    border-radius: 10px;
+    padding-bottom: 0px;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+
+    .imgContainer{
+        min-height: 80px;
+        position: relative;
+        
+        img{
+            width: 80px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            user-select: none;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    
+    p{
+        text-align: center;
+        font-size: 18px;
+        margin: 0px;
+        padding: 20px 0;
+    }
+
+    &:hover{
+        // transform: translateY(-3px);
+    }
+}
+
+.selected{
+    border: 5px solid var(--accent);
+}

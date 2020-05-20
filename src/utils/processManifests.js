@@ -3,10 +3,10 @@ const processManifests =  (packageData) => {
     packageData = packageData.tree.filter((item) => item.path.includes(".yaml"));
 
     packageData.map((item) => {
-         fetch(item.url).then(res => res.json()).then(data => {
-            let contents = new Buffer(data.contents, "base64")
-            console.log(contents.toString())
-         })
+        //  fetch(item.url).then(res => res.json()).then(data => {
+        //     let contents = new Buffer(data.contents, "base64")
+        //     console.log(contents.toString())
+        //  })
     })
 
     return packageData;

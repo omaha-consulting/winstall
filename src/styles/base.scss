@@ -3,10 +3,79 @@
     --card-bg: #e9eaed;
     --textColor: #333;
     --altTextColor: #fff;
+    --accent: #9b2eff;
 }
 
 body{
     font-family: 'Nunito', sans-serif;
     background-color: var(--main-bg);
     color: var(--textColor);
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+
+}
+
+.popular{
+    padding: 20px 0;
+
+    h2{
+        font-size: 30px;
+        margin-bottom: 0px;
+    }
+
+    h3{
+        opacity: 0.75;
+    }
+}
+
+.appList{
+    list-style-type: none;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 15px;
+}
+
+.bottomBar{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #9b2eff; 
+    color: #fff;
+    line-height: 50px;
+
+    .inner{
+        padding: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+
+        button{
+            background-color: var(--main-bg);
+            border: 0px;
+            outline: 0px;
+            height: 35px;
+            margin-top: 8px;
+            font-size: 15px;
+            border-radius: 50px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: 0.3s all ease-in-out;
+
+            &:hover{
+               background-color: var(--card-bg);
+            }
+        }
+    }
+
+    p{
+        padding: 0px;
+        margin: 0px;
+    }
 }

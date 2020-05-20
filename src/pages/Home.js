@@ -1,40 +1,85 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { DebounceInput } from "react-debounce-input";
+
 import PackageContext from "../utils/PackageContext";
 
 import styles from "../styles/home.module.scss";
 
 import ListPackages from "../components/ListPackages";
+import PopularApps from "../components/PopularApps";
+
 import Error from "../components/Error";
 
 function Home() {
   const packageData = useContext(PackageContext);
+  const [searchInput, setSearchInput] = useState();
+  const [selectedApps, setSelectedApps] = useState([]);
 
   // TODO: show a loading element
   if(!packageData) return <></>;
 
+  // let homeContent = () => {
+  //   if (packageData.error) return <Error/>
+  //   return (
+  //       <ListPackages>
+  //           {packageData.map((item, i) => (
+  //               <h1 key={i}>{item.path}</h1>
+  //           ))}
+  //       </ListPackages>
+  //   );
+  // }
 
-  let homeContent = (packageData) => {
-    if (packageData.error) return <Error/>
+  let selectApp = (app, isSelected) => {
+    if(isSelected){
+      setSelectedApps([...selectedApps, app]);
+    } else{
+      let findIndex = selectedApps.findIndex(i => i.name === app.name)
+      let updatedSelectedApps = selectedApps.filter(
+        (a, index) => index !== findIndex
+      );
+      setSelectedApps(updatedSelectedApps);
+    }
+  }
+
+  let SearchResults = () => {
     return (
-        <ListPackages>
-            {packageData.map((item, i) => (
-                <h1 key={i}>{item.path}</h1>
-            ))}
-        </ListPackages>
-    );
+      <div className={styles.searchResults}>
+        <h1>Showing search results for {searchInput}</h1>
+      </div>
+    )
+  }
+
+  const handleSearchInput = (e) => {
+    setSearchInput(e.target.value)
   }
 
   return (
-    <div className={styles.container}>
-      <header>
-        <h1>Welcome to Winstall</h1>
-        <h3>
-          Create a one-click script that can be used to batch install apps using
-          the Windows Package Manager on Windows 10.
-        </h3>
-      </header>
+    <div className="container">
+      <div className={styles.intro}>
+        <h1>Bulk install Windows apps quickly with a single-click.</h1>
 
-      { homeContent(packageData) }
+        <DebounceInput
+          minLength={2}
+          debounceTimeout={300}
+          onChange={(e) => handleSearchInput(e)}
+          placeholder="Search for apps here"
+        />
+      </div>
+
+      {searchInput ? <SearchResults /> : <></>}
+
+      <PopularApps
+        selectApp={(app, isSelected ) => selectApp(app, isSelected)}
+      />
+
+      {selectedApps.length != 0 && (
+        <div className="bottomBar">
+          <div className="container inner">
+            <p>Selected {selectedApps.length} apps so far</p>
+            <button>Generate script</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
