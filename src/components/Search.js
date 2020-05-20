@@ -9,7 +9,7 @@ import SingleApp from "../components/SingleApp";
 
 import styles from "../styles/search.module.scss";
 
-import { sortArray } from "../utils/helpers";
+import { sortArray, sanitize } from "../utils/helpers";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState();
@@ -60,16 +60,7 @@ const Search = () => {
     
     if (!searchResults || searchResults.length === 0) return <></>;
 
-    let sanitize = (obj) => {
-      obj.id = obj.contents.Id;
-      obj.name = obj.contents.Name;
-      obj.publisher = obj.contents.Publisher;
-      obj.version = obj.contents.Version;
-      obj.desc = obj.contents.Description;
-      obj.homepage = obj.contents.Homepage;
-
-      return obj;
-    }
+    
 
     return (
       <ul className={styles.searchResults}>

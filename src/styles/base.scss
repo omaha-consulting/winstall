@@ -71,6 +71,7 @@ header{
 
 }
 
+
 input[type="text"]{
     border: 0px;
     outline: 0px;
@@ -83,14 +84,36 @@ input[type="text"]{
     color: var(--textColor);
 }
 
+.box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.illu-box{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .art{
+        height: 0px;
+        position: relative;
+
+        img{
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0 auto;
+            display: block;
+            max-width: 350px;
+        }
+    }
+}
+
 .popular{
     padding: 20px 0;
     padding-bottom: 50px;
 
-    .box{
-        display: flex;
-        justify-content: space-between;
-    }
+   
 
     h2{
         font-size: 30px;

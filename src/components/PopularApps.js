@@ -19,7 +19,7 @@ let PopularApps = () => {
 
   return (
     <div className="popular">
-      <div class="box">
+      <div className="box">
         <h2>Popular apps</h2>
         <Link to="/all" className="button">View all</Link>
       </div>

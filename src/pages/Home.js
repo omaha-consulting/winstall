@@ -11,6 +11,8 @@ import PopularApps from "../components/PopularApps";
 import Error from "../components/Error";
 import SelectedContext from "../utils/SelectedContext";
 
+import laptop from "../assets/hero.png";
+
 function Home() {
   const packageData = useContext(PackageContext);
   const history = useHistory();
@@ -23,8 +25,12 @@ function Home() {
   return (
     <div className="container">
       <div className={styles.intro}>
-        <h1>Bulk install Windows apps quickly with a single-click.</h1>
-
+        <div className="illu-box">
+          <h1>Bulk install Windows apps quickly with a single-click.</h1>
+          <div className="art">
+            <img src={laptop} draggable={false} />
+          </div>
+        </div>
         <Search />
       </div>
 
