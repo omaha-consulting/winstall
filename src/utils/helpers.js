@@ -5,3 +5,8 @@ export let shuffleArray = (a) => {
     }
     return a;
 }
+
+export let sortArray = (a) => {
+  a.sort((a, b) => a.name.localeCompare(b.name))
+  return a;
+}

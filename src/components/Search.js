@@ -1,14 +1,15 @@
-import React, { useState, useContext, useEffect, useMemo } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { DebounceInput } from "react-debounce-input";
 import fuzzysort from "fuzzysort"
 import PackageContext from "../utils/PackageContext";
 
 import processManifests from "../utils/processManifests";
 import { useIndexedDB } from "react-indexed-db";
-import Skeleton from "react-loading-skeleton";
 import SingleApp from "../components/SingleApp";
 
 import styles from "../styles/search.module.scss";
+
+import { sortArray } from "../utils/helpers";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState();
@@ -36,7 +37,7 @@ const Search = () => {
   let SearchResults = () => {
     const [appsData, setAppsData] = useState([]);
     
-    
+
     useEffect(() => {
       if(!searchResults) return;
       localData.getAll().then((apps) => {
@@ -47,14 +48,11 @@ const Search = () => {
             processManifests(obj).then((newData) => {
               app.contents = newData;
               localData.update({ ...obj, contents: newData }, obj.path);
-              setAppsData((oldArray) => [...oldArray, app]);
+              setAppsData((oldArray) => sortArray([...oldArray, app]));
             });
           } else{
-            setAppsData(oldArray => [...oldArray, app]);
+            setAppsData(oldArray => sortArray([...oldArray, app]));
           }
-
-          // let appData = await getAppData();
-          // setAppsData([...appsData, appData])
         });
      })
      

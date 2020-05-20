@@ -4,12 +4,64 @@
     --textColor: #333;
     --altTextColor: #fff;
     --accent: #9b2eff;
+    --altAccent: #7214c9;
 }
+
+// :root {
+//     --main-bg: rgb(18, 18, 18);
+//     --card-bg: #2d2e30;
+//     --textColor: rgb(255, 255, 255);
+//     --altTextColor: #333;
+//     --accent: #9b2eff;
+//      --altAccent: #6b14bd;
+// }
 
 body{
     font-family: 'Nunito', sans-serif;
     background-color: var(--main-bg);
     color: var(--textColor);
+}
+
+header{
+    padding: 50px;
+    border-radius: 10px;
+
+    a{
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 28px;
+        color: var(--accent);
+        border-bottom: 5px solid var(--textColor);
+        transition: 0.3s all ease-in-out;
+
+        &:hover{
+            border-bottom: 5px solid var(--accent);
+        }
+    }
+}
+
+.dark{
+    header{
+        a {
+            color: var(--textColor);
+            border-bottom: 5px solid var(--accent);
+
+            &:hover{
+                color: var(--accent);
+            }
+        }
+    }
+
+    .button.accent{ 
+        background-color: var(--accent);
+        color: var(--textColor);
+        margin-right: 20px;
+
+        &:hover, &:focus{
+            opacity: 1;
+            background-color: var(--altAccent);
+        }
+    }
 }
 
 .container{
@@ -19,9 +71,26 @@ body{
 
 }
 
+input[type="text"]{
+    border: 0px;
+    outline: 0px;
+    border-radius: 50px;
+    height: 50px;
+    background-color: var(--card-bg);
+    padding: 0 20px;
+    font-size: 17px;
+    min-width: 250px;
+    color: var(--textColor);
+}
+
 .popular{
     padding: 20px 0;
     padding-bottom: 50px;
+
+    .box{
+        display: flex;
+        justify-content: space-between;
+    }
 
     h2{
         font-size: 30px;
@@ -63,6 +132,7 @@ body{
             border-radius: 50px;
             padding: 0 20px;
             cursor: pointer;
+            color: var(--textColor);
             transition: 0.3s all ease-in-out;
 
             &:hover{
@@ -79,4 +149,35 @@ body{
 
 #gsc{
     display: none;
+}
+
+.button{
+    background-color: var(--card-bg);
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin-top: 15px;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--textColor);
+    font-size: 18px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+    border: 0px;
+    outline: 0;
+
+    &:hover, &:focus{
+        opacity: 0.75;
+    }
+} 
+
+.button.accent{ 
+    background-color: var(--accent);
+    color: var(--altTextColor);
+    margin-right: 20px;
+
+    &:hover, &:focus{
+        opacity: 1;
+        background-color: var(--altAccent);
+    }
 }

@@ -1,22 +1,6 @@
-header{
-    padding: 50px;
-    border-radius: 10px;
 
-    a{
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 28px;
-        color: var(--accent);
-        border-bottom: 5px solid var(--textColor);
-        transition: 0.3s all ease-in-out;
 
-        &:hover{
-            border-bottom: 5px solid var(--accent);
-        }
-    }
-}
-
-.intro{
+.intro, .generate{
     padding-top: 50px;
     margin-bottom: 50px;
     
@@ -24,17 +8,37 @@ header{
         max-width: 600px;
         font-size: 45px;
     }
+}
 
-    input[type="text"]{
-        border: 0px;
-        outline: 0px;
-        border-radius: 50px;
-        height: 50px;
-        background-color: var(--card-bg);
-        padding: 0 20px;
-        font-size: 17px;
-        min-width: 250px;
+.generate{
+    h3{
+        font-size: 25px;
+        opacity: 0.75;
+        max-width: 600px;
     }
+    p{
+        font-size: 20px;
+        max-width: 700px;
+    }
+
+    textarea{
+        width: 600px;
+        padding: 20px;
+        background-color: var(--card-bg);
+        border: 0px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-family: monospace;
+        outline: 0;
+        resize: none;
+        display: block;
+        margin-bottom: 10px;
+        min-height: 100px;
+        color: var(--textColor);
+    }
+
+    
+    
 }
 
 .listPackageContainer{
@@ -44,3 +48,4 @@ header{
 .searchResults{
     margin: 50px 0;
 }
+

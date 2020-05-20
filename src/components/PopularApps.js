@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import PopularAppsList from "../utils/popularApps.json";
 import SingleApp from "../components/SingleApp";
@@ -18,7 +19,10 @@ let PopularApps = () => {
 
   return (
     <div className="popular">
-      <h2>Popular apps</h2>
+      <div class="box">
+        <h2>Popular apps</h2>
+        <Link to="/all" className="button">View all</Link>
+      </div>
       <h3>Click to include them on your install script</h3>
       <ListPackages showImg={true}>
         {randomPopularApps.map((app) => (

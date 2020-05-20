@@ -1,0 +1,22 @@
+ul{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 20px;
+    margin-top: 25px;
+
+    li{ 
+        overflow: hidden;
+
+        p{
+            text-align: left !important;
+        }
+
+        button{
+            margin: 0px !important;
+            background-color: var(--main-bg) !important;
+        }
+    }
+}

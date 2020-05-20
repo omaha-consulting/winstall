@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import PackageContext from "../utils/PackageContext";
 
@@ -9,15 +10,14 @@ import PopularApps from "../components/PopularApps";
 
 import Error from "../components/Error";
 import SelectedContext from "../utils/SelectedContext";
-import generateScript from "../utils/generateScript";
 
 function Home() {
   const packageData = useContext(PackageContext);
+  const history = useHistory();
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
   // TODO: show a loading element
   if(!packageData) return <></>;
-
 
 
   return (
@@ -34,7 +34,7 @@ function Home() {
         <div className="bottomBar">
           <div className="container inner">
             <p>Selected {selectedApps.length} apps so far</p>
-            <button onClick={() => generateScript(selectedApps)}>
+            <button onClick={() => history.push("/generate")}>
               Generate script
             </button>
           </div>
