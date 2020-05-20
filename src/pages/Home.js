@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import PackageContext from "../utils/PackageContext";
 
 import styles from "../styles/home.module.scss";
 
@@ -14,12 +13,10 @@ import SelectedContext from "../utils/SelectedContext";
 import laptop from "../assets/hero.png";
 
 function Home() {
-  const packageData = useContext(PackageContext);
   const history = useHistory();
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
   // TODO: show a loading element
-  if(!packageData) return <></>;
 
 
   return (

@@ -7,17 +7,14 @@ import { DebounceInput } from "react-debounce-input";
 import fuzzysort from "fuzzysort"
 
 import Error from "../components/Error";
-import ListPackages from "../components/ListPackages";
 
 import SingleApp from "../components/SingleApp";
-import PackageContext from "../utils/PackageContext";
 import processManifests from "../utils/processManifests";
 import { sortArray, sanitize } from "../utils/helpers";
 
 function All() {
     let localData = useIndexedDB("packages")
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-    const packageData = useContext(PackageContext);
     const [apps, setApps] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [totalApps, setTotalApps] = useState([])

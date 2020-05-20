@@ -4,7 +4,7 @@ li{
     border: 5px solid var(--card-bg);
     border-radius: 10px;
     cursor: pointer;
-    transition: 0.3s all ease-in-out;
+    transition: 0.1s all ease-in-out;
 
     .imgContainer{
         min-height: 80px;
@@ -35,10 +35,6 @@ li{
        opacity: 0.75;
     }
 
-    span{
-        height: 100%;
-        min-height: 150px;
-    }
 
     h3, h4{
         margin-top: 0px;

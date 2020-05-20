@@ -1,78 +1,85 @@
-import React, { useState, useContext, useEffect } from "react";
-import { DebounceInput } from "react-debounce-input";
-import fuzzysort from "fuzzysort"
-import PackageContext from "../utils/PackageContext";
-
-import processManifests from "../utils/processManifests";
-import { useIndexedDB } from "react-indexed-db";
-import SingleApp from "../components/SingleApp";
-
+import React, { useContext, useState, useEffect } from "react";
 import styles from "../styles/search.module.scss";
 
+import { useIndexedDB } from "react-indexed-db";
+import { DebounceInput } from "react-debounce-input";
+import fuzzysort from "fuzzysort"
+
+import SingleApp from "../components/SingleApp";
+import processManifests from "../utils/processManifests";
 import { sortArray, sanitize } from "../utils/helpers";
 
-const Search = () => {
+import Skeleton from 'react-loading-skeleton';
+
+function Search() {
+  let localData = useIndexedDB("packages")
+  const [apps, setApps] = useState([])
   const [searchInput, setSearchInput] = useState();
-  const [searchResults, setSearchResults] = useState();
-  const packageData = useContext(PackageContext)
-  let localData = useIndexedDB("packages");
+  const [appsData, setAppsData] = useState([]);
+  const [pulled, setPulled] = useState(new Set());
+
+  useEffect(() => {
+    if (apps.length !== 0) return;
+
+    localData.getAll().then((items) => {
+      items.map(i => i.loaded = i.loaded ? i.loaded : false)
+      setAppsData(items);
+    })
+  })
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
+    let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), appsData, {
+      limit: 6,
+      allowTypo: true,
+      threshold: -10000,
+      key: "path",
+    })
 
-    setSearchResults(
-      fuzzysort.go(
-        e.target.value.toLowerCase().replace(/\s/g, ""),
-        packageData,
-        {
-          limit: 6,
-          allowTypo: true,
-          threshold: -10000,
-          key: "path",
-        }
-      )
-    );
+    results = [...results.map(r => r.obj)];
+    results.sort((a, b) => a.name.localeCompare(b.name))
+
+    results.sort((a, b) => (+b.loaded) - (+a.loaded))
+   
+    setApps(results)
   };
 
-  let SearchResults = () => {
-    const [appsData, setAppsData] = useState([]);
-    
+  const selectivePull = (obj) => {
+    if(pulled.has(obj.path)) return;
+
+    setPulled(pulled.add(obj.path));
+
+    let app = apps.find((i) => i.path === obj.path);
+
+    if (!app.contents ) {
+      processManifests(obj).then((newData) => {
+        app.contents = newData;
+        localData.update({ ...obj, contents: newData }, obj.path);
+        app.loaded = true;
+        app.loading = false;
+        setApps((oldArray) => sortArray([...new Set([...oldArray, app])]));
+      });
+    } else {
+      app.loaded = true;
+      app.loading = false;
+      setApps((oldArray) => sortArray([...new Set([...oldArray, app])]));
+    }
+  }
+
+  let LoadApp = ({ app }) => {
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-      if(!searchResults) return;
-      localData.getAll().then((apps) => {
-        searchResults.map(async ({ obj }) => {
-          let app = apps.find((i) => i.path === obj.path);
-
-          if (!app.contents) {
-            processManifests(obj).then((newData) => {
-              app.contents = newData;
-              localData.update({ ...obj, contents: newData }, obj.path);
-              setAppsData((oldArray) => sortArray([...oldArray, app]));
-            });
-          } else{
-            setAppsData(oldArray => sortArray([...oldArray, app]));
-          }
-        });
-     })
-     
+      if (loading) return
+      setLoading(true)
+      selectivePull(app)
     }, [])
-    
-    if (!searchResults || searchResults.length === 0) return <></>;
 
-    
-
-    return (
-      <ul className={styles.searchResults}>
-        {appsData.map((app, index) => (
-          <React.Fragment key={index}>
-            <SingleApp app={sanitize(app)}/>
-          </React.Fragment>
-        ))}
-      </ul>
-    );
+    return <Skeleton height={180}/>
   }
- 
+  
+  if (!apps) return <></>;
+
   return (
     <div>
       <DebounceInput
@@ -82,7 +89,14 @@ const Search = () => {
         placeholder="Search for apps here"
       />
 
-      <SearchResults />
+      <ul className={styles.searchResults}>
+        {apps.map((app) => app.loaded ? (
+          <SingleApp app={sanitize(app)} key={app.contents.Id} />
+        ) : (
+            <LoadApp app={app} key={app.path} />
+          ))}
+      </ul>
+
     </div>
   );
 }
