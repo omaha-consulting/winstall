@@ -10,6 +10,7 @@ import PackageContext from "./utils/PackageContext";
 import addToLocalDB from "./utils/addToLocalDB";
 
 import Home from "./pages/Home";
+import Error from "./components/Error";
 import Nav from "./components/Nav";
 import SelectedContext from './utils/SelectedContext';
 
@@ -97,14 +98,15 @@ function App() {
   
   return (
     <Router>
-      <Switch>
-        <PackageContext.Provider value={packageData}>
-            <SelectedContext.Provider value={selectedAppValue}>
-              <Nav/>
-              <Route exact path="/" component={Home} />
-            </SelectedContext.Provider>
-        </PackageContext.Provider>
-      </Switch>
+      <PackageContext.Provider value={packageData}>
+        <SelectedContext.Provider value={selectedAppValue}>
+          <Nav />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route component={Error} />
+          </Switch>
+        </SelectedContext.Provider>
+      </PackageContext.Provider>
     </Router>
   );
 }
