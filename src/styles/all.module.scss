@@ -3,13 +3,11 @@ ul{
     padding: 0px;
     margin: 0px;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 20px;
     margin-top: 25px;
-
+    
     li{ 
-        overflow: hidden;
-
         p{
             text-align: left !important;
         }
@@ -20,5 +18,15 @@ ul{
         }
 
    
+    }
+}
+
+.all{
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media(max-width: 1280px){
+    ul, .all{
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }

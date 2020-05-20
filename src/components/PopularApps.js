@@ -21,7 +21,7 @@ let PopularApps = () => {
     <div className="popular">
       <div className="box">
         <h2>Popular apps</h2>
-        <Link to="/all" className="button">View all</Link>
+        <Link to="/store" className="button">View all</Link>
       </div>
       <h3>Click to include them on your install script</h3>
       <ListPackages showImg={true}>

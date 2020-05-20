@@ -45,18 +45,15 @@ function Search() {
   };
 
   const selectivePull = (obj) => {
-    if(pulled.has(obj.path)) return;
-
-    setPulled(pulled.add(obj.path));
-
     let app = apps.find((i) => i.path === obj.path);
 
-    if (!app.contents ) {
+    if (!app.contents && !pulled.has(obj.path)) {
       processManifests(obj).then((newData) => {
         app.contents = newData;
         localData.update({ ...obj, contents: newData }, obj.path);
         app.loaded = true;
         app.loading = false;
+        setPulled(pulled.add(obj.path));
         setApps((oldArray) => sortArray([...new Set([...oldArray, app])]));
       });
     } else {

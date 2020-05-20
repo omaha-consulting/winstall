@@ -14,7 +14,7 @@ import Error from "./components/Error";
 import Nav from "./components/Nav";
 import SelectedContext from './utils/SelectedContext';
 import Generate from "./pages/Generate";
-import All from "./pages/All";
+import Store from "./pages/Store";
 
 initDB(dbConfig);
 
@@ -106,7 +106,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/generate" exact component={Generate} />
-            <Route path="/all" exact component={All} />
+            <Route path="/store" exact component={Store} />
             <Route component={Error} />
           </Switch>
         </SelectedContext.Provider>

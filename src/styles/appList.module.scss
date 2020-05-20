@@ -4,15 +4,6 @@
     list-style-type: none;
     padding: 0px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 15px;
-}
-
-// app list without images
-.appList{
-    list-style-type: none;
-    padding: 0px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 15px;
 }

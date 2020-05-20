@@ -20,7 +20,11 @@ body{
     font-family: 'Nunito', sans-serif;
     background-color: var(--main-bg);
     color: var(--textColor);
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
+
 
 header{
     padding: 50px;
@@ -68,7 +72,6 @@ header{
     max-width: 1300px;
     margin: 0 auto;
     padding: 20px 50px;
-
 }
 
 
