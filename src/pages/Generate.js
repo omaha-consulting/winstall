@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import styles from "../styles/home.module.scss";
 
 import Error from "../components/Error";
@@ -50,36 +52,52 @@ function Generate() {
     }
 
     return (
-        <div className="container generate-container">
-            <div className="illu-box">
-                <div className={styles.generate}>
-                    <h1>Your apps are ready to be installed.</h1>
-                    <h3>Make sure you have Windows Package Manager installed :)</h3>
-                    <p>Just copy the command from the textbox bellow, paste it into Windows Terminal, Command Prompt, or any other terminal on your Windows machine to start installing the apps.</p>
+      <div className="container generate-container">
+        <div className="illu-box">
+          <div className={styles.generate}>
+            <h1>Your apps are ready to be installed.</h1>
+            <h3>Make sure you have Windows Package Manager installed :)</h3>
+            <p>
+              Just copy the command from the textbox bellow, paste it into
+              Windows Terminal, Command Prompt, or any other terminal on your
+              Windows machine to start installing the apps.
+            </p>
 
-                    <textarea value={script} onChange={() => { }} onFocus={e => e.target.select()} />
+            <textarea
+              value={script}
+              onChange={() => {}}
+              onFocus={(e) => e.target.select()}
+            />
 
-                    <button className="button accent" onClick={handleCopy}>{copyText}</button>
-                    <button className="button" onClick={handleBat}>Download .bat</button>
-                </div>
-                <div className="art">
-                    <img src={art} draggable={false} />
-                </div>
+            <div className="box">
+              <div>
+                <button className="button accent" onClick={handleCopy}>
+                  {copyText}
+                </button>
+                <button className="button" onClick={handleBat}>
+                  Download .bat
+                </button>
+              </div>
             </div>
-
-            <div className={styles.selectedApps}>
-                <h2>Apps you are downloading ({selectedApps.length})</h2>
-                <ListPackages showImg={false}>
-                    {selectedApps.map((app, index) => (
-                        <React.Fragment key={index}>
-                            <SingleApp app={app} />
-                        </React.Fragment>
-                    ))}
-                </ListPackages>
-            </div>
-
-            <Footer/>
+          </div>
+          <div className="art">
+            <img src={art} draggable={false} />
+          </div>
         </div>
+
+        <div className={styles.selectedApps}>
+          <h2>Apps you are downloading ({selectedApps.length})</h2>
+          <ListPackages showImg={false}>
+            {selectedApps.map((app, index) => (
+              <React.Fragment key={index}>
+                <SingleApp app={app} />
+              </React.Fragment>
+            ))}
+          </ListPackages>
+        </div>
+
+        <Footer />
+      </div>
     );
 }
 

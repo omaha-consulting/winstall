@@ -10,7 +10,7 @@ function Error({title, subtitle}) {
       <div className={styles.error}>
           <img src={clippy} alt="Clippy sad face" draggable={false}/>
           <h1>{title ? title : "Something went terribly wrong."}</h1>
-          <h3>{subtitle ? subtitle : "We are not too sure exactly what went wrong, but give it a try later!"}</h3>
+          <h3>{subtitle ? subtitle : "It's looks like you're trying to find something that doesn't exist, would you like some help with that?"}</h3>
           <Link to="/" className="button">
             Go Home
           </Link>

@@ -16,14 +16,17 @@ function Nav() {
     }
 
     return (
-        <header className="container">
-            <Link to="/">winstall</Link>
+      <header className="container">
+        <div className={styles.brand}>
+          <Link to="/">winstall</Link>
+          <span>&nbsp;(preview)</span>
+        </div>
 
-            <div className={styles.nav}>
-                <span onClick={switchTheme}>Switch Theme</span>
-            </div>
-        </header>
-    )
+        <div className={styles.nav}>
+          <span onClick={switchTheme}>Switch Theme</span>
+        </div>
+      </header>
+    );
 }
 
 export default Nav;

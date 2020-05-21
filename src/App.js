@@ -109,6 +109,8 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/generate" exact component={Generate} />
             <Route path="/store" exact component={Store} />
+            {/* <Route path="/pack" exact component={CreatePack} />
+            <Route path="/pack/:data" component={ViewPack} /> */}
             <Route component={Error} />
           </Switch>
         </SelectedContext.Provider>
