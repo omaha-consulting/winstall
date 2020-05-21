@@ -10,6 +10,7 @@ import processManifests from "../utils/processManifests";
 import { sortArray, sanitize } from "../utils/helpers";
 
 import Skeleton from 'react-loading-skeleton';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 function Search() {
   let localData = useIndexedDB("packages")
@@ -17,15 +18,26 @@ function Search() {
   const [searchInput, setSearchInput] = useState();
   const [appsData, setAppsData] = useState([]);
   const [pulled, setPulled] = useState(new Set());
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (apps.length !== 0) return;
 
-    localData.getAll().then((items) => {
-      items.map(i => i.loaded = i.loaded ? i.loaded : false)
-      setAppsData(items);
-    })
+    getApps();
   }, [])
+
+  const getApps = () => {
+    localData.getAll().then((items) => {
+      if(items.length === 0){
+        getApps();
+        return;
+      }
+
+      items.map((i) => (i.loaded = i.loaded ? i.loaded : false));
+      setAppsData(items);
+      setLoading(false);
+    });
+  }
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
@@ -83,17 +95,29 @@ function Search() {
         minLength={2}
         debounceTimeout={300}
         onChange={(e) => handleSearchInput(e)}
-        placeholder="Search for apps here"
+        placeholder={loading ? "Loading apps..." : "Search for apps here"}
+        disabled={loading}
       />
 
-      <ul className={styles.searchResults}>
-        {apps.map((app, i) => app.loaded ? (
-          <SingleApp app={sanitize(app)} showDesc={false} key={`${app.contents.Id}-${i}`} />
-        ) : (
-            <LoadApp app={app} key={app.path} />
-          ))}
-      </ul>
-
+      {loading ? (
+        <div className={styles.loader}>
+          <PropagateLoader color="#9b2eff" />
+        </div>
+      ) : (
+        <ul className={styles.searchResults}>
+          {apps.map((app, i) =>
+            app.loaded ? (
+              <SingleApp
+                app={sanitize(app)}
+                showDesc={false}
+                key={`${app.contents.Id}-${i}`}
+              />
+            ) : (
+              <LoadApp app={app} key={app.path} />
+            )
+          )}
+        </ul>
+      )}
     </div>
   );
 }

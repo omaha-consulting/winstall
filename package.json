@@ -12,6 +12,7 @@
     "react-loading-skeleton": "^2.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-spinners": "^0.8.3",
     "yamljs": "^0.3.0"
   },
   "scripts": {

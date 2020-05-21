@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import styles from "../styles/store.module.scss";
 
 import { useIndexedDB } from "react-indexed-db";
-import SelectedContext from "../ctx/SelectedContext";
 import { DebounceInput } from "react-debounce-input";
 import fuzzysort from "fuzzysort"
 
@@ -13,21 +12,28 @@ import processManifests from "../utils/processManifests";
 import { sortArray, sanitize } from "../utils/helpers";
 import Footer from "../components/Footer";
 
+import PropagateLoader from "react-spinners/PropagateLoader";
+
 function Store() {
     let localData = useIndexedDB("packages")
-    const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [apps, setApps] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [totalApps, setTotalApps] = useState([])
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if(apps.length !== 0) return;
 
         getApps();
-    })
+    }, [])
 
     const getApps = () => {
         localData.getAll().then(async (items) => {
+            if(items.length === 0 ){
+                getApps();
+                return;
+            }
+
             items.map((i) => {
                 if(!i.loaded){ // if it already doesn't have a laoded value, we set it to false
                     i.loaded = false;
@@ -46,6 +52,7 @@ function Store() {
 
             setApps(items);
             setTotalApps(items);
+            setLoading(false);
         })
     }
 
@@ -109,27 +116,38 @@ function Store() {
     if(!apps) return <></>;
 
     return (
-        <div className="container">
-            <h1>All Apps</h1>
-            <h3>Due to API limitations, you will not be able to see the details of all of the apps below right away.</h3>
-            <DebounceInput
-                minLength={2}
-                debounceTimeout={100}
-                onChange={(e) => handleSearchInput(e)}
-                placeholder="Search for apps here"
-            />
-    
-            <ul className={styles.all}>
-                {apps.map((app) => app.loaded ? (
-                    <SingleApp app={sanitize(app)} key={app.contents.Id}/>
-                ) : (
-                    <LoadApp app={app} key={app.path}/>
-                ))}
-            </ul>
-            
-            <Footer/>
-            <SelectionBar/>
-        </div>
+      <div className="container">
+        <h1>All Apps</h1>
+        <h3>
+          Due to API limitations, you will not be able to see the details of all
+          of the apps below right away.
+        </h3>
+        <DebounceInput
+          minLength={2}
+          debounceTimeout={100}
+          onChange={(e) => handleSearchInput(e)}
+          placeholder="Search for apps here"
+        />
+
+        {loading ? (
+          <div className={styles.loader}>
+            <PropagateLoader color="#9b2eff" />
+          </div>
+        ) : (
+          <ul className={styles.all}>
+            {apps.map((app) =>
+              app.loaded ? (
+                <SingleApp app={sanitize(app)} key={app.contents.Id} />
+              ) : (
+                <LoadApp app={app} key={app.path} />
+              )
+            )}
+          </ul>
+        )}
+
+        <Footer />
+        <SelectionBar />
+      </div>
     );
 }
 
