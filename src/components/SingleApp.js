@@ -1,12 +1,14 @@
 import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
+import { sanitize } from "../utils/helpers";
 
 let SingleApp = ({ app }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-
     useEffect(() => {
+ 
+
       let found = selectedApps.findIndex((a) => a.id === app.id) !== -1;
 
       setSelected(found)
@@ -28,6 +30,8 @@ let SingleApp = ({ app }) => {
       }
      
     }
+
+    if(!app.contents && !app.img) return <></>
 
     return (
       <li
@@ -51,9 +55,9 @@ let SingleApp = ({ app }) => {
 
         {!app.img && (
           <div>
-            <h3>{app.name}</h3>
-            <h4>{app.publisher ? `by ${app.publisher}` : ""}</h4>
-            <em>{app.version ? `v${app.version}`: ""}</em>
+            <h3>{app.contents.Name}</h3>
+            <h4>{app.contents.Publisher ? `by ${app.contents.Publisher}` : ""}</h4>
+            <em>{app.contents.Version ? `v${app.contents.Version}`: ""}</em>
           </div>
         )}
       </li>

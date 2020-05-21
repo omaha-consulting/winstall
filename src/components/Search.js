@@ -30,7 +30,7 @@ function Search() {
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
     let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), appsData, {
-      limit: 6,
+      limit: 5,
       allowTypo: true,
       threshold: -10000,
       key: "path",
@@ -48,12 +48,12 @@ function Search() {
     let app = apps.find((i) => i.path === obj.path);
 
     if (!app.contents && !pulled.has(obj.path)) {
+      setPulled(pulled.add(obj.path));
       processManifests(obj).then((newData) => {
         app.contents = newData;
         localData.update({ ...obj, contents: newData }, obj.path);
         app.loaded = true;
         app.loading = false;
-        setPulled(pulled.add(obj.path));
         setApps((oldArray) => sortArray([...new Set([...oldArray, app])]));
       });
     } else {
@@ -87,8 +87,8 @@ function Search() {
       />
 
       <ul className={styles.searchResults}>
-        {apps.map((app) => app.loaded ? (
-          <SingleApp app={sanitize(app)} key={app.contents.Id} />
+        {apps.map((app, i) => app.loaded ? (
+          <SingleApp app={app} key={`${app.contents.Id}-${i}`} />
         ) : (
             <LoadApp app={app} key={app.path} />
           ))}

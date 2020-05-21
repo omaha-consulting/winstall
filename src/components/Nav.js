@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "../styles/nav.module.scss";
 
 function Nav() {
-    const [theme, setTheme] = useState("light");
-
-
     let switchTheme = () => {
         let body = document.querySelector("body");
 

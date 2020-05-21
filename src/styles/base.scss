@@ -14,6 +14,11 @@
     --altTextColor: #333;
     --accent: #9b2eff;
      --altAccent: #6b14bd;
+
+     .react-loading-skeleton{
+            background-color: #2d2f30 !important;
+            background-image: linear-gradient( 90deg,#2d2f30,#272727,#2d2f30 ) !important;
+     }
 }
 
 body{
