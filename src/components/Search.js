@@ -88,7 +88,7 @@ function Search() {
 
       <ul className={styles.searchResults}>
         {apps.map((app, i) => app.loaded ? (
-          <SingleApp app={app} key={`${app.contents.Id}-${i}`} />
+          <SingleApp app={sanitize(app)} key={`${app.contents.Id}-${i}`} />
         ) : (
             <LoadApp app={app} key={app.path} />
           ))}
