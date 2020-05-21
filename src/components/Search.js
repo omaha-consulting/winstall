@@ -25,7 +25,7 @@ function Search() {
       items.map(i => i.loaded = i.loaded ? i.loaded : false)
       setAppsData(items);
     })
-  })
+  }, [])
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
@@ -88,7 +88,7 @@ function Search() {
 
       <ul className={styles.searchResults}>
         {apps.map((app, i) => app.loaded ? (
-          <SingleApp app={sanitize(app)} key={`${app.contents.Id}-${i}`} />
+          <SingleApp app={sanitize(app)} showDesc={false} key={`${app.contents.Id}-${i}`} />
         ) : (
             <LoadApp app={app} key={app.path} />
           ))}

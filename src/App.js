@@ -43,7 +43,7 @@ function App() {
         lastRehydrate = new Date(lastRehydrate);
         let timeDiffernece = Math.abs(lastRehydrate - timeNow) / 36e5;
 
-        if (timeDiffernece >= 1) {
+        if (timeDiffernece >= 5) {
           localStorage.setItem("winstallRehydro", timeNow)
           resolve(true)
         } else {

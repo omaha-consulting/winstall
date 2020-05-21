@@ -3,7 +3,7 @@ import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 import { sanitize } from "../utils/helpers";
 
-let SingleApp = ({ app }) => {
+let SingleApp = ({ app, showDesc=true }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     useEffect(() => {
@@ -58,6 +58,7 @@ let SingleApp = ({ app }) => {
             <h3>{app.contents.Name}</h3>
             <h4>{app.contents.Publisher ? `by ${app.contents.Publisher}` : ""}</h4>
             <em>{app.contents.Version ? `v${app.contents.Version}`: ""}</em>
+            {showDesc && <p>{app.contents.Description ? `${app.contents.Description}` : "No description available."}</p> }
           </div>
         )}
       </li>
