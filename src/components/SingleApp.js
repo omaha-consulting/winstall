@@ -31,6 +31,10 @@ let SingleApp = ({ app, showDesc=true }) => {
      
     }
 
+    let openExtLink = (e, link) => {
+      e.stopPropagation();
+    }
+
     if(!app.contents && !app.img) return <></>
 
     return (
@@ -56,9 +60,39 @@ let SingleApp = ({ app, showDesc=true }) => {
         {!app.img && (
           <div>
             <h3>{app.contents.Name}</h3>
-            <h4>{app.contents.Publisher ? `by ${app.contents.Publisher}` : ""}</h4>
-            <em>{app.contents.Version ? `v${app.contents.Version}`: ""}</em>
-            {showDesc && <p>{app.contents.Description ? `${app.contents.Description}` : "No description available."}</p> }
+            <h4>
+              {app.contents.Publisher ? `by ${app.contents.Publisher}` : ""}
+            </h4>
+            <em>{app.contents.Version ? `v${app.contents.Version}` : ""}</em>
+            {showDesc && (
+              <div>
+                {app.contents.Description && <p>{app.contents.Description}</p>}
+
+                <div className={styles.controls}>
+                  {app.contents.Homepage && (
+                    <a
+                      href={`${app.contents.Homepage}?ref=winstall`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => openExtLink(e, app.contents.Homepage)}
+                    >
+                      View Site
+                    </a>
+                  )}
+                  {app.contents.Installers && (
+                    <a
+                      href={`${app.contents.Installers[0].Url}`}
+                      onClick={(e) => openExtLink(e, app.contents.Homepage)}
+                    >
+                      Download{" "}
+                      {app.contents.InstallerType
+                        ? `.${app.contents.InstallerType.toLowerCase()}`
+                        : "App"}
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </li>

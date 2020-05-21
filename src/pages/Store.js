@@ -108,15 +108,24 @@ function Store() {
 
 
         return (
-            <li className={styles.notReady}>
-                <h3>{app.path.split("/")[1]}</h3>
-                <h4>{app.path.split("/")[0]}</h4>
-                <button className="button" disabled={loading} onClick={() => {
-                    setLoading(true)
-                    selectivePull(app)
-                }}>{loading ? "Loading..." : "Load details"}</button>
-            </li>
-        )
+          <li
+            className={styles.notReady}
+            onClick={() => {
+              setLoading(true);
+              selectivePull(app);
+            }}
+          >
+            <h3>{app.path.split("/")[1]}</h3>
+            <h4>{app.path.split("/")[0]}</h4>
+            <button
+              className="button"
+              disabled={loading}
+            
+            >
+              {loading ? "Loading..." : "Click to view"}
+            </button>
+          </li>
+        );
     }
     if(!apps) return <></>;
 

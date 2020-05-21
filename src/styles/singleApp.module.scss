@@ -29,7 +29,7 @@ li{
         text-align: center !important;
         font-size: 18px;
         margin: 0px;
-        padding: 20px 0;
+        padding-top: 20px;
     }
 
     &:hover{
@@ -54,6 +54,36 @@ li{
         opacity: 0.75;
     }
     
+    button, a{
+        padding: 5px 10px !important;
+        font-size: 15px !important;
+        background-color: var(--main-bg) !important;
+        margin-top: 15px;
+        border-radius: 50px;
+        display: inline-block;
+        text-decoration: none;
+        color: var(--textColor);
+        font-size: 18px;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
+        transition: 0.3s all ease-in-out;
+        cursor: pointer;
+        border: 0px;
+        outline: 0;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover{
+            opacity: 0.75;
+        }
+    }
+}
+
+.controls{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
 }
 
 
