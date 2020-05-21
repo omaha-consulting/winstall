@@ -92,14 +92,14 @@ function Generate() {
             />
 
             <div className="box">
-              <div>
-                <button className="button accent" onClick={handleCopy}>
-                  <FiCopy/>{copyText}
-                </button>
-                <button className="button" onClick={handleBat}>
-                  <FiDownload/>Download .bat
-                </button>
-              </div>
+              <button className="button accent" onClick={handleCopy}>
+                <FiCopy />
+                {copyText}
+              </button>
+              <button className="button" onClick={handleBat}>
+                <FiDownload />
+                Download .bat
+              </button>
             </div>
           </div>
           <div className="art">

@@ -145,6 +145,7 @@ function Store() {
             debounceTimeout={100}
             onChange={(e) => handleSearchInput(e)}
             placeholder="Search for apps here"
+            className="search"
           />
           <button className={styles.btn} onClick={clearCache}><FiRotateCcw/>Clear cache</button>
         </div>

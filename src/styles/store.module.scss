@@ -83,3 +83,21 @@ ul{
         opacity: 1;
     }
 } 
+
+@media(max-width: 690px){
+    .controls{
+        display: grid;
+        width: 100% !important;
+
+    }
+
+    .btn{
+        margin-top: 20px;
+
+        margin-left: 0px;
+    }
+
+    ul li{
+        padding: 10px;
+    }
+}

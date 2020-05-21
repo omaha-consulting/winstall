@@ -23,7 +23,7 @@ function Nav() {
       <header className="container">
         <div className={styles.brand}>
           <Link to="/">winstall</Link>
-          <span>&nbsp;(preview)</span>
+          <span className="preview">&nbsp;(preview)</span>
         </div>
 
         <div className={styles.nav}>
@@ -32,10 +32,11 @@ function Nav() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FiHeart/>Donate
+            <FiHeart />
+            <p>Donate</p>
           </a>
-          <span onClick={e => history.push("/eli5")}>
-            <FiHelpCircle/>
+          <span onClick={(e) => history.push("/eli5")}>
+            <FiHelpCircle />
           </span>
           <span onClick={switchTheme}>
             <FiMoon className="moon" />

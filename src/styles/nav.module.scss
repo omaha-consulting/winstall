@@ -27,6 +27,11 @@
         margin-right: 15px;
         font-weight: normal;
         color: var(--textColor);
+
+        p{
+            margin: 0px;
+            padding: 0px;
+        }
         
         svg{
             padding-top: 15px;
@@ -51,6 +56,34 @@
 
         svg{
             padding-top: 15px;
+        }
+    }
+}
+
+@media(max-width: 495px){
+    .nav{
+        a{
+            border-radius: 50%;
+            padding: 0px;
+            width: 50px;
+
+            p{
+                display: none;
+            }
+            
+            svg{
+                padding-right: 0px;
+            }
+        }
+    }
+}
+
+@media(max-width: 375px){
+    header{
+        display: block;
+
+        .nav{
+            margin-top: 20px;
         }
     }
 }

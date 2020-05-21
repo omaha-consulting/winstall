@@ -93,7 +93,7 @@ header{
 }
 
 
-input[type="text"]{
+input[type="text"].search{
     border: 0px;
     outline: 0px;
     border-radius: 50px;
@@ -170,7 +170,7 @@ input[type="text"]{
     z-index: 9;
     
     .inner{
-        padding: 0px;
+        padding: 0px 50px;
         display: flex;
         justify-content: space-between;
         align-self: center;
@@ -309,4 +309,87 @@ article{
             opacity: 0.75;
         }
     }
+}
+
+@media(max-width: 1190px){
+    .illu-box{
+        h1{
+            font-size: 35px !important;
+        }
+
+        .art img{
+            width: 200px;
+        }
+    }
+
+    .generate-container{
+        .art{
+            display: none;
+        }
+    }
+}
+
+@media(max-width: 790px){
+    .generate-container{
+        textarea{
+            width: 300px !important;
+        }
+    }
+
+    .bottomBar{
+        .inner{
+            justify-content: center !important;
+        }
+
+        .controls{
+            display: block !important;
+        }
+
+        p, .clear{
+            display: none !important;
+        }
+        
+    }
+
+    .illu-box{
+        display: block;
+
+        .art{
+            display: none;
+        }
+    }
+}
+
+@media(max-width: 590px){
+    header{
+        .preview{
+            display: none;
+        }
+    }
+
+    .container{
+        padding: 20px 25px;
+    }
+}
+
+@media(max-width: 495px){
+  
+   .illu-box{
+        h1{
+            font-size: 30px !important;
+        }
+    }
+
+    .box{
+        display: grid;
+    }
+}
+
+
+@media(max-width: 690px){
+    .controls{
+        display: grid;
+    }
+
+    
 }

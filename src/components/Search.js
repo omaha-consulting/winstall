@@ -12,6 +12,8 @@ import { sortArray, sanitize } from "../utils/helpers";
 import Skeleton from 'react-loading-skeleton';
 import PropagateLoader from "react-spinners/PropagateLoader";
 
+import {FiSearch} from "react-icons/fi";
+
 function Search() {
   let localData = useIndexedDB("packages")
   const [apps, setApps] = useState([])
@@ -91,13 +93,18 @@ function Search() {
 
   return (
     <div>
-      <DebounceInput
-        minLength={2}
-        debounceTimeout={300}
-        onChange={(e) => handleSearchInput(e)}
-        placeholder={loading ? "Loading apps..." : "Search for apps here"}
-        disabled={loading}
-      />
+      <div className={styles.searchBox}>
+        <span>
+          <FiSearch />
+        </span>
+        <DebounceInput
+          minLength={2}
+          debounceTimeout={300}
+          onChange={(e) => handleSearchInput(e)}
+          placeholder={loading ? "Loading apps..." : "Search for apps here"}
+          disabled={loading}
+        />
+      </div>
 
       {searchInput && (
         <>

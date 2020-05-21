@@ -110,3 +110,14 @@ li{
     padding: 20px;
     margin: 0px;
 }
+
+@media(max-width: 690px){
+    .imgContainer{
+        min-height: 50px !important;
+        
+        img{
+            width: 50px !important
+        }
+    }
+
+}

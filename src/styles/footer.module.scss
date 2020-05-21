@@ -13,6 +13,16 @@
             color: var(--accent);
         }
     }
+
+    img{
+        width: 50px;
+        transition: 0.3s all ease-in-out;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.75;
+        }
+    }
 }
 
 .disclaimer{

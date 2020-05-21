@@ -35,10 +35,9 @@
         margin-bottom: 10px;
         min-height: 100px;
         color: var(--textColor);
+        overflow: hidden;
     }
 
-    
-    
 }
 
 .listPackageContainer{
@@ -47,4 +46,14 @@
 
 .selectedApps{
     padding-bottom: 20px;
+}
+
+@media(max-width: 590px){
+    .intro, .generate{
+        padding-top: 0px !important;
+
+        textarea{
+            width: auto !important;
+        }
+    }
 }
