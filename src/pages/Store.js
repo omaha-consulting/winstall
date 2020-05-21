@@ -120,7 +120,7 @@ function Store() {
             <h3>{app.path.split("/")[1]}</h3>
             <h4>{app.path.split("/")[0]}</h4>
             <button
-              className="button"
+              className="subtle"
               disabled={loading}
             
             >

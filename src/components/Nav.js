@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/nav.module.scss";
-import { FiMoon, FiSun } from "react-icons/fi";
+import { FiMoon, FiSun, FiHeart, FiHelpCircle } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
 
 function Nav() {
+    const history = useHistory();
+
     let switchTheme = () => {
         let body = document.querySelector("body");
 
@@ -24,7 +27,20 @@ function Nav() {
         </div>
 
         <div className={styles.nav}>
-          <span onClick={switchTheme}><FiMoon className="moon"/><FiSun className="sun"/></span>
+          <a
+            href="https://github.com/sponsors/MehediH"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiHeart/>Donate
+          </a>
+          <span onClick={e => history.push("/eli5")}>
+            <FiHelpCircle/>
+          </span>
+          <span onClick={switchTheme}>
+            <FiMoon className="moon" />
+            <FiSun className="sun" />
+          </span>
         </div>
       </header>
     );

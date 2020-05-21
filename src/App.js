@@ -13,6 +13,7 @@ import Error from "./components/Error";
 import Nav from "./components/Nav";
 import Generate from "./pages/Generate";
 import Store from "./pages/Store";
+import Explainer from "./pages/Explainer";
 
 import addToLocalDB from "./utils/addToLocalDB";
 import {checkTheme} from "./utils/helpers";
@@ -109,6 +110,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/generate" exact component={Generate} />
             <Route path="/store" exact component={Store} />
+            <Route path="/eli5" exact component={Explainer} />
             {/* <Route path="/pack" exact component={CreatePack} />
             <Route path="/pack/:data" component={ViewPack} /> */}
             <Route component={Error} />

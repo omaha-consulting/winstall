@@ -27,6 +27,8 @@
      .moon{
          display: none;
      }
+
+
 }
 
 body{
@@ -234,6 +236,18 @@ input[type="text"]{
     display: none;
 }
 
+.subtle{
+    padding: 0px !important;
+    background-color: transparent !important; 
+    box-shadow: none !important;
+    font-size: 16px !important;
+    opacity: 0.55;
+
+    &:hover{
+        opacity: 0.55 !important;
+    }
+}
+
 .button{
     background-color: var(--card-bg);
     padding: 10px 20px;
@@ -268,5 +282,31 @@ input[type="text"]{
     &:hover, &:focus{
         opacity: 1;
         background-color: var(--altAccent);
+    }
+}
+
+article{
+    h1, h2, h3{
+        display: inline-block;
+        margin-bottom: 0px;
+    }
+
+    p{
+        font-size: 20px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    a{
+        color: var(--textColor);
+        border-bottom: 3px solid var(--accent);
+        transition: 0.3s all ease-in-out;
+        text-decoration: none;
+        margin-bottom: 5px;
+        display: inline-block;
+
+        &:hover{
+            opacity: 0.75;
+        }
     }
 }
