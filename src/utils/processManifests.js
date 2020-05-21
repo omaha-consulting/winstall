@@ -1,4 +1,4 @@
-import YAML from "yamljs";
+import YAML from "yaml";
 
 function b64DecodeUnicode(str) {
   return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {

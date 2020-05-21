@@ -53,6 +53,14 @@ li{
         font-size: 15px;
         opacity: 0.75;
     }
+
+    .subtle{
+        padding: 0px !important;
+        background-color: transparent !important; 
+        box-shadow: none !important;
+        font-size: 16px !important;
+        opacity: 0.55;
+    }
     
     button, a{
         padding: 5px 10px !important;
@@ -85,6 +93,8 @@ li{
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr;
 }
+
+
 
 
 .selected{

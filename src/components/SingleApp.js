@@ -1,14 +1,13 @@
 import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
-import { sanitize } from "../utils/helpers";
 
 let SingleApp = ({ app, showDesc=true }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-    useEffect(() => {
- 
+    const [viewingDesc, setViewingDesc] = useState(false);
 
+    useEffect(() => {
       let found = selectedApps.findIndex((a) => a.id === app.id) !== -1;
 
       setSelected(found)
@@ -31,11 +30,31 @@ let SingleApp = ({ app, showDesc=true }) => {
      
     }
 
-    let openExtLink = (e, link) => {
+    let toggleDescription = (e, status) => {
       e.stopPropagation();
-    }
+      setViewingDesc(status);
+    };
 
     if(!app.contents && !app.img) return <></>
+
+    if (showDesc && !app.img && app.contents.Description && viewingDesc) {
+      return (
+        <li
+          key={app.id}
+          onClick={handleAppSelect}
+          className={selected ? styles.selected : ""}
+        >
+          <h3>{app.contents.Name}</h3>
+          <p>{app.contents.Description}</p>
+          <button
+            onClick={(e) => toggleDescription(e, false)}
+            className={styles.subtle}
+          >
+            Hide Description
+          </button>
+        </li>
+      );
+    }
 
     return (
       <li
@@ -66,7 +85,16 @@ let SingleApp = ({ app, showDesc=true }) => {
             <em>{app.contents.Version ? `v${app.contents.Version}` : ""}</em>
             {showDesc && (
               <div>
-                {app.contents.Description && <p>{app.contents.Description}</p>}
+                {app.contents.Description && (
+                  <button
+                    onClick={(e) =>
+                      toggleDescription(e, true)
+                    }
+                    className={styles.subtle}
+                  >
+                    View Description
+                  </button>
+                )}
 
                 <div className={styles.controls}>
                   {app.contents.Homepage && (
@@ -74,7 +102,7 @@ let SingleApp = ({ app, showDesc=true }) => {
                       href={`${app.contents.Homepage}?ref=winstall`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => openExtLink(e, app.contents.Homepage)}
+                      onClick={(e) => e.stopPropagation()}
                     >
                       View Site
                     </a>
@@ -82,7 +110,7 @@ let SingleApp = ({ app, showDesc=true }) => {
                   {app.contents.Installers && (
                     <a
                       href={`${app.contents.Installers[0].Url}`}
-                      onClick={(e) => openExtLink(e, app.contents.Homepage)}
+                      onClick={(e) => e.stopPropagation()}
                     >
                       Download{" "}
                       {app.contents.InstallerType
