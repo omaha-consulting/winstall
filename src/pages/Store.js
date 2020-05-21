@@ -14,6 +14,8 @@ import Footer from "../components/Footer";
 
 import PropagateLoader from "react-spinners/PropagateLoader";
 
+import { FiRotateCcw, FiInfo } from "react-icons/fi";
+
 function Store() {
     let localData = useIndexedDB("packages")
     const [apps, setApps] = useState([])
@@ -122,7 +124,7 @@ function Store() {
               disabled={loading}
             
             >
-              {loading ? "Loading..." : "Click to view"}
+              <FiInfo/>{loading ? "Loading..." : "Click to view"}
             </button>
           </li>
         );
@@ -144,7 +146,7 @@ function Store() {
             onChange={(e) => handleSearchInput(e)}
             placeholder="Search for apps here"
           />
-          <button className={styles.btn} onClick={clearCache}>Clear cache</button>
+          <button className={styles.btn} onClick={clearCache}><FiRotateCcw/>Clear cache</button>
         </div>
 
         {loading ? (

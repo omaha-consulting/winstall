@@ -2,6 +2,13 @@ import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 
+import {
+  FiExternalLink,
+  FiDownload,
+  FiChevronDown,
+  FiChevronUp,
+} from "react-icons/fi";
+
 let SingleApp = ({ app, showDesc=true }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
@@ -51,6 +58,7 @@ let SingleApp = ({ app, showDesc=true }) => {
             className={styles.subtle}
           >
             Hide Description
+            <FiChevronUp />
           </button>
         </li>
       );
@@ -87,12 +95,11 @@ let SingleApp = ({ app, showDesc=true }) => {
               <div>
                 {app.contents.Description && (
                   <button
-                    onClick={(e) =>
-                      toggleDescription(e, true)
-                    }
+                    onClick={(e) => toggleDescription(e, true)}
                     className={styles.subtle}
                   >
                     View Description
+                    <FiChevronDown />
                   </button>
                 )}
 
@@ -104,6 +111,7 @@ let SingleApp = ({ app, showDesc=true }) => {
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
                     >
+                      <FiExternalLink />
                       View Site
                     </a>
                   )}
@@ -112,6 +120,7 @@ let SingleApp = ({ app, showDesc=true }) => {
                       href={`${app.contents.Installers[0].Url}`}
                       onClick={(e) => e.stopPropagation()}
                     >
+                      <FiDownload />
                       Download{" "}
                       {app.contents.InstallerType
                         ? `.${app.contents.InstallerType.toLowerCase()}`

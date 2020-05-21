@@ -60,7 +60,7 @@ ul{
     background-color: var(--card-bg);
     padding: 10px 20px;
     border-radius: 50px;
-    display: inline-block;
+    display: flex;
     height: 50px;
     text-decoration: none;
     color: var(--textColor);
@@ -72,6 +72,12 @@ ul{
     outline: 0;
     margin-left: 20px;
     opacity: 0.75;
+
+    svg{
+        padding-right: 10px;
+        margin-top: 2px;
+        font-size: 20px;
+    }
 
     &:hover, &:focus{
         opacity: 1;

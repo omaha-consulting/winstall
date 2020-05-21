@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import SelectedContext from "../ctx/SelectedContext";
 
+import { FiTrash, FiCodepen } from "react-icons/fi";
 export default function SelectionBar() {
     const history = useHistory();
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
@@ -20,10 +21,10 @@ export default function SelectionBar() {
           <p>Selected {selectedApps.length} apps so far</p>
           <div className="controls">
             <button className="clear" onClick={() => handleClear()}>
-              Clear Selections
+              <FiTrash/>Clear Selections
             </button>
             <button onClick={() => history.push("/generate")}>
-              Generate script
+              <FiCodepen/>Generate script
             </button>
           </div>
         </div>

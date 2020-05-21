@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/nav.module.scss";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 function Nav() {
     let switchTheme = () => {
@@ -23,7 +24,7 @@ function Nav() {
         </div>
 
         <div className={styles.nav}>
-          <span onClick={switchTheme}>Switch Theme</span>
+          <span onClick={switchTheme}><FiMoon className="moon"/><FiSun className="sun"/></span>
         </div>
       </header>
     );

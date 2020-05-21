@@ -11,6 +11,7 @@ import SelectedContext from "../ctx/SelectedContext";
 import art from "../assets/dl.svg";
 import Footer from "../components/Footer";
 
+import { FiCopy, FiDownload } from "react-icons/fi";
 
 function Generate() {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
@@ -72,10 +73,10 @@ function Generate() {
             <div className="box">
               <div>
                 <button className="button accent" onClick={handleCopy}>
-                  {copyText}
+                  <FiCopy/>{copyText}
                 </button>
                 <button className="button" onClick={handleBat}>
-                  Download .bat
+                  <FiDownload/>Download .bat
                 </button>
               </div>
             </div>
