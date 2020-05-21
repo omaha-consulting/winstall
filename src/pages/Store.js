@@ -11,6 +11,7 @@ import SelectionBar from "../components/SelectionBar";
 import SingleApp from "../components/SingleApp";
 import processManifests from "../utils/processManifests";
 import { sortArray, sanitize } from "../utils/helpers";
+import Footer from "../components/Footer";
 
 function All() {
     let localData = useIndexedDB("packages")
@@ -95,9 +96,9 @@ function All() {
 
 
         return (
-            <li>
+            <li className={styles.notReady}>
                 <h3>{app.path.split("/")[1]}</h3>
-                <p>{app.path.split("/")[0]}</p>
+                <h4>{app.path.split("/")[0]}</h4>
                 <button className="button" disabled={loading} onClick={() => {
                     setLoading(true)
                     selectivePull(app)
@@ -126,6 +127,7 @@ function All() {
                 ))}
             </ul>
             
+            <Footer/>
             <SelectionBar/>
         </div>
     );

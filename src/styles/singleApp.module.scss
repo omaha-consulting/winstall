@@ -4,6 +4,7 @@ li{
     border: 5px solid var(--card-bg);
     border-radius: 10px;
     cursor: pointer;
+    overflow: hidden;
     transition: 0.1s all ease-in-out;
 
     .imgContainer{
@@ -58,4 +59,10 @@ li{
 
 .selected{
     border: 5px solid var(--accent);
+}
+
+.imgHeader{
+    text-align: center;
+    padding: 20px;
+    margin: 0px;
 }

@@ -102,13 +102,19 @@ input[type="text"]{
 
         img{
             position: absolute;
-            top: -80px;
             left: 50%;
+            top: 50%;
             transform: translateX(-50%);
             margin: 0 auto;
             display: block;
-            max-width: 350px;
+            max-width: 280px;
         }
+    }
+}
+
+.generate-container{
+    .art{
+        margin-top: 50px;
     }
 }
 
@@ -116,7 +122,9 @@ input[type="text"]{
     padding: 20px 0;
     padding-bottom: 50px;
 
-   
+    li{
+        padding-bottom: 0px !important;
+    }
 
     h2{
         font-size: 30px;
@@ -140,13 +148,17 @@ input[type="text"]{
     color: #fff;
     line-height: 50px;
     box-shadow: -3px -6px 20px rgba(0, 0, 0, 0.18);
-
-
+    
     .inner{
         padding: 0px;
         display: flex;
         justify-content: space-between;
         align-self: center;
+
+        p{
+            line-height: 58px;
+            font-size: 18px;
+        }
 
         button{
             background-color: var(--main-bg);

@@ -7,7 +7,8 @@ import PopularApps from "../components/PopularApps";
 import SelectionBar from "../components/SelectionBar";
 import Error from "../components/Error";
 
-import laptop from "../assets/hero.png";
+import art from "../assets/logo.svg";
+import Footer from "../components/Footer";
 
 function Home() {
 
@@ -17,7 +18,7 @@ function Home() {
         <div className="illu-box">
           <h1>Bulk install Windows apps quickly with a single-click.</h1>
           <div className="art">
-            <img src={laptop} draggable={false} />
+            <img src={art} draggable={false} />
           </div>
         </div>
         <Search />
@@ -26,6 +27,8 @@ function Home() {
       <PopularApps />
 
       <SelectionBar/>
+
+      <Footer/>
     </div>
   );
 }

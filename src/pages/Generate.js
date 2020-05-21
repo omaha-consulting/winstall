@@ -6,6 +6,10 @@ import ListPackages from "../components/ListPackages";
 import SingleApp from "../components/SingleApp";
 import SelectedContext from "../utils/SelectedContext";
 
+import art from "../assets/dl.svg";
+import Footer from "../components/Footer";
+
+
 function Generate() {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [copyText, setCopyText] = useState("Copy to clipboard");
@@ -39,16 +43,21 @@ function Generate() {
     }
 
     return (
-        <div className="container">
-            <div className={styles.generate}>
-                <h1>Your apps are ready to be installed.</h1>
-                <h3>Make sure you have Windows Package Manager installed :)</h3>
-                <p>Just copy the command from the textbox bellow, paste it into Windows Terminal, Command Prompt, or any other terminal on your Windows machine to start installing the apps.</p>
-            
-                <textarea value={script} onChange={() => {}} onFocus={e => e.target.select()}/>
+        <div className="container generate-container">
+            <div className="illu-box">
+                <div className={styles.generate}>
+                    <h1>Your apps are ready to be installed.</h1>
+                    <h3>Make sure you have Windows Package Manager installed :)</h3>
+                    <p>Just copy the command from the textbox bellow, paste it into Windows Terminal, Command Prompt, or any other terminal on your Windows machine to start installing the apps.</p>
 
-                <button className="button accent" onClick={handleCopy}>{copyText}</button>
-                <button className="button" onClick={handleBat}>Download .bat</button>
+                    <textarea value={script} onChange={() => { }} onFocus={e => e.target.select()} />
+
+                    <button className="button accent" onClick={handleCopy}>{copyText}</button>
+                    <button className="button" onClick={handleBat}>Download .bat</button>
+                </div>
+                <div className="art">
+                    <img src={art} draggable={false} />
+                </div>
             </div>
 
             <div className={styles.selectedApps}>
@@ -61,6 +70,8 @@ function Generate() {
                     ))}
                 </ListPackages>
             </div>
+
+            <Footer/>
         </div>
     );
 }

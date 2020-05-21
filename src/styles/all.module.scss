@@ -6,7 +6,7 @@ ul{
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 20px;
     margin-top: 25px;
-    
+
     li{ 
         p{
             text-align: left !important;
@@ -28,5 +28,24 @@ ul{
 @media(max-width: 1280px){
     ul, .all{
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+.notReady{
+    cursor: auto;
+
+    &:hover{
+        opacity: 1;
+    }
+
+    h3, h4{
+        margin-top: 0px;
+        margin-bottom: 5px;
+    }
+
+    h4{
+        margin-top: 0px;
+        margin-bottom: 15px;
+        opacity: 0.75;
     }
 }

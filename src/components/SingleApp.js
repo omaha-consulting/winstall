@@ -45,7 +45,7 @@ let SingleApp = ({ app }) => {
               />
               {selected}
             </div>
-            <p>{app.name}</p>
+            <h3 className={styles.imgHeader}>{app.name}</h3>
           </div>
         )}
 

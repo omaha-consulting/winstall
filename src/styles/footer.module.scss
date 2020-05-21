@@ -1,0 +1,21 @@
+.footer{
+    padding: 30px 0;
+    font-size: 20px;
+    text-align: center;
+    padding-bottom: 60px;
+
+    a{
+        color: var(--textColor);
+        text-decoration: none;
+        transition: 0.3s all ease-in-out;
+
+        &:hover{
+            color: var(--accent);
+        }
+    }
+}
+
+.disclaimer{
+    opacity: 0.75;
+    font-size: 18px;
+}
