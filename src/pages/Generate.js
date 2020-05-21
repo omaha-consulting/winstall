@@ -25,8 +25,15 @@ function Generate() {
             apps.push(app.id);
             installs.push(`winget install --id=${app.id}`);
         });
+
+        let newScript = installs.join(" & ");
+        
+        if(script !== newScript){
+            setCopyText("Copy to clipboard")
+        }
  
-        setScript(installs.join(" & "))
+        setScript(newScript)
+
     })
 
     if(selectedApps.length === 0) return <Error title="You have not selected any apps to install!" subtitle="You'll need to select some apps first to be able to generate the script."/>

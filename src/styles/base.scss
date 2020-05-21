@@ -151,11 +151,12 @@ input[type="text"]{
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    height: 70px;
     background-color: #9b2eff; 
     color: #fff;
-    line-height: 50px;
+    line-height: 70px;
     box-shadow: -3px -6px 20px rgba(0, 0, 0, 0.18);
+    z-index: 9;
     
     .inner{
         padding: 0px;
@@ -164,17 +165,34 @@ input[type="text"]{
         align-self: center;
 
         p{
-            line-height: 58px;
-            font-size: 18px;
+            line-height: 75px;
+            font-size: 20px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .controls{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+
+            .clear{
+                background-color: var(--card-bg);
+                opacity: 0.75;
+
+                &:hover{
+                    opacity: 1;
+                }
+            }
         }
 
         button{
             background-color: var(--main-bg);
             border: 0px;
             outline: 0px;
-            height: 35px;
-            margin-top: 8px;
-            font-size: 15px;
+            height: 50px;
+            margin-top: 11px;
+            font-size: 18px;
             border-radius: 50px;
             padding: 0 20px;
             cursor: pointer;

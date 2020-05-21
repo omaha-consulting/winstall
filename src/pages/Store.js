@@ -94,8 +94,13 @@ function Store() {
             app.loading = false;
             setTotalApps((oldArray) => sortArray([...oldArray, app]));
         }
+    }
 
-       
+    const clearCache = () => {
+      if(window.confirm("Are you sure you want to clear the local cache and reload all app data?")){
+        setLoading(true);
+        localData.clear().then(() => window.location.reload());
+      }
     }
 
     let LoadApp = ({ app }) => {
@@ -122,12 +127,16 @@ function Store() {
           Due to API limitations, you will not be able to see the details of all
           of the apps below right away.
         </h3>
-        <DebounceInput
-          minLength={2}
-          debounceTimeout={100}
-          onChange={(e) => handleSearchInput(e)}
-          placeholder="Search for apps here"
-        />
+
+        <div className={styles.controls}>
+          <DebounceInput
+            minLength={2}
+            debounceTimeout={100}
+            onChange={(e) => handleSearchInput(e)}
+            placeholder="Search for apps here"
+          />
+          <button className={styles.btn} onClick={clearCache}>Clear cache</button>
+        </div>
 
         {loading ? (
           <div className={styles.loader}>

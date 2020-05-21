@@ -57,3 +57,30 @@ ul{
     justify-content: center;
     margin: 80px 0;
 } 
+
+.controls{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn{
+    background-color: var(--card-bg);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-block;
+    height: 50px;
+    text-decoration: none;
+    color: var(--textColor);
+    font-size: 18px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+    border: 0px;
+    outline: 0;
+    margin-left: 20px;
+    opacity: 0.75;
+
+    &:hover, &:focus{
+        opacity: 1;
+    }
+} 
