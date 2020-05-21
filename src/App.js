@@ -6,7 +6,6 @@ import dbConfig from "./data/dbConfig";
 
 import "./styles/base.scss";
 
-import PopularContext from "./ctx/PopularContext";
 import SelectedContext from './ctx/SelectedContext';
 
 import Home from "./pages/Home";
@@ -16,6 +15,7 @@ import Generate from "./pages/Generate";
 import Store from "./pages/Store";
 
 import addToLocalDB from "./utils/addToLocalDB";
+import {checkTheme} from "./utils/helpers";
 
 initDB(dbConfig);
 
@@ -28,6 +28,8 @@ function App() {
   let localData = useIndexedDB("packages")
   
   useEffect(() => {
+    checkTheme();
+    
     // we are caching the packges repository, because otherwise it bombards the 
     // github API and reaches api limit quickly
     setPackageData({loading: true})
