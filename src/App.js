@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { initDB, useIndexedDB } from "react-indexed-db";
 
-import dbConfig from "./utils/dbConfig";
+import dbConfig from "./data/dbConfig";
 
 import "./styles/base.scss";
 
-import PackageContext from "./utils/PackageContext";
-import addToLocalDB from "./utils/addToLocalDB";
+import PopularContext from "./ctx/PopularContext";
+import SelectedContext from './ctx/SelectedContext';
 
 import Home from "./pages/Home";
 import Error from "./components/Error";
 import Nav from "./components/Nav";
-import SelectedContext from './utils/SelectedContext';
 import Generate from "./pages/Generate";
 import Store from "./pages/Store";
+
+import addToLocalDB from "./utils/addToLocalDB";
 
 initDB(dbConfig);
 
@@ -100,7 +101,6 @@ function App() {
   
   return (
     <Router>
-      <PackageContext.Provider value={packageData}>
         <SelectedContext.Provider value={selectedAppValue}>
           <Nav />
           <Switch>
@@ -110,7 +110,6 @@ function App() {
             <Route component={Error} />
           </Switch>
         </SelectedContext.Provider>
-      </PackageContext.Provider>
     </Router>
   );
 }

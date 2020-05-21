@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/search.module.scss";
 
 import { useIndexedDB } from "react-indexed-db";

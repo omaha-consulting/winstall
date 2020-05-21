@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
-import SelectedContext from "../utils/SelectedContext";
+import SelectedContext from "../ctx/SelectedContext";
 
 let SingleApp = ({ app }) => {
     const [selected, setSelected] = useState(false);

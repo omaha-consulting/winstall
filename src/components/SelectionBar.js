@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import SelectedContext from "../utils/SelectedContext";
+import SelectedContext from "../ctx/SelectedContext";
 
 export default function SelectionBar() {
     const history = useHistory();

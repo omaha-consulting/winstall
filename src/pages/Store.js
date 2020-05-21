@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import styles from "../styles/all.module.scss";
+import styles from "../styles/store.module.scss";
 
 import { useIndexedDB } from "react-indexed-db";
-import SelectedContext from "../utils/SelectedContext";
+import SelectedContext from "../ctx/SelectedContext";
 import { DebounceInput } from "react-debounce-input";
 import fuzzysort from "fuzzysort"
 
@@ -13,7 +13,7 @@ import processManifests from "../utils/processManifests";
 import { sortArray, sanitize } from "../utils/helpers";
 import Footer from "../components/Footer";
 
-function All() {
+function Store() {
     let localData = useIndexedDB("packages")
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [apps, setApps] = useState([])
@@ -133,4 +133,4 @@ function All() {
     );
 }
 
-export default All;
+export default Store;

@@ -4,7 +4,7 @@ import styles from "../styles/home.module.scss";
 import Error from "../components/Error";
 import ListPackages from "../components/ListPackages";
 import SingleApp from "../components/SingleApp";
-import SelectedContext from "../utils/SelectedContext";
+import SelectedContext from "../ctx/SelectedContext";
 
 import art from "../assets/dl.svg";
 import Footer from "../components/Footer";
