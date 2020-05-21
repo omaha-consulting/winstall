@@ -99,24 +99,34 @@ function Search() {
         disabled={loading}
       />
 
-      {loading ? (
-        <div className={styles.loader}>
-          <PropagateLoader color="#9b2eff" />
-        </div>
-      ) : (
-        <ul className={styles.searchResults}>
-          {apps.map((app, i) =>
-            app.loaded ? (
-              <SingleApp
-                app={sanitize(app)}
-                showDesc={false}
-                key={`${app.contents.Id}-${i}`}
-              />
-            ) : (
-              <LoadApp app={app} key={app.path} />
-            )
+      {searchInput && (
+        <>
+          {loading ? (
+            <div className={styles.loader}>
+              <PropagateLoader color="#9b2eff" />
+            </div>
+          ) : (
+            <>
+              {apps.length !== 0 ? (
+                <ul className={styles.searchResults}>
+                  {apps.map((app, i) =>
+                    app.loaded ? (
+                      <SingleApp
+                        app={sanitize(app)}
+                        showDesc={false}
+                        key={`${app.contents.Id}-${i}`}
+                      />
+                    ) : (
+                      <LoadApp app={app} key={app.path} />
+                    )
+                  )}
+                </ul>
+              ) : (
+                <p>Could not find any apps.</p>
+              )}
+            </>
           )}
-        </ul>
+        </>
       )}
     </div>
   );

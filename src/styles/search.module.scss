@@ -1,11 +1,9 @@
 .searchResults{
     list-style-type: none;
     padding: 0px;
-    margin: 20px 0;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 15px;
-    margin-top: 50px;;
 }
 
 @media(max-width: 1280px){

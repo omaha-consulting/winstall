@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 
 import styles from "../styles/home.module.scss";
 
@@ -10,7 +11,7 @@ import SelectedContext from "../ctx/SelectedContext";
 import art from "../assets/dl.svg";
 import Footer from "../components/Footer";
 
-import { FiCopy, FiDownload } from "react-icons/fi";
+import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
 
 function Generate() {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
@@ -38,7 +39,28 @@ function Generate() {
 
     })
 
-    if(selectedApps.length === 0) return <Error title="You have not selected any apps to install!" subtitle="You'll need to select some apps first to be able to generate the script."/>
+    if(selectedApps.length === 0){
+      return (
+        <div className="container generate-container">
+          <div className="illu-box">
+            <div className={styles.generate}>
+              <h1>Your don't have any apps selected.</h1>
+              <h3>
+                Make sure you select some apps first to be able to generate a
+                script :)
+              </h3>
+              <Link to="/" className="button">
+                <FiHome />
+                Go home
+              </Link>
+            </div>
+            <div className="art">
+              <img src={art} draggable={false} />
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     let handleCopy = () => {
         navigator.clipboard.writeText(script).then(() => setCopyText("Copied!")).catch((err) => {
