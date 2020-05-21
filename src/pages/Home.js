@@ -16,7 +16,7 @@ function Home() {
     <div className="container">
       <div className={styles.intro}>
         <div className="illu-box">
-          <h1>Bulk install Windows apps quickly with a single-click.</h1>
+          <h1>Bulk install Windows apps quickly with Windows Package Manager.</h1>
           <div className="art">
             <img src={art} draggable={false} />
           </div>

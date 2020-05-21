@@ -1,4 +1,4 @@
-:root {
+.light {
     --main-bg: #fff;
     --card-bg: #e9eaed;
     --textColor: #333;
@@ -7,14 +7,14 @@
     --altAccent: #7214c9;
 }
 
-// :root {
-//     --main-bg: rgb(18, 18, 18);
-//     --card-bg: #2d2e30;
-//     --textColor: rgb(255, 255, 255);
-//     --altTextColor: #333;
-//     --accent: #9b2eff;
-//      --altAccent: #6b14bd;
-// }
+.dark {
+    --main-bg: rgb(18, 18, 18);
+    --card-bg: #2d2e30;
+    --textColor: rgb(255, 255, 255);
+    --altTextColor: #333;
+    --accent: #9b2eff;
+     --altAccent: #6b14bd;
+}
 
 body{
     font-family: 'Nunito', sans-serif;
@@ -29,6 +29,9 @@ body{
 header{
     padding: 50px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     a{
         text-decoration: none;
