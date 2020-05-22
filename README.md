@@ -31,3 +31,8 @@ When you search for an app, winstall will only fetch the details for that app an
 On [the "all apps" page](/store) you will be able to see all the currently available apps that are on the Windows Package Manager. The data for all the apps will not be available at once, and you will have to click on individual apps to view their full details. This is, once again, done to avoid hitting GitHub API limits.
 
 The latest app data is cached for 5 hours, and you can manually clear the cache from the "all apps" page if you would like. You may sometimes hit the GitHub API limit, in that case some app details may not load. You will have to wait an hour before the limit is reset by GitHub. I am working on improving the API usage in order to limit API requests as much as possible.-
+
+Popular apps
+------------
+
+The list of popular apps are fetched from a `.json` file with a pre-poulated set of data. On the front-end, a random selection of 6 apps from teh list is displayed. If you would like to add an app to the list of popular apps, you can do so by [adding an app here](https://github.com/MehediH/winstall/blob/master/src/data/popularApps.json) and creating a pull request. You will also have to provide a logo for that app, which needs to have a transparent image, be 150x150px, and in the .webp format. The logo must be [added in this folder.](https://github.com/MehediH/winstall/tree/master/src/assets/apps) 
