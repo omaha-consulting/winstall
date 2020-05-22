@@ -87,6 +87,8 @@ function Generate() {
       } else {
         setScript(script.replace(/;/g, "&&"));
       }
+
+      setCopyText("Copy to clipboard")
     }
 
     return (
@@ -110,7 +112,7 @@ function Generate() {
               />
               <span id="biscuit-label">Show PowerShell script</span>
             </div>
-            
+
             <textarea
               value={script}
               onChange={() => {}}
