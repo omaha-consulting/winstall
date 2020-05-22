@@ -11,11 +11,13 @@ import art from "../assets/dl.svg";
 import Footer from "../components/Footer";
 
 import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
+import Toggle from "react-toggle";
 
 function Generate() {
     const { selectedApps } = useContext(SelectedContext);
     const [copyText, setCopyText] = useState("Copy to clipboard");
     const [script, setScript] = useState("");
+    const [showPS, setShowPS] = useState(false);
 
     useEffect(() => {
         let installs = [];
@@ -30,8 +32,9 @@ function Generate() {
             return app;
         });
 
-        let newScript = installs.join(" && ");
+        let newScript = installs.join(showPS ? " ; " : " && ");
         
+    
         if(script !== newScript){
             setCopyText("Copy to clipboard")
         }
@@ -70,8 +73,20 @@ function Generate() {
     }
 
     let handleBat = () => {
-        document.querySelector("#gsc").href = "data:text/plain;base64," + btoa(script);
-        document.querySelector("#gsc").click();
+        let dl = document.querySelector("#gsc");
+        dl.setAttribute("download", `winstall.${showPS ? ".ps1" : ".bat"}`)
+        dl.href = "data:text/plain;base64," + btoa(script);
+        dl.click();
+    }
+
+    let handleScriptSwitch = () => {
+      setShowPS(!showPS);
+
+      if (!showPS) {
+        setScript(script.replace(/&&/g, ";"));
+      } else {
+        setScript(script.replace(/;/g, "&&"));
+      }
     }
 
     return (
@@ -86,6 +101,16 @@ function Generate() {
               Windows machine to start installing the apps.
             </p>
 
+            <div className="switch">
+              <Toggle
+                id="biscuit-status"
+                defaultChecked={showPS}
+                aria-labelledby="biscuit-label"
+                onChange={handleScriptSwitch}
+              />
+              <span id="biscuit-label">Show PowerShell script</span>
+            </div>
+            
             <textarea
               value={script}
               onChange={() => {}}
@@ -97,14 +122,15 @@ function Generate() {
                 <FiCopy />
                 {copyText}
               </button>
+
               <button className="button" onClick={handleBat}>
                 <FiDownload />
-                Download .bat
+                Download {showPS ? ".ps1" : ".bat"}
               </button>
             </div>
           </div>
           <div className="art">
-            <img src={art} draggable={false} alt="download icon"/>
+            <img src={art} draggable={false} alt="download icon" />
           </div>
         </div>
 

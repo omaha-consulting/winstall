@@ -105,9 +105,9 @@ let SingleApp = ({ app, showDesc=true }) => {
             <div className={styles.imgContainer}>
 
               <picture>
-                <source srcset={require(`../assets/apps/${app.img}`)} type="image/webp"/>
-                <source srcset={require(`../assets/apps/fallback/${app.img.replace("webp", "png")}`)} type="image/png" />
-                <img src={require(`../assets/apps/fallback/${app.img.replace("webp", "png")}`)}/>
+                <source srcSet={require(`../assets/apps/${app.img}`)} type="image/webp"/>
+                <source srcSet={require(`../assets/apps/fallback/${app.img.replace("webp", "png")}`)} type="image/png" />
+                <img src={require(`../assets/apps/fallback/${app.img.replace("webp", "png")}`)} alt={`Logo for ${app.name}`}/>
             
               </picture>
               
