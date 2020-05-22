@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/nav.module.scss";
 import { FiMoon, FiSun, FiCoffee, FiHelpCircle } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 function Nav() {
     const history = useHistory();
+    const location = useLocation();
 
     let switchTheme = () => {
         let body = document.querySelector("body");
@@ -17,6 +18,14 @@ function Nav() {
             localStorage.setItem("wiTheme", "light")
             body.classList.replace("dark", "light")
         }
+    }
+
+    const handleExplainer = () => {
+      if(location.pathname === "/eli5"){
+        history.push("/")
+      } else{
+        history.push("/eli5");
+      }
     }
 
     return (
@@ -35,7 +44,7 @@ function Nav() {
             <FiCoffee />
             <p>Donate</p>
           </a>
-          <span onClick={(e) => history.push("/eli5")}>
+          <span onClick={handleExplainer}>
             <FiHelpCircle />
           </span>
           <span onClick={switchTheme}>
