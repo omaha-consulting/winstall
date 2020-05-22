@@ -81,7 +81,7 @@ function Generate() {
             <h1>Your apps are ready to be installed.</h1>
             <h3>Make sure you have Windows Package Manager installed :)</h3>
             <p>
-              Just copy the command from the textbox bellow, paste it into
+              Just copy the command from the textbox below, paste it into
               Windows Terminal, Command Prompt, or any other terminal on your
               Windows machine to start installing the apps.
             </p>
