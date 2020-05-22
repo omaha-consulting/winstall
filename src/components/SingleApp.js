@@ -18,7 +18,7 @@ let SingleApp = ({ app, showDesc=true }) => {
       let found = selectedApps.findIndex((a) => a.id === app.id) !== -1;
 
       setSelected(found)
-    })
+    }, [selectedApps, app.id])
 
     let handleAppSelect = () => {
       let found = selectedApps.findIndex((a) => a.id === app.id);

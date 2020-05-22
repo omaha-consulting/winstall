@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/store.module.scss";
 
 import { useIndexedDB } from "react-indexed-db";
@@ -24,10 +24,10 @@ function Store() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if(apps.length !== 0) return;
+      getApps();
 
-        getApps();
-    }, [])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const getApps = () => {
         localData.getAll().then(async (items) => {
@@ -47,6 +47,8 @@ function Store() {
                 }
 
                 i.loading = false;
+
+                return i;
             });
 
             // we put the items that are loaded first, and then by alphabetical order
@@ -144,6 +146,7 @@ function Store() {
             minLength={2}
             debounceTimeout={100}
             onChange={(e) => handleSearchInput(e)}
+            value={searchInput}
             placeholder="Search for apps here"
             className="search"
           />

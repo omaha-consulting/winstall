@@ -8,7 +8,7 @@ function b64DecodeUnicode(str) {
 
 
 const processManifests = (app) => {
-    console.log("Requesting manifest...", app.path)
+    // console.log("Requesting manifest...", app.path)
     return new Promise((resolve) => {
         fetch(app.yamlStore)
           .then((res) => res.json())

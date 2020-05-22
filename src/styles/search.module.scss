@@ -6,7 +6,19 @@
     grid-gap: 15px;
 }
 
-@media(max-width: 1280px){
+@media(max-width: 1200px){
+   .searchResults{
+        grid-template-columns: repeat(3, 1fr);
+   }
+}
+
+@media(max-width: 1000px){
+   .searchResults{
+        grid-template-columns: repeat(2, 1fr);
+   }
+}
+
+@media(max-width: 680px){
    .searchResults{
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
    }
@@ -64,8 +76,12 @@
     .searchBox{
         width: 100%;
     }
-    
+
     input[type=text]{
         width: calc(100% - 65px) !important;
     }
+}
+
+.noresults{
+    position: absolute;
 }

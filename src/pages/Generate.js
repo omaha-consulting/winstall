@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 
 import styles from "../styles/home.module.scss";
 
-import Error from "../components/Error";
 import ListPackages from "../components/ListPackages";
 import SingleApp from "../components/SingleApp";
 import SelectedContext from "../ctx/SelectedContext";
@@ -14,7 +13,7 @@ import Footer from "../components/Footer";
 import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
 
 function Generate() {
-    const { selectedApps, setSelectedApps } = useContext(SelectedContext);
+    const { selectedApps } = useContext(SelectedContext);
     const [copyText, setCopyText] = useState("Copy to clipboard");
     const [script, setScript] = useState("");
 
@@ -23,10 +22,12 @@ function Generate() {
         let apps = [];
 
         selectedApps.map((app) => {
-            if (app.id === undefined) return;
+            if (app.id === undefined) return app;
 
             apps.push(app.id);
             installs.push(`winget install --id=${app.id}`);
+
+            return app;
         });
 
         let newScript = installs.join(" & ");
@@ -36,8 +37,8 @@ function Generate() {
         }
  
         setScript(newScript)
-
-    })
+        
+    }, [selectedApps, script])
 
     if(selectedApps.length === 0){
       return (
@@ -55,7 +56,7 @@ function Generate() {
               </Link>
             </div>
             <div className="art">
-              <img src={art} draggable={false} />
+              <img src={art} draggable={false} alt="download icon"/>
             </div>
           </div>
         </div>
@@ -103,7 +104,7 @@ function Generate() {
             </div>
           </div>
           <div className="art">
-            <img src={art} draggable={false} />
+            <img src={art} draggable={false} alt="download icon"/>
           </div>
         </div>
 

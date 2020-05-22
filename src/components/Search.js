@@ -15,7 +15,7 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 import {FiSearch} from "react-icons/fi";
 
 function Search() {
-  let localData = useIndexedDB("packages")
+  const localData = useIndexedDB("packages")
   const [apps, setApps] = useState([])
   const [searchInput, setSearchInput] = useState();
   const [appsData, setAppsData] = useState([]);
@@ -23,24 +23,25 @@ function Search() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (apps.length !== 0) return;
+    const getApps = () => {
+      localData.getAll().then((items) => {
+        if (items.length === 0) {
+          getApps();
+          return;
+        }
+
+        items.map((i) => (i.loaded = i.loaded ? i.loaded : false));
+        setAppsData(items);
+        setLoading(false);
+      });
+    };
 
     getApps();
-  }, [])
 
-  const getApps = () => {
-    localData.getAll().then((items) => {
-      if(items.length === 0){
-        getApps();
-        return;
-      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-      items.map((i) => (i.loaded = i.loaded ? i.loaded : false));
-      setAppsData(items);
-      setLoading(false);
-    });
-  }
-
+  
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
     let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), appsData, {
@@ -84,7 +85,7 @@ function Search() {
       if (loading) return
       setLoading(true)
       selectivePull(app)
-    }, [])
+    }, [app, loading])
 
     return <Skeleton height={180}/>
   }
@@ -97,6 +98,7 @@ function Search() {
         <span>
           <FiSearch />
         </span>
+
         <DebounceInput
           minLength={2}
           debounceTimeout={300}
@@ -129,7 +131,7 @@ function Search() {
                   )}
                 </ul>
               ) : (
-                <p>Could not find any apps.</p>
+                <p className={styles.noresults}>Could not find any apps.</p>
               )}
             </>
           )}

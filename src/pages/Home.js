@@ -5,7 +5,6 @@ import styles from "../styles/home.module.scss";
 import Search from "../components/Search";
 import PopularApps from "../components/PopularApps";
 import SelectionBar from "../components/SelectionBar";
-import Error from "../components/Error";
 
 import art from "../assets/logo.svg";
 import Footer from "../components/Footer";
@@ -18,7 +17,7 @@ function Home() {
         <div className="illu-box">
           <h1>Bulk install Windows apps quickly with Windows Package Manager.</h1>
           <div className="art">
-            <img src={art} draggable={false} />
+            <img src={art} draggable={false} alt="winstall logo" />
           </div>
         </div>
         <Search />

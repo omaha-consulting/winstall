@@ -6,7 +6,7 @@ const addToLocalDB = (db, dataToAdd) => {
       // which is part of the manifest submission on github
       let entryId = item.path.substr(0, item.path.lastIndexOf("/"));
 
-      if (hashTable.has(entryId)) return;
+      if (hashTable.has(entryId)) return item;
 
       hashTable.add(entryId);
 
@@ -22,6 +22,8 @@ const addToLocalDB = (db, dataToAdd) => {
       db.add(app, entryId).catch(error => {
         console.log(error)
       })
+
+      return item;
     });
 }
 
