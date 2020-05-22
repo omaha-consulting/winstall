@@ -74,7 +74,7 @@ let SingleApp = ({ app, showDesc=true }) => {
           <div>
             <div className={styles.imgContainer}>
               <img
-                src={app.img}
+                src={require(`../assets/apps/${app.img}`)}
                 alt={`Logo for ${app.name}`}
                 draggable={false}
               />

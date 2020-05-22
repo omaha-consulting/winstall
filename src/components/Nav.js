@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/nav.module.scss";
-import { FiMoon, FiSun, FiHeart, FiHelpCircle } from "react-icons/fi";
+import { FiMoon, FiSun, FiCoffee, FiHelpCircle } from "react-icons/fi";
 import { useHistory } from "react-router-dom";
 
 function Nav() {
@@ -28,11 +28,11 @@ function Nav() {
 
         <div className={styles.nav}>
           <a
-            href="https://github.com/sponsors/MehediH"
+            href="https://ko-fi.com/mehedi"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FiHeart />
+            <FiCoffee />
             <p>Donate</p>
           </a>
           <span onClick={(e) => history.push("/eli5")}>

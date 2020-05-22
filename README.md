@@ -1,68 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# winstall
 
-## Available Scripts
+## A web app for browsing Windows Package Manager apps, and create a batch-installation command using an inutitive interface.  
 
-In the project directory, you can run:
+How does it work?
+-----------------------
 
-### `yarn start`
+winstall is powered by Windows Package Manager (aka "winget"), [Microsoft's new package manager](https://devblogs.microsoft.com/commandline/windows-package-manager-preview/) for Windows 10. Windows Package Manager is currently in preview, and it is not available by default in Windows 10.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Installing Windows Package Manager
+----------------------------------
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+If you don't already have Windows Package Manager, you can install it by downloading and installing the [latest .appxbundle file from here.](https://github.com/microsoft/winget-cli/releases)
 
-### `yarn test`
+Using winstall
+--------------
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To use winstall, you can search for apps on the homepage. Additionally, you can also view all the apps available via Windows Package Manager [on this page.](/store)
 
-### `yarn build`
+Simply select the apps you want to download and click on the "Generate Script" button at the bottom of the screen. You will then be presented with a command that you can copy and paste into any Windows command-line. Input that into a command line app of your choice, and hit enter to start installing the apps one-by-one using Windows Package Manager.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Alternatively, you can click on the "Download .bat" button which will download a batch file. However, you will likely get a security warning from your browser. In that case, ignore the warning as the batch file is completely secure. Once downloaded, you can double-click the .bat file to install the apps using the Windows Package Manager.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+How is the data obtained?
+-------------------------
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+When you first load this website, winstall will automatically fetch the latest data from the [official repository](https://github.com/microsoft/winget-pkgs) for Windows Package Manager apps. The latest data is then cached locally (using IndexedDB) on your device. The app only obtains the list of packages available, in order to avoid hitting the [GitHub API limit](https://developer.github.com/v3/#rate-limiting) quickly.
 
-### `yarn eject`
+When you search for an app, winstall will only fetch the details for that app and update the local cache. This way, when you first search for an app, it may take a few seconds to load, but the subsequent searches will be instant.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+On [the "all apps" page](/store) you will be able to see all the currently available apps that are on the Windows Package Manager. The data for all the apps will not be available at once, and you will have to click on individual apps to view their full details. This is, once again, done to avoid hitting GitHub API limits.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The latest app data is cached for 5 hours, and you can manually clear the cache from the "all apps" page if you would like. You may sometimes hit the GitHub API limit, in that case some app details may not load. You will have to wait an hour before the limit is reset by GitHub. I am working on improving the API usage in order to limit API requests as much as possible.-

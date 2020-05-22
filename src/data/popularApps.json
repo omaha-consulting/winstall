@@ -1,80 +1,98 @@
 {
     "spotify": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/1200px-Spotify_logo_without_text.svg.png",
+        "img": "spotify.webp",
         "name": "Spotify",
         "id": "Spotify.Spotify",
         "path": "Spotify/Spotify"
     },
     "discord": {
-        "img": "https://discord.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg",
+        "img": "discord.webp",
         "name": "Discord",
         "id": "Discord.Discord",
         "path": "Discord/Discord"
     },
     "vscode": {
-        "img": "https://code.visualstudio.com/assets/updates/1_35/logo-stable.png",
+        "img": "code.webp",
         "name": "Visual Studio Code",
         "id": "Microsoft.VisualStudioCode",
         "path": "Microsoft/VisualStudioCode"
     },
     "chrome": {
-        "img": "https://vignette.wikia.nocookie.net/logopedia/images/c/ca/Google_Chrome_for_Android_Icon_2016.svg/revision/latest/scale-to-width-down/200?cb=20160305053723",
+        "img": "chrome.webp",
         "name": "Google Chrome",
         "id": "Google.Chrome",
         "path": "Google/Chrome"
     },
     "firefox": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/1024px-Firefox_logo%2C_2019.svg.png",
+        "img": "firefox.webp",
         "name": "Mozilla Firefox",
         "id": "Mozilla.Firefox",
         "path": "Mozilla/Firefox"
     },
     "notion": {
-        "img": "https://upload.wikimedia.org/wikipedia/en/4/45/Notion_app_logo.png",
+        "img": "notion.webp",
         "name" : "Notion",
         "id": "Notion.Notion",
         "path": "Notion/Notion"
     },
     "python": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png",
+        "img": "python.webp",
         "name" : "python",
         "id": "Python.Python",
         "path": "Python/Python"
     },
     "whatsapp": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/662px-WhatsApp.svg.png",
+        "img": "whatsapp.webp",
         "name" : "WhatsApp",
         "id": "WhatsApp.WhatsApp",
         "path": "WhatsApp/WhatsApp"
     },
     "zoom": {
-        "img": "https://zoom.us/docs/ent/media-assets/img/desktop-logo-zoombrand.png",
+        "img": "zoom.webp",
         "name" : "zoom",
         "id": "Zoom.Zoom",
         "path": "Zoom/Zoom"
     },
     "dropbox": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Dropbox_Icon.svg/1200px-Dropbox_Icon.svg.png",
+        "img": "dropbox.webp",
         "name" : "Dropbox",
         "id": "Dropbox.Dropbox",
         "path": "Dropbox/Dropbox"
     },
     "npp": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Notepad%2B%2B_Logo.svg/1200px-Notepad%2B%2B_Logo.svg.png",
+        "img": "npp.webp",
         "name" : "Notepad++",
         "id": "Notepad++.Notepad++",
         "path": "Notepad++/Notepad++"
     },
     "node": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png",
+        "img": "node.webp",
         "name" : "Node.js",
         "id": "OpenJS.Nodejs",
         "path": "OpenJS/NodeJS"
     },
     "obsstudio": {
-        "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/OBS_Studio_Logo.svg/1200px-OBS_Studio_Logo.svg.png",
+        "img": "obs.webp",
         "name" : "OBS Studio",
         "id": "BSProject.OBSStudio",
         "path": "OBSProject/OBSStudio"
+    },
+    "edge": {
+        "img": "edge.webp",
+        "name": "Microsoft Edge",
+        "id": "Microsoft.Edge",
+        "path": "Microsoft/Edge"
+    },
+    "teams": {
+        "img": "teams.webp",
+        "name": "Microsoft Teams",
+        "id": "Microsoft.Teams",
+        "path": "Microsoft/Teams"
+    },
+    "windowsterminal": {
+        "img": "terminal.webp",
+        "name": "Windows Terminal",
+        "id": "Microsoft.WindowsTerminal",
+        "path": "Microsoft/WindowsTerminal"
     }
 }
