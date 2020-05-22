@@ -140,7 +140,7 @@ function Store() {
       <div className="container">
         <h1>All Apps {`(${appCount})`}</h1>
         <h3>
-          You can browse all teh apps available on the Windows Package Manager below. Click an app to view more details about it.
+          You can browse all the apps available on the Windows Package Manager below. Click an app to view more details about it.
         </h3>
 
         <div className={styles.controls}>
