@@ -30,7 +30,7 @@ function Generate() {
             return app;
         });
 
-        let newScript = installs.join(" & ");
+        let newScript = installs.join(" && ");
         
         if(script !== newScript){
             setCopyText("Copy to clipboard")
