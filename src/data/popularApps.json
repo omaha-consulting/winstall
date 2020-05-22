@@ -74,7 +74,7 @@
     "obsstudio": {
         "img": "obs.webp",
         "name" : "OBS Studio",
-        "id": "BSProject.OBSStudio",
+        "id": "OBSProject.OBSStudio",
         "path": "OBSProject/OBSStudio"
     },
     "edge": {

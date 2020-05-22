@@ -35,10 +35,11 @@
 }
 
 .loader{
+    position: absolute;
     width: 100%;
     display: flex;
     justify-content: center;
-    margin: 50px 0;
+    margin: 35px 0;
     opacity: 0;
     animation: tears 0.1s 0.3s forwards ease;
 } 

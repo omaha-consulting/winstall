@@ -8,11 +8,14 @@ import {
   FiChevronDown,
   FiChevronUp,
 } from "react-icons/fi";
+import { useIndexedDB } from "react-indexed-db";
+import processManifests from "../utils/processManifests";
 
 let SingleApp = ({ app, showDesc=true }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [viewingDesc, setViewingDesc] = useState(false);
+    const localData = useIndexedDB("packages");
 
     useEffect(() => {
       let found = selectedApps.findIndex((a) => a.id === app.id) !== -1;
@@ -31,8 +34,35 @@ let SingleApp = ({ app, showDesc=true }) => {
         setSelectedApps(updatedSelectedApps);
         setSelected(false)
       } else{
-        setSelectedApps([...selectedApps, app]);
-        setSelected(true)
+        // we selective pull when a click is on a popular app
+        if(app.img){
+          setSelected(true);
+          // we check if we have it in cache
+          localData.getAll().then(data => {
+            app = data.filter(item => item.path === app.path)[0];
+            if (!app.contents) { // if we dont, we grab it from github
+              processManifests(app).then((newData) => {
+                app.contents = newData;
+                app.id = app.contents.Id;
+                localData.update({ ...app, contents: newData }, app.path);
+
+                setSelectedApps([...selectedApps, app]);
+                setSelected(true);
+              });
+            } else {
+              app.id = app.contents.Id;
+              setSelectedApps([...selectedApps, app]);
+              setSelected(true);
+            }
+          })
+
+          return;
+        } else{
+          setSelectedApps([...selectedApps, app]);
+          setSelected(true);
+        }
+
+        
       }
      
     }

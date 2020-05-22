@@ -22,7 +22,8 @@ function Store() {
     const [searchInput, setSearchInput] = useState();
     const [totalApps, setTotalApps] = useState([])
     const [loading, setLoading] = useState(true);
-
+    const [appCount, setAppCount] = useState(0);
+    
     useEffect(() => {
       getApps();
 
@@ -31,6 +32,8 @@ function Store() {
 
     const getApps = () => {
         localData.getAll().then(async (items) => {
+            setAppCount(items.length)
+
             if(items.length === 0 ){
                 getApps();
                 return;
@@ -135,10 +138,9 @@ function Store() {
 
     return (
       <div className="container">
-        <h1>All Apps</h1>
+        <h1>All Apps {`(${appCount})`}</h1>
         <h3>
-          Due to API limitations, you will not be able to see the details of all
-          of the apps below right away.
+          You can browse all teh apps available on the Windows Package Manager below. Click an app to view more details about it.
         </h3>
 
         <div className={styles.controls}>

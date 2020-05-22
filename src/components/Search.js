@@ -108,32 +108,28 @@ function Search() {
         />
       </div>
 
-      {searchInput && (
+      {loading ? (
+        <div className={styles.loader}>
+          <PropagateLoader color="#9b2eff" />
+        </div>
+      ) : (
         <>
-          {loading ? (
-            <div className={styles.loader}>
-              <PropagateLoader color="#9b2eff" />
-            </div>
-          ) : (
-            <>
-              {apps.length !== 0 ? (
-                <ul className={styles.searchResults}>
-                  {apps.map((app, i) =>
-                    app.loaded ? (
-                      <SingleApp
-                        app={sanitize(app)}
-                        showDesc={false}
-                        key={`${app.contents.Id}-${i}`}
-                      />
-                    ) : (
-                      <LoadApp app={app} key={app.path} />
-                    )
-                  )}
-                </ul>
-              ) : (
-                <p className={styles.noresults}>Could not find any apps.</p>
+          {searchInput && apps.length !== 0 ? (
+            <ul className={styles.searchResults}>
+              {apps.map((app, i) =>
+                app.loaded ? (
+                  <SingleApp
+                    app={sanitize(app)}
+                    showDesc={false}
+                    key={`${app.contents.Id}-${i}`}
+                  />
+                ) : (
+                  <LoadApp app={app} key={app.path} />
+                )
               )}
-            </>
+            </ul>
+          ) : (
+            <>{searchInput ? <p className={styles.noresults}>Could not find any apps.</p> : ""}</>
           )}
         </>
       )}
