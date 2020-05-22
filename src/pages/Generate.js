@@ -41,7 +41,7 @@ function Generate() {
  
         setScript(newScript)
         
-    }, [selectedApps, script])
+    }, [selectedApps, script, showPS])
 
     if(selectedApps.length === 0){
       return (
