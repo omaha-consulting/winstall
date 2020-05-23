@@ -27,7 +27,7 @@ function Generate() {
             if (app.id === undefined) return app;
 
             apps.push(app.id);
-            installs.push(`winget install --id=${app.id}`);
+            installs.push(`winget install --id=${app.id} -e`);
 
             return app;
         });
