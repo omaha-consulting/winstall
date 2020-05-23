@@ -106,5 +106,11 @@
     "name": "Tweeten",
     "id": "MehediHassan.Tweeten",
     "path": "MehediHassan/Tweeten"
+  },
+  "vlc": {
+    "img": "vlc,webp",
+    "name": "VLC",
+    "id": "VideoLan.VLC",
+    "path": "VideoLan/VLC"
   }
 }
