@@ -1,6 +1,6 @@
 # winstall
 
-![Node.js CI](https://github.com/usmslm102/winstall/workflows/Node.js%20CI/badge.svg?branch=master)
+![Node.js CI](https://github.com/MehediH/winstall/workflows/Node.js%20CI/badge.svg?branch=master)
 
 ## A web app for browsing Windows Package Manager apps, and create a batch-installation command using an inutitive interface.  
 
