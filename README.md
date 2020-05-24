@@ -2,7 +2,7 @@
 
 ![Node.js CI](https://github.com/MehediH/winstall/workflows/Node.js%20CI/badge.svg?branch=master)
 
-## A web app for browsing Windows Package Manager apps, and create a batch-installation command using an inutitive interface.  
+## A web app for browsing Windows Package Manager apps, and create a batch-installation command using an intuitive interface.  
 
 How does it work?
 -----------------------
@@ -37,4 +37,4 @@ The latest app data is cached for 5 hours, and you can manually clear the cache 
 Popular apps
 ------------
 
-The list of popular apps are fetched from a `.json` file with a pre-poulated set of data. On the front-end, a random selection of 6 apps from teh list is displayed. If you would like to add an app to the list of popular apps, you can do so by [adding an app here](https://github.com/MehediH/winstall/blob/master/src/data/popularApps.json) and creating a pull request. You will also have to provide a logo for that app, which needs to have a transparent image, be 150x150px, and in the .webp format. The logo must be [added in this folder.](https://github.com/MehediH/winstall/tree/master/src/assets/apps). And because Safari does not like .webp, you need to also add a .png version of the same image under /apps/fallback.
+The list of popular apps are fetched from a `.json` file with a pre-populated set of data. On the front-end, a random selection of 6 apps from the list is displayed. If you would like to add an app to the list of popular apps, you can do so by [adding an app here](https://github.com/MehediH/winstall/blob/master/src/data/popularApps.json) and creating a pull request. You will also have to provide a logo for that app, which needs to have a transparent image, be 150x150px, and in the .webp format. The logo must be [added in this folder.](https://github.com/MehediH/winstall/tree/master/src/assets/apps). And because Safari does not like .webp, you need to also add a .png version of the same image under /apps/fallback.
