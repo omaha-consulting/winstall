@@ -74,7 +74,7 @@ function Generate() {
 
     let handleBat = () => {
         let dl = document.querySelector("#gsc");
-        dl.setAttribute("download", `winstall.${showPS ? ".ps1" : ".bat"}`)
+        dl.setAttribute("download", `winstall${showPS ? ".ps1" : ".bat"}`)
         dl.href = "data:text/plain;base64," + btoa(script);
         dl.click();
     }
