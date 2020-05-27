@@ -14,7 +14,7 @@ import Footer from "../components/Footer";
 
 import PropagateLoader from "react-spinners/PropagateLoader";
 
-import { FiRotateCcw, FiInfo, FiChevronUp } from "react-icons/fi";
+import { FiRotateCcw, FiInfo } from "react-icons/fi";
 
 function Store() {
     let localData = useIndexedDB("packages")
@@ -26,7 +26,6 @@ function Store() {
     
     useEffect(() => {
       getApps();
-      window.onscroll = function(){scrollFunction()};
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -136,21 +135,6 @@ function Store() {
     }
     if(!apps) return <></>;
 
-    const scrollFunction = () => {
-      const btnTop = document.getElementById('btnTop');
-      
-      if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
-        btnTop.style.display = "flex";
-      } else {
-        btnTop.style.display = "none";
-      }
-    }
-
-    const topFunction = () => {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    }
-
     return (
       <div className="container">
         <h1>All Apps {`(${appCount})`}</h1>
@@ -185,10 +169,6 @@ function Store() {
             )}
           </ul>
         )}
-
-        <span id="btnTop" title="Go to top" onClick={topFunction} className={styles.backToTop}>
-          <FiChevronUp />
-        </span>
 
         <Footer />
         <SelectionBar />
