@@ -61,6 +61,7 @@ ul{
     padding: 10px 20px;
     border-radius: 50px;
     display: flex;
+    align-items: center;
     height: 50px;
     text-decoration: none;
     color: var(--textColor);
@@ -99,5 +100,54 @@ ul{
 
     ul li{
         padding: 10px;
+    }
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    flex-wrap: wrap;
+
+    .pagbtn{
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: 1fr 1fr;
+
+        button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg{
+                margin: 0px;
+                padding: 0px;
+            }
+
+            &:active, &:focus{
+                opacity: 1;
+            }
+
+            &:disabled{
+                opacity: 0.60;
+                cursor: not-allowed;
+                pointer-events: all;
+            }
+        }
+    }
+
+    em{
+        display: flex;
+        min-width: 100%;
+        text-align: center;
+        padding: 30px 0;
+        font-style: normal;
+        align-items: center;
+        justify-content: center;
+
+        svg{
+            padding: 0 5px;
+        }
     }
 }

@@ -1,10 +1,11 @@
 {
   "name": "winstall",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "fuzzysort": "^1.1.4",
     "node-sass": "^4.14.1",
+    "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.1",

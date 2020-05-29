@@ -14,9 +14,9 @@ export default function Footer(){
   const scrollFunction = () => {
     const btnTop = document.getElementById('btnTop');
     
-    if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+    if((document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) && btnTop){
       btnTop.style.display = "flex";
-    } else {
+    } else if(btnTop){
       btnTop.style.display = "none";
     }
   }
