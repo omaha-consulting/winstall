@@ -151,3 +151,13 @@ ul{
         }
     }
 }
+
+@media(max-width: 710px){
+    .pagination{
+        padding: 50px 0 !important;
+        
+        em{
+            display: none;
+        }
+    }
+}

@@ -246,7 +246,7 @@ function Store({ location }) {
           </button>
         </div>
 
-        {!searchInput && (
+        {!searchInput && !loading && (
           <p>
             Showing {apps.slice(offset, offset + appsPerPage).length} apps (page{" "}
             {Math.round(offset / appsPerPage) + 1} of{" "}
