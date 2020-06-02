@@ -37,9 +37,12 @@ let SingleApp = ({ app, showDesc=true }) => {
         // we selective pull when a click is on a popular app
         if(app.img){
           setSelected(true);
+          setSelectedApps([...selectedApps, app]);
           // we check if we have it in cache
           localData.getAll().then(data => {
             app = data.filter(item => item.path === app.path)[0];
+            if(!app) return;
+
             if (!app.contents) { // if we dont, we grab it from github
               processManifests(app).then((newData) => {
                 app.contents = newData;
@@ -58,8 +61,8 @@ let SingleApp = ({ app, showDesc=true }) => {
 
           return;
         } else{
-          setSelectedApps([...selectedApps, app]);
           setSelected(true);
+          setSelectedApps([...selectedApps, app]);
         }
 
         

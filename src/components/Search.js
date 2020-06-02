@@ -120,7 +120,7 @@ function Search() {
                 app.loaded ? (
                   <SingleApp
                     app={sanitize(app)}
-                    showDesc={false}
+                    showDesc={true}
                     key={`${app.contents.Id}-${i}`}
                   />
                 ) : (
