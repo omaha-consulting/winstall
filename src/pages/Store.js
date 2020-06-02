@@ -179,7 +179,7 @@ function Store({ location }) {
       setTimeout(() => {
         setLoading(false)
         history.replace(
-          `/store?page=${Math.round((offset + appsPerPage) / appsPerPage) + 1}`
+          `/store?page=${Math.round((offset + appsPerPage - 1) / appsPerPage) + 1}`
         );
       }, 200);
     }
@@ -193,7 +193,7 @@ function Store({ location }) {
         setLoading(false);
 
         history.replace(
-          `/store?page=${Math.round((offset + appsPerPage) / appsPerPage) - 1}`
+          `/store?page=${Math.round((offset + appsPerPage - 1) / appsPerPage)-1}`
         );
       }, 200);
     }
@@ -249,8 +249,8 @@ function Store({ location }) {
         {!searchInput && !loading && (
           <p>
             Showing {apps.slice(offset, offset + appsPerPage).length} apps (page{" "}
-            {Math.round(offset / appsPerPage) + 1} of{" "}
-            {Math.round(appCount / appsPerPage) + 1}).
+            {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
+            {Math.round((appCount + appsPerPage - 1) / appsPerPage)}).
           </p>
         )}
         {searchInput && (
