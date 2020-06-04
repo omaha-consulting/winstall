@@ -34,7 +34,7 @@ function Nav() {
           <Link href="/">
             <a>winstall</a>
           </Link>
-          <span className="preview">&nbsp;(preview)</span>
+          {/* <span className="preview">&nbsp;(preview)</span> */}
         </div>
 
         <div className={styles.nav}>

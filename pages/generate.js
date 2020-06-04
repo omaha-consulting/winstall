@@ -143,7 +143,7 @@ function Generate() {
 
         <div className={styles.selectedApps}>
           <h2>Apps you are downloading ({selectedApps.length})</h2>
-          <ListPackages showImg={false}>
+          <ListPackages showImg={true}>
             {selectedApps.map((app, index) => (
               <React.Fragment key={index}>
                 <SingleApp app={app} />

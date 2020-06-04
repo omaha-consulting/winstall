@@ -10,7 +10,6 @@ import { checkTheme } from "../utils/helpers";
 import Nav from "../components/Nav";
 import PopularContext from "../ctx/PopularContext";
 
-
 function winstall({ Component, pageProps }) {
     const [selectedApps, setSelectedApps] = useState([]);
     const selectedAppValue = { selectedApps, setSelectedApps };
@@ -23,21 +22,20 @@ function winstall({ Component, pageProps }) {
 
     useEffect(() => {
       checkTheme();
-      
 
       // we are caching the packges repository, because otherwise it bombards the
       // github API and reaches api limit quickly
       // setPackageData({ loading: true });
 
-      fetch(`https://api.winstall.app/apps`)
-        .then((res) => res.json())
-        .then(async (data) => {
-          console.log("Obtaining data from API");
-          setPackages(data);
-        })
-        .catch((error) => {
-          setPackages({ error });
-        });
+      // fetch(`https://api.winstall.app/apps`)
+      //   .then((res) => res.json())
+      //   .then(async (data) => {
+      //     console.log("Obtaining data from API");
+      //     setPackages(data);
+      //   })
+      //   .catch((error) => {
+      //     setPackages({ error });
+      //   });
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

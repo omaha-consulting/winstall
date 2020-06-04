@@ -103,6 +103,35 @@
     }
 }
 
+.minPagination{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.smallBtn {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0px;
+    font-size: 30px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:disabled{
+        opacity: 0.60;
+        cursor: not-allowed;
+        pointer-events: all;
+    }
+
+    svg{
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
 .pagination{
     display: flex;
     align-items: center;
@@ -114,6 +143,8 @@
         display: grid;
         grid-gap: 20px;
         grid-template-columns: 1fr 1fr;
+
+        
 
         button{
             display: flex;
@@ -159,5 +190,9 @@
         em{
             display: none;
         }
+    }
+
+    .minPagination{
+        display: none;
     }
 }

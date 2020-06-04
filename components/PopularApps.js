@@ -7,7 +7,7 @@ import PopularContext from "../ctx/PopularContext";
 import {FiPackage} from "react-icons/fi";
 import { useEffect, useContext } from "react";
 
-let PopularApps = ({ apps }) => {
+let PopularApps = ({ apps, all }) => {
   const { popular, setPopular } = useContext(PopularContext);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ let PopularApps = ({ apps }) => {
           <h3>Click to include them on your install script</h3>
           <ListPackages showImg={true}>
             {popular.map((app) => (
-              <SingleApp app={app} key={app._id} />
+              <SingleApp app={app} key={app._id} all={all}/>
             ))}
           </ListPackages>
         </div>

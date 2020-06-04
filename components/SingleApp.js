@@ -10,7 +10,7 @@ import {
 } from "react-icons/fi";
 
 
-let SingleApp = ({ app, showDesc=true }) => {
+let SingleApp = ({ app, showDesc=true, all }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [viewingDesc, setViewingDesc] = useState(false);
@@ -33,7 +33,14 @@ let SingleApp = ({ app, showDesc=true }) => {
         setSelected(false)
       } else{
         setSelected(true);
-        setSelectedApps([...selectedApps, app]);
+      
+        if(all){
+          app = all.find(i => app._id == i._id);
+          setSelectedApps([...selectedApps, app]);
+        } else{
+          setSelectedApps([...selectedApps, app]);
+        }
+        
       }
     }
 

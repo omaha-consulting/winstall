@@ -19,6 +19,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
+        <a id="gsc" href="#" download="winstall.bat" />
       </Html>
     );
   }

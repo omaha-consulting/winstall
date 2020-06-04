@@ -10,7 +10,7 @@ import Footer from "../components/Footer";
 import { shuffleArray } from "../utils/helpers";
 import popularAppsList from "../data/popularApps.json";
 
-function Home({ popular }) {
+function Home({ popular, apps }) {
   return (
     <div className="container">
       <div className={styles.intro}>
@@ -22,10 +22,10 @@ function Home({ popular }) {
             <img src="./assets/logo.svg" draggable={false} alt="winstall logo" />
           </div>
         </div>
-        <Search />
+        <Search apps={apps}/>
       </div>
 
-      <PopularApps apps={popular}/>
+      <PopularApps apps={popular} all={apps}/>
 
       <SelectionBar />
 
@@ -34,13 +34,15 @@ function Home({ popular }) {
   );
 }
 
-export function getStaticProps(){
-  let popular = shuffleArray(Object.values(popularAppsList))
-
+export async function getStaticProps(){
+  let popular = shuffleArray(Object.values(popularAppsList));
+  let apps = await fetch(`https://api.winstall.app/apps`).then((res) => res.json());
+  
   return (
     {
       props: {
-        popular
+        popular,
+        apps
       }
     }
   )

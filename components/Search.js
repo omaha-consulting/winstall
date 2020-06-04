@@ -9,15 +9,14 @@ import SingleApp from "../components/SingleApp";
 import {FiSearch} from "react-icons/fi";
 import PackagesContext from "../ctx/PackagesContext";
 
-function Search() {
-  const [apps, setApps] = useState([])
+function Search({apps}) {
+  const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
-  const { packages, setPackages } = useContext(PackagesContext);
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
 
-    let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), packages, {
+    let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), apps, {
       limit: 5,
       allowTypo: true,
       threshold: -10000,
@@ -27,7 +26,7 @@ function Search() {
     results = [...results.map(r => r.obj)];
     results.sort((a, b) => a.name.localeCompare(b.name))
 
-    setApps(results)
+    setResults(results)
   };
 
 
@@ -48,9 +47,9 @@ function Search() {
         />
       </div>
 
-      {searchInput && apps.length !== 0 ? (
+      {searchInput && results.length !== 0 ? (
         <ul className={styles.searchResults}>
-          {apps.map((app, i) =>
+          {results.map((app, i) =>
             <SingleApp
               app={app}
               showDesc={true}
