@@ -1,0 +1,116 @@
+{
+  "spotify": {
+    "img": "spotify.webp",
+    "name": "Spotify",
+    "_id": "Spotify.Spotify",
+    "path": "Spotify/Spotify"
+  },
+  "discord": {
+    "img": "discord.webp",
+    "name": "Discord",
+    "_id": "Discord.Discord",
+    "path": "Discord/Discord"
+  },
+  "vscode": {
+    "img": "code.webp",
+    "name": "Visual Studio Code",
+    "_id": "Microsoft.VisualStudioCode",
+    "path": "Microsoft/VisualStudioCode"
+  },
+  "chrome": {
+    "img": "chrome.webp",
+    "name": "Google Chrome",
+    "_id": "Google.Chrome",
+    "path": "Google/Chrome"
+  },
+  "firefox": {
+    "img": "firefox.webp",
+    "name": "Mozilla Firefox",
+    "_id": "Mozilla.Firefox",
+    "path": "Mozilla/Firefox"
+  },
+  "notion": {
+    "img": "notion.webp",
+    "name": "Notion",
+    "_id": "Notion.Notion",
+    "path": "Notion/Notion"
+  },
+  "python": {
+    "img": "python.webp",
+    "name": "python",
+    "_id": "Python.Python",
+    "path": "Python/Python"
+  },
+  "whatsapp": {
+    "img": "whatsapp.webp",
+    "name": "WhatsApp",
+    "_id": "WhatsApp.WhatsApp",
+    "path": "WhatsApp/WhatsApp"
+  },
+  "zoom": {
+    "img": "zoom.webp",
+    "name": "zoom",
+    "_id": "Zoom.Zoom",
+    "path": "Zoom/Zoom"
+  },
+  "dropbox": {
+    "img": "dropbox.webp",
+    "name": "Dropbox",
+    "_id": "Dropbox.Dropbox",
+    "path": "Dropbox/Dropbox"
+  },
+  "npp": {
+    "img": "npp.webp",
+    "name": "Notepad++",
+    "_id": "Notepad++.Notepad++",
+    "path": "Notepad++/Notepad++"
+  },
+  "node": {
+    "img": "node.webp",
+    "name": "Node.js",
+    "_id": "OpenJS.Nodejs",
+    "path": "OpenJS/NodeJS"
+  },
+  "obsstudio": {
+    "img": "obs.webp",
+    "name": "OBS Studio",
+    "_id": "OBSProject.OBSStudio",
+    "path": "OBSProject/OBSStudio"
+  },
+  "edge": {
+    "img": "edge.webp",
+    "name": "Microsoft Edge",
+    "_id": "Microsoft.Edge",
+    "path": "Microsoft/Edge"
+  },
+  "teams": {
+    "img": "teams.webp",
+    "name": "Microsoft Teams",
+    "_id": "Microsoft.Teams",
+    "path": "Microsoft/Teams"
+  },
+  "windowsterminal": {
+    "img": "terminal.webp",
+    "name": "Windows Terminal",
+    "_id": "Microsoft.WindowsTerminal",
+    "path": "Microsoft/WindowsTerminal"
+  },
+  "eartrumpet": {
+    "img": "trumpet.webp",
+    "name": "EarTrumpet",
+    "_id": "File-New-Project.EarTrumpet",
+    "path": "File-New-Project/EarTrumpet"
+  },
+  "tweeten": {
+    "img": "tweeten.webp",
+    "name": "Tweeten",
+    "_id": "MehediHassan.Tweeten",
+    "path": "MehediHassan/Tweeten"
+  },
+  "sharex": {
+    "img": "sharex.webp",
+    "name": "ShareX",
+    "_id": "ShareX.ShareX",
+    "path": "ShareX/ShareX"
+  }
+}
