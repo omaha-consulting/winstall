@@ -1,9 +1,24 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Router from "next/router";
 
 import Link from "next/link";
 import styles from "../styles/nav.module.scss";
 import { FiMoon, FiSun, FiCoffee, FiHelpCircle } from "react-icons/fi";
+
+import NProgress from "nprogress";
+
+Router.onRouteChangeStart = () => {
+  NProgress.start();
+};
+
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+};
+
+Router.onRouteChangeError = () => {
+  NProgress.done();
+};
 
 function Nav() {
     const router = useRouter();
