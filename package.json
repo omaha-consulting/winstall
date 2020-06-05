@@ -3,17 +3,15 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
+    "fuse.js": "^6.0.3",
     "fuzzysort": "^1.1.4",
     "next": "9.4.4",
     "node-sass": "^4.14.1",
-    "qs": "^6.9.4",
     "react": "16.13.1",
     "react-debounce-input": "^3.2.2",
     "react-dom": "16.13.1",
     "react-icons": "^3.10.0",
-    "react-loading-skeleton": "^2.0.1",
     "react-scripts": "3.4.1",
-    "react-spinners": "^0.8.3",
     "react-toggle": "^4.1.1",
     "yaml": "^1.10.0"
   },

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/store.module.scss";
 
 import { DebounceInput } from "react-debounce-input";
 
-import fuzzysort from "fuzzysort"
-import qs from "qs";
+import Fuse from "fuse.js";
 
 import SelectionBar from "../components/SelectionBar";
 
@@ -24,10 +23,16 @@ function Store({ apps }) {
     const [results, setResults] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
+
     const appsPerPage = 60;
 
     const totalPages = Math.ceil(apps.length / appsPerPage);
 
+    const fuse = new Fuse(apps, {
+      minMatchCharLength: 3,
+      threshold: 0.3,
+      keys: [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"]
+    })
 
     useEffect(() => {
       let handlePagination = (e) => {
@@ -73,22 +78,15 @@ function Store({ apps }) {
     const handleSearchInput = (e) => {
         setSearchInput(e.target.value);
 
-        setOffset(0);
+        if(e.target.value.length <= 3) return;
         
         Router.replace("/store");
 
-        let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), apps, {
-            limit: Infinity,
-            allowTypo: true,
-            threshold: -10000,
-            key: "path",
-        })
+        let results = fuse.search(
+          e.target.value.toLowerCase().replace(/\s/g, "")
+        );
 
-        results = [...results.map(r => r.obj)];
-
-        results.sort((a, b) => a.path.localeCompare(b.path))
-        
-        setResults(results)
+        setResults([...results.map(r => r.item)])
     };
 
 
@@ -116,7 +114,8 @@ function Store({ apps }) {
       });
     }
 
-    let Pagination = ({ small }) => {
+    let Pagination = ({ small, disable }) => {
+
       return (
         <div className={small ? styles.minPagination : styles.pagbtn}>
           <button
@@ -124,7 +123,7 @@ function Store({ apps }) {
             id="previous"
             onClick={handlePrevious}
             title="Previous page of apps"
-            disabled={offset > 0 ? null : "disabled"}
+            disabled={offset > 0 ? (disable ? "disabled" : null) : "disabled"}
           >
             <FiChevronLeft />
             {!small ? "Previous" : ""}
@@ -134,7 +133,7 @@ function Store({ apps }) {
             id="next"
             title="Next page of apps"
             onClick={handleNext}
-            disabled={offset + appsPerPage < apps.length ? null : "disabled"}
+            disabled={offset + appsPerPage < apps.length ? ( disable ? "disabled" : null ) : "disabled"}
           >
             {!small ? "Next" : ""}
             <FiChevronRight />
@@ -164,7 +163,7 @@ function Store({ apps }) {
             className="search"
           />
 
-          <Pagination small/>
+          <Pagination small disable={searchInput ? true : false }/>
         </div>
 
         {!searchInput && (
@@ -198,7 +197,7 @@ function Store({ apps }) {
         )}
 
         <div className={styles.pagination}>
-          <Pagination />
+          <Pagination disable={searchInput ? true : false}/>
           <em>
             Tip! Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
             on your keyboard to navigate between pages quickly.

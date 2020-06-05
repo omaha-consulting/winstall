@@ -108,7 +108,7 @@ let SingleApp = ({ app, showDesc=true, all }) => {
             <h3>
               {app.icon ? (
                 <img
-                  src={app.icon}
+                  src={app.icon.startsWith("http") ? app.icon : `https://api.winstall.app/icons/${app.icon}`}
                   draggable={false}
                   alt={`Logo for ${app.name}`}
                 />

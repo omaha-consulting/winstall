@@ -1,32 +1,31 @@
-import React, { useState, useContext } from "react";
+import{ useState } from "react";
 import styles from "../styles/search.module.scss";
 
 import { DebounceInput } from "react-debounce-input";
-import fuzzysort from "fuzzysort"
+import Fuse from "fuse.js";
 
 import SingleApp from "../components/SingleApp";
 
 import {FiSearch} from "react-icons/fi";
-import PackagesContext from "../ctx/PackagesContext";
 
 function Search({apps}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
 
+  const fuse = new Fuse(apps, {
+    minMatchCharLength: 3,
+    threshold: 0.3,
+    keys: [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"],
+  });
+
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
 
-    let results = fuzzysort.go(e.target.value.toLowerCase().replace(/\s/g, ""), apps, {
-      limit: 5,
-      allowTypo: true,
-      threshold: -10000,
-      key: "name",
-    })
+    if (e.target.value.length <= 3) return;
 
-    results = [...results.map(r => r.obj)];
-    results.sort((a, b) => a.name.localeCompare(b.name))
+    let results = fuse.search(e.target.value.toLowerCase().replace(/\s/g, ""));
 
-    setResults(results)
+    setResults([...results.map((r) => r.item)]);
   };
 
 
