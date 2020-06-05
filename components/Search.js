@@ -5,6 +5,7 @@ import { DebounceInput } from "react-debounce-input";
 import Fuse from "fuse.js";
 
 import SingleApp from "../components/SingleApp";
+import ListPackages from "../components/ListPackages";
 
 import {FiSearch} from "react-icons/fi";
 
@@ -47,15 +48,15 @@ function Search({apps}) {
       </div>
 
       {searchInput && results.length !== 0 ? (
-        <ul className={styles.searchResults}>
-          {results.map((app, i) =>
+        <ListPackages>
+            {results.map((app, i) =>
             <SingleApp
               app={app}
               showDesc={true}
               key={`${app._id}`}
             />
           )}
-        </ul>
+        </ListPackages>
       ) : (
           <>{searchInput ? <p className={styles.noresults}>Could not find any apps.</p> : ""}</>
         )}

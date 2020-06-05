@@ -141,25 +141,6 @@ input[type="text"].search{
     }
 }
 
-.popular{
-    padding: 20px 0;
-    padding-bottom: 50px;
-
-    li{
-        padding-bottom: 0px !important;
-    }
-
-    h2{
-        font-size: 30px;
-        margin-bottom: 0px;
-        margin-top: 0px;
-    }
-
-    h3{
-        opacity: 0.75;
-    }
-}
-
 
 .bottomBar{
     position: fixed;
@@ -258,6 +239,7 @@ input[type="text"].search{
     border-radius: 50px;
     margin-top: 15px;
     display: flex;
+    align-items: center;
     text-decoration: none;
     color: var(--textColor);
     font-size: 18px;

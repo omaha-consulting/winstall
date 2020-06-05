@@ -2,13 +2,14 @@ import styles from "../styles/home.module.scss";
 
 import Search from "../components/Search";
 import PopularApps from "../components/PopularApps";
+import RecentApps from "../components/RecentApps";
 import SelectionBar from "../components/SelectionBar";
 
 import Footer from "../components/Footer";
 import { shuffleArray } from "../utils/helpers";
 import popularAppsList from "../data/popularApps.json";
 
-function Home({ popular, apps }) {
+function Home({ popular, apps, recents }) {
   return (
     <div className="container">
       <div className={styles.intro}>
@@ -25,6 +26,8 @@ function Home({ popular, apps }) {
 
       <PopularApps apps={popular} all={apps}/>
 
+      <RecentApps apps={recents}/>
+
       <SelectionBar />
 
       <Footer />
@@ -35,12 +38,14 @@ function Home({ popular, apps }) {
 export async function getStaticProps(){
   let popular = shuffleArray(Object.values(popularAppsList));
   let apps = await fetch(`https://api.winstall.app/apps`).then((res) => res.json());
+  let recents = await fetch(`https://api.winstall.app/apps/recent?limit=8`).then((res) => res.json());
   
   return (
     {
       props: {
         popular,
-        apps
+        apps,
+        recents
       }
     }
   )

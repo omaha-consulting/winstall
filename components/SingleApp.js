@@ -2,6 +2,8 @@ import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 
+import Link from "next/link";
+
 import {
   FiExternalLink,
   FiDownload,
@@ -9,6 +11,7 @@ import {
   FiChevronUp,
 } from "react-icons/fi";
 
+import AppIcon from "./AppIcon";
 
 let SingleApp = ({ app, showDesc=true, all }) => {
     const [selected, setSelected] = useState(false);
@@ -58,7 +61,10 @@ let SingleApp = ({ app, showDesc=true, all }) => {
           onClick={handleAppSelect}
           className={`${styles.single} ${selected ? styles.selected : ""}`}
         >
-          <h3>{app.name}</h3>
+          <h3>
+            <AppIcon name={app.name} icon={app.icon} />
+            <p>{app.name}</p>
+          </h3>
           <p>{app.desc}</p>
           <button
             onClick={(e) => toggleDescription(e, false)}
@@ -77,73 +83,45 @@ let SingleApp = ({ app, showDesc=true, all }) => {
         onClick={handleAppSelect}
         className={`${styles.single} ${selected ? styles.selected : ""}`}
       >
-        {app.img && (
-          <div>
-            <div className={styles.imgContainer}>
-              <picture>
-                <source srcSet={`./assets/apps/${app.img}`} type="image/webp" />
-                <source
-                  srcSet={`./assets/apps/fallback/${app.img.replace(
-                    "webp",
-                    "png"
-                  )}`}
-                  type="image/png"
-                />
-                <img
-                  src={`./assets/apps/fallback/${app.img.replace(
-                    "webp",
-                    "png"
-                  )}`}
-                  alt={`Logo for ${app.name}`}
-                  draggable={false}
-                />
-              </picture>
-            </div>
-            <h3 className={styles.imgHeader}>{app.name}</h3>
-          </div>
-        )}
+        <div>
+          <h3>
+            <AppIcon name={app.name} icon={app.icon} />
+            <p>{app.name}</p>
+          </h3>
+          <h4>{app.publisher ? `by ${app.publisher}` : ""}</h4>
+          <em>{app.latestVersion ? `v${app.latestVersion}` : ""}</em>
+          {showDesc && (
+            <div>
+              {app.desc && (
+                <button
+                  onClick={(e) => toggleDescription(e, true)}
+                  className={styles.subtle}
+                >
+                  View Description
+                  <FiChevronDown />
+                </button>
+              )}
 
-        {!app.img && (
-          <div>
-            <h3>
-              {app.icon ? (
-                <img
-                  src={app.icon.startsWith("http") ? app.icon : `https://api.winstall.app/icons/${app.icon}`}
-                  draggable={false}
-                  alt={`Logo for ${app.name}`}
-                />
-              ) : (
-                ""
-              )}{" "}
-              {app.name}
-            </h3>
-            <h4>{app.publisher ? `by ${app.publisher}` : ""}</h4>
-            <em>{app.latestVersion ? `v${app.latestVersion}` : ""}</em>
-            {showDesc && (
-              <div>
-                {app.desc && (
-                  <button
-                    onClick={(e) => toggleDescription(e, true)}
-                    className={styles.subtle}
+              <div className={styles.controls}>
+                {app.homepage && (
+                  <a
+                    href={`${app.homepage}?ref=winstall`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    View Description
-                    <FiChevronDown />
-                  </button>
+                    <FiExternalLink />
+                    View Site
+                  </a>
                 )}
 
-                <div className={styles.controls}>
-                  {app.homepage && (
-                    <a
-                      href={`${app.homepage}?ref=winstall`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <FiExternalLink />
-                      View Site
-                    </a>
-                  )}
-                  {/* {app.contents.Installers && (
+                <Link href={`/apps/${app._id}`}>
+                  <a>
+                    <FiExternalLink />
+                    View App
+                  </a>
+                </Link>
+                {/* {app.contents.Installers && (
                     <a
                       href={`${app.contents.Installers[0].Url}`}
                       onClick={(e) => e.stopPropagation()}
@@ -155,11 +133,10 @@ let SingleApp = ({ app, showDesc=true, all }) => {
                         : "App"}
                     </a>
                   )} */}
-                </div>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </li>
     );
 }

@@ -17,7 +17,7 @@ If you don't already have Windows Package Manager, you can install it by downloa
 Using winstall
 --------------
 
-To use winstall, you can search for apps on the homepage. Additionally, you can also view all the apps available via Windows Package Manager [on this page.](https://winstall.app//store)
+To use winstall, you can search for apps on the homepage. Additionally, you can also view all the apps available via Windows Package Manager [on this page.](https://winstall.app//apps)
 
 Simply select the apps you want to download and click on the "Generate Script" button at the bottom of the screen. You will then be presented with a command that you can copy and paste into any Windows command-line. Input that into a command line app of your choice, and hit enter to start installing the apps one-by-one using Windows Package Manager.
 
@@ -30,7 +30,7 @@ When you first load this website, winstall will automatically fetch the latest d
 
 When you search for an app, winstall will only fetch the details for that app and update the local cache. This way, when you first search for an app, it may take a few seconds to load, but the subsequent searches will be instant.
 
-On [the "all apps" page](https://winstall.app/store) you will be able to see all the currently available apps that are on the Windows Package Manager. The data for all the apps will not be available at once, and you will have to click on individual apps to view their full details. This is, once again, done to avoid hitting GitHub API limits.
+On [the "all apps" page](https://winstall.app/apps) you will be able to see all the currently available apps that are on the Windows Package Manager. The data for all the apps will not be available at once, and you will have to click on individual apps to view their full details. This is, once again, done to avoid hitting GitHub API limits.
 
 The latest app data is cached for 5 hours, and you can manually clear the cache from the "all apps" page if you would like. You may sometimes hit the GitHub API limit, in that case some app details may not load. You will have to wait an hour before the limit is reset by GitHub. I am working on improving the API usage in order to limit API requests as much as possible.-
 

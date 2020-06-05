@@ -41,7 +41,7 @@ export default function Explainer() {
             To use winstall, you can search for apps on the homepage.
             Additionally, you can also view all the apps available via Windows
             Package Manager{" "}
-            <Link href="/store">
+            <Link href="/apps">
               <a>on this page.</a>
             </Link>
           </p>
@@ -95,7 +95,7 @@ export default function Explainer() {
           </p>
           <p>
             On{" "}
-            <Link href="/store">
+            <Link href="/apps">
               <a>the "all apps" page</a>
             </Link>{" "}
             you will be able to see all the currently available apps that are on

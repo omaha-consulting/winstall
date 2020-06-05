@@ -1,13 +1,14 @@
 // app list with images
 
-.appListImg{
+.appList{
     list-style-type: none;
     padding: 0px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 15px;
 
     h3{
         display: block;
+        padding-bottom: 0px;
     }
 }

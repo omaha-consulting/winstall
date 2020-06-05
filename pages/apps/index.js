@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import styles from "../styles/store.module.scss";
+import styles from "../../styles/apps.module.scss";
 
 import { DebounceInput } from "react-debounce-input";
 
 import Fuse from "fuse.js";
 
-import SelectionBar from "../components/SelectionBar";
+import SelectionBar from "../../components/SelectionBar";
 
-import SingleApp from "../components/SingleApp";
-import Footer from "../components/Footer";
+import SingleApp from "../../components/SingleApp";
+import Footer from "../../components/Footer";
 
 import {
   FiChevronLeft,
@@ -80,7 +80,7 @@ function Store({ apps }) {
 
         if(e.target.value.length <= 3) return;
         
-        Router.replace("/store");
+        Router.replace("/apps");
 
         let results = fuse.search(
           e.target.value.toLowerCase().replace(/\s/g, "")
@@ -95,7 +95,7 @@ function Store({ apps }) {
       setOffset(offset => offset + appsPerPage);
 
       Router.replace({
-        pathname: "/store",
+        pathname: "/apps",
         query: {
           page: Math.round((offset + appsPerPage - 1) / appsPerPage) + 1,
         },
@@ -107,7 +107,7 @@ function Store({ apps }) {
       setOffset(offset => offset - appsPerPage);
 
       Router.replace({
-        pathname: "/store",
+        pathname: "/apps",
         query: {
           page: Math.round((offset + appsPerPage - 1) / appsPerPage) - 1,
         },

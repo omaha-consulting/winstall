@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SingleApp from "../components/SingleApp";
+import PrettyApp from "../components/PrettyApp";
 import ListPackages from "../components/ListPackages";
 
 import PopularContext from "../ctx/PopularContext";
@@ -12,7 +12,7 @@ let PopularApps = ({ apps, all }) => {
 
   useEffect(() => {
     if(popular.length === 0){
-      setPopular(apps.slice(0, 6));
+      setPopular(apps.slice(0, 8));
     }
   })
 
@@ -22,7 +22,7 @@ let PopularApps = ({ apps, all }) => {
         <div className="popular">
           <div className="box">
             <h2>Popular apps</h2>
-            <Link href="/store">
+            <Link href="/apps">
               <a className="button">
                 <FiPackage />
                 View All
@@ -30,9 +30,9 @@ let PopularApps = ({ apps, all }) => {
             </Link>
           </div>
           <h3>Click to include them on your install script</h3>
-          <ListPackages showImg={true}>
+          <ListPackages>
             {popular.map((app) => (
-              <SingleApp app={app} key={app._id} all={all}/>
+              <PrettyApp app={app} key={app._id} all={all} />
             ))}
           </ListPackages>
         </div>
