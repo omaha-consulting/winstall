@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import styles from "../../styles/apps.module.scss";
+import styles from "../styles/apps.module.scss";
 
 import { DebounceInput } from "react-debounce-input";
 
 import Fuse from "fuse.js";
 
-import SelectionBar from "../../components/SelectionBar";
+import SelectionBar from "../components/SelectionBar";
 
-import SingleApp from "../../components/SingleApp";
-import Footer from "../../components/Footer";
-
+import SingleApp from "../components/SingleApp";
+import Footer from "../components/Footer";
+ 
 import {
   FiChevronLeft,
   FiChevronRight,
