@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
+import moment from "moment";
 
 import Link from "next/link";
 
@@ -12,8 +13,10 @@ import {
   FiPackage,
   FiPlus,
   FiX,
+  FiClock,
   FiCode
 } from "react-icons/fi";
+
 
 import AppIcon from "./AppIcon";
 import { compareVersion } from "../utils/helpers";
@@ -121,6 +124,11 @@ let SingleApp = ({ app, all, onVersionChange = false }) => {
         <Description desc={app.desc} />
 
         <ul className={styles.metaData}>
+          <li className={ styles.noHover}>
+            <FiClock />
+            <span>Last updated {moment(app.updatedAt).fromNow()}</span>
+          </li>
+
           <li className={app.versions.length === 1 ? styles.noHover : ""}>
             <FiPackage />
             {app.versions.length > 1 ? (

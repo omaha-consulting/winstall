@@ -39,7 +39,7 @@ export async function getStaticProps(){
   let popular = shuffleArray(Object.values(popularAppsList));
   let apps = await fetch(`https://api.winstall.app/apps`).then((res) => res.json());
   let recents = await fetch(`https://api.winstall.app/apps/recent?limit=8`).then((res) => res.json());
-  
+  recents = recents.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)); 
   return (
     {
       props: {

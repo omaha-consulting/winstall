@@ -6,6 +6,7 @@ import { DebounceInput } from "react-debounce-input";
 import Fuse from "fuse.js";
 
 import SelectionBar from "../components/SelectionBar";
+import ListSort from "../components/ListSort";
 
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
@@ -25,6 +26,7 @@ function Publishers({ allApps }) {
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
     const [publisher, setPublisher] = useState();
+    const [sort, setSort] = useState("update-desc");  
 
     const appsPerPage = 60;
 
@@ -35,6 +37,8 @@ function Publishers({ allApps }) {
         threshold: 0.3,
         keys: [{ name: "name", weight: 2 }, "path", "desc", "tags"]
     })
+
+    let foundPublisher = false;
 
     useEffect(() => {
         if(!Router.query.name){
@@ -65,7 +69,14 @@ function Publishers({ allApps }) {
 
         let publisherApps = apps.filter(a => a.publisher === Router.query.name);
         if(publisherApps.length === 0) Router.replace("/apps")
-        setApps(publisherApps)
+
+        if (!foundPublisher) {
+          setApps(
+            publisherApps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+          );
+
+          foundPublisher = true;
+        }
 
         return () => document.removeEventListener("keydown", handlePagination)
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -158,67 +169,77 @@ function Publishers({ allApps }) {
     if (!apps) return <></>;
 
     return (
-        <div className="container">
-            <h1>Apps by {publisher} {`(${apps.length})`}</h1>
-            <h3>
-                You can browse all the apps available on the Windows Package Manager
-                below. Click an app to view more details about it.
+      <div className="container">
+        <h1>
+          Apps by {publisher} {`(${apps.length})`}
+        </h1>
+        <h3>
+          You can browse all the apps available on the Windows Package Manager
+          below. Click an app to view more details about it.
         </h3>
 
-            <div className={styles.controls}>
-                <DebounceInput
-                    minLength={2}
-                    debounceTimeout={200}
-                    onChange={(e) => handleSearchInput(e)}
-                    value={searchInput}
-                    placeholder="Search for apps here"
-                    className="search"
-                />
+        <div className={styles.controls}>
+          <DebounceInput
+            minLength={2}
+            debounceTimeout={200}
+            onChange={(e) => handleSearchInput(e)}
+            value={searchInput}
+            placeholder="Search for apps here"
+            className="search"
+          />
 
-                <Pagination small disable={searchInput ? true : false} />
-            </div>
+          <Pagination small disable={searchInput ? true : false} />
+        </div>
 
-            {!searchInput && (
-                <p>
-                    Showing {apps.slice(offset, offset + appsPerPage).length} apps (page{" "}
-                    {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
-                    {totalPages}).
-                </p>
-            )}
-            {searchInput && (
-                <p>
-                    Showing {results.length} search{" "}
-                    {results.length === 1 ? "result" : "results"}.
-                </p>
-            )}
+        <div className={styles.controls}>
+          {!searchInput && (
+            <p>
+              Showing {apps.slice(offset, offset + appsPerPage).length} apps
+              (page {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
+              {totalPages}).
+            </p>
+          )}
+          {searchInput && (
+            <p>
+              Showing {results.length} search{" "}
+              {results.length === 1 ? "result" : "results"}.
+            </p>
+          )}
 
-            {searchInput && (
-                <ul className={`${styles.all} ${styles.storeList}`}>
-                    {results.map((app) => (
-                        <SingleApp app={app} showDesc={true} key={app._id} />
-                    ))}
-                </ul>
-            )}
+          <ListSort
+            apps={apps}
+            defaultSort="update-desc"
+            onSort={(sort) => setSort(sort)}
+          />
+        </div>
 
-            {!searchInput && (
-                <ul className={`${styles.all} ${styles.storeList}`}>
-                    {apps.slice(offset, offset + appsPerPage).map((app) => (
-                        <SingleApp app={app} showDesc={true} key={app._id} />
-                    ))}
-                </ul>
-            )}
+        {searchInput && (
+          <ul className={`${styles.all} ${styles.storeList}`}>
+            {results.map((app) => (
+              <SingleApp app={app} showDesc={true} key={app._id} />
+            ))}
+          </ul>
+        )}
 
-            <div className={styles.pagination}>
-                <Pagination disable={searchInput ? true : false} />
-                <em>
-                    Tip! Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
+        {!searchInput && (
+          <ul className={`${styles.all} ${styles.storeList}`}>
+            {apps.slice(offset, offset + appsPerPage).map((app) => (
+              <SingleApp app={app} showDesc={true} key={app._id} />
+            ))}
+          </ul>
+        )}
+
+        <div className={styles.pagination}>
+          <Pagination disable={searchInput ? true : false} />
+          <em>
+            Tip! Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
             on your keyboard to navigate between pages quickly.
           </em>
-            </div>
-
-            <Footer />
-            <SelectionBar />
         </div>
+
+        <Footer />
+        <SelectionBar />
+      </div>
     );
 }
 

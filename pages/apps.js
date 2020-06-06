@@ -9,7 +9,8 @@ import SelectionBar from "../components/SelectionBar";
 
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
- 
+import ListSort from "../components/ListSort";
+
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -19,10 +20,12 @@ import {
 
 import Router from "next/router";
 
-function Store({ apps }) {
+function Store({ data }) {
+    const [apps, setApps] = useState([])
     const [results, setResults] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
+    const [sort, setSort] = useState("name-desc");  
 
     const appsPerPage = 60;
 
@@ -35,6 +38,8 @@ function Store({ apps }) {
     })
 
     useEffect(() => {
+      setApps(data.sort((a, b) => a.name.localeCompare(b.name)))
+
       let handlePagination = (e) => {
         if (e.keyCode === 39) {
           let nextBtn = document.getElementById("next");
@@ -113,6 +118,8 @@ function Store({ apps }) {
         },
       });
     }
+    
+    
 
     let Pagination = ({ small, disable }) => {
 
@@ -163,22 +170,30 @@ function Store({ apps }) {
             className="search"
           />
 
-          <Pagination small disable={searchInput ? true : false }/>
+          <Pagination small disable={searchInput ? true : false} />
         </div>
 
-        {!searchInput && (
-          <p>
-            Showing {apps.slice(offset, offset + appsPerPage).length} apps (page{" "}
-            {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
-            {totalPages}).
-          </p>
-        )}
-        {searchInput && (
-          <p>
-            Showing {results.length} search{" "}
-            {results.length === 1 ? "result" : "results"}.
-          </p>
-        )}
+        <div className={styles.controls}>
+          {!searchInput && (
+            <p>
+              Showing {apps.slice(offset, offset + appsPerPage).length} apps
+              (page {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
+              {totalPages}).
+            </p>
+          )}
+          {searchInput && (
+            <p>
+              Showing {results.length} search{" "}
+              {results.length === 1 ? "result" : "results"}.
+            </p>
+          )}
+
+          <ListSort
+            apps={apps}
+            defaultSort="name-desc"
+            onSort={(sort) => setSort(sort)}
+          />
+        </div>
 
         {searchInput && (
           <ul className={`${styles.all} ${styles.storeList}`}>
@@ -197,7 +212,7 @@ function Store({ apps }) {
         )}
 
         <div className={styles.pagination}>
-          <Pagination disable={searchInput ? true : false}/>
+          <Pagination disable={searchInput ? true : false} />
           <em>
             Tip! Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
             on your keyboard to navigate between pages quickly.
@@ -217,7 +232,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      apps,
+      data: apps,
     },
   };
 }
