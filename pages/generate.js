@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 
 import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
 import Toggle from "react-toggle";
+import MetaTags from "../components/MetaTags";
 
 function Generate() {
     const { selectedApps } = useContext(SelectedContext);
@@ -49,6 +50,7 @@ function Generate() {
     if(selectedApps.length === 0){
       return (
         <div className="container generate-container">
+          <MetaTags title="winstall - GUI for Windows Package Manager" />
           <div className="illu-box">
             <div className={styles.generate}>
               <h1>Your don't have any apps selected.</h1>

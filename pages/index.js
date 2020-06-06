@@ -4,6 +4,7 @@ import Search from "../components/Search";
 import PopularApps from "../components/PopularApps";
 import RecentApps from "../components/RecentApps";
 import SelectionBar from "../components/SelectionBar";
+import MetaTags from "../components/MetaTags";
 
 import Footer from "../components/Footer";
 import { shuffleArray } from "../utils/helpers";
@@ -12,21 +13,26 @@ import popularAppsList from "../data/popularApps.json";
 function Home({ popular, apps, recents }) {
   return (
     <div className="container">
+      <MetaTags title="winstall - GUI for Windows Package Manager" />
       <div className={styles.intro}>
         <div className="illu-box">
           <h1>
             Bulk install Windows apps quickly with Windows Package Manager.
           </h1>
           <div className="art">
-            <img src="./assets/logo.svg" draggable={false} alt="winstall logo" />
+            <img
+              src="./assets/logo.svg"
+              draggable={false}
+              alt="winstall logo"
+            />
           </div>
         </div>
-        <Search apps={apps}/>
+        <Search apps={apps} />
       </div>
 
-      <PopularApps apps={popular} all={apps}/>
+      <PopularApps apps={popular} all={apps} />
 
-      <RecentApps apps={recents}/>
+      <RecentApps apps={recents} />
 
       <SelectionBar />
 

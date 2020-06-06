@@ -1,12 +1,12 @@
 import Head from "next/head";
 
-const MetaTags = () => {
+const MetaTags = ({ title }) => {
     return (
       <Head>
-        <title>winstall - GUI for Windows Package Manager</title>
+        <title>{title}</title>
         <meta
           name="title"
-          content="winstall - the Windows Package Manager GUI"
+          content={title}
         />
         <meta
           name="description"
@@ -15,10 +15,10 @@ const MetaTags = () => {
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#9b2eff" />
-        
+
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://winstall.app/" />
-        <meta property="og:title" content="winstall" />
+        <meta property="og:title" content={title} />
         <meta
           property="og:description"
           content="Bulk install Windows apps quickly with Windows Package Manager."
@@ -27,7 +27,7 @@ const MetaTags = () => {
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://winstall.app/" />
-        <meta property="twitter:title" content="winstall" />
+        <meta property="twitter:title" content={title} />
         <meta
           property="twitter:description"
           content="Bulk install Windows apps quickly with Windows Package Manager."

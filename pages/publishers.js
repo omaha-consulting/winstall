@@ -11,7 +11,7 @@ import ListSort from "../components/ListSort";
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
 
-import Head from "next/head";
+import MetaTags from "../components/MetaTags";
 
 import {
     FiChevronLeft,
@@ -172,9 +172,7 @@ function Publishers({ allApps }) {
 
     return (
       <div className="container">
-        <Head>
-          <title>{publisher} Apps | winstall</title>
-        </Head>
+        <MetaTags title={`Apps by ${publisher} - winstall`}/>
         <h1>
           Apps by {publisher} {`(${apps.length})`}
         </h1>
