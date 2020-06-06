@@ -2,6 +2,7 @@ import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 
+import Link from "next/link";
 
 import {
   FiExternalLink,
@@ -11,6 +12,7 @@ import {
   FiPackage,
   FiPlus,
   FiX,
+  FiCode
 } from "react-icons/fi";
 
 import AppIcon from "./AppIcon";
@@ -117,7 +119,7 @@ let SingleApp = ({ app, all }) => {
             <AppIcon name={app.name} icon={app.icon} />
             <p>{app.name}</p>
           </h3>
-          <h4>by {app.publisher}</h4>
+          
 
           <Description desc={app.desc} />
 
@@ -129,6 +131,15 @@ let SingleApp = ({ app, all }) => {
               ) : (
                 <span>v{app.selectedVersion}</span>
               )}
+            </li>
+
+            <li>
+              <Link href={`/publishers?name=${app.publisher}`}>
+                <a>
+                  <FiCode />
+                  by {app.publisher}
+                </a>
+              </Link>
             </li>
 
             {app.homepage && (

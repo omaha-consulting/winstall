@@ -59,6 +59,17 @@
         margin-top: 0px;
         margin-bottom: 5px;
         opacity: 0.75;
+
+        a{
+            color: var(--textColor);
+            text-decoration: none;
+            font-weight: 300;
+            
+            svg{
+                display: inline-block;
+                padding-right: 10px;
+            }
+        }
     }
 
     em{
@@ -110,7 +121,7 @@
             border: 0px;
             width: 100%;
             background-color: transparent;
-            color: var(--textColor);
+            color: inherit;
             border-radius: 50px;
             padding: 0px;
             cursor: pointer;
@@ -132,6 +143,10 @@
         .noHover{
             cursor: initial;
 
+            svg{
+                color: var(--textColor);
+            }
+            
             &:hover{
                 opacity: 1;
             }
@@ -152,13 +167,16 @@
 
             a{
                 text-decoration: none;
-                color: var(--textColor);
+                color: inherit;
+                display: flex;
+                align-items: center;
             }
 
             svg{
                 width: 18px;
                 height: 18px;
                 padding-right: 10px;
+                color: var(--accent);
             }
             
             &:last-child{
