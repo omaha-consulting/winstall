@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/listSort.module.scss";
 
 const ListSort = ({apps, defaultSort, onSort}) => {
-    const [sort, setSort] = useState(defaultSort);
+    const [sort, setSort] = useState("");
+
+    useEffect(() => {
+      setSort(defaultSort);
+    })
 
     let handleSort = (e) => {
       let sortChoice = e.target.value;

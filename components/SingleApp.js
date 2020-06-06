@@ -87,7 +87,7 @@ let SingleApp = ({ app, all, onVersionChange = false }) => {
               let found = selectedApps.find((a) => a._id === app._id);
               found.selectedVersion = e.target.value;
 
-              onVersionChange();
+              if(onVersionChange) onVersionChange();
             }
           }}
         >

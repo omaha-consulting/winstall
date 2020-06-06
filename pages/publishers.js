@@ -193,11 +193,18 @@ function Publishers({ allApps }) {
 
         <div className={styles.controls}>
           {!searchInput && (
-            <p>
-              Showing {apps.slice(offset, offset + appsPerPage).length} apps
-              (page {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
-              {totalPages}).
-            </p>
+            <>
+              <p>
+                Showing {apps.slice(offset, offset + appsPerPage).length} apps
+                (page {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
+                {totalPages}).
+              </p>
+              <ListSort
+                apps={apps}
+                defaultSort="update-desc"
+                onSort={(sort) => setSort(sort)}
+              />
+            </>
           )}
           {searchInput && (
             <p>
@@ -205,12 +212,6 @@ function Publishers({ allApps }) {
               {results.length === 1 ? "result" : "results"}.
             </p>
           )}
-
-          <ListSort
-            apps={apps}
-            defaultSort="update-desc"
-            onSort={(sort) => setSort(sort)}
-          />
         </div>
 
         {searchInput && (

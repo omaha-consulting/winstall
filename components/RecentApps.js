@@ -7,17 +7,19 @@ import { FiPackage } from "react-icons/fi";
 let RecentApps = ({ apps }) => {
 
   return (
-    <div className="popular">
+    <div className="homeBlock">
       <div className="box">
-        <h2>Recent apps</h2>
-        <Link href="/apps">
-          <a className="button">
+        <h2 className="blockHeader">Recent Updates</h2>
+        <Link href="/apps?sort=update-desc">
+          <a className="button small">
             <FiPackage />
             View All
           </a>
         </Link>
       </div>
-      <h3>All the latest app updates</h3>
+      <h3 className="blockSubtitle">
+        All the newest apps and updates.
+      </h3>
       <ListPackages>
         {apps.map((app) => (
           <SingleApp app={app} key={app._id} />

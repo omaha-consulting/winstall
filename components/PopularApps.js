@@ -19,17 +19,19 @@ let PopularApps = ({ apps, all }) => {
   return (
     <PopularContext.Consumer>
       {({ popular }) => (
-        <div className="popular">
+        <div className="homeBlock">
           <div className="box">
-            <h2>Popular apps</h2>
+            <h2 className="blockHeader">Popular Apps</h2>
             <Link href="/apps">
-              <a className="button">
+              <a className="button small">
                 <FiPackage />
                 View All
               </a>
             </Link>
           </div>
-          <h3>Click to include them on your install script</h3>
+          <h3 className="blockSubtitle">
+            The essentials for your new Windows device.
+          </h3>
           <ListPackages>
             {popular.map((app) => (
               <PrettyApp app={app} key={app._id} all={all} />

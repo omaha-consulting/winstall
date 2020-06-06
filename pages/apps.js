@@ -25,7 +25,7 @@ function Store({ data }) {
     const [results, setResults] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
-    const [sort, setSort] = useState("name-desc");  
+    const [sort, setSort] = useState();  
 
     const appsPerPage = 60;
 
@@ -38,7 +38,13 @@ function Store({ data }) {
     })
 
     useEffect(() => {
-      setApps(data.sort((a, b) => a.name.localeCompare(b.name)))
+      if (Router.query.sort && Router.query.sort === "update-desc") {
+        setSort(Router.query.sort);
+        setApps(data.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)));
+      } else {
+        setSort("name-desc");
+        setApps(data.sort((a, b) => a.name.localeCompare(b.name)));
+      }
 
       let handlePagination = (e) => {
         if (e.keyCode === 39) {
@@ -175,11 +181,18 @@ function Store({ data }) {
 
         <div className={styles.controls}>
           {!searchInput && (
-            <p>
-              Showing {apps.slice(offset, offset + appsPerPage).length} apps
-              (page {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
-              {totalPages}).
-            </p>
+            <>
+              <p>
+                Showing {apps.slice(offset, offset + appsPerPage).length} apps
+                (page {Math.round((offset + appsPerPage - 1) / appsPerPage)} of{" "}
+                {totalPages}).
+              </p>
+              <ListSort
+                apps={apps}
+                defaultSort={sort}
+                onSort={(sort) => setSort(sort)}
+              />
+            </>
           )}
           {searchInput && (
             <p>
@@ -187,12 +200,6 @@ function Store({ data }) {
               {results.length === 1 ? "result" : "results"}.
             </p>
           )}
-
-          <ListSort
-            apps={apps}
-            defaultSort="name-desc"
-            onSort={(sort) => setSort(sort)}
-          />
         </div>
 
         {searchInput && (

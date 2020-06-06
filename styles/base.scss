@@ -604,3 +604,27 @@ article{
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+
+.homeBlock{
+    padding-top: 20px;
+
+    h2.blockHeader{
+        margin: 0px;
+        border-bottom: 3px solid var(--accent);
+        padding-bottom: 5px;
+        margin-bottom: 10px !important;
+
+    }
+
+    h3.blockSubtitle{
+        margin: 0px;
+        opacity: 0.75;
+    }
+
+    .button.small{
+        padding: 10px 15px;
+        margin: 0px;
+    }   
+}
