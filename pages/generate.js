@@ -18,29 +18,33 @@ function Generate() {
     const [script, setScript] = useState("");
     const [showPS, setShowPS] = useState(false);
 
+    let handleScriptChange = () => {
+      let installs = [];
+
+      selectedApps.map((app) => {
+        installs.push(
+          `winget install --id=${app._id} ${
+            app.selectedVersion !== app.latestVersion
+              ? `-v "${app.selectedVersion}" `
+              : ""
+          }-e`
+        );
+
+        return app;
+      });
+
+      let newScript = installs.join(showPS ? " ; " : " && ");
+
+      if (script !== newScript) {
+        setCopyText("Copy to clipboard");
+      }
+
+      setScript(newScript);
+    };
+
     useEffect(() => {
-        let installs = [];
-        let apps = [];
-
-        selectedApps.map((app) => {
-            if (app._id === undefined) return app;
-
-            apps.push(app.id);
-            installs.push(`winget install --id=${app._id} -e`);
-
-            return app;
-        });
-
-        let newScript = installs.join(showPS ? " ; " : " && ");
-        
-    
-        if(script !== newScript){
-            setCopyText("Copy to clipboard")
-        }
- 
-        setScript(newScript)
-        
-    }, [selectedApps, script, showPS])
+      handleScriptChange();
+    }, [handleScriptChange]);
 
     if(selectedApps.length === 0){
       return (
@@ -71,6 +75,8 @@ function Generate() {
       );
     }
 
+    
+
     let handleCopy = () => {
         navigator.clipboard.writeText(script).then(() => setCopyText("Copied!")).catch((err) => {
             document.querySelector("textarea").select();
@@ -95,7 +101,7 @@ function Generate() {
 
       setCopyText("Copy to clipboard")
     }
-
+    
     return (
       <div className="container generate-container">
         <div className="illu-box">
@@ -144,10 +150,8 @@ function Generate() {
         <div className={styles.selectedApps}>
           <h2>Apps you are downloading ({selectedApps.length})</h2>
           <ListPackages showImg={true}>
-            {selectedApps.map((app, index) => (
-              <React.Fragment key={index}>
-                <SingleApp app={app} />
-              </React.Fragment>
+            {selectedApps.map((app) => (
+              <SingleApp app={app} key={app._id} onVersionChange={handleScriptChange}/>
             ))}
           </ListPackages>
         </div>

@@ -13,16 +13,12 @@ export default function SelectionBar() {
             setSelectedApps([]);
         }
     }
-
     return (
       <div className="bottomBar">
         <div className="container inner">
-          <p>Selected {selectedApps.length} apps so far</p>
-          {/* <ul>
-            { selectedApps.reverse().map(app => {
-              return <li key={app._id}><img src={app.icon}/></li>
-            })}
-          </ul> */}
+          <div className="appPreview">
+            <p>Selected {selectedApps.length} apps so far</p>
+          </div>
           <div className="controls">
             <button className="clear" onClick={() => handleClear()}>
               <FiTrash />
