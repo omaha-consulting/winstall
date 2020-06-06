@@ -8,7 +8,7 @@ function Error({title, subtitle}) {
   return (
     <div className={styles.error}>
       <img
-        src={`./assets/clippy.png`}
+        src={`/assets/clippy.png`}
         alt="Clippy sad face"
         draggable={false}
       />

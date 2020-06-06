@@ -118,7 +118,7 @@ let SingleApp = ({ app, all, onVersionChange = false }) => {
       <div>
         <h3>
           <AppIcon name={app.name} icon={app.icon} />
-          <p>{app.name}</p>
+          <Link href="/apps/[id]" as={`/apps/${app._id}`}><a>{app.name}</a></Link>
         </h3>
 
         <Description desc={app.desc} />

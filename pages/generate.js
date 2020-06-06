@@ -67,7 +67,7 @@ function Generate() {
             </div>
             <div className="art">
               <img
-                src="./assets/dl.svg"
+                src="/assets/dl.svg"
                 draggable={false}
                 alt="download icon"
               />
@@ -145,7 +145,7 @@ function Generate() {
             </div>
           </div>
           <div className="art">
-            <img src="./assets/dl.svg" draggable={false} alt="download icon" />
+            <img src="/assets/dl.svg" draggable={false} alt="download icon" />
           </div>
         </div>
 

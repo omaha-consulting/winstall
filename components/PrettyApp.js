@@ -45,16 +45,16 @@ let PrettyApp = ({ app, all }) => {
         <div>
             <div className={styles.imgContainer}>
             <picture>
-                <source srcSet={`./assets/apps/${app.img}`} type="image/webp" />
+                <source srcSet={`/assets/apps/${app.img}`} type="image/webp" />
                 <source
-                srcSet={`./assets/apps/fallback/${app.img.replace(
+                srcSet={`/assets/apps/fallback/${app.img.replace(
                     "webp",
                     "png"
                 )}`}
                 type="image/png"
                 />
                 <img
-                src={`./assets/apps/fallback/${app.img.replace("webp", "png")}`}
+                src={`/assets/apps/fallback/${app.img.replace("webp", "png")}`}
                 alt={`Logo for ${app.name}`}
                 draggable={false}
                 />

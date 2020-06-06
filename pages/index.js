@@ -21,7 +21,7 @@ function Home({ popular, apps, recents }) {
           </h1>
           <div className="art">
             <img
-              src="./assets/logo.svg"
+              src="/assets/logo.svg"
               draggable={false}
               alt="winstall logo"
             />

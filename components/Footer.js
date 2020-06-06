@@ -31,7 +31,7 @@ export default function Footer(){
           href="https://builtbymeh.com/"
           target="_blank"
           rel="noopener noreferrer"
-        ><img src={"./assets/meh.png"} alt="builtbymeh.com logo" draggable={false}/></a>
+        ><img src={"/assets/meh.png"} alt="builtbymeh.com logo" draggable={false}/></a>
         <p>
           <a
             href="https://twitter.com/mehedih_"
