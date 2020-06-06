@@ -113,6 +113,7 @@ input[type="text"].search{
 .box{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .illu-box{
@@ -620,11 +621,14 @@ article{
 
     h3.blockSubtitle{
         margin: 0px;
+        padding-top: 10px;
         opacity: 0.75;
     }
 
     .button.small{
-        padding: 10px 15px;
+        padding: 5px 15px !important;
         margin: 0px;
+        height: 25px;
+        font-size: 15px;
     }   
 }

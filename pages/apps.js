@@ -10,6 +10,7 @@ import SelectionBar from "../components/SelectionBar";
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
 import ListSort from "../components/ListSort";
+import Head from "next/head";
 
 import {
   FiChevronLeft,
@@ -160,11 +161,10 @@ function Store({ data }) {
 
     return (
       <div className="container">
+        <Head>
+          <title>All Apps | winstall</title>
+        </Head>
         <h1>All Apps {`(${apps.length})`}</h1>
-        <h3>
-          You can browse all the apps available on the Windows Package Manager
-          below. Click an app to view more details about it.
-        </h3>
 
         <div className={styles.controls}>
           <DebounceInput

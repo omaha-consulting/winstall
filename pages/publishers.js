@@ -11,6 +11,8 @@ import ListSort from "../components/ListSort";
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
 
+import Head from "next/head";
+
 import {
     FiChevronLeft,
     FiChevronRight,
@@ -170,13 +172,12 @@ function Publishers({ allApps }) {
 
     return (
       <div className="container">
+        <Head>
+          <title>{publisher} Apps | winstall</title>
+        </Head>
         <h1>
           Apps by {publisher} {`(${apps.length})`}
         </h1>
-        <h3>
-          You can browse all the apps available on the Windows Package Manager
-          below. Click an app to view more details about it.
-        </h3>
 
         <div className={styles.controls}>
           <DebounceInput

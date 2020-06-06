@@ -1,5 +1,3 @@
-// import App from 'next/app'
-
 import { useState, useEffect } from "react";
 import "../styles/base.scss";
 
@@ -7,6 +5,7 @@ import SelectedContext from "../ctx/SelectedContext";
 
 import { checkTheme } from "../utils/helpers";
 import Nav from "../components/Nav";
+import MetaTags from "../components/MetaTags";
 import PopularContext from "../ctx/PopularContext";
 
 function winstall({ Component, pageProps }) {
@@ -23,6 +22,7 @@ function winstall({ Component, pageProps }) {
     return (
       <SelectedContext.Provider value={selectedAppValue}>
         <PopularContext.Provider value={popularApps}>
+          <MetaTags/>
           <>
             <Nav />
             <Component {...pageProps} />

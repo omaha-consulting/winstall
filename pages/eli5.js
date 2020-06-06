@@ -1,8 +1,12 @@
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Explainer() {
   return (
     <div className="container">
+      <Head>
+        <title>winstall - how does it work?</title>
+      </Head>
       <article>
         <section>
           <h2>How does this app work?</h2>

@@ -8,9 +8,9 @@
     transition: 0.1s all ease-in-out;
     box-shadow: 0px 3px 5px #00000026;
 
-    // &:hover{
-    //    opacity: 0.75;
-    // }
+    &:focus{
+       opacity: 0.75;
+    }
 
     h3{
         display: flex; 
