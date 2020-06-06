@@ -3,23 +3,17 @@
     padding: 20px;
     border: 5px solid var(--card-bg);
     border-radius: 10px;
-    cursor: pointer;
+    // cursor: pointer;
     overflow: hidden;
     transition: 0.1s all ease-in-out;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 3px 5px #00000026;
 
-    p{
-        font-size: 18px;
-        margin: 0px;
-        padding-top: 20px;
-    }
-
-    &:hover{
-       opacity: 0.75;
-    }
+    // &:hover{
+    //    opacity: 0.75;
+    // }
 
     h3{
-        display: flex;
+        display: flex; 
         align-items: center;
 
         p{
@@ -73,16 +67,110 @@
         opacity: 0.75;
     }
 
+    p{
+        margin: 10px 0;
+    }
+
     .subtle{
         padding: 0px !important;
         background-color: transparent !important; 
         box-shadow: none !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
         opacity: 0.55;
+        font-family: 'Nunito', sans-serif;
+        border: 0px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        outline: 0;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.75;
+        }
+
+        svg{
+            padding-right: 10px !important;
+            margin-top: 0px !important;
+            font-size: 18px !important;
+        }
+    }
+
+    .versions{
+        position: relative;
+        width: 100%;
+
+        span{
+            font-size: 15px;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .versionSelector{
+            border: 0px;
+            width: 100%;
+            background-color: transparent;
+            color: var(--textColor);
+            border-radius: 50px;
+            padding: 0px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            outline: 0;
+            font-size: 16px;
+            font-family: 'Nunito', sans-serif;
+            position: absolute;
+            top: -15px;
+            height: 50px;
+        }
     }
     
-    button, a{
-        padding: 8px 15px !important;
+
+    .metaData{
+        list-style-type: none;
+        padding: 0px;
+
+        .noHover{
+            cursor: initial;
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+        
+
+        li{
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 16px;
+            cursor: pointer;
+
+            &:hover{
+                opacity: 0.75;
+            }
+
+            a{
+                text-decoration: none;
+                color: var(--textColor);
+            }
+
+            svg{
+                width: 18px;
+                height: 18px;
+                padding-right: 10px;
+            }
+            
+            &:last-child{
+                margin-bottom: 0px;
+            }
+
+        }
+        
+    }
+
+    .selectApp {
+        padding: 5px 10px !important;
         font-size: 15px !important;
         background-color: var(--main-bg) !important;
         margin-top: 15px;
@@ -101,9 +189,9 @@
         align-items: center;
 
         svg{
-            padding-right: 10px !important;
+            padding-right: 5px !important;
             margin-top: 0px !important;
-            font-size: 18px !important;
+            font-size: 15px !important;
         }
 
         &:hover{
@@ -112,28 +200,8 @@
     }
 }
 
-.controls{
-    display: grid;
-}
-
 
 .selected{
     border: 5px solid var(--accent);
 }
 
-.imgHeader{
-    text-align: center;
-    padding: 20px;
-    margin: 0px;
-}
-
-@media(max-width: 690px){
-    .imgContainer{
-        min-height: 50px !important;
-        
-        img{
-            width: 50px !important
-        }
-    }
-
-}

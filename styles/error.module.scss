@@ -21,7 +21,10 @@
     cursor: pointer;
     border: 0px;
     outline: 0;
-    line-height: 18px;
+
+    div{
+        display: flex;
+    }
 
     &:hover, &:focus{
         opacity: 0.75;
@@ -29,7 +32,6 @@
 
     svg{
         padding-right: 10px;
-        margin-top: 2px;
         font-size: 20px;
     }
 } 

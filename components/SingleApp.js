@@ -2,26 +2,45 @@ import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 
-import Link from "next/link";
 
 import {
   FiExternalLink,
   FiDownload,
   FiChevronDown,
   FiChevronUp,
+  FiPackage,
+  FiPlus,
+  FiX,
 } from "react-icons/fi";
 
 import AppIcon from "./AppIcon";
+import { compareVersion } from "../utils/helpers";
 
-let SingleApp = ({ app, showDesc=true, all }) => {
+let SingleApp = ({ app, all }) => {
     const [selected, setSelected] = useState(false);
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-    const [viewingDesc, setViewingDesc] = useState(false);
+    
+    const [version, setVersion] = useState(app.latestVersion);
+
+    if(!app.selectedVersion) app.selectedVersion = version;
+
+    if (app.versions.length > 1) {
+      app.versions = app.versions.sort((a, b) =>
+        compareVersion(b.version, a.version)
+      );
+    }
 
     useEffect(() => {
-      let found = selectedApps.findIndex((a) => a._id === app._id) !== -1;
+      let found = selectedApps.find((a) => a._id === app._id);
 
-      setSelected(found)
+      if(!found) return;
+
+      if(found.selectedVersion !== app.latestVersion){
+        setVersion(found.selectedVersion)
+      } 
+
+      setSelected(true)
+
     }, [selectedApps, app._id])
 
     let handleAppSelect = () => {
@@ -47,40 +66,50 @@ let SingleApp = ({ app, showDesc=true, all }) => {
       }
     }
 
-    let toggleDescription = (e, status) => {
-      e.stopPropagation();
-      setViewingDesc(status);
-    };
-
+    
     if(!app && !app.img) return <></>
 
-    if (showDesc && !app.img && app.desc && viewingDesc) {
+
+
+    let VersionSelector = () => {
       return (
-        <li
-          key={app._id}
-          onClick={handleAppSelect}
-          className={`${styles.single} ${selected ? styles.selected : ""}`}
-        >
-          <h3>
-            <AppIcon name={app.name} icon={app.icon} />
-            <p>{app.name}</p>
-          </h3>
-          <p>{app.desc}</p>
-          <button
-            onClick={(e) => toggleDescription(e, false)}
-            className={styles.subtle}
+        <div className={styles.versions}>
+          <select
+            className={styles.versionSelector}
+            value={version}
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => {
+              setVersion(e.target.value);
+              app.selectedVersion = e.target.value;
+
+              if(selected){
+                let found = selectedApps.find((a) => a._id === app._id);
+                found.selectedVersion = e.target.value;
+              }
+            }}
           >
-            Hide Description
-            <FiChevronUp />
-          </button>
-        </li>
+            {app.versions.map((v) => {
+              return (
+                <option key={v.version} value={v.version}>
+                  v{v.version}
+                </option>
+              );
+            })}
+          </select>
+          {app.versions.length > 1 && (
+              <span>
+                ({app.versions.length - 1} other{" "}
+                {app.versions.length - 1 > 1 ? "versions" : "version"} available)
+              </span>
+          )}
+        </div>
       );
     }
 
     return (
       <li
         key={app._id}
-        onClick={handleAppSelect}
+        // onClick={handleAppSelect}
         className={`${styles.single} ${selected ? styles.selected : ""}`}
       >
         <div>
@@ -88,57 +117,101 @@ let SingleApp = ({ app, showDesc=true, all }) => {
             <AppIcon name={app.name} icon={app.icon} />
             <p>{app.name}</p>
           </h3>
-          <h4>{app.publisher ? `by ${app.publisher}` : ""}</h4>
-          <em>{app.latestVersion ? `v${app.latestVersion}` : ""}</em>
-          {showDesc && (
-            <div>
-              {app.desc && (
-                <button
-                  onClick={(e) => toggleDescription(e, true)}
-                  className={styles.subtle}
-                >
-                  View Description
-                  <FiChevronDown />
-                </button>
+          <h4>by {app.publisher}</h4>
+
+          <Description desc={app.desc} />
+
+          <ul className={styles.metaData}>
+            <li className={app.versions.length === 1 ? styles.noHover : ""}>
+              <FiPackage />
+              {app.versions.length > 1 ? (
+                <VersionSelector />
+              ) : (
+                <span>v{app.selectedVersion}</span>
               )}
+            </li>
 
-              <div className={styles.controls}>
-                {app.homepage && (
-                  <a
-                    href={`${app.homepage}?ref=winstall`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FiExternalLink />
-                    View Site
-                  </a>
-                )}
+            {app.homepage && (
+              <li>
+                <a
+                  href={`${app.homepage}?ref=winstall`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FiExternalLink />
+                  View Site
+                </a>
+              </li>
+            )}
 
-                <Link href={`/apps/${app._id}`}>
-                  <a>
-                    <FiExternalLink />
-                    View App
-                  </a>
-                </Link>
-                {/* {app.contents.Installers && (
-                    <a
-                      href={`${app.contents.Installers[0].Url}`}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <FiDownload />
-                      Download{" "}
-                      {app.contents.InstallerType
-                        ? `.${app.contents.InstallerType.toLowerCase()}`
-                        : "App"}
-                    </a>
-                  )} */}
-              </div>
-            </div>
-          )}
+            <li>
+              <a
+                href={`${
+                  app.versions.find((i) => i.version === app.selectedVersion)
+                    .installers[0]
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <FiDownload />
+                Download{" "}
+                {app.versions[0].installerType
+                  ? `.${app.versions[0].installerType.toLowerCase()}`
+                  : "App"}
+              </a>
+            </li>
+          </ul>
+
+          <button className={styles.selectApp} onClick={handleAppSelect}>
+            {selected ? <FiX/> : <FiPlus/>}
+            {selected ? "Unselect" : "Select"} app
+          </button>
         </div>
       </li>
     );
 }
+
+const Description = ({ desc }) => {
+  const [descTrimmed, setDescTrimmed] = useState(desc.length > 140);
+
+  let toggleDescription = (e, status) => {
+    e.stopPropagation();
+    setDescTrimmed(status);
+  };
+
+  if(!desc) return <p>No description available for this app.</p>
+
+
+  return (
+    <>
+      <p>
+        {desc.length > 140
+          ? !descTrimmed
+            ? desc
+            : `${desc.substr(0, 140).replace(/(^[\s]+|[\s]+$)/g, "")}...`
+          : desc}
+      </p>
+
+      {desc.length > 140 && (
+        <button
+          onClick={(e) => toggleDescription(e, !descTrimmed)}
+          className={styles.subtle}
+        >
+          {descTrimmed ? (
+            <>
+              Full Description
+              <FiChevronDown />
+            </>
+          ) : (
+            <>
+              Hide Description
+              <FiChevronUp />
+            </>
+          )}
+        </button>
+      )}
+    </>
+  );
+};
 
 export default SingleApp;
