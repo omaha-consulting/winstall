@@ -78,12 +78,8 @@
     }
 }
 
-@media(max-width: 375px){
-    header.container{
-        display: block;
-
-        .nav{
-            margin-top: 20px;
-        }
+@media(max-width: 460px){
+    .nav{
+        margin-top: 20px;
     }
 }

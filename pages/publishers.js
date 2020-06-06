@@ -172,7 +172,7 @@ function Publishers({ allApps }) {
 
     return (
       <div className="container">
-        <MetaTags title={`Apps by ${publisher} - winstall`}/>
+        <MetaTags title={`Apps - winstall`}/>
         <h1>
           Apps by {publisher} {`(${apps.length})`}
         </h1>

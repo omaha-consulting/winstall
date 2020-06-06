@@ -224,3 +224,8 @@
     border: 5px solid var(--accent);
 }
 
+@media(max-width: 690px){
+    .single{
+        padding: 10px;
+    }
+}

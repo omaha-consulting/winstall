@@ -369,6 +369,11 @@ article{
 
     .box{
         display: grid;
+        grid-gap: 10px;
+    }
+
+    .button.small{
+        margin-bottom: 10px !important;
     }
 }
 
@@ -631,4 +636,11 @@ article{
         height: 25px;
         font-size: 15px;
     }   
+}
+
+
+@media(max-width: 460px){
+    header.container{
+        display: block;
+    }
 }

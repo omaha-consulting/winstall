@@ -32,7 +32,7 @@ let PopularApps = ({ apps, all }) => {
           <h3 className="blockSubtitle">
             The essentials for your new Windows device.
           </h3>
-          <ListPackages>
+          <ListPackages popular>
             {popular.map((app) => (
               <PrettyApp app={app} key={app._id} all={all} />
             ))}

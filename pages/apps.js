@@ -161,7 +161,7 @@ function Store({ data }) {
 
     return (
       <div className="container">
-        <MetaTags title="All Apps - winstall"/>
+        <MetaTags title="Apps - winstall"/>
         <h1>All Apps {`(${apps.length})`}</h1>
 
         <div className={styles.controls}>
