@@ -289,8 +289,16 @@
     }
 
     .metaData{
+        margin-top: 20px;
+        
         li{
-            font-size: 17px;
+            font-size: 18px;
+            margin-bottom: 15px;
+
+            svg{
+               width: 25px !important;
+               height: 25px !important;
+            }
         }
     }
 
@@ -299,6 +307,7 @@
         font-size: 18px !important;
         padding: 10px 25px !important;
         align-self: start !important;
+        margin-top: 20px !important;
         margin-left: initial !important;
         width: auto !important;
         height: auto !important;
