@@ -16,6 +16,18 @@
         display: flex; 
         align-items: center;
 
+        a{
+            display: flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+            transition: 0.3s all ease-in-out;
+
+            &:hover, &:focus, &:active{
+                opacity: 0.76;
+            }
+        }
+
         p{
             text-align: left;
             margin: 0px;
@@ -128,7 +140,7 @@
             cursor: pointer;
             -webkit-appearance: none;
             outline: 0;
-            font-size: 15px;
+            font-size: inherit;
             font-family: 'Nunito', sans-serif;
             position: absolute;
             top: -15px;
@@ -144,9 +156,9 @@
         .noHover{
             cursor: initial;
 
-            svg{
-                color: var(--textColor);
-            }
+            // svg{
+            //     color: var(--textColor);
+            // }
             
             &:hover{
                 opacity: 1;
@@ -177,7 +189,7 @@
                 width: 18px;
                 height: 18px;
                 padding-right: 10px;
-                // color: var(--textColor);
+                color: var(--accent);
             }
             
             &:last-child{
@@ -227,5 +239,47 @@
 @media(max-width: 690px){
     .single{
         padding: 10px;
+    }
+}
+
+.large{
+    list-style-type: none;
+    padding: 0px;
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+    overflow: visible;
+
+    h3{
+        font-size: 30px;
+    }
+
+    p{
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .metaData{
+        li{
+            font-size: 17px;
+        }
+    }
+
+    .selectApp{
+        background-color: var(--card-bg) !important;
+        font-size: 18px !important;
+        padding: 10px 25px !important;
+
+        svg{
+            font-size: 20px !important;
+            padding-right: 10px !important;
+        }
+    }
+}
+
+.selected.large{
+    .selectApp{
+        background-color: var(--accent) !important;
+        color: #fff;
     }
 }

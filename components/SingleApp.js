@@ -14,14 +14,15 @@ import {
   FiPlus,
   FiX,
   FiClock,
-  FiCode
+  FiCode,
+  FiInfo
 } from "react-icons/fi";
 
 
 import AppIcon from "./AppIcon";
 import { compareVersion } from "../utils/helpers";
 
-let SingleApp = ({ app, all, onVersionChange = false }) => {
+let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false }) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -113,21 +114,48 @@ let SingleApp = ({ app, all, onVersionChange = false }) => {
     <li
       key={app._id}
       // onClick={handleAppSelect}
-      className={`${styles.single} ${selected ? styles.selected : ""}`}
+      className={`${large ? styles.large : ""} ${styles.single} ${
+        selected ? styles.selected : ""
+      }`}
     >
       <div>
         <h3>
-          <AppIcon name={app.name} icon={app.icon} />
-          <Link href="/apps/[id]" as={`/apps/${app._id}`}><a>{app.name}</a></Link>
+          {large ? (
+            <>
+              <AppIcon name={app.name} icon={app.icon} />
+              {app.name}
+            </>
+          ) : (
+            <Link href="/apps/[id]" as={`/apps/${app._id}`}>
+              <a>
+                <AppIcon name={app.name} icon={app.icon} />
+                {app.name}
+              </a>
+            </Link>
+          )}
         </h3>
 
-        <Description desc={app.desc} />
+        <Description desc={app.desc} full={large} />
 
         <ul className={styles.metaData}>
-          <li className={ styles.noHover}>
-            <FiClock />
-            <span>Last updated {moment(app.updatedAt).fromNow()}</span>
-          </li>
+          {showTime ||
+            (large && (
+              <li className={styles.noHover}>
+                <FiClock />
+                <span>Last updated {moment(app.updatedAt).fromNow()}</span>
+              </li>
+            ))}
+
+          {!large && (
+            <li>
+              <Link href="/apps/[id]" as={`/apps/${app._id}`}>
+                <a>
+                  <FiInfo />
+                  View App
+                </a>
+              </Link>
+            </li>
+          )}
 
           <li className={app.versions.length === 1 ? styles.noHover : ""}>
             <FiPackage />
@@ -147,7 +175,7 @@ let SingleApp = ({ app, all, onVersionChange = false }) => {
             </Link>
           </li>
 
-          {app.homepage && (
+          {app.homepage && large && (
             <li>
               <a
                 href={`${app.homepage}?ref=winstall`}
@@ -187,7 +215,7 @@ let SingleApp = ({ app, all, onVersionChange = false }) => {
   );
 };
 
-const Description = ({ desc }) => {
+const Description = ({ desc, full }) => {
   const [descTrimmed, setDescTrimmed] = useState(desc.length > 140);
 
   let toggleDescription = (e, status) => {
@@ -202,13 +230,13 @@ const Description = ({ desc }) => {
     <>
       <p>
         {desc.length > 140
-          ? !descTrimmed
+          ? !descTrimmed || full
             ? desc
             : `${desc.substr(0, 140).replace(/(^[\s]+|[\s]+$)/g, "")}...`
           : desc}
       </p>
 
-      {desc.length > 140 && (
+      {desc.length > 140 && !full && (
         <button
           onClick={(e) => toggleDescription(e, !descTrimmed)}
           className={styles.subtle}

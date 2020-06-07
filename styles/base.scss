@@ -21,7 +21,7 @@
 
      .react-loading-skeleton{
             background-color: #2d2f30 !important;
-            background-image: linear-gradient( 90deg,#2d2f30,#272727,#2d2f30 ) !important;
+            background-image: linear-gradient( 90deg,#2d2f30,rgb(40, 40, 40),#2d2f30 ) !important;
      }
 
      .moon{
@@ -642,5 +642,25 @@ article{
 @media(max-width: 460px){
     header.container{
         display: block;
+    }
+}
+
+.skeleton-group{
+    display: grid;
+    grid-template-columns: 45px 180px;
+    margin-bottom: 20px;
+}
+
+.skeleton-button span{
+    margin-top: 10px;
+    border-radius: 50px !important;
+}
+
+.skeleton-list{
+    margin-top: 20px;
+
+    .react-loading-skeleton{
+        display: block !important;
+        margin-bottom: 10px;
     }
 }

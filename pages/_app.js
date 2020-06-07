@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import "../styles/base.scss";
+import { useState, useEffect } from "react";
 
 import SelectedContext from "../ctx/SelectedContext";
 

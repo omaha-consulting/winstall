@@ -22,7 +22,7 @@ let RecentApps = ({ apps }) => {
       </h3>
       <ListPackages>
         {apps.map((app) => (
-          <SingleApp app={app} key={app._id} />
+          <SingleApp app={app} key={app._id} showTime/>
         ))}
       </ListPackages>
     </div>
