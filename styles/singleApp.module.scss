@@ -329,3 +329,37 @@
         color: #fff;
     }
 }
+
+.tags{
+    margin-top: 15px;
+    margin: 0px;
+
+    ul{
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+        margin-top: 10px;
+        
+        li{
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+
+            a{
+                text-decoration: none;
+                background-color: var(--card-bg);
+                padding: 10px 15px;
+                border-radius: 50px;
+                color: var(--textColor);
+                display: inline-block;
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
+                transition: 0.3s all ease-in-out;
+
+                &:hover, &:focus, &:active{
+                    background-color: var(--accent);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

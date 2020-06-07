@@ -28,7 +28,6 @@ function Store({ data }) {
 
     const totalPages = Math.ceil(apps.length / appsPerPage);
 
-
     useEffect(() => {
       if (Router.query.sort && Router.query.sort === "update-desc") {
         setSort(Router.query.sort);
@@ -132,6 +131,19 @@ function Store({ data }) {
       );
     }
 
+    const Title = () => {
+      return (
+        <>
+          {!searchInput && <h1>All apps {`(${apps.length})`}</h1>}
+          {searchInput && (
+            <>
+              { searchInput.startsWith("tags: ") && <h1>Tag: {searchInput.split(": ")[1]}</h1> }
+              { !searchInput.startsWith("tags: ") && <h1>Search results</h1>}
+            </>
+          )}
+        </>
+      )
+    }
   
     if(!apps) return <></>;
 
@@ -141,7 +153,7 @@ function Store({ data }) {
         
 
         <div className={styles.controls}>
-          <h1>All Apps {`(${apps.length})`}</h1>
+          <Title/>
 
           <Pagination small disable={searchInput ? true : false} />
         </div>
@@ -168,7 +180,7 @@ function Store({ data }) {
         {!searchInput && (
           <ul className={`${styles.all} ${styles.storeList}`}>
             {apps.slice(offset, offset + appsPerPage).map((app) => (
-              <SingleApp app={app} showDesc={true} key={app._id} />
+              <SingleApp app={app} key={app._id} showTime={sort.includes("update-") ? true : false}/>
             ))}
           </ul>
         )}

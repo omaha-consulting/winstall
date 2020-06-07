@@ -12,7 +12,10 @@ import {
   FiPlus,
   FiClock,
   FiCode,
-  FiInfo
+  FiInfo,
+  FiFileText,
+  FiAlertOctagon,
+  FiTag
 } from "react-icons/fi";
 
 
@@ -78,6 +81,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           value={version}
           onClick={(e) => e.stopPropagation()}
           id="v-selector"
+          name="Select app version"
           onChange={(e) => {
             setVersion(e.target.value);
             app.selectedVersion = e.target.value;
@@ -145,14 +149,6 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
         <Description desc={app.desc} full={large} />
 
         <ul className={styles.metaData}>
-          {showTime ||
-            (large && (
-              <li className={styles.noHover}>
-                <FiClock />
-                <span>Last updated {timeAgo(app.updatedAt)}</span>
-              </li>
-            ))}
-
           {!large && (
             <li>
               <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
@@ -164,6 +160,14 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             </li>
           )}
 
+          {(showTime || large) && (
+              <li className={styles.noHover}>
+                <FiClock />
+                <span>Last updated {timeAgo(app.updatedAt)}</span>
+              </li>
+          )}
+
+        
           <li className={app.versions.length === 1 ? styles.noHover : ""}>
             <FiPackage />
             {app.versions.length > 1 ? (
@@ -177,7 +181,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             <Link href={`/apps?q=${`publisher: ${app.publisher}`}`}>
               <a>
                 <FiCode />
-                by {app.publisher}
+                Other apps by {app.publisher}
               </a>
             </Link>
           </li>
@@ -211,7 +215,11 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
                 : ""}
             </a>
           </li>
+
+          { large && <ExtraMetadata app={app}/>}
         </ul>
+              
+        {large && app.tags && app.tags.length > 1 && <Tags tags={app.tags} />}
 
         { large && (
           <button className={styles.selectApp} onClick={handleAppSelect}>
@@ -267,5 +275,66 @@ const Description = ({ desc, full }) => {
     </>
   );
 };
+
+const ExtraMetadata = ({app}) => {
+  return (
+    <>
+      {
+        app.minOS && (
+          <li className={styles.noHover}>
+            <FiAlertOctagon/>
+            Minimum OS verison: {app.minOS}
+          </li>
+        )
+      }
+      
+      {
+        app.license && (
+          <li>
+            { app.licenseUrl && (
+              <a href={app.licenseUrl} target="_blank" rel="noopener noreferrer">
+                <FiFileText />
+                License: {app.license}
+              </a>
+            )}
+
+            {!app.licenseUrl && (
+              <>
+                <FiFileText />
+                License: {app.license}
+              </>
+            )}
+          </li>
+        )
+      }
+
+      {
+        app.tags && app.tags.length > 1 && (
+         <li className={styles.noHover}>
+          <FiTag/>
+          Tags
+         </li>
+        )
+      }
+
+    </>
+  )
+}
+
+const Tags = ({tags}) => {
+  return (
+    <div className={styles.tags}>
+      <ul>
+        {tags.map((tag, i) => (
+          <li key={i}>
+            <Link href={`/apps?q=tags: ${tag}`}>
+              <a>{tag}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 export default SingleApp;

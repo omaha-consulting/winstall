@@ -52,11 +52,11 @@ function Search({apps, onSearch, label, placeholder}) {
     let prefixes = ["name", "tags", "publisher", "desc"];
     let checkPrefix = prefixes.filter(prefix => query.startsWith(`${prefix}:`));
 
+    
     if(checkPrefix.length !== 0){
       setKeys(checkPrefix);
       query = query.replace(`${checkPrefix[0]}:`, "")
       fuse = new Fuse(apps, options(checkPrefix));
-
     } else if(keys !== defaultKeys){
       setKeys(defaultKeys)
       fuse = new Fuse(apps, options(defaultKeys));
