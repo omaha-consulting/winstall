@@ -174,7 +174,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           </li>
 
           <li>
-            <Link href={`/publishers?name=${app.publisher}`}>
+            <Link href={`/apps?q=${`publisher: ${app.publisher}`}`}>
               <a>
                 <FiCode />
                 by {app.publisher}

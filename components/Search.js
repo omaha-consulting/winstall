@@ -1,4 +1,4 @@
-import{ useState } from "react";
+import{ useState, useEffect } from "react";
 import styles from "../styles/search.module.scss";
 
 import { DebounceInput } from "react-debounce-input";
@@ -9,12 +9,16 @@ import ListPackages from "../components/ListPackages";
 
 import {FiSearch} from "react-icons/fi";
 import { forceVisible } from 'react-lazyload';
+import { useRouter } from "next/router";
+import { route } from "next/dist/next-server/server/router";
 
 function Search({apps, onSearch, label, placeholder}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
   const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
   const [keys, setKeys] = useState(defaultKeys);
+  const router = useRouter();
+  const [urlQuery, setUrlQuery] = useState();
 
   const options = (keys) => {
     return {
@@ -26,10 +30,20 @@ function Search({apps, onSearch, label, placeholder}) {
 
   let fuse = new Fuse(apps, options(defaultKeys));
 
-  const handleSearchInput = (e) => {
-    if(onSearch) onSearch(e.target.value);
+  useEffect(() => {
+    // if we have a ?q param on the url, we deal with it
+    if (router.query && router.query.q && urlQuery !== router.query.q){
+      handleSearchInput(null, router.query.q)
+      setUrlQuery(router.query.q)
+    }
+  })
 
-    let query = e.target.value;
+  const handleSearchInput = (e, q) => {
+    const inputVal = e ? e.target.value : q;
+
+    if(onSearch) onSearch(inputVal);
+
+    let query = inputVal;
 
     if(query === ""){
       forceVisible(); // for some reason lazy load doesn't detect when the new elements roll in, so we force visible to all imgs
@@ -48,7 +62,7 @@ function Search({apps, onSearch, label, placeholder}) {
       fuse = new Fuse(apps, options(defaultKeys));
     }
 
-    setSearchInput(e.target.value);
+    setSearchInput(inputVal);
 
     if (query<= 3) return;
 
@@ -72,6 +86,7 @@ function Search({apps, onSearch, label, placeholder}) {
             debounceTimeout={300}
             onChange={(e) => handleSearchInput(e)}
             id="search"
+            value={searchInput}
             placeholder={placeholder || "Search for apps here"}
           />
         </div>
