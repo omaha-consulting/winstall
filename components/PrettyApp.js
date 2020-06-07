@@ -2,10 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import styles from "../styles/prettyApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 
+import { useRouter } from "next/router";
+import { FiChevronRight } from "react-icons/fi";
+
 let PrettyApp = ({ app, all }) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-
+  const router = useRouter();
+  
   useEffect(() => {
     let found = selectedApps.findIndex((a) => a._id === app._id) !== -1;
 
@@ -61,6 +65,15 @@ let PrettyApp = ({ app, all }) => {
             </picture>
             </div>
             <h3 className={styles.imgHeader}>{app.name}</h3>
+            <div className={styles.moreInfo}>
+              <span onClick={e => {
+                e.stopPropagation();
+                router.push("/apps/[id]", `/apps/${app._id}`)
+              }}>
+                More Info <FiChevronRight />
+              </span>
+            </div>
+            
         </div>
     </li>
   );

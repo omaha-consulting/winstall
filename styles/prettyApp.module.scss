@@ -7,7 +7,7 @@
     overflow: hidden;
     transition: 0.1s all ease-in-out;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
-
+    
     .imgContainer{
         min-height: 80px;
         position: relative;
@@ -40,6 +40,28 @@
             height: 25px;
             display: inline-block;
             padding-right: 5px;
+        }
+    }
+    
+    .moreInfo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span{
+            opacity: 0.75;
+            font-size: 15px;
+            transition: 0.3s all ease-in-out;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 3px;
+
+            &:hover{
+                opacity: 1;
+                border-bottom: 3px solid var(--accent);
+            }
         }
     }
 }

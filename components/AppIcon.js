@@ -19,7 +19,7 @@ const AppIcon = ({name, icon}) => {
     }
     
     return (
-      <LazyLoad height={25} offset={300}>
+      <LazyLoad height={25} offset={300} once>
         <img
           src={
             icon.startsWith("http")

@@ -8,12 +8,17 @@
     border-radius: 50px;
     height: 50px;
     background-color: var(--card-bg);
-    min-width: 300px;
     display: inline-block;
     line-height: 55px;
 
+    .searchInner{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
 
-    span{
+
+    svg{
         padding-left: 15px;
     }
 
@@ -24,10 +29,13 @@
         height: 50px;
         padding: 0 15px;
         font-size: 17px;
-        line-height: 50px;
-        
+        min-width: 210px;
         color: var(--textColor);
         
+    }
+
+    .searchHint{
+        margin-top: 0px;
     }
 
 }

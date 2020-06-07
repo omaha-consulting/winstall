@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/apps.module.scss";
 
-import { DebounceInput } from "react-debounce-input";
-
-import Fuse from "fuse.js";
-
 import SelectionBar from "../components/SelectionBar";
 
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
 import ListSort from "../components/ListSort";
 import MetaTags from "../components/MetaTags";
+import Search from "../components/Search";
 
 import {
   FiChevronLeft,
@@ -23,7 +20,6 @@ import Router from "next/router";
 
 function Store({ data }) {
     const [apps, setApps] = useState([])
-    const [results, setResults] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
     const [sort, setSort] = useState();  
@@ -32,11 +28,6 @@ function Store({ data }) {
 
     const totalPages = Math.ceil(apps.length / appsPerPage);
 
-    const fuse = new Fuse(apps, {
-      minMatchCharLength: 3,
-      threshold: 0.3,
-      keys: [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"]
-    })
 
     useEffect(() => {
       if (Router.query.sort && Router.query.sort === "update-desc") {
@@ -85,21 +76,6 @@ function Store({ data }) {
 
       }
     }
-
-
-    const handleSearchInput = (e) => {
-        setSearchInput(e.target.value);
-
-        if(e.target.value.length <= 3) return;
-        
-        Router.replace("/apps");
-
-        let results = fuse.search(
-          e.target.value.toLowerCase().replace(/\s/g, "")
-        );
-
-        setResults([...results.map(r => r.item)])
-    };
 
 
     let handleNext = () => {
@@ -162,24 +138,15 @@ function Store({ data }) {
     return (
       <div className="container">
         <MetaTags title="Apps - winstall"/>
-        <h1>All Apps {`(${apps.length})`}</h1>
+        
 
         <div className={styles.controls}>
-          <div className={styles.searchLabel}>
-            <label htmlFor="search">Search for apps</label>
-            <DebounceInput
-              minLength={2}
-              debounceTimeout={200}
-              onChange={(e) => handleSearchInput(e)}
-              value={searchInput}
-              placeholder="Enter a search term"
-              className="search"
-              id="search"
-            />
-          </div>
+          <h1>All Apps {`(${apps.length})`}</h1>
 
           <Pagination small disable={searchInput ? true : false} />
         </div>
+
+        <Search apps={apps} onSearch={q => setSearchInput(q)} label={"Search for apps"} placeholder={"Enter you search term here"}/>
 
         <div className={styles.controls}>
           {!searchInput && (
@@ -196,21 +163,7 @@ function Store({ data }) {
               />
             </>
           )}
-          {searchInput && (
-            <p>
-              Showing {results.length} search{" "}
-              {results.length === 1 ? "result" : "results"}.
-            </p>
-          )}
         </div>
-
-        {searchInput && (
-          <ul className={`${styles.all} ${styles.storeList}`}>
-            {results.map((app) => (
-              <SingleApp app={app} showDesc={true} key={app._id} />
-            ))}
-          </ul>
-        )}
 
         {!searchInput && (
           <ul className={`${styles.all} ${styles.storeList}`}>

@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
-    margin-top: 25px;
+    margin-top: 0px;
 
     li{ 
         p{
@@ -54,6 +54,7 @@
 .controls{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .btn{
