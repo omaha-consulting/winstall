@@ -126,7 +126,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
               {app.name}
             </>
           ) : (
-            <Link href="/apps/[id]" as={`/apps/${app._id}`}>
+            <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
               <a>
                 <AppIcon name={app.name} icon={app.icon} />
                 {app.name}
@@ -148,7 +148,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
 
           {!large && (
             <li>
-              <Link href="/apps/[id]" as={`/apps/${app._id}`}>
+              <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
                 <a>
                   <FiInfo />
                   View App

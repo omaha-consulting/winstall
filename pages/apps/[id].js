@@ -1,17 +1,12 @@
 import styles from "../../styles/home.module.scss";
 
 import SingleApp from "../../components/SingleApp";
-import PopularApps from "../../components/PopularApps";
 import SelectionBar from "../../components/SelectionBar";
 
 import Footer from "../../components/Footer";
 import Error from "../../components/Error";
-import { shuffleArray } from "../../utils/helpers";
-import popularAppsList from "../../data/popularApps.json";
 
 import Skeleton from "react-loading-skeleton";
-
-import {FiArrowLeft} from "react-icons/fi";
 
 import { useRouter } from "next/router";
 import MetaTags from "../../components/MetaTags";
@@ -34,7 +29,7 @@ function AppSkeleton() {
     );
 }
 
-function AppDetail({ app }) {
+function AppDetail({ app, popular}) {
     const router = useRouter();
     const fallbackMessage = {
         title: "Sorry! We could not load this app.",
@@ -68,8 +63,6 @@ function AppDetail({ app }) {
             </div>
           </div>
         </div>
-
-        {/* <PopularApps apps={popular} all={apps} /> */}
 
         <SelectionBar />
 
