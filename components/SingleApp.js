@@ -78,6 +78,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           className={styles.versionSelector}
           value={version}
           onClick={(e) => e.stopPropagation()}
+          id="v-selector"
           onChange={(e) => {
             setVersion(e.target.value);
             app.selectedVersion = e.target.value;
@@ -101,8 +102,10 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
         <FiChevronDown/>
         {app.versions.length > 1 && (
           <span>
-            ({app.versions.length - 1} other{" "}
-            {app.versions.length - 1 > 1 ? "versions" : "version"} available)
+            <label htmlFor="v-selector">
+              ({app.versions.length - 1} other{" "}
+              {app.versions.length - 1 > 1 ? "versions" : "version"} available)
+            </label>
           </span>
         )}
       </div>
@@ -128,13 +131,13 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
               <a>
                 <AppIcon name={app.name} icon={app.icon} />
-                {app.name}
+                <p>{app.name}</p>
               </a>
             </Link>
           )}
 
           { !large && (
-            <button className={styles.selectApp} onClick={handleAppSelect}>
+            <button className={styles.selectApp} onClick={handleAppSelect} aria-label={selected ? "Unselect app" : "Select app"}>
               <FiPlus />
             </button>
           )}

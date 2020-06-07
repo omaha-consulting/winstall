@@ -178,15 +178,19 @@ function Publishers({ allApps }) {
         </h1>
 
         <div className={styles.controls}>
-          <DebounceInput
-            minLength={2}
-            debounceTimeout={200}
-            onChange={(e) => handleSearchInput(e)}
-            value={searchInput}
-            placeholder="Search for apps here"
-            className="search"
-          />
-
+          <div className={styles.searchLabel}>
+            <label htmlFor="search">Search for apps</label>
+            <DebounceInput
+              minLength={2}
+              debounceTimeout={200}
+              onChange={(e) => handleSearchInput(e)}
+              value={searchInput}
+              placeholder="Enter a search term"
+              className="search"
+              id="search"
+            />
+          </div>
+          
           <Pagination small disable={searchInput ? true : false} />
         </div>
 

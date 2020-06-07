@@ -134,7 +134,7 @@ function Store({ data }) {
         <div className={small ? styles.minPagination : styles.pagbtn}>
           <button
             className={`button ${small ? styles.smallBtn : null}`}
-            id="previous"
+            id={!small ? "previous": ""}
             onClick={handlePrevious}
             title="Previous page of apps"
             disabled={offset > 0 ? (disable ? "disabled" : null) : "disabled"}
@@ -144,7 +144,7 @@ function Store({ data }) {
           </button>
           <button
             className={`button ${small ? styles.smallBtn : null}`}
-            id="next"
+            id={!small ? "next" : ""}
             title="Next page of apps"
             onClick={handleNext}
             disabled={offset + appsPerPage < apps.length ? ( disable ? "disabled" : null ) : "disabled"}
@@ -165,14 +165,18 @@ function Store({ data }) {
         <h1>All Apps {`(${apps.length})`}</h1>
 
         <div className={styles.controls}>
-          <DebounceInput
-            minLength={2}
-            debounceTimeout={200}
-            onChange={(e) => handleSearchInput(e)}
-            value={searchInput}
-            placeholder="Search for apps here"
-            className="search"
-          />
+          <div className={styles.searchLabel}>
+            <label htmlFor="search">Search for apps</label>
+            <DebounceInput
+              minLength={2}
+              debounceTimeout={200}
+              onChange={(e) => handleSearchInput(e)}
+              value={searchInput}
+              placeholder="Enter a search term"
+              className="search"
+              id="search"
+            />
+          </div>
 
           <Pagination small disable={searchInput ? true : false} />
         </div>

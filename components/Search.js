@@ -34,15 +34,17 @@ function Search({apps}) {
 
   return (
     <div>
+      <label htmlFor="search" className={styles.searchLabel}>{Math.floor(apps.length / 50) * 50}+ apps and growing.</label>
       <div className={styles.searchBox}>
         <span>
           <FiSearch />
         </span>
-
+        
         <DebounceInput
           minLength={2}
           debounceTimeout={300}
           onChange={(e) => handleSearchInput(e)}
+          id="search"
           placeholder={"Search for apps here"}
         />
       </div>

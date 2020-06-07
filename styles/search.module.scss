@@ -1,3 +1,8 @@
+.searchLabel{
+    display: block;
+    padding-bottom: 10px;
+}
+
 .searchBox{
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
@@ -6,6 +11,7 @@
     min-width: 300px;
     display: inline-block;
     line-height: 55px;
+
 
     span{
         padding-left: 15px;

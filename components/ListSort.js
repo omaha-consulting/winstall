@@ -5,7 +5,9 @@ const ListSort = ({apps, defaultSort, onSort}) => {
     const [sort, setSort] = useState("");
 
     useEffect(() => {
-      setSort(defaultSort);
+      if(!sort){
+        setSort(defaultSort);
+      }
     })
 
     let handleSort = (e) => {
@@ -28,12 +30,12 @@ const ListSort = ({apps, defaultSort, onSort}) => {
 
     return (
       <div className={styles.sort}>
-        <p>Sort by</p>
-        <select value={sort} onChange={(e) => handleSort(e)}>
+        <label htmlFor="sort">Sort by</label>
+        <select id="sort" value={sort} onChange={(e) => handleSort(e)}>
           <option value="name-desc">Name (Descending)</option>
           <option value="name-asc">Name (Ascending)</option>
-          <option value="update-desc">Recently Updated (Newer First)</option>
-          <option value="update-asc">Recently Updated (Older First)</option>
+          <option value="update-desc">Recently Updated (Newest First)</option>
+          <option value="update-asc">Recently Updated (Oldest First)</option>
         </select>
       </div>
     );
