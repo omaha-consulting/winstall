@@ -6,24 +6,6 @@ export let shuffleArray = (a) => {
     return a;
 }
 
-export let sortArray = (a) => {
-  a.sort((a, b) => a.name.localeCompare(b.name))
-  return a;
-}
-
-export let sanitize = (obj) => {
-  if(!obj.contents) return obj;
-  
-  obj.id = obj.contents.Id;
-  obj.name = obj.contents.Name;
-  obj.publisher = obj.contents.Publisher;
-  obj.version = obj.contents.Version;
-  obj.desc = obj.contents.Description;
-  obj.homepage = obj.contents.Homepage;
-
-  return obj;
-}
-
 export let checkTheme = () => {
   let isLight = false;
 
@@ -71,6 +53,14 @@ export let checkTheme = () => {
 export let compareVersion = (v1, v2) => {
   if (typeof v1 !== "string") return false;
   if (typeof v2 !== "string") return false;
+
+  // deal with version strings like 78.0b1
+  if (v1.match(/\d([A-Za-z])\d/) && v2.match(/\d([A-Za-z])\d/)){
+    if(v1 > v2) return 1;
+    if(v1 < v2) return -1;
+    if(v1 === v2) return 0;
+  }
+
   v1 = v1.split(".");
   v2 = v2.split(".");
   const k = Math.min(v1.length, v2.length);

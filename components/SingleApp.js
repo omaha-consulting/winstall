@@ -34,6 +34,8 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
     app.versions = app.versions.sort((a, b) =>
       compareVersion(b.version, a.version)
     );
+    // make sure latest version is sorted
+    app.latestVersion = app.versions[0].version;
   }
 
   useEffect(() => {
