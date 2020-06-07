@@ -1,4 +1,5 @@
 import styles from "../styles/singleApp.module.scss";
+import LazyLoad from "react-lazyload";
 
 const AppIcon = ({name, icon}) => {
     if(!icon){ // if we don't have an icon, we mimmick one with app initials
@@ -18,16 +19,18 @@ const AppIcon = ({name, icon}) => {
     }
     
     return (
+      <LazyLoad height={25} offset={300}>
         <img
-            src={
-                icon.startsWith("http")
-                ? icon
-                : `https://api.winstall.app/icons/${icon}`
-            }
-            draggable={false}
-            alt={`Logo for ${name}`}
+          src={
+            icon.startsWith("http")
+              ? icon
+              : `https://api.winstall.app/icons/${icon}`
+          }
+          draggable={false}
+          alt={`Logo for ${name}`}
         />
-    )
+      </LazyLoad>
+    );
 }
 
 export default AppIcon;

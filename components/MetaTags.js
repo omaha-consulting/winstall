@@ -13,6 +13,7 @@ const MetaTags = ({ title }) => {
           content="Bulk install Windows apps quickly with Windows Package Manager."
         ></meta>
 
+        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#9b2eff" />
 

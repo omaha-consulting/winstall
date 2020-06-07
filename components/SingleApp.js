@@ -1,7 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
-
 import Link from "next/link";
 
 import {
