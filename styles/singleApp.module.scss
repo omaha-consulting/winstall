@@ -15,13 +15,18 @@
     h3{
         display: flex; 
         align-items: center;
+        position: relative;
 
         a{
-            display: flex;
-            align-items: center;
             color: inherit;
             text-decoration: none;
             transition: 0.3s all ease-in-out;
+            margin-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+            display: flex;
+            align-items: center;
 
             &:hover, &:focus, &:active{
                 opacity: 0.76;
@@ -128,6 +133,11 @@
             font-size: 14px;
             margin-top: 20px;
             display: block;
+        }   
+
+        svg{
+            position: absolute;
+            right: 0;
         }
 
         .versionSelector{
@@ -145,6 +155,8 @@
             position: absolute;
             top: -15px;
             height: 50px;
+
+            
         }
     }
     
@@ -201,12 +213,9 @@
     }
 
     .selectApp {
-        padding: 5px 10px !important;
         font-size: 15px !important;
         background-color: var(--main-bg) !important;
-        margin-top: 15px;
         border-radius: 50px;
-        display: flex;
         text-decoration: none;
         color: var(--textColor);
         font-size: 18px;
@@ -214,15 +223,25 @@
         transition: 0.3s all ease-in-out;
         cursor: pointer;
         border: 0px;
+        width: 35px;
+        height: 35px;
         outline: 0;
-        text-align: left;
         display: flex;
         align-items: center;
+        justify-content: center;
+        margin-left: auto;
+
 
         svg{
-            padding-right: 5px !important;
+            padding-right: 0px !important;
             margin-top: 0px !important;
-            font-size: 15px !important;
+            font-size: 20px !important;
+            color: var(--textColor);
+            transition: 0.1s all ease-in-out;
+        }
+
+        &:active, &:focus{
+            opacity: 0.7 !important;
         }
 
         &:hover{
@@ -234,6 +253,16 @@
 
 .selected{
     border: 5px solid var(--accent);
+
+    .selectApp{
+        background-color: var(--accent) !important;
+        color: #fff;
+
+        svg{
+            transform: rotate(45deg);
+            color: #fff;
+        }
+    }
 }
 
 @media(max-width: 690px){
@@ -269,10 +298,13 @@
         background-color: var(--card-bg) !important;
         font-size: 18px !important;
         padding: 10px 25px !important;
+        align-self: start !important;
+        margin-left: initial !important;
+        width: auto !important;
+        height: auto !important;
 
         svg{
-            font-size: 20px !important;
-            padding-right: 10px !important;
+            margin-right: 10px !important;
         }
     }
 }

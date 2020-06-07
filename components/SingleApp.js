@@ -12,7 +12,6 @@ import {
   FiChevronUp,
   FiPackage,
   FiPlus,
-  FiX,
   FiClock,
   FiCode,
   FiInfo
@@ -100,6 +99,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             );
           })}
         </select>
+        <FiChevronDown/>
         {app.versions.length > 1 && (
           <span>
             ({app.versions.length - 1} other{" "}
@@ -132,6 +132,12 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
                 {app.name}
               </a>
             </Link>
+          )}
+
+          { !large && (
+            <button className={styles.selectApp} onClick={handleAppSelect}>
+              <FiPlus />
+            </button>
           )}
         </h3>
 
@@ -200,16 +206,19 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
               <FiDownload />
               Download{" "}
               {app.versions[0].installerType
-                ? `.${app.versions[0].installerType.toLowerCase()}`
-                : "App"}
+                ? `(.${app.versions[0].installerType.toLowerCase()})`
+                : ""}
             </a>
           </li>
         </ul>
 
-        <button className={styles.selectApp} onClick={handleAppSelect}>
-          {selected ? <FiX /> : <FiPlus />}
-          {selected ? "Unselect" : "Select"} app
-        </button>
+        { large && (
+          <button className={styles.selectApp} onClick={handleAppSelect}>
+            <FiPlus />
+            {selected ? "Unselect" : "Select"} app
+          </button>
+        )}
+       
       </div>
     </li>
   );
