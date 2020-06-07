@@ -1,7 +1,6 @@
 import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
-import moment from "moment";
 
 import Link from "next/link";
 
@@ -19,7 +18,7 @@ import {
 
 
 import AppIcon from "./AppIcon";
-import { compareVersion } from "../utils/helpers";
+import { compareVersion, timeAgo } from "../utils/helpers";
 
 let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false }) => {
   const [selected, setSelected] = useState(false);
@@ -148,7 +147,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             (large && (
               <li className={styles.noHover}>
                 <FiClock />
-                <span>Last updated {moment(app.updatedAt).fromNow()}</span>
+                <span>Last updated {timeAgo(app.updatedAt)}</span>
               </li>
             ))}
 
