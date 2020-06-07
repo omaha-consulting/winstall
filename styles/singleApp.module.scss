@@ -45,6 +45,11 @@
             height: 25px;
             display: inline-block;
             margin-right: 10px;
+
+            // hide alt txt
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
             // border-radius: 50%;
         }
         

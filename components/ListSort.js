@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/listSort.module.scss";
+import { FiChevronDown } from "react-icons/fi";
 
 const ListSort = ({apps, defaultSort, onSort}) => {
     const [sort, setSort] = useState("");
@@ -37,6 +38,7 @@ const ListSort = ({apps, defaultSort, onSort}) => {
           <option value="update-desc">Recently Updated (Newest First)</option>
           <option value="update-asc">Recently Updated (Oldest First)</option>
         </select>
+        <FiChevronDown/>
       </div>
     );
 }

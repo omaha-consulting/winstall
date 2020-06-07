@@ -32,7 +32,7 @@ function Search({apps, onSearch, label, placeholder}) {
 
   useEffect(() => {
     // if we have a ?q param on the url, we deal with it
-    if (router.query && router.query.q && urlQuery !== router.query.q){
+    if (apps.length !== 0 && router.query && router.query.q && urlQuery !== router.query.q){
       handleSearchInput(null, router.query.q)
       setUrlQuery(router.query.q)
     }
