@@ -292,7 +292,7 @@ const ExtraMetadata = ({app}) => {
       
       {
         app.license && (
-          <li>
+          <li className={!app.licenseUrl ? styles.noHover : ""}>
             { app.licenseUrl && (
               <a href={app.licenseUrl} target="_blank" rel="noopener noreferrer">
                 <FiFileText />
