@@ -57,10 +57,16 @@
             align-items: center;
             justify-content: center;
             padding-bottom: 3px;
+            padding-top: 5px;
+
+            svg{
+                transition: 0.3s all ease-in-out;
+            }
 
             &:hover{
-                opacity: 1;
-                border-bottom: 3px solid var(--accent);
+                svg{
+                    padding-left: 5px;
+                }
             }
         }
     }

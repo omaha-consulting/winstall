@@ -203,6 +203,7 @@
                 align-items: center;
                 cursor: pointer;
                 transition: 0.3s all ease-in-out;
+                width: 100%;
 
                 &:hover{
                     opacity: 0.75;
@@ -308,6 +309,10 @@
         li{
             font-size: 18px;
             margin-bottom: 15px;
+
+            a{
+                width: auto !important;
+            }
 
             svg{
                width: 25px !important;
