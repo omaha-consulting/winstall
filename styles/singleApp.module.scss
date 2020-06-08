@@ -30,13 +30,6 @@
             display: grid;
             grid-template-columns: 35px 1fr;
 
-            p{
-                display: flex;
-                align-items: center;
-                line-height: 18px !important;
-            }
-
-        
 
             &:hover, &:focus, &:active{
                 opacity: 0.76;
@@ -250,7 +243,8 @@
         svg{
             padding-right: 0px !important;
             margin-top: 0px !important;
-            font-size: 20px !important;
+            width: 20px;
+            height: 20px;
             color: var(--textColor);
             transition: 0.1s all ease-in-out;
         }
