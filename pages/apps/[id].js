@@ -49,7 +49,7 @@ function AppDetail({ app, popular}) {
             ) : (
               <div>
                 <MetaTags
-                  title={`${app.name} by ${app.publisher} - winstall`}
+                  title={`${app.name} - winstall`}
                 />
                 <ul className="largeApp"><SingleApp app={app} large={true} /></ul>
               </div>

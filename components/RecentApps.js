@@ -18,7 +18,7 @@ let RecentApps = ({ apps }) => {
         </Link>
       </div>
       <h3 className="blockSubtitle">
-        All the newest apps and updates.
+        All the newest apps and updates. Click the + sign to include an app on your install script.
       </h3>
       <ListPackages>
         {apps.map((app) => (
