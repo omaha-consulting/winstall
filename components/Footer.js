@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styles from "../styles/footer.module.scss";
 
 import {FaJira} from "react-icons/fa";
 import { FiChevronUp } from "react-icons/fi";
+import SelectedContext from "../ctx/SelectedContext";
 
 export default function Footer(){
+  const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
   useEffect(() => {
     window.onscroll = function(){scrollFunction()};
@@ -53,7 +55,7 @@ export default function Footer(){
           winstall is not associated with Microsoft, Windows, or Windows Package
           Manager.
         </p>
-        <span id="btnTop" title="Go to top" onClick={topFunction} className={styles.backToTop}>
+        <span id="btnTop" title="Go to top" onClick={topFunction} className={`${styles.backToTop} ${selectedApps.length !== 0 ? styles.selectionOpen : ""}`}>
           <FiChevronUp />
         </span>
       </div>

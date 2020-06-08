@@ -1,7 +1,8 @@
-import React, {useState, useContext, useEffect} from "react";
+import {useState, useContext, useEffect} from "react";
 import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import {
   FiExternalLink,
@@ -41,7 +42,12 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
   useEffect(() => {
     let found = selectedApps.find((a) => a._id === app._id);
 
-    if (!found) return;
+    if (!found){
+      if(selected){
+        setSelected(false);
+      }
+      return;
+    };
 
     if (found.selectedVersion !== app.latestVersion) {
       setVersion(found.selectedVersion);
@@ -125,7 +131,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
         selected ? styles.selected : ""
       }`}
     >
-      <div>
+      <div className={styles.info}>
         <h3>
           {large ? (
             <>
@@ -148,98 +154,107 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           )}
         </h3>
 
-        <Description desc={app.desc} full={large} />
+        <Description desc={app.desc} id={app._id} full={large} />
 
-        <ul className={styles.metaData}>
-          {!large && (
-            <li>
-              <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
-                <a>
-                  <FiInfo />
-                  View App
-                </a>
-              </Link>
-            </li>
-          )}
-
-          {(showTime || large) && (
-              <li className={styles.noHover}>
-                <FiClock />
-                <span>Last updated {timeAgo(app.updatedAt)}</span>
-              </li>
-          )}
-
-        
-          <li className={app.versions.length === 1 ? styles.noHover : ""}>
-            <FiPackage />
-            {app.versions.length > 1 ? (
-              <VersionSelector />
-            ) : (
-              <span>v{app.selectedVersion}</span>
-            )}
-          </li>
-
-          <li>
-            <Link href={`/apps?q=${`publisher: ${app.publisher}`}`}>
-              <a>
-                <FiCode />
-                Other apps by {app.publisher}
-              </a>
-            </Link>
-          </li>
-
-          {app.homepage && large && (
-            <li>
-              <a
-                href={`${app.homepage}?ref=winstall`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <FiExternalLink />
-                View Site
-              </a>
-            </li>
-          )}
-
-          <li>
-            <a
-              href={`${
-                app.versions.find((i) => i.version === app.selectedVersion)
-                  .installers[0]
-              }`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FiDownload />
-              Download{" "}
-              {app.versions[0].installerType
-                ? `(.${app.versions[0].installerType.toLowerCase()})`
-                : ""}
-            </a>
-          </li>
-
-          { large && <ExtraMetadata app={app}/>}
-        </ul>
-              
-        {large && app.tags && app.tags.length > 1 && <Tags tags={app.tags} />}
-
-        { large && (
-          <button className={styles.selectApp} onClick={handleAppSelect}>
-            <FiPlus />
-            {selected ? "Unselect" : "Select"} app
-          </button>
-        )}
        
       </div>
+
+      <ul className={styles.metaData}>
+        {!large && (
+          <li>
+            <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
+              <a>
+                <FiInfo />
+                  View App
+                </a>
+            </Link>
+          </li>
+        )}
+
+        {(showTime || large) && (
+          <li>
+            <FiClock />
+            <span>Last updated {timeAgo(app.updatedAt)}</span>
+          </li>
+        )}
+
+
+        <li className={app.versions.length > 1 ? styles.hover : ""}>
+          <FiPackage />
+          {app.versions.length > 1 ? (
+            <VersionSelector />
+          ) : (
+              <span>v{app.selectedVersion}</span>
+            )}
+        </li>
+
+        <li>
+          <Link href={`/apps?q=${`publisher: ${app.publisher}`}`}>
+            <a>
+              <FiCode />
+                Other apps by {app.publisher}
+            </a>
+          </Link>
+        </li>
+
+        {app.homepage && large && (
+          <li>
+            <a
+              href={`${app.homepage}?ref=winstall`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FiExternalLink />
+                View Site
+              </a>
+          </li>
+        )}
+
+        <li>
+          <a
+            href={`${
+              app.versions.find((i) => i.version === app.selectedVersion)
+                .installers[0]
+              }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FiDownload />
+              Download{" "}
+            {app.versions[0].installerType
+              ? `(.${app.versions[0].installerType.toLowerCase()})`
+              : ""}
+          </a>
+        </li>
+
+        {large && <ExtraMetadata app={app} />}
+      </ul>
+
+      {large && app.tags && app.tags.length > 1 && <Tags tags={app.tags} />}
+
+      {large && (
+        <button className={styles.selectApp} onClick={handleAppSelect}>
+          <FiPlus />
+          {selected ? "Unselect" : "Select"} app
+        </button>
+      )}
+
     </li>
   );
 };
 
-const Description = ({ desc, full }) => {
+const Description = ({ desc, id, full }) => {
   const [descTrimmed, setDescTrimmed] = useState(desc.length > 140);
+  const router = useRouter();
 
   let toggleDescription = (e, status) => {
     e.stopPropagation();
+
+    if(desc.length > 340){
+      router.push('/apps/[id]', `/apps/${id}`)
+      return;
+    };
+
     setDescTrimmed(status);
   };
 
@@ -283,7 +298,7 @@ const ExtraMetadata = ({app}) => {
     <>
       {
         app.minOS && (
-          <li className={styles.noHover}>
+          <li>
             <FiAlertOctagon/>
             Minimum OS verison: {app.minOS}
           </li>
@@ -292,7 +307,7 @@ const ExtraMetadata = ({app}) => {
       
       {
         app.license && (
-          <li className={!app.licenseUrl ? styles.noHover : ""}>
+          <li>
             { app.licenseUrl && (
               <a href={app.licenseUrl} target="_blank" rel="noopener noreferrer">
                 <FiFileText />
@@ -312,7 +327,7 @@ const ExtraMetadata = ({app}) => {
 
       {
         app.tags && app.tags.length > 1 && (
-         <li className={styles.noHover}>
+         <li>
           <FiTag/>
           Tags
          </li>

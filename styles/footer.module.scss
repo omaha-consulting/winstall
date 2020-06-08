@@ -90,3 +90,9 @@
     0% {opacity:0;}
     100% {opacity:0.75;}
 }
+
+@media(max-width: 1490px) and (min-width: 791px){
+    .selectionOpen.backToTop{
+        bottom: 90px;
+    }
+}

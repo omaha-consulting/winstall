@@ -9,9 +9,15 @@ export default function SelectionBar() {
     if(selectedApps.length === 0) return <></>;
 
     let handleClear = () => {
+      // check if confirm exists
+      // support for iOS safari
+      if ('confirm' in window && typeof window.confirm === 'function'){
         if(window.confirm("Are you sure you want to unselect all the apps?")){
             setSelectedApps([]);
         }
+      } else{
+        setSelectedApps([]);
+      }
     }
     return (
       <div className="bottomBar">
