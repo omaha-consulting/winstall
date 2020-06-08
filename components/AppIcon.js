@@ -18,19 +18,38 @@ const AppIcon = ({name, icon}) => {
         return <span className={styles.noIcon}>{initials}</span>;
     }
     
+  
+    if (icon.startsWith("http")) {
+      return (
+        <LazyLoad height={25} offset={300} once>
+          { // if icon is not hosted on winstall
+            icon.startsWith("http") && (
+              <img
+                src={icon}
+                draggable={false}
+                alt={`Logo for ${name}`}
+              />
+            )
+          }
+        </LazyLoad>
+      );
+    }
+
+    icon = icon.replace(".png", "")
+
     return (
       <LazyLoad height={25} offset={300} once>
-        <img
-          src={
-            icon.startsWith("http")
-              ? icon
-              : `https://api.winstall.app/icons/${icon}`
-          }
-          draggable={false}
-          alt={`Logo for ${name}`}
-        />
+        <picture>
+          <source srcSet={`https://api.winstall.app/icons/next/${icon}.webp`} type="image/webp" />
+          <source srcSet={`https://api.winstall.app/icons/${icon}.png`} type="image/png" />
+          <img
+            src={`https://api.winstall.app/icons/${icon}.png`}
+            alt={`Logo for ${name}`}
+            draggable={false}
+          />
+        </picture>
       </LazyLoad>
-    );
+    )
 }
 
 export default AppIcon;
