@@ -7,7 +7,7 @@ import Fuse from "fuse.js";
 import SingleApp from "../components/SingleApp";
 import ListPackages from "../components/ListPackages";
 
-import {FiSearch} from "react-icons/fi";
+import {FiSearch, FiHelpCircle} from "react-icons/fi";
 import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
 import { route } from "next/dist/next-server/server/router";
@@ -52,7 +52,7 @@ function Search({apps, onSearch, label, placeholder}) {
     let prefixes = ["name", "tags", "publisher", "desc"];
     let checkPrefix = prefixes.filter(prefix => query.startsWith(`${prefix}:`));
 
-    
+
     if(checkPrefix.length !== 0){
       setKeys(checkPrefix);
       query = query.replace(`${checkPrefix[0]}:`, "")
@@ -89,6 +89,19 @@ function Search({apps, onSearch, label, placeholder}) {
             value={searchInput}
             placeholder={placeholder || "Search for apps here"}
           />
+        </div>
+        
+        <div className={styles.tip}>
+          <a href="#"><FiHelpCircle /></a>
+          <div className={styles.tipData}>
+            <p>Use search prefixes to target a specific field in searches!</p>
+            <ul>
+              <li><code>name:</code> search for an app's name</li>
+              <li><code>publisher:</code> search for apps by a publisher</li>
+              <li><code>tags:</code> search for apps by a tag</li>
+              <li><code>desc:</code> search the description of apps</li>
+            </ul>
+          </div>
         </div>
         {results.length > 0 && searchInput && <p className={styles.searchHint}>Showing {results.length} {results.length === 1 ? "result" : "results"}.</p>}
       </div>

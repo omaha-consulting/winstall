@@ -188,7 +188,7 @@ function Store({ data }) {
         <div className={styles.pagination}>
           <Pagination disable={searchInput ? true : false} />
           <em>
-            Tip! Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
+            Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
             on your keyboard to navigate between pages quickly.
           </em>
         </div>
