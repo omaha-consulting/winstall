@@ -35,6 +35,11 @@ function Search({apps, onSearch, label, placeholder}) {
     if (apps.length !== 0 && router.query && router.query.q && urlQuery !== router.query.q){
       handleSearchInput(null, router.query.q)
       setUrlQuery(router.query.q)
+    } else if(results != 0 && urlQuery && router.query && !router.query.q){
+      // if we previously had a query, going back should reset it.
+      setSearchInput("");
+      setResults([]);
+      onSearch();
     }
   })
 
