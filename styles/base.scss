@@ -198,6 +198,7 @@ input[type="text"].search{
             box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
             display: flex;
             align-items: center;
+            font-family: 'Nunito', sans-serif;
 
             svg{
                 padding-right: 10px;
@@ -249,6 +250,7 @@ input[type="text"].search{
     cursor: pointer;
     border: 0px;
     outline: 0;
+    font-family: 'Nunito', sans-serif;
 
     &:hover, &:focus{
         opacity: 0.75;
@@ -668,4 +670,8 @@ article{
 .largeApp{
     padding: 0px;
     margin: 0px;
+}
+
+button{
+    font-family: 'Nunito', sans-serif;
 }

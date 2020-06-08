@@ -92,12 +92,13 @@ function Search({apps, onSearch, label, placeholder}) {
             onChange={(e) => handleSearchInput(e)}
             id="search"
             value={searchInput}
+            autoComplete="off"
             placeholder={placeholder || "Search for apps here"}
           />
         </div>
         
         <div className={styles.tip}>
-          <a href="#"><FiHelpCircle /></a>
+          <a href="#" title="Search tips"><FiHelpCircle /></a>
           <div className={styles.tipData}>
             <p>Use search prefixes to target a specific field in searches!</p>
             <ul>
