@@ -1,0 +1,25 @@
+// app list with images
+
+.appList{
+    list-style-type: none;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 15px;
+
+    h3{
+        padding-bottom: 0px;
+    }
+}
+
+@media(max-width: 1300px){
+    .popularList{
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media(max-width: 500px){ 
+    .popularList{
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}

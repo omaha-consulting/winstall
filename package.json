@@ -1,42 +1,27 @@
 {
   "name": "winstall",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
+    "fuse.js": "^6.0.3",
     "fuzzysort": "^1.1.4",
+    "next": "9.4.4",
     "node-sass": "^4.14.1",
-    "qs": "^6.9.4",
-    "react": "^16.13.1",
+    "nprogress": "^0.2.0",
+    "react": "16.13.1",
     "react-debounce-input": "^3.2.2",
-    "react-dom": "^16.13.1",
+    "react-dom": "16.13.1",
     "react-icons": "^3.10.0",
-    "react-indexed-db": "^1.0.12",
+    "react-lazyload": "^2.6.7",
     "react-loading-skeleton": "^2.0.1",
-    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "react-spinners": "^0.8.3",
     "react-toggle": "^4.1.1",
     "yaml": "^1.10.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
   }
 }
