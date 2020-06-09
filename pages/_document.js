@@ -19,6 +19,7 @@ class MyDocument extends Document {
           href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap"
           rel="stylesheet"
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48569869-4"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `

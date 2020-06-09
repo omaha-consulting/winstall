@@ -106,6 +106,7 @@ function Generate() {
     
     return (
       <div className="container generate-container">
+        <MetaTags title="winstall - GUI for Windows Package Manager" />
         <div className="illu-box">
           <div className={styles.generate}>
             <h1>Your apps are ready to be installed.</h1>
