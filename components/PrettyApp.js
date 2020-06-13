@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styles from "../styles/prettyApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
-
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiChevronRight } from "react-icons/fi";
 
@@ -66,12 +66,13 @@ let PrettyApp = ({ app, all }) => {
             </div>
             <h3 className={styles.imgHeader}>{app.name}</h3>
             <div className={styles.moreInfo}>
-              <span onClick={e => {
-                e.stopPropagation();
-                router.push("/apps/[id]", `/apps/${app._id}`)
-              }}>
-                More Info <FiChevronRight />
-              </span>
+              <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
+                <span onClick={e => {
+                  e.stopPropagation();
+                }}>
+                  More Info <FiChevronRight />
+                </span>
+              </Link>
             </div>
             
         </div>
