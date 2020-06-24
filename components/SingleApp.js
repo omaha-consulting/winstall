@@ -135,13 +135,13 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
         <h3>
           {large ? (
             <>
-              <AppIcon name={app.name} icon={app.icon} />
+              <AppIcon id={app._id} name={app.name} icon={app.icon} />
               {app.name}
             </>
           ) : (
             <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
               <a>
-                <AppIcon name={app.name} icon={app.icon} />
+                <AppIcon id={app._id} name={app.name} icon={app.icon} />
                 <p>{app.name}</p>
               </a>
             </Link>
