@@ -27,14 +27,22 @@
         margin-right: 15px;
         font-weight: normal;
         color: var(--textColor);
+        display: flex;
+        align-items: center;
 
         p{
             margin: 0px;
             padding: 0px;
         }
+
+        img{
+            width: 25px;
+            height: 25px;
+            border-radius: 50px;
+            margin-right: 10px;
+        }
         
         svg{
-            padding-top: 15px;
             font-size: 18px;
             padding-right: 10px;
         }
@@ -44,7 +52,7 @@
         }
     }
 
-    span:nth-child(3){
+    span:nth-child(4){
         margin-right: 15px;
     }
 

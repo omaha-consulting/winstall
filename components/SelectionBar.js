@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from 'next/link'
 import SelectedContext from "../ctx/SelectedContext";
 
-import { FiTrash, FiCodepen } from "react-icons/fi";
+import { FiTrash, FiCodepen, FiShare } from "react-icons/fi";
 export default function SelectionBar() {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -26,10 +26,15 @@ export default function SelectionBar() {
             <p>Selected {selectedApps.length} apps so far</p>
           </div>
           <div className="controls">
-            <button className="clear" onClick={() => handleClear()}>
+            <button className="clear small" onClick={() => handleClear()} title="Clear selections">
               <FiTrash />
-              Clear Selections
             </button>
+            <Link href="/packs/create">
+              <button>
+                <FiShare />
+                Share Pack
+              </button>
+            </Link>
             <Link href="/generate">
               <button>
                 <FiCodepen />

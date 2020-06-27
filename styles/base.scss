@@ -170,18 +170,25 @@ input[type="text"].search{
 
         .controls{
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 50px 1fr 1fr;
             grid-gap: 20px;
 
             .clear{
                 background-color: var(--card-bg);
                 opacity: 0.75;
+                padding: 0 5px;
+                justify-content: center;
+                
+                svg{
+                    padding: 0px;
+                }
 
                 &:hover{
                     opacity: 1;
                 }
             }
         }
+
 
         button{
             background-color: var(--main-bg);
