@@ -12,14 +12,22 @@ const options = {
   secret: process.env.SECRET,
 
   session: {
-    jwt: true,
     maxAge: 30 * 24 * 60 * 60,
   },
 
+  jwt: true,
+
   callbacks: {
-    signin: async (profile, account, metadata) => {
-      Promise.resolve(true);
-    },
+    session: async (session, token) => {
+      if (!session || !session.user || !token || !token.account) {
+        return Promise.resolve(session);
+      }
+
+      session.user.id = token.account.id;
+      session.accessToken = token.account.accessToken;
+      
+      return Promise.resolve(session);
+    }
   },
 
 };
