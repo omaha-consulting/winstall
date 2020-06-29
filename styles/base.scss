@@ -217,6 +217,27 @@ input[type="text"].search{
                 font-size: 20px;
             }
 
+            &:disabled{
+                opacity: 0.75;
+                cursor: not-allowed;
+
+                &:hover{
+                    background-color: var(--main-bg);
+                }
+
+                em {
+                    max-width: 125px;
+                    font-style: normal;
+                    text-align: left;
+                    font-size: 15px;
+                }
+            }
+
+            em {
+                font-style: normal;
+                text-align: left;
+                font-size: 18px;
+            }
 
             &:hover{
                background-color: var(--card-bg);

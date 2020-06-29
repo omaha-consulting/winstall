@@ -46,6 +46,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
       if(selected){
         setSelected(false);
       }
+      
       return;
     };
 

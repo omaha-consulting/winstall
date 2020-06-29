@@ -30,9 +30,9 @@ export default function SelectionBar() {
               <FiTrash />
             </button>
             <Link href="/packs/create">
-              <button>
+              <button disabled={selectedApps.length >= 5 ? false : true}>
                 <FiShare />
-                Share Pack
+                <em>{selectedApps.length >= 5 ? "Create Pack" : `Need ${Math.abs(5 - selectedApps.length)} more ${Math.abs(5 - selectedApps.length) === 1 ? "app" : "apps"} to create a pack.`}</em>
               </button>
             </Link>
             <Link href="/generate">

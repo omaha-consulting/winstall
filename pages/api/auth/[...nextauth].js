@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
+
 const options = {
   site: process.env.SITE,
   providers: [
@@ -22,13 +23,15 @@ const options = {
       if (!session || !session.user || !token || !token.account) {
         return Promise.resolve(session);
       }
-
+      
       session.user.id = token.account.id;
       session.accessToken = token.account.accessToken;
-      
+
       return Promise.resolve(session);
-    }
+    },
   },
+
+  
 
 };
 

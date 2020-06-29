@@ -1,0 +1,23 @@
+.createForm{
+    label{
+        display: block;
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    input{
+        display: block;
+        margin: 10px 0;
+        border: 0px;
+        padding: 0px 15px;
+        outline: 0px;
+        height: 50px;
+        background-color: var(--card-bg);
+        width: 100%;
+        border-radius: 50px;
+        font-size: 15px;
+        font-family: inherit;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
+    }
+}
