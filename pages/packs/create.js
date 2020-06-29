@@ -79,8 +79,11 @@ const CreatePackForm = ({ uid, selectedApps }) => {
     const { handleSubmit, register, errors } = useForm();
     const [creating, setCreating] = useState(false);
     const [created, setCreated] = useState();
-    
+    const [error, setError] = useState("");
+
     const onSubmit = (values) => {
+        setCreating(true);
+
         var myHeaders = new Headers();
         myHeaders.append("Authorization", process.env.NEXT_PUBLIC_TWITTER_SECRET);
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -99,12 +102,23 @@ const CreatePackForm = ({ uid, selectedApps }) => {
         };
 
         fetch("https://api.winstall.app/packs/create", requestOptions)
-            .then(response => response.json())
+            .then(async (response) => {
+                if(response.status !== 200){
+                    const res = await response.json();
+                    setCreating(false);
+                    setError(res.error);
+                    return;
+                }
+
+                return response.json()
+            })
             .then(result => {
-                console.log(result)
                 setCreated(result)
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {
+                setCreating(false);
+                setError(error.message);
+            });
     };
 
     if(created){
@@ -141,6 +155,8 @@ const CreatePackForm = ({ uid, selectedApps }) => {
             </label>
             
             <button type="submit" className="button" disabled={creating}>{creating ? "Creating..." : "Create pack"}</button>
+
+            {error && <p>Couldn't add pack! Error: {error}</p>}
         </form>
     )
 }
