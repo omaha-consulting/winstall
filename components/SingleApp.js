@@ -23,7 +23,7 @@ import {
 import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
 
-let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false }) => {
+let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false, pack=false}) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -59,7 +59,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
 
   let handleAppSelect = () => {
     let found = selectedApps.findIndex((a) => a._id === app._id);
-
+    
     if (found !== -1) {
       let updatedSelectedApps = selectedApps.filter(
         (a, index) => index !== found
@@ -67,6 +67,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
 
       setSelectedApps(updatedSelectedApps);
       setSelected(false);
+      
     } else {
       setSelected(true);
 
@@ -128,7 +129,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
     <li
       key={app._id}
       // onClick={handleAppSelect}
-      className={`${large ? styles.large : ""} ${styles.single} ${
+      className={`${large ? styles.large : ""} ${pack ? styles.pack : ""} ${styles.single} ${
         selected ? styles.selected : ""
       }`}
     >
@@ -148,16 +149,18 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             </Link>
           )}
 
-          { !large && (
-            <button className={styles.selectApp} onClick={handleAppSelect} aria-label={selected ? "Unselect app" : "Select app"}>
+          {!large && !pack && (
+            <button
+              className={styles.selectApp}
+              onClick={handleAppSelect}
+              aria-label={selected ? "Unselect app" : "Select app"}
+            >
               <FiPlus />
             </button>
           )}
         </h3>
 
-        <Description desc={app.desc} id={app._id} full={large} />
-
-       
+        {!pack && <Description desc={app.desc} id={app._id} full={large} />}
       </div>
 
       <ul className={styles.metaData}>
@@ -166,8 +169,8 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
               <a>
                 <FiInfo />
-                  View App
-                </a>
+                View App
+              </a>
             </Link>
           </li>
         )}
@@ -179,21 +182,22 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           </li>
         )}
 
-
-        <li className={app.versions.length > 1 ? styles.hover : ""}>
-          <FiPackage />
-          {app.versions.length > 1 ? (
-            <VersionSelector />
-          ) : (
+        {!pack && (
+          <li className={app.versions.length > 1 ? styles.hover : ""}>
+            <FiPackage />
+            {app.versions.length > 1 ? (
+              <VersionSelector />
+            ) : (
               <span>v{app.selectedVersion}</span>
             )}
-        </li>
+          </li>
+        )}
 
         <li>
           <Link href={`/apps?q=${`publisher: ${app.publisher}`}`}>
             <a>
               <FiCode />
-                Other apps by {app.publisher}
+              Other apps by {app.publisher}
             </a>
           </Link>
         </li>
@@ -207,26 +211,28 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
               onClick={(e) => e.stopPropagation()}
             >
               <FiExternalLink />
-                View Site
-              </a>
+              View Site
+            </a>
           </li>
         )}
 
-        <li>
-          <a
-            href={`${
-              app.versions.find((i) => i.version === app.selectedVersion)
-                .installers[0]
+        {!pack && (
+          <li>
+            <a
+              href={`${
+                app.versions.find((i) => i.version === app.selectedVersion)
+                  .installers[0]
               }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <FiDownload />
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FiDownload />
               Download{" "}
-            {app.versions[0].installerType
-              ? `(.${app.versions[0].installerType.toLowerCase()})`
-              : ""}
-          </a>
-        </li>
+              {app.versions[0].installerType
+                ? `(.${app.versions[0].installerType.toLowerCase()})`
+                : ""}
+            </a>
+          </li>
+        )}
 
         {large && <ExtraMetadata app={app} />}
       </ul>
@@ -239,7 +245,6 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           {selected ? "Unselect" : "Select"} app
         </button>
       )}
-
     </li>
   );
 };

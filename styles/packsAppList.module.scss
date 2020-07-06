@@ -1,0 +1,61 @@
+.appsList{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+
+    div.appCard{
+        margin-bottom: 20px;
+        background-color: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 5px #00000026;
+        position: relative;
+    }
+
+    li{
+        border: 0px !important;
+
+        div{
+            margin-bottom: 0px;
+        }
+    }
+
+    .unselectApp{
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        background-color: var(--main-bg) !important;
+        border-radius: 50px;
+        color: var(--textColor);
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.18);
+        transition: 0.3s all ease-in-out;
+        cursor: pointer;
+        border: 0px;
+        width: 35px !important;
+        height: 35px !important;
+        outline: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0px !important;
+
+        svg{
+            padding-right: 0px !important;
+            margin-top: 0px !important;
+            width: 20px;
+            height: 20px;
+            color: var(--textColor);
+            transition: 0.1s all ease-in-out;
+            transform: rotate(45deg);
+        }
+
+        &:active, &:focus{
+            opacity: 0.7 !important;
+        }
+
+        &:hover{
+            opacity: 0.75;
+        }
+    }
+}
