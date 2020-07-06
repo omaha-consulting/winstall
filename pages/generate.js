@@ -110,7 +110,7 @@ function Generate() {
         <div className="illu-box">
           <div className={styles.generate}>
             <h1>Your apps are ready to be installed.</h1>
-            <h3>Make sure you have Windows Package Manager installed :)</h3>
+            <h3>Make sure you have <a href="https://docs.microsoft.com/en-us/windows/package-manager/winget/#install-winget">Windows Package Manager installed</a> :)</h3>
             <p>
               Just copy the command from the textbox below, paste it into
               Windows Terminal, Command Prompt, or any other terminal on your
