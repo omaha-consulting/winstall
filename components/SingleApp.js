@@ -79,7 +79,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
 
   };
 
-  if (!app && !app.img) return <></>;
+  if (!app && !app.img || !app.name) return <></>;
 
   let VersionSelector = () => {
     return (
@@ -211,6 +211,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
           </li>
         )}
 
+            
         <li>
           <a
             href={`${
