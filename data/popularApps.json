@@ -17,6 +17,12 @@
     "_id": "Microsoft.VisualStudioCode",
     "path": "Microsoft/VisualStudioCode"
   },
+  "vscode-insiders": {
+    "img": "code-insiders.webp",
+    "name": "Visual Studio Code - Insiders",
+    "_id": "Microsoft.VisualStudioCodeInsiders",
+    "path": "Microsoft/VisualStudioCodeInsiders"
+  },
   "chrome": {
     "img": "chrome.webp",
     "name": "Google Chrome",
