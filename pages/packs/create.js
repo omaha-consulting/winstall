@@ -6,26 +6,49 @@ import { useForm } from "react-hook-form";
 
 import styles from "../../styles/create.module.scss";
 
-import ListPackages from "../../components/ListPackages";
 import PackAppsList from "../../components/PackAppsList";
 import SelectedContext from "../../ctx/SelectedContext";
 
 import PageWrapper from "../../components/PageWrapper";
 
-import { FiCopy, FiDownload, FiHome, FiPackage, FiTwitter} from "react-icons/fi";
+import { FiPackage, FiTwitter} from "react-icons/fi";
 import MetaTags from "../../components/MetaTags";
 import SelectionBar from "../../components/SelectionBar";
-import { route } from "next/dist/next-server/server/router";
 import { useRouter } from "next/router";
 
 function Create() {
-    const { selectedApps } = useContext(SelectedContext);
+    const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [session, loading] = useSession(); 
     const [packApps, setPackApps] = useState([]);
 
     useEffect(() => {
       setPackApps(selectedApps);
+
+      const restoreBackup = async () => {
+        const checkForBackup = await localStorage.getItem("winstallLogin")
+
+        const backup = JSON.parse(checkForBackup);
+
+        if(!backup) return;
+
+        setSelectedApps(backup);
+        setPackApps(backup);
+
+        await localStorage.removeItem("winstallLogin");
+
+      }
+
+      restoreBackup();
+
     }, [])
+
+    const handleLogin = async () => {
+      const appsBackup = JSON.stringify(selectedApps);
+      
+      await localStorage.setItem("winstallLogin", appsBackup);
+
+      signin("twitter");
+    }
 
     return (
       <PageWrapper>
@@ -39,7 +62,7 @@ function Create() {
               <p>Welcome! Login with Twitter to be able to create a pack.</p>
               <button
                 className={styles.button}
-                onClick={(e) => signin("twitter")}
+                onClick={handleLogin}
               >
                 <div>
                   <FiTwitter />
@@ -69,7 +92,7 @@ function Create() {
 
           <br/><br/>
 
-          <PackAppsList providedApps={packApps} reorderEnabled={true} onListUpdate={(apps) => setPackApps(apps)}/>
+          <PackAppsList notLoggedIn={session === null} providedApps={packApps} reorderEnabled={true} onListUpdate={(apps) => setPackApps(apps)}/>
         </div>
 
         <SelectionBar/>

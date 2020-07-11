@@ -1,9 +1,5 @@
 import styles from "../../styles/home.module.scss";
 
-import SingleApp from "../../components/SingleApp";
-import SelectionBar from "../../components/SelectionBar";
-
-import Footer from "../../components/Footer";
 import Error from "../../components/Error";
 
 import Skeleton from "react-loading-skeleton";
@@ -11,6 +7,8 @@ import Skeleton from "react-loading-skeleton";
 import { useRouter } from "next/router";
 import MetaTags from "../../components/MetaTags";
 import { useEffect, useState } from "react";
+import PageWrapper from "../../components/PageWrapper";
+import PackAppsList from "../../components/PackAppsList";
 
 function AppSkeleton() {
     return (
@@ -43,31 +41,29 @@ function PackDetail({ pack, creator }) {
     }
 
     return (
-      <div className="container">
-        <div className={styles.intro}>
-          <div className="illu-box">
-            {router.isFallback ? (
-              <AppSkeleton/>
-            ) : (
+      <PageWrapper>
+
+        <div className={styles.content}>
+          
+          {router.isFallback ? (
+            <AppSkeleton />
+          ) : (
               <div>
                 <MetaTags
                   title={`${pack.title} - winstall`}
                 />
+
                 <h1>{pack.title}</h1>
+                <p><img src={creator.profile_image_url} alt="pack creator image"/>@{creator.screen_name}</p>
                 <p>{pack.desc}</p>
-                <p>{pack.apps}</p>
-                <p>{pack.creator}</p>
-                <p>{creator ? creator.screen_name : ""}</p>
+                <PackAppsList providedApps={pack.apps} reorderEnabled={false} />
               </div>
             )}
-        
-          </div>
+
+          {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
         </div>
 
-        <SelectionBar />
-
-        <Footer />
-      </div>
+      </PageWrapper>
     );
 }
 
@@ -91,8 +87,25 @@ export async function getStaticProps({ params }) {
         }
       }).then(res => res.json())
 
+      const appsList = pack.apps.split(",");
+
+      const getIndividualApps = appsList.map(async (app, index) => {
+        return new Promise(async (resolve) => {
+          let appData = await fetch(`https://api.winstall.app/apps/${app}`).then(res => res.json());
+          appsList[index] = appData;
+          resolve();
+        })
+      })
+
+      await Promise.all(getIndividualApps).then(() => {
+        pack.apps = appsList;
+
+      })
+      
       return { props: pack ? { pack, creator } : {} }
+      
     } catch(err) {
+        console.log(err.message)
         return { props: {} };
     }
 }

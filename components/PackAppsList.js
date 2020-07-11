@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import styles from "../styles/packsAppList.module.scss";
 import SingleApp from "./SingleApp";
-import SelectedContext from "../ctx/SelectedContext";
 
 import { FiPlus } from "react-icons/fi";
 
@@ -46,10 +45,9 @@ function App({ app, index, onListUpdate }) {
   );
 }
 
-function PackAppsList({ providedApps, reorderEnabled, onListUpdate }){
+function PackAppsList({ notLoggedIn=false, providedApps, reorderEnabled, onListUpdate }){
     if (providedApps.length < 5) return <></>;
 
-    const { selectedApps } = useContext(SelectedContext);
     const [apps, setApps] = useState([]);
 
     useEffect(() => {
@@ -58,9 +56,11 @@ function PackAppsList({ providedApps, reorderEnabled, onListUpdate }){
     
     if(!reorderEnabled){
         return (
-          <ul>
+          <ul className={styles.appsList}> 
             {apps.map((app) => (
-              <SingleApp app={app} key={app._id} pack={true}/>
+              <div className={styles.appCard}>
+                <SingleApp app={app} key={app._id} pack={true} />
+              </div>
             ))}
           </ul>
         );
@@ -96,21 +96,24 @@ function PackAppsList({ providedApps, reorderEnabled, onListUpdate }){
     return (
       <>
         <h2>Apps in this pack</h2>
-        <p>Tip! Drag and drop any app to re-order how they appear in your pack.</p>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="list">
-            {(provided) => (
-              <ul
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className={styles.appsList}
-              >
-                <AppsList apps={apps} onListUpdate={manageUpdates}/>
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </DragDropContext>
+        {!notLoggedIn && <p>Tip! Drag and drop any app to re-order how they appear in your pack.</p>}
+        
+        {notLoggedIn ? <p>You need to login first before you can view the apps in this pack.</p> : (
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="list">
+              {(provided) => (
+                <ul
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className={styles.appsList}
+                >
+                  <AppsList apps={apps} onListUpdate={manageUpdates} />
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+        ) }
       </>
     );
 
