@@ -31,7 +31,7 @@ function App({ app, index, onListUpdate }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <SingleApp app={app} pack={true}/>
+          <SingleApp app={app} pack={true} displaySelect={false}/>
           <button
             className={styles.unselectApp}
             onClick={() => onListUpdate(app._id)}
@@ -56,10 +56,10 @@ function PackAppsList({ notLoggedIn=false, providedApps, reorderEnabled, onListU
     
     if(!reorderEnabled){
         return (
-          <ul className={styles.appsList}> 
+          <ul className={`${styles.appsList} ${styles.noDragList}`}> 
             {apps.map((app) => (
-              <div className={styles.appCard}>
-                <SingleApp app={app} key={app._id} pack={true} />
+              <div className={styles.appCard} key={app._id}>
+                <SingleApp app={app} pack={true} displaySelect={true}/>
               </div>
             ))}
           </ul>

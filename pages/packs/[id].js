@@ -1,4 +1,4 @@
-import styles from "../../styles/home.module.scss";
+import styles from "../../styles/packPage.module.scss";
 
 import Error from "../../components/Error";
 
@@ -6,9 +6,11 @@ import Skeleton from "react-loading-skeleton";
 
 import { useRouter } from "next/router";
 import MetaTags from "../../components/MetaTags";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import PageWrapper from "../../components/PageWrapper";
 import PackAppsList from "../../components/PackAppsList";
+import SelectionBar from "../../components/SelectionBar";
+import SelectedContext from "../../ctx/SelectedContext";
 
 function AppSkeleton() {
     return (
@@ -30,6 +32,7 @@ function AppSkeleton() {
 
 function PackDetail({ pack, creator }) {
     const router = useRouter();
+    const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
     const fallbackMessage = {
         title: "Sorry! We could not load this pack.",
@@ -38,6 +41,14 @@ function PackDetail({ pack, creator }) {
 
     if(!router.isFallback && !pack){
         return <Error {...fallbackMessage}/>
+    }
+
+    const handleSelectAll = () => {
+      const updatedList = [...selectedApps, ...pack.apps];
+
+      let uniqueList = [...new Map(updatedList.map(item => [item["_id"], item])).values()]
+
+      setSelectedApps(uniqueList);
     }
 
     return (
@@ -54,14 +65,20 @@ function PackDetail({ pack, creator }) {
                 />
 
                 <h1>{pack.title}</h1>
-                <p><img src={creator.profile_image_url} alt="pack creator image"/>@{creator.screen_name}</p>
+                <p className={styles.author}><img src={creator.profile_image_url} alt="pack creator image"/>@{creator.screen_name}</p>
                 <p>{pack.desc}</p>
+                <p>{pack.createdAt} </p>
+                <button className="button">Get Pack</button>
+                <button className="button" onClick={handleSelectAll}>Select Apps</button>
+
                 <PackAppsList providedApps={pack.apps} reorderEnabled={false} />
               </div>
             )}
 
           {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
         </div>
+
+        <SelectionBar/>
 
       </PageWrapper>
     );

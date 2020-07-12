@@ -23,7 +23,7 @@ import {
 import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
 
-let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false, pack=false}) => {
+let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false, pack=false, displaySelect=true}) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -149,7 +149,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
             </Link>
           )}
 
-          {!large && !pack && (
+          {displaySelect &&  (
             <button
               className={styles.selectApp}
               onClick={handleAppSelect}

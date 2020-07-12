@@ -1,0 +1,21 @@
+.content{
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+
+
+    .author{
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        margin: 5px 0;
+
+
+        img{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    }
+}

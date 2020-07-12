@@ -14,6 +14,7 @@
 
     li{
         border: 0px !important;
+        overflow: visible;
 
         div{
             margin-bottom: 0px;
@@ -57,5 +58,15 @@
         &:hover{
             opacity: 0.75;
         }
+    }
+}
+
+.noDragList{
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(350px, 1fr));
+    grid-gap: 15px;
+    
+    div.appCard{
+        margin-bottom: 0px;
     }
 }

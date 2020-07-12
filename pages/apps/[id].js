@@ -51,7 +51,7 @@ function AppDetail({ app, popular}) {
                 <MetaTags
                   title={`${app.name} - winstall`}
                 />
-                <ul className="largeApp"><SingleApp app={app} large={true} /></ul>
+                <ul className="largeApp"><SingleApp app={app} large={true} displaySelect={false}/></ul>
               </div>
             )}
             <div className="art">
