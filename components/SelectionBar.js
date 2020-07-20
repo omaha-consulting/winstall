@@ -3,7 +3,8 @@ import Link from 'next/link'
 import SelectedContext from "../ctx/SelectedContext";
 
 import { FiTrash, FiCodepen, FiShare } from "react-icons/fi";
-export default function SelectionBar() {
+
+export default function SelectionBar({ hideCreatePack }) {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
     if(selectedApps.length === 0) return <></>;

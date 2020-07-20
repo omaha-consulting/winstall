@@ -63,8 +63,8 @@
 
 .noDragList{
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(350px, 1fr));
-    grid-gap: 15px;
+    // grid-template-columns: repeat( auto-fit, minmax(350px, 1fr));
+    grid-gap: 16px;
     
     div.appCard{
         margin-bottom: 0px;

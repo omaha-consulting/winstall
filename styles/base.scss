@@ -428,6 +428,14 @@ article{
     }
 }
 
+.switch.min{
+    place-items: center;
+
+    .react-toggle{
+        margin-bottom: 0px;
+    }
+}
+
 .react-toggle {
   touch-action: pan-x;
 
@@ -685,6 +693,14 @@ article{
     margin-bottom: 20px;
 }
 
+.skeleton-group.centre{
+    justify-content: center;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-gap: 10px;
+    margin: 16px 0;
+}
+
 .skeleton-button span{
     margin-top: 10px;
     border-radius: 50px !important;
@@ -696,6 +712,14 @@ article{
     .react-loading-skeleton{
         display: block !important;
         margin-bottom: 10px;
+    }
+}
+
+.skeleton-list.left{
+    span{
+        display: grid;
+        grid-auto-flow: column;
+        grid-gap: 16px;
     }
 }
 

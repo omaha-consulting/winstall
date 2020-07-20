@@ -110,6 +110,16 @@ const CreatePackForm = ({ uid, packApps }) => {
     const onSubmit = (values) => {
         setCreating(true);
 
+        const apps = packApps.map(app => {
+          return {
+            _id: app._id,
+            name: app.name,
+            icon: app.icon
+          }
+        })
+
+        console.log(apps)
+
         var myHeaders = new Headers();
         myHeaders.append("Authorization", process.env.NEXT_PUBLIC_TWITTER_SECRET);
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -117,8 +127,9 @@ const CreatePackForm = ({ uid, packApps }) => {
         var urlencoded = new URLSearchParams();
         urlencoded.append("title", values.title);
         urlencoded.append("desc", values.description);
-        urlencoded.append("apps", packApps.map(i => i._id));
+        urlencoded.append("apps", JSON.stringify(apps));
         urlencoded.append("creator", uid);
+
 
         var requestOptions = {
             method: 'POST',
@@ -184,7 +195,7 @@ const CreatePackForm = ({ uid, packApps }) => {
           {errors.description && <span className={styles.formError}>Please check the description of your pack!</span>}
         </label>
 
-        <button type="submit" className="button" disabled={creating}>
+        <button type="submit" className="button" disabled={creating || created}>
           {creating ? "Creating..." : "Create pack"}
         </button>
 
