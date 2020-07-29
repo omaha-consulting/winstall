@@ -16,6 +16,9 @@ function winstall({ Component, pageProps }) {
 
     useEffect(() => {
       checkTheme();
+
+      if (localStorage.getItem("selectedApps") !== null) 
+        setSelectedApps(JSON.parse(localStorage.getItem("selectedApps")));
     }, []);
 
     return (
