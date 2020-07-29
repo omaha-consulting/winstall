@@ -3,6 +3,7 @@ import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { setSelectedAppLocalStorage } from "../utils/helpers";
 
 import {
   FiExternalLink,
@@ -66,6 +67,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
 
       setSelectedApps(updatedSelectedApps);
       setSelected(false);
+      setSelectedAppLocalStorage(updatedSelectedApps);
     } else {
       setSelected(true);
 
@@ -75,6 +77,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
       } else {
         setSelectedApps([...selectedApps, app]);
       }
+      setSelectedAppLocalStorage([...selectedApps, app]);
     }
 
   };

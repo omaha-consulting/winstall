@@ -98,12 +98,6 @@ export let timeAgo = (isoDate) => {
   return value + " " + unit + " " + direction;
 }
 
-export let setCookie = (name, value, days) => {
-  let expires = "";
-  if (days) {
-      const date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+export let setSelectedAppLocalStorage = (apps) => {
+  localStorage.setItem("selectedApps", JSON.stringify(apps));
 }

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SelectedContext from "../ctx/SelectedContext";
 
 import { FiTrash, FiCodepen } from "react-icons/fi";
+import { setSelectedAppLocalStorage } from "../utils/helpers";
 export default function SelectionBar() {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -18,6 +19,7 @@ export default function SelectionBar() {
       } else{
         setSelectedApps([]);
       }
+      setSelectedAppLocalStorage([]);
     }
     return (
       <div className="bottomBar">
