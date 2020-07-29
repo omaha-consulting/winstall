@@ -4,6 +4,7 @@ import SelectedContext from "../ctx/SelectedContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiChevronRight } from "react-icons/fi";
+import { setCookie } from "../utils/helpers";
 
 let PrettyApp = ({ app, all }) => {
   const [selected, setSelected] = useState(false);
@@ -26,6 +27,7 @@ let PrettyApp = ({ app, all }) => {
 
       setSelectedApps(updatedSelectedApps);
       setSelected(false);
+      setCookie("selectedApps", JSON.stringify(updatedSelectedApps), 7);
     } else {
       setSelected(true);
 
@@ -35,7 +37,9 @@ let PrettyApp = ({ app, all }) => {
       } else {
         setSelectedApps([...selectedApps, app]);
       }
+      setCookie("selectedApps", JSON.stringify([...selectedApps, app]), 7);
     }
+
   };
 
   if (!app && !app.img) return <></>;

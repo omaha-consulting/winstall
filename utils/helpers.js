@@ -97,3 +97,13 @@ export let timeAgo = (isoDate) => {
   if (value != 1) unit = unit + "s";
   return value + " " + unit + " " + direction;
 }
+
+export let setCookie = (name, value, days) => {
+  let expires = "";
+  if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
