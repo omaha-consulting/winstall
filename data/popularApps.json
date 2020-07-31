@@ -118,5 +118,11 @@
     "name": "ShareX",
     "_id": "ShareX.ShareX",
     "path": "ShareX/ShareX"
+  },
+  "vlc": {
+    "img": "vlc.webp",
+    "name": "VLC",
+    "id": "VideoLan.VLC",
+    "path": "VideoLan/VLC"
   }
 }
