@@ -22,7 +22,8 @@
         margin-bottom: 30px;
     }
 
-    input{
+    input[type="text"]{
+        box-sizing: border-box;
         display: block;
         margin: 10px 0;
         border: 0px;
@@ -76,3 +77,39 @@
         font-size: 20px;
     }
 } 
+
+.accents{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    margin-top: 10px;
+
+    input{
+        background-color: var(--accent);
+        appearance: none;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        outline: 0;
+        margin: 0 10px;
+        cursor: pointer;
+
+        &:checked{
+            border: 4px solid var(--altAccent);
+        }
+    }
+
+    label{
+        cursor: pointer;
+        transition: 0.3s all ease-in-out;
+
+        &:hover{
+            opacity: 0.75;
+        }
+    }
+    
+    p{
+        margin: 0px;
+        padding-top: 5px;
+        font-size: 15px;
+    }
+}

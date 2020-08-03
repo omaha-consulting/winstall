@@ -167,14 +167,14 @@ function PackDetail({ pack, creator }) {
                 <MetaTags
                   title={`${pack.title} - winstall`}
                 />
-
+                
                 <h1>{pack.title}</h1>
                 <p className={styles.author}><img src={creator.profile_image_url} alt="pack creator image"/>@{creator.screen_name}</p>
                 <p>{pack.desc}</p>
                 <p>Created {timeAgo(pack.createdAt)} </p>
                 
                 <div className={styles.packGet}>
-                  <a className="button" href="#packScript"><FiCodepen/> Get Pack</a>
+                  <a className="button lightText" href="#packScript" id={pack.accent}><FiCodepen/> Get Pack</a>
                   <a className="button" onClick={handleSelectAll}><FiPackage/> Select Apps</a>
                 </div>
 

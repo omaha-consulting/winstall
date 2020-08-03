@@ -118,8 +118,6 @@ const CreatePackForm = ({ uid, packApps }) => {
           }
         })
 
-        console.log(apps)
-
         var myHeaders = new Headers();
         myHeaders.append("Authorization", process.env.NEXT_PUBLIC_TWITTER_SECRET);
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -129,7 +127,7 @@ const CreatePackForm = ({ uid, packApps }) => {
         urlencoded.append("desc", values.description);
         urlencoded.append("apps", JSON.stringify(apps));
         urlencoded.append("creator", uid);
-
+        urlencoded.append("accent", values.accent);
 
         var requestOptions = {
             method: 'POST',
@@ -171,6 +169,7 @@ const CreatePackForm = ({ uid, packApps }) => {
           Pack title
           <input
             name="title"
+            type="text"
             placeholder="Give your pack a name"
             ref={register({
               required: true,
@@ -185,6 +184,7 @@ const CreatePackForm = ({ uid, packApps }) => {
           Pack description
           <input
             name="description"
+            type="text"
             ref={register({
                 required: true,
                 validate: (value) => { return value.replace(/\s/g, '').length === 0 ? false : true; }
@@ -195,6 +195,19 @@ const CreatePackForm = ({ uid, packApps }) => {
           {errors.description && <span className={styles.formError}>Please check the description of your pack!</span>}
         </label>
 
+        <label>
+          Pack accent
+          
+          <div className={styles.accents}>
+            <label htmlFor="winterNeva"><input defaultChecked={true} type="radio" id="winterNeva" name="accent" value="winterNeva" ref={register({ required: true })} /><p>Winter Neva</p></label>
+            <label htmlFor="deepBlue"><input type="radio" id="deepBlue" name="accent" value="deepBlue" ref={register({ required: true })} /><p>Deep Blue</p></label>
+            <label htmlFor="starWine"><input type="radio" id="starWine" name="accent" value="starWine" ref={register({ required: true })} /><p>Star Wine</p></label>
+            <label htmlFor="purpleDivision"><input type="radio" id="purpleDivision" name="accent" value="purpleDivision" ref={register({ required: true })} /><p>Purple Divison</p></label>
+            <label htmlFor="loveKiss"><input type="radio" id="loveKiss" name="accent" value="loveKiss" ref={register({ required: true })} /><p>Love Kiss</p></label>
+          </div>
+
+          {errors.accent && <span className={styles.formError}>Please check the accent of your pack!</span>}
+        </label>
         <button type="submit" className="button" disabled={creating || created}>
           {creating ? "Creating..." : "Create pack"}
         </button>

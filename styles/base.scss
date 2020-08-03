@@ -32,8 +32,8 @@
          color: var(--altTextColor);
      }
 
-
 }
+
 
 html {
     scroll-behavior: smooth;
@@ -730,4 +730,28 @@ article{
 
 button{
     font-family: 'Nunito', sans-serif;
+}
+
+#winterNeva{
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+}
+
+#deepBlue{
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+}
+
+#starWine{
+    background-image: linear-gradient(12deg, rgb(110, 27, 220), rgb(241, 56, 167))
+}
+
+#purpleDivision{
+    background-image: linear-gradient(to top, #aa39df 0%, #9b2fff 100%);
+}
+
+#loveKiss{
+    background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+}
+
+.lightText{
+    color: #fff;
 }

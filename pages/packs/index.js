@@ -32,6 +32,8 @@ export async function getStaticProps() {
         res.json()
     );
 
+    packs = packs.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+
     return {
         props: {
             packs,
