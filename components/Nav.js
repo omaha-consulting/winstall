@@ -13,7 +13,8 @@ import {
   FiHelpCircle,
   FiPackage,
   FiTwitter,
-  FiLogOut
+  FiLogOut,
+  FiGrid
 } from "react-icons/fi";
 
 import NProgress from "nprogress";
@@ -69,6 +70,12 @@ function Nav() {
               <p>Apps</p>
             </a>
           </Link>
+          <Link href="/packs">
+            <a>
+              <FiGrid />
+              <p>Packs</p>
+            </a>
+          </Link>
           <a
             href="https://ko-fi.com/mehedi"
             target="_blank"
@@ -112,14 +119,14 @@ const User = () => {
     return (
       <>
         {!session && (
-            <a onClick={() => signin("twitter")}itle="Login with Twitter to create and share packs.">
+            <a onClick={() => signin("twitter")} title="Login with Twitter to create and share packs.">
               <FiTwitter />
               <p>Login</p>
             </a>
         )}
         {session && (
           <>
-            <Link href="/packs/user-[id]" as={`/packs/user-${session.user.id}`}>
+            <Link href="/users/[id]" as={`/users/${session.user.id}`}>
               <a title="View your packs" className={styles.user}>
                 <img src={session.user.image} alt="User profile picture" />
               </a>
