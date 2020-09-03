@@ -9,7 +9,13 @@
         place-items: center;
         justify-content: center;
         margin: 5px 0;
+        text-decoration: none;
+        color: inherit;
+        transition: 0.3s all ease-in-out;
 
+        &:hover{
+            opacity: 0.75;
+        }
 
         img{
             width: 30px;

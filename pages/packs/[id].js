@@ -3,7 +3,7 @@ import styles from "../../styles/packPage.module.scss";
 import Error from "../../components/Error";
 
 import Skeleton from "react-loading-skeleton";
-
+import Link from "next/link";
 import { useRouter } from "next/router";
 import MetaTags from "../../components/MetaTags";
 import { useEffect, useState, useContext } from "react";
@@ -157,38 +157,55 @@ function PackDetail({ pack, creator }) {
 
     return (
       <PageWrapper>
-
         <div className={styles.content}>
-          
           {router.isFallback ? (
             <AppSkeleton />
           ) : (
-              <div>
-                <MetaTags
-                  title={`${pack.title} - winstall`}
-                />
-                
-                <h1>{pack.title}</h1>
-                <p className={styles.author}><img src={creator.profile_image_url} alt="pack creator image"/>@{creator.screen_name}</p>
-                <p>{pack.desc}</p>
-                <p>Created {timeAgo(pack.createdAt)} </p>
-                
-                <div className={styles.packGet}>
-                  <a className="button lightText" href="#packScript" id={pack.accent}><FiCodepen/> Get Pack</a>
-                  <a className="button" onClick={handleSelectAll}><FiPackage/> Select Apps</a>
-                </div>
+            <div>
+              <MetaTags title={`${pack.title} - winstall`} />
 
-                <PackAppsList providedApps={pack.apps} reorderEnabled={false} />
+              <h1>{pack.title}</h1>
 
-                <ScriptCode apps={pack.apps}/>
+              <Link
+                href="/users/[id]"
+                as={`/users/${creator.id}`}
+                prefetch={false}
+              >
+                <a className={styles.author} title="View other packs by this user">
+                  <img
+                    src={creator.profile_image_url}
+                    alt="pack creator image"
+                  />
+                  @{creator.screen_name}
+                </a>
+              </Link>
+
+              <p>{pack.desc}</p>
+              <p>Created {timeAgo(pack.createdAt)} </p>
+
+              <div className={styles.packGet}>
+                <a
+                  className="button lightText"
+                  href="#packScript"
+                  id={pack.accent}
+                >
+                  <FiCodepen /> Get Pack
+                </a>
+                <a className="button" onClick={handleSelectAll}>
+                  <FiPackage /> Select Apps
+                </a>
               </div>
-            )}
+
+              <PackAppsList providedApps={pack.apps} reorderEnabled={false} />
+
+              <ScriptCode apps={pack.apps} />
+            </div>
+          )}
 
           {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
         </div>
 
-        <SelectionBar/>
-
+        <SelectionBar />
       </PageWrapper>
     );
 }

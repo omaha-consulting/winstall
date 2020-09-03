@@ -126,7 +126,7 @@ const User = () => {
         )}
         {session && (
           <>
-            <Link href="/users/[id]" as={`/users/${session.user.id}`}>
+            <Link href="/users/you">
               <a title="View your packs" className={styles.user}>
                 <img src={session.user.image} alt="User profile picture" />
               </a>
