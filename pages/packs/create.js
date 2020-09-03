@@ -148,6 +148,7 @@ const CreatePackForm = ({ uid, packApps }) => {
                 return response.json()
             })
             .then(result => {
+                localStorage.removeItem("ownPacks");
                 router.push(`/packs/${result._id}`)
                 setCreated(result)
             })
