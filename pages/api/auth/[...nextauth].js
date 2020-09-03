@@ -3,7 +3,6 @@ import Providers from "next-auth/providers";
 
 
 const options = {
-  site: process.env.SITE,
   providers: [
     Providers.Twitter({
       clientId: process.env.TWITTER_ID,
