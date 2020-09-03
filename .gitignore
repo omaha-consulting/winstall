@@ -25,3 +25,6 @@ yarn-error.log*
 diff.js
 
 .env
+
+**/public/workbox-*.js
+**/public/sw.js

@@ -1,6 +1,7 @@
 {
   "short_name": "winstall",
   "name": "Bulk install Windows apps quickly with Windows Package Manager.",
+  "start_url": "/",
   "icons": [
     {
       "src": "favicon.ico",
