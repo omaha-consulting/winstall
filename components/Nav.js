@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
 
@@ -9,12 +9,14 @@ import styles from "../styles/nav.module.scss";
 import {
   FiMoon,
   FiSun,
-  FiCoffee,
   FiHelpCircle,
   FiPackage,
   FiTwitter,
   FiLogOut,
-  FiGrid
+  FiGrid,
+  FiChevronDown,
+  FiX,
+  FiHeart
 } from "react-icons/fi";
 
 import NProgress from "nprogress";
@@ -33,6 +35,32 @@ Router.onRouteChangeError = () => {
 
 function Nav() {
     const router = useRouter();
+    const [ddShown, setDDShown] = useState(false);
+    const navRef = useRef(null);
+
+    let handleClickOut = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setDDShown(false);
+        navRef.current.classList.remove("shown");
+      }
+
+      if(navRef.current && navRef.current.contains(e.target)){
+        setDDShown(false);
+        setTimeout(() => {
+          navRef.current.classList.remove("shown");
+        }, 100);
+      }
+    }
+
+    useEffect(() => {
+      window.addEventListener("mousedown", handleClickOut);
+
+      // cleanup this component
+      return () => {
+        window.removeEventListener("mousedown", handleClickOut);
+      };
+    }, []);
+    
 
     let switchTheme = () => {
         let body = document.querySelector("body");
@@ -54,8 +82,18 @@ function Nav() {
       }
     }
 
+    const toggleDD = () => {
+      if (ddShown) {
+        navRef.current.classList.remove("shown");
+      } else {
+        navRef.current.classList.add("shown");
+      }
+
+      setDDShown(!ddShown);
+    }
+
     return (
-      <header className="container">
+      <header className={`container ${styles.navContainer}`}>
         <div className={styles.brand}>
           <Link href="/">
             <a>winstall</a>
@@ -63,7 +101,7 @@ function Nav() {
           {/* <span className="preview">&nbsp;(preview)</span> */}
         </div>
 
-        <div className={styles.nav}>
+        <div className={styles.nav} ref={navRef}>
           <Link href="/apps">
             <a>
               <FiPackage />
@@ -82,17 +120,25 @@ function Nav() {
             rel="noopener noreferrer"
             className={styles.justIcon}
           >
-            <FiCoffee />
+            <FiHeart />
+            <p className={styles.ddOnly}>Support winstall</p>
           </a>
-          <span onClick={handleExplainer}>
+          <span onClick={handleExplainer} className={styles.justIcon}>
             <FiHelpCircle />
+            <p className={styles.ddOnly}>FAQ</p>
           </span>
-          <span onClick={switchTheme}>
+          <span onClick={switchTheme} className={styles.justIcon}>
             <FiMoon className="moon" />
             <FiSun className="sun" />
+            <p className={styles.ddOnly}>Switch theme</p>
           </span>
           <User />
         </div>
+
+        <span className={`mobileDD ${styles.dropdown}`} onClick={toggleDD}>
+          {ddShown ? <FiX /> : <FiChevronDown />}
+        </span>
+
       </header>
     );
 }
@@ -129,10 +175,12 @@ const User = () => {
             <Link href="/users/you">
               <a title="View your packs" className={styles.user}>
                 <img src={session.user.image} alt="User profile picture" />
+                <p className={styles.ddOnly}>Your packs</p>
               </a>
             </Link>
-            <span onClick={signout} title="Logout">
+            <span onClick={signout} title="Logout" className={styles.justIcon}>
               <FiLogOut/>
+              <p className={styles.ddOnly}>Logout</p>
             </span>
           </>
         )}

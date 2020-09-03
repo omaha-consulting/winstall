@@ -350,6 +350,31 @@ article{
     }
 }
 
+@media(max-width: 510px){
+    .bottomBar{
+
+        .controls button{
+           padding: 0 15px;
+           font-size: 15px;
+
+           em{
+               font-size: 15px;
+               text-align: center;
+           }
+
+           svg{
+               display: none;
+           }
+        }
+
+    }
+
+    .bottomBar .inner button:disabled em{
+        font-size: 12px;
+        line-height: 13px;
+    }
+}
+
 @media(max-width: 790px){
     .generate-container{
         textarea{
@@ -360,10 +385,12 @@ article{
     .bottomBar{
         .inner{
             justify-content: center !important;
+            padding: 0 25px !important;
         }
 
         .controls{
-            display: block !important;
+            grid-template-columns: 1fr 1fr 50px !important;
+            grid-gap: 10px !important;
         }
 
         p, .clear{
@@ -681,12 +708,6 @@ article{
 }
 
 
-@media(max-width: 460px){
-    header.container{
-        display: block;
-    }
-}
-
 .skeleton-group{
     display: grid;
     grid-template-columns: 45px 180px;
@@ -754,4 +775,14 @@ button{
 
 .lightText{
     color: #fff;
+}
+
+.shown{
+    display: flex !important;
+}
+
+@media(max-width: 900px){
+    .shown{
+        display: block !important;
+    }
 }
