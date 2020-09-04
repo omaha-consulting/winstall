@@ -12,7 +12,7 @@ let PopularApps = ({ apps, all }) => {
 
   useEffect(() => {
     if(popular.length === 0){
-      setPopular(apps.slice(0, 8));
+      setPopular(apps.slice(0, 4));
     }
   })
 

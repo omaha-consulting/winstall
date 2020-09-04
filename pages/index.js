@@ -5,6 +5,7 @@ import PopularApps from "../components/PopularApps";
 import RecentApps from "../components/RecentApps";
 import SelectionBar from "../components/SelectionBar";
 import MetaTags from "../components/MetaTags";
+import Recommendations from "../components/Recommendations";
 
 import Footer from "../components/Footer";
 import { shuffleArray } from "../utils/helpers";
@@ -32,7 +33,8 @@ function Home({ popular, apps, recents }) {
 
       <PopularApps apps={popular} all={apps} />
 
-      <RecentApps apps={recents} />
+      {/* <RecentApps apps={recents} /> */}
+      <Recommendations/>
 
       <SelectionBar />
 
