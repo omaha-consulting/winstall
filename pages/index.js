@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 import { shuffleArray } from "../utils/helpers";
 import popularAppsList from "../data/popularApps.json";
 
-function Home({ popular, apps, recents }) {
+function Home({ popular, apps, recommended }) {
   return (
     <div className="container">
       <MetaTags title="winstall - GUI for Windows Package Manager" />
@@ -34,7 +34,7 @@ function Home({ popular, apps, recents }) {
       <PopularApps apps={popular} all={apps} />
 
       {/* <RecentApps apps={recents} /> */}
-      <Recommendations/>
+      <Recommendations packs={recommended}/>
 
       <SelectionBar />
 
@@ -47,14 +47,14 @@ export async function getStaticProps(){
   let popular = shuffleArray(Object.values(popularAppsList));
   let apps = await fetch(`https://api.winstall.app/apps`).then((res) => res.json());
 
-  let recents = apps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)).slice(0, 8); 
-  
+  let recommended = await fetch(`https://api.winstall.app/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`).then((res) => res.json());
+
   return (
     {
       props: {
         popular,
         apps,
-        recents
+        recommended
       }
     }
   )

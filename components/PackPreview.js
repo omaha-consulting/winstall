@@ -28,12 +28,14 @@ export default function PackPreview({ pack, hideMeta }){
                     </ul>
                 </header>
 
-                <div className={styles.packMeta}>
-                    <h3>{pack.title}</h3>
-                    <p>{pack.desc}</p>
-                    <p className={styles.includes}>Includes {pack.apps.slice(0, 3).map(a => a.name).join(", ")}, and more.</p>
-                    <button className="button accent"><FiPackage /> Get Pack</button>
-                </div>
+                {!hideMeta && (
+                    <div className={styles.packMeta}>
+                        <h3>{pack.title}</h3>
+                        <p>{pack.desc}</p>
+                        <p className={styles.includes}>Includes {pack.apps.slice(0, 3).map(a => a.name).join(", ")}, and more.</p>
+                        <button className="button accent"><FiPackage /> Get Pack</button>
+                    </div>
+                )}
             </a>
         </Link>
     )

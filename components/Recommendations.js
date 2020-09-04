@@ -1,38 +1,110 @@
 import Link from "next/link";
 
 import styles from "../styles/recommendations.module.scss"
-import { FiPackage } from "react-icons/fi";
-import { useEffect, useContext } from "react";
+import { FiPackage, FiPlus, FiGlobe, FiHome } from "react-icons/fi";
+import { useEffect, useContext, useState } from "react";
+import PackAppsList from "./PackAppsList";
+import AppIcon from "./AppIcon";
+import SelectedContext from "../ctx/SelectedContext";
+import PackPreview from "./PackPreview";
 
-const Recommendations = ({ apps }) => {
+const Recommendations = ({ packs }) => {
   return (
-    <div>
-        <PackList id="Z_tilUZjA" title="Web Browsers" apps={apps}/>
+    <div className={styles.recommendations}>
+        <PackList id="Z_tilUZjA" title="Web Browsers" packs={packs}>
+          <FiGlobe/>
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="Work From Home" packs={packs}>
+          <FiHome />
+        </PackList>
 
     </div>
   );
 };
 
-const PackList = ({ title, id, apps}) => {
+const PackList = ({ children, title, id, packs}) => {
+  const [packApps, setPackApps] = useState([]);
+  const [pack, setPack] = useState();
+
+  useEffect(() => {
+    if (!packs) return;
+
+    const pack = packs.find(p => p._id === id);
+
+    if(!pack) return;
+
+    setPackApps(pack.apps.slice(0, 5));
+    setPack(pack);
+  }, []);
+
+  if(!pack) return <></>;
+
   return (
     <div>
-      <h3>{title}</h3>
+      <header id={pack.accent} className={styles.packHeader}>
+        {children}
+        <h3>{title}</h3>
+        <p>{pack.desc}</p>
+      </header>
 
-      { apps && apps.map(app => <p>{app.name}</p>)}
+      <div className={styles.packListContainer}>
+        {packApps && packApps.map(app => <App key={app._id} data={app} />)}
+      </div>
+      
     </div>
   );
 };
 
-export async function getStaticProps(){
-  let apps = await fetch(`https://api.winstall.app/packs/Z_tilUZjA`).then((res) => res.json());
-  console.log(apps)
-  return (
-    {
-      props: {
-        apps,
-      }
+const App = ({data}) => {
+  const [selected, setSelected] = useState(false);
+  const { selectedApps, setSelectedApps } = useContext(SelectedContext);
+
+  useEffect(() => {
+    let found = selectedApps.find((a) => a._id === data._id);
+
+    setSelected(found);
+  })
+
+  let handleAppSelect = () => {
+    let found = selectedApps.findIndex((a) => a._id === data._id);
+
+    if (found !== -1) {
+      let updatedSelectedApps = selectedApps.filter(
+        (a, index) => index !== found
+      );
+
+      setSelectedApps(updatedSelectedApps);
+      setSelected(false);
+
+    } else {
+      setSelected(true);
+
+      setSelectedApps([...selectedApps, data]);
     }
+
+  };
+
+  return (
+    <div className={`${styles.appContainer} ${selected ? styles.selected : null}`}>
+  
+      <Link href="/apps/[id]" as={`/apps/${data._id}`} prefetch={false}>
+        <a>
+          <AppIcon name={data.name} icon={data.icon} />
+          <h4>{data.name}</h4>
+        </a>
+      </Link>
+
+      <button
+        className={styles.selectApp}
+        onClick={handleAppSelect}
+        aria-label={selected ? "Unselect app" : "Select app"}
+      >
+        <FiPlus/>
+      </button>
+    </div>
   )
 }
+
 
 export default Recommendations;
