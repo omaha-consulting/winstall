@@ -38,8 +38,6 @@ function Create() {
 
       }
 
-      console.log(session)
-
       restoreBackup();
 
     }, [])

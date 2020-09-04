@@ -168,7 +168,7 @@ function PackDetail({ pack, creator }) {
 
               <Link
                 href="/users/[id]"
-                as={`/users/${creator.id}`}
+                as={`/users/${creator.id_str}`}
                 prefetch={false}
               >
                 <a className={styles.author} title="View other packs by this user">

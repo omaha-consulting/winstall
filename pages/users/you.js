@@ -6,15 +6,20 @@ import PackPreview from "../../components/PackPreview";
 import { useEffect, useState } from "react";
 import { useSession, getSession } from "next-auth/client";
 import Error from "../../components/Error";
+import { useRouter } from "next/router";
 
 function OwnProfile() {
   const [user, setUser] = useState();
   const [packs, setPacks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     getSession().then(async (session) => {
-      if(!session) return;
+      if(!session){
+        router.push(`/`);
+        return;
+      };
 
       let packs = await localStorage.getItem("ownPacks");
 

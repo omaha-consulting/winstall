@@ -18,20 +18,23 @@ const options = {
   jwt: true,
 
   callbacks: {
-    session: async (session, token) => {
-      if (!session || !session.user || !token || !token.account) {
-        return Promise.resolve(session);
+    session: async (session, user) => {
+      if(session && user){
+        console.log(user)
+        session.user = user;
       }
-      
-      session.user.id = token.account.id;
-      session.accessToken = token.account.accessToken;
 
       return Promise.resolve(session);
     },
+
+    jwt: async (token, user, account, profile, isNewUser) => {
+      if(profile){
+        token.id = profile.id_str;
+      }
+
+      return Promise.resolve(token);
+    },
   },
-
-  
-
 };
 
 export default (req, res) => NextAuth(req, res, options);

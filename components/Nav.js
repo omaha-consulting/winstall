@@ -150,7 +150,6 @@ const User = () => {
     useEffect(() => {
       getSession().then(async (session) => {
         if(!session) return;
-
         await fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`, {
           method: "GET",
           headers: {
@@ -174,7 +173,7 @@ const User = () => {
           <>
             <Link href="/users/you">
               <a title="View your packs" className={styles.user}>
-                <img src={session.user.image} alt="User profile picture" />
+                <img src={session.user.picture} alt="User profile picture" />
                 <p className={styles.ddOnly}>Your packs</p>
               </a>
             </Link>
