@@ -20,7 +20,6 @@ const options = {
   callbacks: {
     session: async (session, user) => {
       if(session && user){
-        console.log(user)
         session.user = user;
       }
 

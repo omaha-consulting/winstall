@@ -5,12 +5,24 @@
     grid-gap: 15px;
 }
 
+@media(max-width: 450px){
+    .recommendations{
+        grid-template-columns: 1fr;
+    }
+}
+
 .packHeader{
     display: block;
     padding: 10px 20px;
     border-radius: 10px 10px 0px 0px;
     color: #fff;
     padding-top: 30px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.85;
+    }
 
     svg{
         font-size: 20px;
@@ -27,14 +39,17 @@
     }
 }
 
-.packListContainer{
+.recommendation{
     background-color: var(--card-bg);
-    padding: 20px;
-    border: 5px solid var(--card-bg);
     border-radius: 0px 0px 10px 10px;
     overflow: hidden;
     transition: 0.1s all ease-in-out;
     box-shadow: 0px 3px 5px #00000026;
+}
+
+.packListContainer{
+    padding: 20px;
+  
 
     h3{
         border-bottom: 3px solid var(--accent);

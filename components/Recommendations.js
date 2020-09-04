@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import styles from "../styles/recommendations.module.scss"
 import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight } from "react-icons/fi";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, useRef } from "react";
 import PackAppsList from "./PackAppsList";
 import AppIcon from "./AppIcon";
 import SelectedContext from "../ctx/SelectedContext";
@@ -41,6 +41,7 @@ const Recommendations = ({ packs }) => {
 const PackList = ({ children, title, id, packs}) => {
   const [packApps, setPackApps] = useState([]);
   const [pack, setPack] = useState();
+  const headerRef = useRef(null);
 
   useEffect(() => {
     if (!packs) return;
@@ -51,23 +52,28 @@ const PackList = ({ children, title, id, packs}) => {
 
     setPackApps(pack.apps.slice(0, 5));
     setPack(pack);
+
   }, []);
 
   if(!pack) return <></>;
 
   return (
-    <div>
-      <header id={pack.accent} className={styles.packHeader}>
-        {children}
-        <h3>{title}</h3>
-        <p>{pack.desc}</p>
-      </header>
+    <div className={styles.recommendation}>
+      <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
+        <a id={pack.accent} className={styles.packHeader} ref={headerRef}>
+          {children}
+          <h3>{title}</h3>
+          <p>{pack.desc}</p>
+        </a>
+      </Link>
 
       <div className={styles.packListContainer}>
         {packApps && packApps.map((app) => <App key={app._id} data={app} />)}
 
         <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
-          <a className="button subtle">View Pack <FiChevronRight/></a>
+          <a className="button subtle">
+            View Pack <FiChevronRight />
+          </a>
         </Link>
       </div>
     </div>
