@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import styles from "../styles/recommendations.module.scss"
-import { FiPackage, FiPlus, FiGlobe, FiHome } from "react-icons/fi";
+import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight } from "react-icons/fi";
 import { useEffect, useContext, useState } from "react";
 import PackAppsList from "./PackAppsList";
 import AppIcon from "./AppIcon";
@@ -10,15 +10,30 @@ import PackPreview from "./PackPreview";
 
 const Recommendations = ({ packs }) => {
   return (
-    <div className={styles.recommendations}>
+    <div className="homeBlock">
+      <div className="box">
+        <h2 className="blockHeader">Featured Packs</h2>
+        <Link href="/packs">
+          <a className="button small">
+            <FiPackage />
+            View All
+          </a>
+        </Link>
+      </div>
+      <h3 className="blockSubtitle">
+        Just got a new Windows device? Start with our favourites. Click the +
+        sign to include an app on your install script.
+      </h3>
+
+      <div className={styles.recommendations}>
         <PackList id="Z_tilUZjA" title="Web Browsers" packs={packs}>
-          <FiGlobe/>
+          <FiGlobe />
         </PackList>
 
         <PackList id="A6JzO22Y1" title="Work From Home" packs={packs}>
           <FiHome />
         </PackList>
-
+      </div>
     </div>
   );
 };
@@ -49,9 +64,12 @@ const PackList = ({ children, title, id, packs}) => {
       </header>
 
       <div className={styles.packListContainer}>
-        {packApps && packApps.map(app => <App key={app._id} data={app} />)}
+        {packApps && packApps.map((app) => <App key={app._id} data={app} />)}
+
+        <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
+          <a className="button subtle">View Pack <FiChevronRight/></a>
+        </Link>
       </div>
-      
     </div>
   );
 };
