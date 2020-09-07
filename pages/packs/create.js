@@ -85,7 +85,7 @@ function Create() {
               </Link>
             </>
           ) : session ? (
-              <CreatePackForm uid={session.user.id} packApps={packApps} />
+              <CreatePackForm user={session.user} packApps={packApps} />
           ) : (
             ""
           )}
@@ -100,7 +100,7 @@ function Create() {
     );
 }
 
-const CreatePackForm = ({ uid, packApps }) => {
+const CreatePackForm = ({ user, packApps }) => {
     const { handleSubmit, register, errors } = useForm();
     const [creating, setCreating] = useState(false);
     const [created, setCreated] = useState();
@@ -119,14 +119,14 @@ const CreatePackForm = ({ uid, packApps }) => {
         })
 
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", process.env.NEXT_PUBLIC_TWITTER_SECRET);
+        myHeaders.append("Authorization", `${user.accessToken},${user.refreshToken}`);
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
         var urlencoded = new URLSearchParams();
         urlencoded.append("title", values.title);
         urlencoded.append("desc", values.description);
         urlencoded.append("apps", JSON.stringify(apps));
-        urlencoded.append("creator", uid);
+        urlencoded.append("creator", user.id);
         urlencoded.append("accent", values.accent);
 
         var requestOptions = {
@@ -148,6 +148,7 @@ const CreatePackForm = ({ uid, packApps }) => {
                 return response.json()
             })
             .then(result => {
+              console.log(result)
                 localStorage.removeItem("ownPacks");
                 router.push(`/packs/${result._id}`)
                 setCreated(result)

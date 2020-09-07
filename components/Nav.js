@@ -159,6 +159,7 @@ const User = () => {
           setUser(data);
         })
       });
+
     }, [])
 
     return (

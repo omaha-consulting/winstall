@@ -49,6 +49,28 @@ export async function getStaticProps(){
 
   let recommended = await fetch(`https://api.winstall.app/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`).then((res) => res.json());
 
+  // get the new pack data, and versions data, etc.
+  const getPackData = recommended.map(async (pack) => {
+    return new Promise(async(resolve) => {
+      const appsList = pack.apps;
+
+      const getIndividualApps = appsList.map(async (app, index) => {
+        return new Promise(async (resolve) => {
+          let appData = await fetch(`https://api.winstall.app/apps/${app._id}`).then(res => res.json());
+          appsList[index] = appData;
+          resolve();
+        })
+      })
+
+      await Promise.all(getIndividualApps).then(() => {
+        pack.apps = appsList
+        resolve();
+      })
+    })
+  })
+
+  await Promise.all(getPackData);
+  
   return (
     {
       props: {

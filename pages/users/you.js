@@ -12,6 +12,8 @@ function OwnProfile() {
   const [user, setUser] = useState();
   const [packs, setPacks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState("Loading...");
+
   const router = useRouter();
 
   useEffect(() => {
@@ -27,23 +29,28 @@ function OwnProfile() {
         setPacks(JSON.parse(packs));
         setLoading(false);
       } else {
-        getPacks(session.user.id);
+        getPacks(session.user);
       }
     });
   }, []);
 
-  const getPacks = async (id) => {
+  const getPacks = async (user) => {
     await fetch(
-      `https://api.winstall.app/packs/profile/${id}`,
+      `https://api.winstall.app/packs/profile/${user.id}`,
       {
         method: "GET",
         headers: {
-          Authorization: process.env.NEXT_PUBLIC_TWITTER_SECRET,
-        },
+          'Authorization': `${user.accessToken},${user.refreshToken}`
+        }
       }
     )
       .then((data) => data.json())
       .then((data) => {
+        if(data.error){
+          setStatus(data.error);
+          return;
+        };
+
         setPacks(data);
         setLoading(false);
         localStorage.setItem("ownPacks", JSON.stringify(data));
@@ -66,7 +73,7 @@ function OwnProfile() {
         </div>
 
         {loading ? (
-          <p>Loading....</p>
+          <p>{status}</p>
         ) : packs.length === 0 ? (
           <p>You don't have any packs yet. Try creating one first when selecting apps :)</p>
         ) : (

@@ -31,6 +31,13 @@ const options = {
         token.id = profile.id_str;
       }
 
+      if(account){
+        token.accessToken = account.accessToken;
+        token.refreshToken = account.refreshToken;
+      }
+
+
+
       return Promise.resolve(token);
     },
   },
