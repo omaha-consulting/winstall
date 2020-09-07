@@ -31,6 +31,8 @@ function OwnProfile() {
       } else {
         getPacks(session.user);
       }
+
+      setUser(session.user)
     });
   }, []);
 
@@ -57,6 +59,11 @@ function OwnProfile() {
       });
   };
 
+  const handleDelete = (id) => {
+    const newPacks = packs.filter(p => p._id != id);
+    setPacks(newPacks);
+  }
+
   return (
     <PageWrapper>
       {user && user.errors ? (
@@ -80,7 +87,7 @@ function OwnProfile() {
           <ul className={`${styles.all} ${styles.storeList}`}>
             {packs.map((pack) => (
               <li key={pack._id}>
-                <PackPreview pack={pack} />
+                <PackPreview pack={pack} showDelete={true} auth={user} deleted={handleDelete}/>
               </li>
             ))}
           </ul>

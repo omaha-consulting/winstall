@@ -11,11 +11,7 @@
     text-decoration: none;
     height: 100%;
 
-    &:hover, &:focus{
-        .packMeta{
-            opacity: 0.75;
-        }
-    }
+ 
 
     .singleIcon ul{
         display: flex !important;
@@ -62,6 +58,11 @@
 
         h3{
             margin: 0px;
+            color: var(--textColor);
+        }
+
+        a{
+            text-decoration: none;
         }
 
         p{
@@ -76,5 +77,12 @@
         a{
             display: inline-block;
         }
+    }
+}
+
+
+.delete{
+    &:hover{
+        opacity: 1 !important;
     }
 }

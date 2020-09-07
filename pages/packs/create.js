@@ -87,7 +87,7 @@ function Create() {
           ) : session ? (
               <CreatePackForm user={session.user} packApps={packApps} />
           ) : (
-            ""
+            <></>
           )}
 
           <br/><br/>
