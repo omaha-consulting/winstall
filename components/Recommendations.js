@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import styles from "../styles/recommendations.module.scss"
-import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight } from "react-icons/fi";
+import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight, FiKey, FiCrosshair, FiUserPlus, FiZap, FiMusic, FiCode } from "react-icons/fi";
 import { useEffect, useContext, useState, useRef } from "react";
 import PackAppsList from "./PackAppsList";
 import AppIcon from "./AppIcon";
@@ -26,13 +26,41 @@ const Recommendations = ({ packs }) => {
       </h3>
 
       <div className={styles.recommendations}>
-        <PackList id="Z_tilUZjA" title="Web Browsers" packs={packs}>
-          <FiGlobe />
-        </PackList>
-
         <PackList id="A6JzO22Y1" title="Work From Home" packs={packs}>
           <FiHome />
         </PackList>
+
+        <PackList id="A6JzO22Y1" title="Web Browsers" packs={packs}>
+          <FiGlobe />
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="Essential Tools" packs={packs}>
+          <FiKey />
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="Entertainment" packs={packs}>
+          <FiMusic />
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="Gaming" packs={packs}>
+          <FiCrosshair />
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="Developers" packs={packs}>
+          <FiCode />
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="Social Media" packs={packs}>
+          <FiUserPlus />
+        </PackList>
+
+        <PackList id="A6JzO22Y1" title="I'm feeling lucky" packs={packs}>
+          <FiZap />
+        </PackList>
+
+
+
+      
       </div>
     </div>
   );
@@ -71,7 +99,7 @@ const PackList = ({ children, title, id, packs}) => {
         {packApps && packApps.map((app) => <App key={app._id} data={app} />)}
 
         <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
-          <a className="button subtle">
+          <a className={`button subtle ${styles.viewPack}`}>
             View Pack <FiChevronRight />
           </a>
         </Link>
