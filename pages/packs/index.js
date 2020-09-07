@@ -14,7 +14,7 @@ export default function Packs({ packs }) {
                 <div className={styles.controls}>
                     <h1>All packs {`(${packs.length})`}</h1>
 
-                    {/* <Pagination/> */}
+                    {/* <Pagination/> */} 
                 </div>
 
                 <ul className={`${styles.all} ${styles.storeList}`}>

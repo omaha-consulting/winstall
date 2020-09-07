@@ -12,6 +12,7 @@ function UserProfile({ uid }) {
     const [session, loading] = useSession();
     const [title, setTitle] = useState("Loading...");
     const [packs, setPacks] = useState([]);
+    const [status, setStatus] = useState("Getting packs...");
 
     useEffect(() => {
         getSession().then(async (session) => {
@@ -25,17 +26,7 @@ function UserProfile({ uid }) {
                 if (!session || session.user.id !== parseInt(uid)) {
                     setTitle(`Packs created by @${data.screen_name}`)
                     getPacks(uid);
-                } else{
-                    setTitle("Your packs");
-                    let packs = await localStorage.getItem("ownPacks");
-
-                    if(packs != null){
-                        setPacks(JSON.parse(packs));
-                    } else{
-                        getPacks(uid, false);
-                    }
-                }
-
+                } 
                 setUser(data);
             })
         });
@@ -49,7 +40,7 @@ function UserProfile({ uid }) {
             }
         }).then(data => data.json()).then(data => {
             setPacks(data);
-
+            if (data.length === 0) setStatus("This user does not have any packs yet.");
             if(!cache) localStorage.setItem("ownPacks", JSON.stringify(data));
         })
     }
@@ -71,7 +62,7 @@ function UserProfile({ uid }) {
                             {packs.map(pack => <li key={pack._id}><PackPreview pack={pack} /></li>)}
                         </ul>
 
-                        {user && packs.length === 0 && <p>This user does not have any packs yet.</p>}
+                        {user && packs.length === 0 && <p>{status}</p>}
                     </div>
                 )
             }

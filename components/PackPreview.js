@@ -16,7 +16,7 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
 
     const deletePack = async () => {
         if(!auth) return;
-        
+
         await fetch(
             `https://api.winstall.app/packs/${pack._id}`,
             {
@@ -71,7 +71,7 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
                         <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
                             <button className="button accent"><FiPackage /> Get Pack</button>
                         </Link>
-                        <button className={`button subtle ${styles.delete}`} title="Delete Pack" onClick={handleDelete}><FiTrash2 /></button>
+                        {showDelete && <button className={`button subtle ${styles.delete}`} title="Delete Pack" onClick={handleDelete}><FiTrash2 /></button>}
                     </div>
                 </div>
             )}
