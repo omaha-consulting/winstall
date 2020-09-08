@@ -63,26 +63,10 @@
             overflow: hidden;
             // border-radius: 50%;
         }
-        
 
-        .noIcon{
-            background-color: var(--accent);
-            width: 25px;
-            height: 25px;
-            border-radius: 50px;
-            text-align: center;
-            color: #fff;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            user-select: none;
-        }
     }
 
     
-
     h3, h4{
         margin-top: 0px;
         margin-bottom: 5px;
@@ -398,4 +382,19 @@
         background-color: transparent;
         border: 3px solid var(--card-bg);
     }
+}
+
+.noIcon{
+    background-image: linear-gradient(12deg, rgb(110, 27, 220), rgb(241, 56, 167) 100%);
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    user-select: none;
 }

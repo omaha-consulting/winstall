@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import styles from "../styles/recommendations.module.scss"
-import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight, FiKey, FiCrosshair, FiUserPlus, FiZap, FiMusic, FiCode } from "react-icons/fi";
+import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight, FiKey, FiCrosshair, FiUserPlus, FiZap, FiMusic, FiCode, FiStar } from "react-icons/fi";
 import { useEffect, useContext, useState, useRef } from "react";
 import PackAppsList from "./PackAppsList";
 import AppIcon from "./AppIcon";
@@ -30,33 +30,30 @@ const Recommendations = ({ packs }) => {
           <FiHome />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="Web Browsers" packs={packs}>
+        <PackList id="z3zuf1vVD" title="Web Browsers" packs={packs}>
           <FiGlobe />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="Essential Tools" packs={packs}>
-          <FiKey />
+        <PackList id="ur23Tk6Sf" title="Essential Tools" packs={packs}>
+          <FiStar />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="Entertainment" packs={packs}>
+        <PackList id="qO_m22F6k" title="Entertainment" packs={packs}>
           <FiMusic />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="Gaming" packs={packs}>
+        <PackList id="Jtght2FO5" title="Gaming" packs={packs}>
           <FiCrosshair />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="Developers" packs={packs}>
+        <PackList id="3glB-CGXA" title="Developers" packs={packs}>
           <FiCode />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="Social Media" packs={packs}>
+        <PackList id="NYWPVq9ct" title="Communication" packs={packs}>
           <FiUserPlus />
         </PackList>
 
-        <PackList id="A6JzO22Y1" title="I'm feeling lucky" packs={packs}>
-          <FiZap />
-        </PackList>
 
 
 

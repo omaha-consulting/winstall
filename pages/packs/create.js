@@ -101,7 +101,7 @@ function Create() {
           <PackAppsList notLoggedIn={user === null} providedApps={packApps} reorderEnabled={true} onListUpdate={(apps) => setPackApps(apps)}/>
         </div>
 
-        <SelectionBar/>
+        <SelectionBar hideCreatePack={true}/>
       </PageWrapper>
     );
 }
