@@ -63,7 +63,7 @@ function Create() {
         <div className={styles.content}>
           <h1>Create a pack</h1>
 
-          {user === null && (
+          {!user && (
             <>
               <p>Welcome! Login with Twitter to be able to create a pack.</p>
               <button

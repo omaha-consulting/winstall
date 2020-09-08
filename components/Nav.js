@@ -48,7 +48,7 @@ function Nav() {
         setDDShown(false);
         setTimeout(() => {
           navRef.current.classList.remove("shown");
-        }, 100);
+        }, 200);
       }
     }
 

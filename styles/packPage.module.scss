@@ -104,3 +104,23 @@
     }
 }
 
+@media(max-width: 530px){
+    .packGet{
+        grid-gap: 15px !important;
+
+        a{
+            padding: 0px;
+            box-shadow: none;
+            background: transparent;
+            background-image: none !important;
+            color: var(--textColor);
+            margin: 20px 0;
+            font-size: 16px;
+
+            svg{
+                padding-right: 5px;
+            }
+        }
+    }
+}
+

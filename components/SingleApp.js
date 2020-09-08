@@ -16,7 +16,8 @@ import {
   FiInfo,
   FiFileText,
   FiAlertOctagon,
-  FiTag
+  FiTag,
+  FiShare2
 } from "react-icons/fi";
 
 
@@ -124,6 +125,12 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
       </div>
     );
   };
+
+  const handleShare = () => {
+    const link = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Checkout ${app.name} by ${app.publisher} on @winstallHQ:`)}&url=${encodeURIComponent(`https://winstall.app/apps/${app._id}`)}`
+
+    window.open(link)
+  }
 
   return (
     <li
@@ -240,10 +247,16 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
       {large && app.tags && app.tags.length > 1 && <Tags tags={app.tags} />}
 
       {large && (
-        <button className={styles.selectApp} onClick={handleAppSelect}>
-          <FiPlus />
-          {selected ? "Unselect" : "Select"} app
-        </button>
+        <div className={styles.largeAppButtons}>
+          <button className={styles.selectApp} onClick={handleAppSelect}>
+            <FiPlus />
+            {selected ? "Unselect" : "Select"} app
+          </button>
+          <button className={`button ${styles.shareApp}`} onClick={handleShare}>
+            <FiShare2 />
+            Share
+          </button>
+        </div>
       )}
     </li>
   );

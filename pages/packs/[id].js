@@ -12,7 +12,7 @@ import PackAppsList from "../../components/PackAppsList";
 import SelectionBar from "../../components/SelectionBar";
 import SelectedContext from "../../ctx/SelectedContext";
 import { timeAgo } from "../../utils/helpers";
-import { FiCodepen, FiPackage, FiCopy, FiDownload } from "react-icons/fi";
+import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
 import Toggle from "react-toggle";
 
 function AppSkeleton() {
@@ -155,6 +155,12 @@ function PackDetail({ pack, creator }) {
       setSelectedApps(uniqueList);
     }
 
+    const handleShare = () => {
+      const link = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Checkout the "${pack.title}" pack by @${creator.screen_name}!`)}&url=${encodeURIComponent(`https://winstall.app/packs/${pack._id}`)}&via=winstallHQ`
+      
+      window.open(link)
+    }
+
     return (
       <PageWrapper>
         <div className={styles.content}>
@@ -193,6 +199,12 @@ function PackDetail({ pack, creator }) {
                 </a>
                 <a className="button" onClick={handleSelectAll}>
                   <FiPackage /> Select Apps
+                </a>
+                  <a
+                    className="button"
+                    onClick={handleShare}
+                  >
+                    <FiShare2 /> Share
                 </a>
               </div>
 
