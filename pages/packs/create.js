@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { useSession, signin } from "next-auth/client";
+import { getSession, signin } from "next-auth/client";
 
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 
 function Create() {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-    const [session, loading] = useSession(); 
+    const [user, setUser] = useState(); 
     const [packApps, setPackApps] = useState([]);
 
     useEffect(() => {
@@ -40,6 +40,12 @@ function Create() {
 
       restoreBackup();
 
+      getSession().then(async (session) => {
+        if(!session) return;
+
+        if(session.user) setUser(session.user);
+      });
+
     }, [])
 
     const handleLogin = async () => {
@@ -57,7 +63,7 @@ function Create() {
         <div className={styles.content}>
           <h1>Create a pack</h1>
 
-          {session === null && (
+          {user === null && (
             <>
               <p>Welcome! Login with Twitter to be able to create a pack.</p>
               <button
@@ -72,7 +78,7 @@ function Create() {
             </>
           )}
 
-          {session && packApps.length < 5 ? (
+          {user && packApps.length < 5 ? (
             <>
               <p>You need at least 5 apps to be able to create a pack!</p>
               <Link href="/apps">
@@ -84,15 +90,15 @@ function Create() {
                 </a>
               </Link>
             </>
-          ) : session ? (
-              <CreatePackForm user={session.user} packApps={packApps} />
+          ) : user ? (
+              <CreatePackForm user={user} packApps={packApps} />
           ) : (
             <></>
           )}
 
           <br/><br/>
 
-          <PackAppsList notLoggedIn={session === null} providedApps={packApps} reorderEnabled={true} onListUpdate={(apps) => setPackApps(apps)}/>
+          <PackAppsList notLoggedIn={user === null} providedApps={packApps} reorderEnabled={true} onListUpdate={(apps) => setPackApps(apps)}/>
         </div>
 
         <SelectionBar/>

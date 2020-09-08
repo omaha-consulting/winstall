@@ -4,7 +4,7 @@ import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
 import { useEffect, useState } from "react";
-import { useSession, getSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Error from "../../components/Error";
 import { useRouter } from "next/router";
 

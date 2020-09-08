@@ -4,12 +4,11 @@ import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
 import { useEffect, useState } from "react";
-import { useSession, getSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Error from "../../components/Error";
 
 function UserProfile({ uid }) {
     const [user, setUser] = useState();
-    const [session, loading] = useSession();
     const [title, setTitle] = useState("Loading...");
     const [packs, setPacks] = useState([]);
     const [status, setStatus] = useState("Getting packs...");
