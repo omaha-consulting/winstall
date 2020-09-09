@@ -179,7 +179,7 @@ function PackDetail({ pack, creator }) {
               >
                 <a className={styles.author} title="View other packs by this user">
                   <img
-                    src={creator.profile_image_url}
+                    src={creator.profile_image_url_https}
                     alt="pack creator image"
                   />
                   @{creator.screen_name}
