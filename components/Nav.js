@@ -74,14 +74,6 @@ function Nav() {
         }
     }
 
-    const handleExplainer = () => {
-      if(router.pathname === "/eli5"){
-        router.push("/");
-      } else{
-        router.push("/eli5");
-      }
-    }
-
     const toggleDD = () => {
       if (ddShown) {
         navRef.current.classList.remove("shown");
@@ -123,10 +115,6 @@ function Nav() {
             <FiHeart />
             <p className={styles.ddOnly}>Support winstall</p>
           </a>
-          <span onClick={handleExplainer} className={styles.justIcon}>
-            <FiHelpCircle />
-            <p className={styles.ddOnly}>FAQ</p>
-          </span>
           <span onClick={switchTheme} className={styles.justIcon}>
             <FiMoon className="moon" />
             <FiSun className="sun" />

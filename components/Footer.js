@@ -39,7 +39,7 @@ export default function Footer(){
             alt="builtbymeh.com logo"
             draggable={false}
           />
-          <p>Built by Mehedi Hassan</p>
+          <p>Built by Mehedi Hassan.</p>
         </a>
 
         <ul>
@@ -53,8 +53,13 @@ export default function Footer(){
             </a>
           </li>
           <li>
-            <Link href="/privacy-policy">
+            <Link href="/privacy">
               <a>Privacy Policy</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/eli5">
+              <a>Help</a>
             </Link>
           </li>
           <li>
