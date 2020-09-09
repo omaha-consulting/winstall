@@ -12,7 +12,7 @@ import PackAppsList from "../../components/PackAppsList";
 import SelectionBar from "../../components/SelectionBar";
 import SelectedContext from "../../ctx/SelectedContext";
 import { timeAgo } from "../../utils/helpers";
-import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2 } from "react-icons/fi";
+import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock } from "react-icons/fi";
 import Toggle from "react-toggle";
 
 function AppSkeleton() {
@@ -183,11 +183,11 @@ function PackDetail({ pack, creator }) {
                     alt="pack creator image"
                   />
                   @{creator.screen_name}
-                </a>
+                </a> 
               </Link>
 
               <p>{pack.desc}</p>
-              <p>Created {timeAgo(pack.createdAt)} </p>
+              <p className={styles.time}><FiClock/> Last updated {timeAgo(pack.updatedAt)} </p>
 
               <div className={styles.packGet}>
                 <a

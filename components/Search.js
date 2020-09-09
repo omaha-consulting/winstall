@@ -12,7 +12,7 @@ import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
 import { route } from "next/dist/next-server/server/router";
 
-function Search({apps, onSearch, label, placeholder}) {
+function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
   const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
@@ -73,7 +73,11 @@ function Search({apps, onSearch, label, placeholder}) {
 
     let results = fuse.search(query.toLowerCase().replace(/\s/g, ""));
 
-    setResults([...results.map((r) => r.item)]);
+    if(isPackView){
+      setResults([...results.map((r) => r.item).slice(0, 4)]);
+    } else{
+      setResults([...results.map((r) => r.item)]);
+    }
   };
 
 
@@ -118,6 +122,9 @@ function Search({apps, onSearch, label, placeholder}) {
             <SingleApp
               app={app}
               showDesc={true}
+              preventGlobalSelect={preventGlobalSelect}
+              pack={isPackView}
+              hideBorder={true}
               key={`${app._id}`}
             />
           )}

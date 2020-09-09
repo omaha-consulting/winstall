@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import styles from "../styles/packsAppList.module.scss";
 import SingleApp from "./SingleApp";
 
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiPlusCircle, FiXCircle } from "react-icons/fi";
+import Search from "./Search";
+import Modal from "react-modal";
+
+Modal.setAppElement("#__next");
 
 const AppsList = ({ apps, onListUpdate }) => {
 
@@ -45,10 +49,12 @@ function App({ app, index, onListUpdate }) {
   );
 }
 
-function PackAppsList({ notLoggedIn=false, providedApps, reorderEnabled, onListUpdate }){
-    if (providedApps.length < 5) return <></>;
+function PackAppsList({ notLoggedIn = false, providedApps, reorderEnabled, onListUpdate, allApps}){
 
     const [apps, setApps] = useState([]);
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+    const [showAdd, setShowAdd] = useState(false);
 
     useEffect(() => {
         setApps(providedApps)
@@ -93,11 +99,46 @@ function PackAppsList({ notLoggedIn=false, providedApps, reorderEnabled, onListU
       onListUpdate(updatedApps);
     }
 
+    const handleSelect = (app, isSelected) => {
+      let existingApps = apps;
+
+      if (isSelected) {
+        existingApps.push(app);
+      } else {
+        existingApps = existingApps.filter(a => a._id !== app._id);
+      }
+
+      setApps(existingApps);
+      onListUpdate(existingApps);
+      
+      forceUpdate();
+    }
+
+    const closeModal = () => {
+      setShowAdd(false);
+    }
+
     return (
       <>
         <h2>Apps in this pack</h2>
         {!notLoggedIn && <p>Tip! Drag and drop any app to re-order how they appear in your pack.</p>}
-        
+
+        <button className="button center subtle" onClick={() => setShowAdd(!showAdd)}><FiPlusCircle/> Add More Apps</button><br/>
+
+        <Modal
+          isOpen={showAdd}
+          onRequestClose={closeModal}
+          className={styles.addModal}
+          overlayClassName={styles.modalOverlay}
+          contentLabel="Example Modal"
+        >
+          <div className={styles.modalHeader}>
+            <h2>Add Apps</h2>
+            <FiXCircle onClick={closeModal}/>
+          </div>
+          <Search apps={allApps} preventGlobalSelect={handleSelect} isPackView={true} />
+        </Modal>
+   
         {notLoggedIn ? <p>You need to login first before you can view the apps in this pack.</p> : (
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="list">

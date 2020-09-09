@@ -3,6 +3,11 @@
     margin: 0 auto;
     text-align: center;
 
+    .time{
+        svg{
+            vertical-align: middle;
+        }
+    }
 
     .author{
         display: flex;

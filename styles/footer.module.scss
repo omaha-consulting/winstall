@@ -11,6 +11,8 @@
 
         p{
             margin: 0px;
+            font-size: 17px;
+            margin-top: 2px;
             opacity: 0.75;
         }
     }
@@ -47,6 +49,7 @@
         padding: 0px;
         margin: 0px;
         list-style-type: none;
+        font-size: 17px;
 
         li{
             margin-left: 20px;
@@ -149,6 +152,15 @@
 
         ul{
             justify-content: center;
+            font-size: 15px;
+            display: grid;
+            grid-auto-flow: column;
+            grid-gap: 10px;
+
+            li{
+                padding: 0px;
+                margin: 0px;
+            }
         }
     }
 }

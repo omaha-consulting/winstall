@@ -24,7 +24,7 @@ import {
 import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
 
-let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=false, pack=false, displaySelect=true}) => {
+let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = false, pack = false, displaySelect = true, preventGlobalSelect, hideBorder=false}) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -59,6 +59,12 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
   }, [selectedApps, app._id]);
 
   let handleAppSelect = () => {
+    if (preventGlobalSelect) {
+      preventGlobalSelect(app, !selected);
+      setSelected(!selected);
+      return;
+    }
+
     let found = selectedApps.findIndex((a) => a._id === app._id);
     
     if (found !== -1) {
@@ -136,7 +142,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large=false, showTime=fals
     <li
       key={app._id}
       // onClick={handleAppSelect}
-      className={`${large ? styles.large : ""} ${pack ? styles.pack : ""} ${styles.single} ${
+      className={`${hideBorder ? styles.noBorder: "" }${large ? styles.large : ""} ${pack ? styles.pack : ""} ${styles.single} ${
         selected ? styles.selected : ""
       }`}
     >

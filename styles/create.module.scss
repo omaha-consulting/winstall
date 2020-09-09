@@ -43,6 +43,11 @@
         margin: 0 auto;
         background-color: var(--accent);
         color: #fff;
+
+        &:disabled{
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 }
 
@@ -76,6 +81,8 @@
         margin-top: 2px;
         font-size: 20px;
     }
+
+   
 } 
 
 .accents{
