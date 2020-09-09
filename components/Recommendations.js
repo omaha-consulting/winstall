@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import styles from "../styles/recommendations.module.scss"
-import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight, FiKey, FiCrosshair, FiUserPlus, FiZap, FiMusic, FiCode, FiStar } from "react-icons/fi";
+import { FiPackage, FiPlus, FiGlobe, FiHome, FiChevronRight, FiCrosshair, FiUserPlus, FiZap, FiMusic, FiCode, FiStar, FiBookOpen } from "react-icons/fi";
 import { useEffect, useContext, useState, useRef } from "react";
 import PackAppsList from "./PackAppsList";
 import AppIcon from "./AppIcon";
@@ -50,8 +50,12 @@ const Recommendations = ({ packs }) => {
           <FiCode />
         </PackList>
 
-        <PackList id="NYWPVq9ct" title="Communication" packs={packs}>
+        <PackList id="NYWPVq9ct" title="Social Media" packs={packs}>
           <FiUserPlus />
+        </PackList>
+        
+        <PackList id="yphy7XItI" title="School" packs={packs}>
+          <FiBookOpen />
         </PackList>
 
 
