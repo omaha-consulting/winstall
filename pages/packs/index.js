@@ -38,6 +38,6 @@ export async function getStaticProps() {
         props: {
             packs,
         },
-        revalidate: 60
+        revalidate: 1
     };
 }

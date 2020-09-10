@@ -257,7 +257,7 @@ export async function getStaticProps({ params }) {
 
       })
       
-      return { props: pack ? { pack, creator } : {}, revalidate: 60 }
+      return { props: pack ? { pack, creator } : {}, revalidate: 1 }
       
     } catch(err) {
         console.log(err.message)
