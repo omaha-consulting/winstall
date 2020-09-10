@@ -11,7 +11,7 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
     const [error, setError] = useState("");
     const router = useRouter();
 
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
         setCreating(true);
 
         const apps = packApps.map(app => {
@@ -22,44 +22,41 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
           }
         })
 
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", `${user.accessToken},${user.refreshToken}`);
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        await fetch(
+            editMode ? `https://api.winstall.app/packs/${defaultValues._id}` : `https://api.winstall.app/packs/create`,
+            {
+                method: editMode ? 'PATCH' : 'POST',
+                headers: {
+                    'Authorization': `${user.accessToken},${user.refreshToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  title: values.title,
+                  desc: values.description,
+                  apps: JSON.stringify(apps),
+                  creator: user.id,
+                  accent: values.accent
+                }),
+                redirect: 'follow'
+            }
+        ).then(async (data) => {
+          if(data.status !== 200){
+              const res = await data.json();
+              setCreating(false);
+              setError(res.error);
+              return;
+          }
 
-        var urlencoded = new URLSearchParams();
-        urlencoded.append("title", values.title);
-        urlencoded.append("desc", values.description);
-        urlencoded.append("apps", JSON.stringify(apps));
-        urlencoded.append("creator", user.id);
-        urlencoded.append("accent", values.accent);
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: urlencoded,
-            redirect: 'follow'
-        };
-
-        fetch("https://api.winstall.app/packs/create", requestOptions)
-            .then(async (response) => {
-                if(response.status !== 200){
-                    const res = await response.json();
-                    setCreating(false);
-                    setError(res.error);
-                    return;
-                }
-
-                return response.json()
-            })
-            .then(result => {
-                localStorage.removeItem("ownPacks");
-                router.push(`/packs/${result._id}`)
-                setCreated(result)
-            })
-            .catch(error => {
-                setCreating(false);
-                setError(error.message);
-            });
+          return data.json()
+        }).then(data => {
+            localStorage.removeItem("ownPacks");
+            router.push(`/packs/${data._id}`)
+            setCreated(data)
+        })
+        .catch(error => {
+            setCreating(false);
+            setError(error.message);
+        });
     };
 
     if(created){

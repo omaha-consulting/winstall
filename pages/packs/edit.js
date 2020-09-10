@@ -90,12 +90,12 @@ export default function Edit({ allApps }) {
 
     return (
         <PageWrapper>
-            <MetaTags title="Create a pack - winstall" />
+            <MetaTags title="Edit pack - winstall" />
 
             <div className={styles.content}>
                 <h1>Edit Pack</h1>
 
-                <CreatePackForm user={user} packApps={packApps} editMode={true} isDisabled={packApps.length < 5} defaultValues={{ title: pack.title, description: pack.desc, accent: pack.accent }} />
+                <CreatePackForm user={user} packApps={packApps} editMode={true} isDisabled={packApps.length < 5} defaultValues={{ _id: pack._id, title: pack.title, description: pack.desc, accent: pack.accent }} />
 
                 {packApps.length < 5 && <p>You need at least 5 apps to update this pack.</p>}
 
