@@ -24,7 +24,7 @@ import {
 import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
 
-let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = false, pack = false, displaySelect = true, preventGlobalSelect, hideBorder=false}) => {
+let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = false, pack = false, displaySelect = true, preventGlobalSelect, hideBorder=false, preSelected=false}) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -41,6 +41,11 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
   }
 
   useEffect(() => {
+    if(preSelected){
+      setSelected(true);
+      return;
+    }
+
     let found = selectedApps.find((a) => a._id === app._id);
 
     if (!found){
@@ -55,7 +60,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
       setVersion(found.selectedVersion);
     }
 
-    setSelected(true);
+    setSelected(true);    
   }, [selectedApps, app._id]);
 
   let handleAppSelect = () => {

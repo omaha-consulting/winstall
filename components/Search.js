@@ -12,7 +12,7 @@ import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
 import { route } from "next/dist/next-server/server/router";
 
-function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView}) {
+function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
   const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
@@ -126,6 +126,7 @@ function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPac
               pack={isPackView}
               hideBorder={true}
               key={`${app._id}`}
+              preSelected={alreadySelected.findIndex(a => a._id === app._id) != -1 ? true : false}
             />
           )}
         </ListPackages>

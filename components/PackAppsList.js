@@ -136,7 +136,7 @@ function PackAppsList({ notLoggedIn = false, providedApps, reorderEnabled, onLis
             <h2>Add Apps</h2>
             <FiXCircle onClick={closeModal}/>
           </div>
-          <Search apps={allApps} preventGlobalSelect={handleSelect} isPackView={true} />
+          <Search apps={allApps} preventGlobalSelect={handleSelect} isPackView={true} alreadySelected={apps}/>
         </Modal>
    
         {notLoggedIn ? <p>You need to login first before you can view the apps in this pack.</p> : (

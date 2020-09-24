@@ -1,7 +1,7 @@
 import styles from "../styles/packPreview.module.scss";
 import AppIcon from "./AppIcon";
-import { useState, useEffect, useRef} from "react";
-import { FiPackage, FiTrash2 } from "react-icons/fi";
+import { useState, useEffect} from "react";
+import { FiEdit, FiPackage, FiTrash2 } from "react-icons/fi";
 import Link from "next/link";
 
 export default function PackPreview({ pack, hideMeta, showDelete=false, auth, deleted}){
@@ -71,7 +71,13 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
                         <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
                             <button className="button accent"><FiPackage /> Get Pack</button>
                         </Link>
-                        {showDelete && <button className={`button subtle ${styles.delete}`} title="Delete Pack" onClick={handleDelete}><FiTrash2 /></button>}
+
+                        { showDelete && (
+                            <div className={styles.packEdit}>
+                                <Link href={`/packs/edit?id=${pack._id}`} prefetch={false}><button title="Edit Pack" className={`button subtle ${styles.delete}`} ><FiEdit /></button></Link>
+                                <button className={`button subtle ${styles.delete}`} title="Delete Pack" onClick={handleDelete}><FiTrash2 /></button>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}
