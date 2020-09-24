@@ -15,7 +15,7 @@ import MetaTags from "../../components/MetaTags";
 import SelectionBar from "../../components/SelectionBar";
 import CreatePackForm from "../../components/CreatePackForm";
 
-function Create() {
+function Create({ allApps }) {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [user, setUser] = useState(); 
     const [packApps, setPackApps] = useState([]);
@@ -55,6 +55,10 @@ function Create() {
       signin("twitter");
     }
 
+    const updatePackApps = (apps) => {
+      setPackApps(apps);
+  }
+
     return (
       <PageWrapper>
         <MetaTags title="Create a pack - winstall" />
@@ -77,32 +81,35 @@ function Create() {
             </>
           )}
 
-          {user && packApps.length < 5 ? (
+          { user && (
             <>
-              <p>You need at least 5 apps to be able to create a pack!</p>
-              <Link href="/apps">
-                <a className={styles.button}>
-                  <div>
-                    <FiPackage />
-                    Search for more apps
-                  </div>
-                </a>
-              </Link>
+              <CreatePackForm user={user} packApps={packApps} editMode={false}/>
+
+              <br/>
+
+              <PackAppsList notLoggedIn={user === null} providedApps={packApps} reorderEnabled={true} allApps={allApps} onListUpdate={updatePackApps}/>
             </>
-          ) : user ? (
-              <CreatePackForm user={user} packApps={packApps} />
-          ) : (
-            <></>
           )}
 
-          <br/><br/>
+          
 
-          <PackAppsList notLoggedIn={user === null} providedApps={packApps} reorderEnabled={true} onListUpdate={(apps) => setPackApps(apps)}/>
         </div>
 
         <SelectionBar hideCreatePack={true}/>
       </PageWrapper>
     );
+}
+
+export async function getStaticProps() {
+  let apps = await fetch(`https://api.winstall.app/apps`).then((res) =>
+      res.json()
+  );
+
+  return {
+      props: {
+          allApps: apps,
+      },
+  };
 }
 
 

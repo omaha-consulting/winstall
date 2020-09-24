@@ -26,7 +26,7 @@ export default function Edit({ allApps }) {
             if (session && session.user) setUser(session.user);
 
             setPackId(Router.query.id);
-            
+                        
             if(session && session.user && Router.query.id){
                 checkPack(Router.query.id, session.user.id);
             } else{
@@ -95,9 +95,9 @@ export default function Edit({ allApps }) {
             <div className={styles.content}>
                 <h1>Edit Pack</h1>
 
-                <CreatePackForm user={user} packApps={packApps} editMode={true} isDisabled={packApps.length < 5} defaultValues={{ _id: pack._id, title: pack.title, description: pack.desc, accent: pack.accent }} />
+                <CreatePackForm user={user} packApps={packApps} editMode={true} defaultValues={{ _id: pack._id, title: pack.title, description: pack.desc, accent: pack.accent }} />
 
-                {packApps.length < 5 && <p>You need at least 5 apps to update this pack.</p>}
+                {/* <p>Note: it may take up to 10 minutes for your changes to apply for you and others on the site.</p> */}
 
                 <br/><br/>
 

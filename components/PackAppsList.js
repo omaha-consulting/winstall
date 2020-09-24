@@ -123,7 +123,7 @@ function PackAppsList({ notLoggedIn = false, providedApps, reorderEnabled, onLis
         <h2>Apps in this pack</h2>
         {!notLoggedIn && <p>Tip! Drag and drop any app to re-order how they appear in your pack.</p>}
 
-        <button className="button center subtle" onClick={() => setShowAdd(!showAdd)}><FiPlusCircle/> Add More Apps</button><br/>
+        <button className={`button center ${apps.length === 0 ? '' : 'subtle'}`} onClick={() => setShowAdd(!showAdd)}><FiPlusCircle/> {`Add ${apps.length != 0 ? "More" : ""} Apps`}</button><br/>
 
         <Modal
           isOpen={showAdd}

@@ -22,6 +22,12 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
           }
         })
 
+        if(apps.length < 5){
+          setError(`You need at least 5 apps to be able to ${editMode ? "update" : "create"} this pack.`);
+          setCreating(false);
+          return;
+        }
+
         await fetch(
             editMode ? `https://api.winstall.app/packs/${defaultValues._id}` : `https://api.winstall.app/packs/create`,
             {
@@ -61,7 +67,7 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
 
     if(created){
         return (
-        <p>Your pack "{created.title}" has been sucesfully {editMode ? "updated" : "created"}! You can view it here: <Link href="/packs/[id]" as={`/packs/${created._id}`}><a>winstall.app/packs/{created._id}</a></Link></p>
+        <p>Your pack has been sucesfully {editMode ? "updated" : "created"}! You can view it here: <Link href="/packs/[id]" as={`/packs/${created._id}`}><a>winstall.app/packs/{created._id}</a></Link></p>
         )
     }
 

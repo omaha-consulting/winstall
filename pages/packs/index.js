@@ -3,6 +3,8 @@ import MetaTags from "../../components/MetaTags";
 import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
+import Link from "next/link";
+import { FiPlus } from "react-icons/fi";
 
 export default function Packs({ packs }) {
   
@@ -14,6 +16,9 @@ export default function Packs({ packs }) {
                 <div className={styles.controls}>
                     <h1>All packs {`(${packs.length})`}</h1>
 
+                    <Link href="/packs/create">
+                        <a className="button"><FiPlus/> Create Pack</a>
+                    </Link>
                     {/* <Pagination/> */} 
                 </div>
 
