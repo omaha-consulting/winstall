@@ -4,7 +4,8 @@ import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
 import Link from "next/link";
-import { FiPlus } from "react-icons/fi";
+import { FiPackage, FiPlus } from "react-icons/fi";
+import FeaturePromoter from "../../components/FeaturePromoter";
 
 export default function Packs({ packs }) {
   
@@ -13,6 +14,14 @@ export default function Packs({ packs }) {
             <MetaTags title="Packs - winstall" />
 
             <div>
+             <FeaturePromoter art="/assets/packsPromo.svg" promoId="packs" disableHide={true}>
+                    <h3>Introducing Packs</h3>
+                    <h1>Curate, share, and show off the apps you use daily.</h1>
+                    <div className="box2">
+                        <Link href="/packs/create"><button className="button spacer accent" id="starWine"><FiPlus/> Create a pack</button></Link>
+                    </div>
+                </FeaturePromoter>
+
                 <div className={styles.controls}>
                     <h1>All packs {`(${packs.length})`}</h1>
 
@@ -22,6 +31,7 @@ export default function Packs({ packs }) {
                     {/* <Pagination/> */} 
                 </div>
 
+                
                 <ul className={`${styles.all} ${styles.storeList}`}>
                     {packs.map(pack => <li key={pack._id}><PackPreview pack={pack}/></li>)}
                 </ul>
