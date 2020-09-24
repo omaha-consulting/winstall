@@ -50,3 +50,47 @@
         }
     }
 }
+
+@media(max-width: 1300px){
+    .container{
+        img{
+            max-width: 500px;
+        }
+    }
+}
+
+@media(max-width: 995px){
+    .container{
+        img{
+            max-width: 450px;
+        }
+    }
+}
+
+@media(max-width: 900px){
+    .container{
+        padding: 15px 30px;
+
+        img{
+            display: none;
+        
+        }
+    }
+}
+
+@media(max-width: 750px){
+    .container{
+        min-height: auto;
+        height: auto;
+
+        .slogan{
+            position: initial;
+            padding: 30px 0px;
+        }
+
+        h1{
+            font-size: 22px;
+        }
+    }
+}
+
