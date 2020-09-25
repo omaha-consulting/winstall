@@ -24,10 +24,6 @@ export default function Packs({ packs }) {
 
                 <div className={styles.controls}>
                     <h1>All packs {`(${packs.length})`}</h1>
-
-                    <Link href="/packs/create">
-                        <a className="button"><FiPlus/> Create Pack</a>
-                    </Link>
                     {/* <Pagination/> */} 
                 </div>
 

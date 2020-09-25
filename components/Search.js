@@ -12,7 +12,7 @@ import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
 import { route } from "next/dist/next-server/server/router";
 
-function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected}) {
+function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected=[]}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
   const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];

@@ -14,6 +14,7 @@ import { FiPackage, FiTwitter} from "react-icons/fi";
 import MetaTags from "../../components/MetaTags";
 import SelectionBar from "../../components/SelectionBar";
 import CreatePackForm from "../../components/CreatePackForm";
+import FeaturePromoter from "../../components/FeaturePromoter";
 
 function Create({ allApps }) {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
@@ -43,6 +44,8 @@ function Create({ allApps }) {
         if(!session) return;
 
         if(session.user) setUser(session.user);
+
+        setSelectedApps([]);
       });
 
     }, [])
@@ -59,27 +62,33 @@ function Create({ allApps }) {
       setPackApps(apps);
   }
 
+  if(!user){
+    return (
+      <PageWrapper>
+        <MetaTags title="Create a pack - winstall" />
+        <FeaturePromoter  art="/assets/packsPromo.svg" disableHide={true}>
+          <h3>One more thing...</h3>
+          <h1>Welcome! Login with Twitter to be able to create a pack.</h1>
+          <button
+            className={styles.button}
+            onClick={handleLogin}
+          >
+            <div>
+              <FiTwitter />
+              Login
+            </div>
+          </button>
+        </FeaturePromoter>
+      </PageWrapper>
+    )
+  }
+
     return (
       <PageWrapper>
         <MetaTags title="Create a pack - winstall" />
 
         <div className={styles.content}>
           <h1>Create a pack</h1>
-
-          {!user && (
-            <>
-              <p>Welcome! Login with Twitter to be able to create a pack.</p>
-              <button
-                className={styles.button}
-                onClick={handleLogin}
-              >
-                <div>
-                  <FiTwitter />
-                  Login
-                </div>
-              </button>
-            </>
-          )}
 
           { user && (
             <>

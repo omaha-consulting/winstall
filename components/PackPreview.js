@@ -69,7 +69,7 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
                     <p className={styles.includes}>Includes {pack.apps.slice(0, 3).map(a => a.name).join(", ")}, and more.</p>
                     <div className="box">
                         <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
-                            <button className="button accent"><FiPackage /> Get Pack</button>
+                            <button className="button accent"><FiPackage /> View Pack</button>
                         </Link>
 
                         { showDelete && (
