@@ -51,7 +51,7 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
             <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
                 <a>
                     <header className={`${styles.packIcons} ${icons.length <= 2? styles.singleIcon : ""}`} id={pack.accent}>
-                        <ul>
+                        <ul style={{gridTemplateColumns: `repeat(${icons.length > 4 ? "4": icons.length},1fr)`}}>
                             {
                             icons.map((icon, index) => <li key={index}><AppIcon icon={icon} /></li>)
                             }
