@@ -168,7 +168,7 @@ function PackDetail({ pack, creator }) {
             <AppSkeleton />
           ) : (
             <div>
-              <MetaTags title={`${pack.title} - winstall`} />
+              <MetaTags title={`${pack.title} - winstall`} desc={`Includes ${pack.apps[0].name}, ${pack.apps[1].name}, ${pack.apps[2].name}, and more!`} />
 
               <h1>{pack.title}</h1>
 

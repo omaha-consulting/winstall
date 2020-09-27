@@ -11,10 +11,10 @@ export default function Packs({ packs }) {
   
     return (
         <PageWrapper>
-            <MetaTags title="Packs - winstall" />
+            <MetaTags title="Packs - winstall" desc="Checkout the community's app collections for your new Windows 10 machine." />
 
             <div>
-             <FeaturePromoter art="/assets/packsPromo.svg" promoId="packs" disableHide={true}>
+                <FeaturePromoter art="/assets/packsPromo.svg" promoId="packs" disableHide={true}>
                     <h3>Introducing Packs</h3>
                     <h1>Curate, share, and show off the apps you use daily.</h1>
                     <div className="box2">
@@ -49,6 +49,6 @@ export async function getStaticProps() {
         props: {
             packs,
         },
-        revalidate: 1
+        revalidate: 600
     };
 }

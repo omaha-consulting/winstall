@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const MetaTags = ({ title }) => {
+const MetaTags = ({ title, desc="Bulk install Windows apps quickly with Windows Package Manager." }) => {
     return (
       <Head>
         <title>{title}</title>
@@ -10,7 +10,7 @@ const MetaTags = ({ title }) => {
         />
         <meta
           name="description"
-          content="Bulk install Windows apps quickly with Windows Package Manager."
+          content={desc}
         ></meta>
 
         <link rel="icon" href="/favicon.ico" />
@@ -22,7 +22,7 @@ const MetaTags = ({ title }) => {
         <meta property="og:title" content={title} />
         <meta
           property="og:description"
-          content="Bulk install Windows apps quickly with Windows Package Manager."
+          content={desc}
         />
         <meta property="og:image" content="https://winstall.app/cover.png" />
 
@@ -31,7 +31,7 @@ const MetaTags = ({ title }) => {
         <meta property="twitter:title" content={title} />
         <meta
           property="twitter:description"
-          content="Bulk install Windows apps quickly with Windows Package Manager."
+          content={desc}
         />
         <meta
           property="twitter:image"
