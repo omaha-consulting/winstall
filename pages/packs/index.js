@@ -29,7 +29,7 @@ export default function Packs({ packs }) {
 
                 
                 <ul className={`${styles.all} ${styles.storeList}`}>
-                    {packs.map(pack => <li key={pack._id}><PackPreview pack={pack}/></li>)}
+                    {packs.map(pack => <li key={pack._id}><PackPreview pack={pack} /></li>)}
                 </ul>
             </div>
 

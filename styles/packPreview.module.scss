@@ -55,6 +55,9 @@
     .packMeta{
         padding: 20px;
         transition: 0.1s all ease-in-out;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
 
         h3{
             margin: 0px;
