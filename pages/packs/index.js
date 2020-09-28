@@ -4,7 +4,7 @@ import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
 import Link from "next/link";
-import { FiPackage, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import FeaturePromoter from "../../components/FeaturePromoter";
 
 export default function Packs({ packs }) {
