@@ -10,7 +10,6 @@ import ListPackages from "../components/ListPackages";
 import {FiSearch, FiHelpCircle} from "react-icons/fi";
 import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
-import { route } from "next/dist/next-server/server/router";
 
 function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected=[]}) {
   const [results, setResults] = useState([])
@@ -97,6 +96,7 @@ function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPac
             id="search"
             value={searchInput}
             autoComplete="off"
+            autoFocus={true}
             placeholder={placeholder || "Search for apps here"}
           />
         </div>

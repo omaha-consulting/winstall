@@ -16,7 +16,7 @@ export default function Packs({ packs }) {
             <div>
                 <FeaturePromoter art="/assets/packsPromo.svg" promoId="packs" disableHide={true}>
                     <h3>Introducing Packs</h3>
-                    <h1>Curate, share, and show off the apps you use daily.</h1>
+                    <h1>Curate and share the apps you use daily.</h1>
                     <div className="box2">
                         <Link href="/packs/create"><button className="button spacer accent" id="starWine"><FiPlus/> Create a pack</button></Link>
                     </div>
