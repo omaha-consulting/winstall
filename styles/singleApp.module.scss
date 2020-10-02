@@ -157,6 +157,10 @@
             top: -15px;
             height: 50px;
             transition: 0.3s all ease-in-out;      
+
+            option{
+                background-color: var(--card-bg);
+            }
             
         }
     }
