@@ -55,7 +55,7 @@ export default function Explainer() {
             Windows command-line. Input that into a command line app of your
             choice, and hit enter to start installing the apps one-by-one using
             Windows Package Manager. You can also generate a PowerShell script by toggling
-            the "Show Powershell scirpt" option.
+            the "Show Powershell script" option.
           </p>
           <p>
             Alternatively, you can click on the "Download .bat/.ps1" button which
