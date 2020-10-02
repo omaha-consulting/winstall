@@ -43,7 +43,7 @@
   },
   "python": {
     "img": "python.webp",
-    "name": "python",
+    "name": "Python",
     "_id": "Python.Python",
     "path": "Python/Python"
   },
@@ -55,7 +55,7 @@
   },
   "zoom": {
     "img": "zoom.webp",
-    "name": "zoom",
+    "name": "Zoom",
     "_id": "Zoom.Zoom",
     "path": "Zoom/Zoom"
   },
