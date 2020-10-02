@@ -13,8 +13,10 @@ import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
 import Toggle from "react-toggle";
 import MetaTags from "../components/MetaTags";
 
+import { setSelectedAppLocalStorage } from "../utils/helpers";
+
 function Generate() {
-    const { selectedApps } = useContext(SelectedContext);
+    const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [copyText, setCopyText] = useState("Copy to clipboard");
     const [script, setScript] = useState("");
     const [showPS, setShowPS] = useState(false);
@@ -90,6 +92,9 @@ function Generate() {
         dl.setAttribute("download", `winstall${showPS ? ".ps1" : ".bat"}`)
         dl.href = "data:text/plain;base64," + btoa(script);
         dl.click();
+
+        setSelectedApps([]);
+        setSelectedAppLocalStorage([]);
     }
 
     let handleScriptSwitch = () => {
