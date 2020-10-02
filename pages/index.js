@@ -30,7 +30,7 @@ function Home({ popular, apps, recommended }) {
             />
           </div>
         </div>
-        <Search apps={apps} />
+        <Search apps={apps} limit={4}/>
       </div>
 
       <PopularApps apps={popular} all={apps} />

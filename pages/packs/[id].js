@@ -12,8 +12,9 @@ import PackAppsList from "../../components/PackAppsList";
 import SelectionBar from "../../components/SelectionBar";
 import SelectedContext from "../../ctx/SelectedContext";
 import { timeAgo } from "../../utils/helpers";
-import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock } from "react-icons/fi";
+import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock, FiEdit, FiTrash } from "react-icons/fi";
 import Toggle from "react-toggle";
+import { getSession } from "next-auth/client";
 
 function AppSkeleton() {
     return (
@@ -137,6 +138,19 @@ function ScriptCode({apps}){
 function PackDetail({ pack, creator }) {
     const router = useRouter();
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
+    const [user, setUser] = useState();
+    const [deleting, setDeleting] = useState(false);
+    const [deleteLabel, setDeleteLabel] = useState("Delete Pack");
+
+    useEffect(() => {
+      getSession().then(async (session) => {
+        if(!session){
+          return;
+        };
+  
+        setUser(session.user)
+      });
+    }, []);
 
     const fallbackMessage = {
         title: "Sorry! We could not load this pack.",
@@ -161,65 +175,123 @@ function PackDetail({ pack, creator }) {
       window.open(link)
     }
 
-    return (
-      <PageWrapper>
-        <div className={styles.content}>
-          {router.isFallback ? (
-            <AppSkeleton />
-          ) : (
-            <div>
-              <MetaTags title={`${pack.title} - winstall`} desc={`Includes ${pack.apps[0].name}, ${pack.apps[1].name}, ${pack.apps[2].name}, and more!`} />
+    const deletePack = async () => {
+      if(!user) return;
 
-              <h1>{pack.title}</h1>
+      setDeleting(true);
+      setDeleteLabel("Deleting...");
 
-              <Link
-                href="/users/[id]"
-                as={`/users/${creator.id_str}`}
-                prefetch={false}
+      await fetch(
+          `https://api.winstall.app/packs/${pack._id}`,
+          {
+              method: "DELETE",
+              headers: {
+                  'Authorization': `${user.accessToken},${user.refreshToken}`,
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ creator: pack.creator })
+          }
+      ).then((data) => data.json()).then((data) => {
+          if(data.msg){ // sucessfully deleted
+              setDeleteLabel("Deleted!");
+              localStorage.removeItem("ownPacks");
+              router.push("/packs");
+          }
+      });
+  }
+
+  const handleDelete = async (e) => {
+      if(deleting) return;
+
+      if ('confirm' in window && typeof window.confirm === 'function') {
+          if (window.confirm("Are you sure you want to delete this pack?")) {
+              deletePack();
+          }
+      } else {
+          deletePack();
+      }
+
+  }
+
+  return (
+    <PageWrapper>
+      <div className={styles.content}>
+        {router.isFallback ? (
+          <AppSkeleton />
+        ) : (
+          <div>
+            <MetaTags title={`${pack.title} - winstall`} desc={`Includes ${pack.apps[0].name}, ${pack.apps[1].name}, ${pack.apps[2].name}, and more!`} />
+
+            <h1>{pack.title}</h1>
+
+            <Link
+              href="/users/[id]"
+              as={`/users/${creator.id_str}`}
+              prefetch={false}
+            >
+              <a className={styles.author} title="View other packs by this user">
+                <img
+                  src={creator.profile_image_url_https}
+                  alt="pack creator image"
+                />
+                @{creator.screen_name}
+              </a> 
+            </Link>
+
+            <p>{pack.desc}</p>
+            <p className={styles.time}><FiClock/> Last updated {timeAgo(pack.updatedAt)} </p>
+
+            <div className={styles.packGet}>
+              <a
+                className="button lightText"
+                href="#packScript"
+                id={pack.accent}
               >
-                <a className={styles.author} title="View other packs by this user">
-                  <img
-                    src={creator.profile_image_url_https}
-                    alt="pack creator image"
-                  />
-                  @{creator.screen_name}
-                </a> 
-              </Link>
-
-              <p>{pack.desc}</p>
-              <p className={styles.time}><FiClock/> Last updated {timeAgo(pack.updatedAt)} </p>
-
-              <div className={styles.packGet}>
+                <FiCodepen /> Get Pack
+              </a>
+              <a className="button" onClick={handleSelectAll}>
+                <FiPackage /> Select Apps
+              </a>
                 <a
-                  className="button lightText"
-                  href="#packScript"
-                  id={pack.accent}
+                  className="button"
+                  onClick={handleShare}
                 >
-                  <FiCodepen /> Get Pack
-                </a>
-                <a className="button" onClick={handleSelectAll}>
-                  <FiPackage /> Select Apps
-                </a>
-                  <a
-                    className="button"
-                    onClick={handleShare}
-                  >
-                    <FiShare2 /> Share
-                </a>
-              </div>
-
-              <PackAppsList providedApps={pack.apps} reorderEnabled={false} />
-
-              <ScriptCode apps={pack.apps} />
+                  <FiShare2 /> Share
+              </a>
             </div>
-          )}
 
-          {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
-        </div>
+            {
+              (user && (user.id === pack.creator)) && (
+                <div className={styles.packGet}>
+                  <Link href={`/packs/edit?id=${pack._id}`} prefetch={false}>
+                    <a className="button subtle">
+                        <FiEdit /> Edit Pack
+                    </a>
+                  </Link> &nbsp;
+        
+                  <a
+                      className="button subtle"
+                      onClick={handleDelete}
+                    >
+                      <FiTrash /> {deleteLabel}
+                  </a>
+                  
+                </div>
+              )
+            }
 
-        <SelectionBar />
-      </PageWrapper>
-    );
+            <PackAppsList providedApps={pack.apps} reorderEnabled={false} />
+
+            <ScriptCode apps={pack.apps} />
+          </div>
+        )}
+
+        {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
+      </div>
+
+      <SelectionBar />
+    </PageWrapper>
+  );
 }
 
 export async function getStaticPaths() {

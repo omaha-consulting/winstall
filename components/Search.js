@@ -11,7 +11,7 @@ import {FiSearch, FiHelpCircle} from "react-icons/fi";
 import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
 
-function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected=[]}) {
+function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected=[], limit=-1}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
   const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
@@ -72,11 +72,7 @@ function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPac
 
     let results = fuse.search(query.toLowerCase().replace(/\s/g, ""));
 
-    if(isPackView){
-      setResults([...results.map((r) => r.item).slice(0, 4)]);
-    } else{
-      setResults([...results.map((r) => r.item)]);
-    }
+    setResults([...results.map((r) => r.item).slice(0, (limit ? limit : results.length))]);
   };
 
 
