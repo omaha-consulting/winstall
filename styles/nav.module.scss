@@ -1,6 +1,10 @@
 .nav{
     display: flex;
 
+    .ddOnly{
+        display: none;
+    }
+
     span, a{
         background-color: var(--card-bg);
         cursor: pointer;
@@ -18,6 +22,25 @@
         }
     }
 
+    .justIcon{
+        padding: 0px;
+        width: 50px;
+        
+        svg{
+            padding-right: 0px;
+        }
+    }
+
+    .user{
+        padding: 0px;
+
+        img{
+            width: 50px;
+            height: 50px;
+            margin: 0px;
+        }
+    }
+
     a{
         font-size: 20px;
         height: 50px;
@@ -27,14 +50,22 @@
         margin-right: 15px;
         font-weight: normal;
         color: var(--textColor);
+        display: flex;
+        align-items: center;
 
         p{
             margin: 0px;
             padding: 0px;
         }
+
+        img{
+            width: 25px;
+            height: 25px;
+            border-radius: 50px;
+            margin-right: 10px;
+        }
         
         svg{
-            padding-top: 15px;
             font-size: 18px;
             padding-right: 10px;
         }
@@ -44,15 +75,13 @@
         }
     }
 
-    span:nth-child(3){
-        margin-right: 15px;
-    }
 
     span{
         width: 50px;
         height: 50px;
         border-radius: 50%;
         font-size: 22px;
+        margin-right: 15px;
 
         svg{
             padding-top: 15px;
@@ -60,26 +89,84 @@
     }
 }
 
-@media(max-width: 550px){
-    .nav{
-        a{
-            border-radius: 50%;
-            padding: 0px;
-            width: 50px;
+.dropdown{
+    display: none;
+    background-color: var(--card-bg);
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s all ease-in-out;
+    align-self: center;
+    justify-content: center;
+    place-items: center;
+    border: 0px !important;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 22px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+    color: inherit;
 
-            p{
-                display: none;
-            }
-            
-            svg{
-                padding-right: 0px;
-            }
-        }
+    &:hover{
+        opacity: 0.75;
     }
 }
 
-@media(max-width: 460px){
+
+@media(max-width: 590px){
     .nav{
-        margin-top: 20px;
+        right: 30px !important;
+    }
+}
+
+@media(max-width: 900px){
+
+    .dropdown{
+        display: flex;
+    }
+
+    .nav{
+        display: none;
+        position: absolute;
+        right: 55px;
+        top: 80px;
+        z-index: 999;
+        width: 200px;
+        background-color: var(--card-bg);
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        text-align: left;
+        padding: 0 20px;
+
+        a, span{
+            background-color: transparent;
+            box-shadow: none;
+            border-radius: 0px;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            justify-content: flex-start;
+        }
+
+        .ddOnly{
+            display: block;
+            font-size: 20px;
+            height: 50px;
+            margin: 0px;
+            line-height: 50px;
+        }
+
+        .justIcon{
+            width: auto;
+            
+            svg{
+                padding-right: 10px;
+            }
+        }
+
+        .user img{
+            width: 23px;
+            height: 23px;
+            margin-right: 10px;
+        }
     }
 }

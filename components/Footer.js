@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import styles from "../styles/footer.module.scss";
-
-import {FaJira} from "react-icons/fa";
+import Link from "next/link";
 import { FiChevronUp } from "react-icons/fi";
 import SelectedContext from "../ctx/SelectedContext";
 
@@ -33,29 +32,55 @@ export default function Footer(){
           href="https://builtbymeh.com/"
           target="_blank"
           rel="noopener noreferrer"
-        ><img src={"/assets/meh.png"} alt="builtbymeh.com logo" draggable={false}/></a>
-        <p>
-          <a
-            href="https://twitter.com/mehedih_"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Built by Mehedi Hassan
-          </a>{" "}
-          <FaJira />{" "}
-          <a
-            href="https://github.com/MehediH/winstall"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Contribute on GitHub
-          </a>
-        </p>
-        <p className={styles.disclaimer}>
-          winstall is not associated with Microsoft, Windows, or Windows Package
-          Manager.
-        </p>
-        <span id="btnTop" title="Go to top" onClick={topFunction} className={`${styles.backToTop} ${selectedApps.length !== 0 ? styles.selectionOpen : ""}`}>
+          className={styles.brand}
+        >
+          <img
+            src={"/assets/meh.png"}
+            alt="builtbymeh.com logo"
+            draggable={false}
+          />
+          <p>Built by Mehedi Hassan.</p>
+        </a>
+
+        <ul>
+          <li>
+            <a
+              href="https://github.com/MehediH/winstall"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          </li>
+          <li>
+            <Link href="/privacy">
+              <a>Privacy Policy</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/eli5">
+              <a>Help</a>
+            </Link>
+          </li>
+          <li>
+            <a
+              href="https://ko-fi.com/mehedi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Donate
+            </a>
+          </li>
+        </ul>
+
+        <span
+          id="btnTop"
+          title="Go to top"
+          onClick={topFunction}
+          className={`${styles.backToTop} ${
+            selectedApps.length !== 0 ? styles.selectionOpen : ""
+          }`}
+        >
           <FiChevronUp />
         </span>
       </div>

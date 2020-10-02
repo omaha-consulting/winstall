@@ -10,9 +10,8 @@ import ListPackages from "../components/ListPackages";
 import {FiSearch, FiHelpCircle} from "react-icons/fi";
 import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
-import { route } from "next/dist/next-server/server/router";
 
-function Search({apps, onSearch, label, placeholder}) {
+function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected=[], limit=-1}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
   const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
@@ -73,7 +72,7 @@ function Search({apps, onSearch, label, placeholder}) {
 
     let results = fuse.search(query.toLowerCase().replace(/\s/g, ""));
 
-    setResults([...results.map((r) => r.item)]);
+    setResults([...results.map((r) => r.item).slice(0, (limit ? limit : results.length))]);
   };
 
 
@@ -93,6 +92,7 @@ function Search({apps, onSearch, label, placeholder}) {
             id="search"
             value={searchInput}
             autoComplete="off"
+            autoFocus={true}
             placeholder={placeholder || "Search for apps here"}
           />
         </div>
@@ -118,7 +118,11 @@ function Search({apps, onSearch, label, placeholder}) {
             <SingleApp
               app={app}
               showDesc={true}
+              preventGlobalSelect={preventGlobalSelect}
+              pack={isPackView}
+              hideBorder={true}
               key={`${app._id}`}
+              preSelected={alreadySelected.findIndex(a => a._id === app._id) != -1 ? true : false}
             />
           )}
         </ListPackages>

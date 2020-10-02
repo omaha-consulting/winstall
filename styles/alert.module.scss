@@ -1,0 +1,46 @@
+.alert{
+    margin: 20px 0;
+    transition: 0.1s all ease-in-out;
+    box-shadow: 0px 3px 5px #00000026;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    place-items: center;
+    background-color: var(--card-bg);
+    
+    svg{
+        margin-right: 10px;
+    }
+     
+    p{
+        margin: 0px;
+    }
+}
+
+.themed{
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.close{
+    margin-left: auto;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
+    margin-right: 0px;
+
+    &:hover{
+        opacity: 0.75;
+    }
+}
+
+@media (max-width: 1174px){
+    .alert{
+        flex-direction: column;
+        place-items: flex-start;
+
+        svg{
+            margin-bottom: 10px;
+            justify-content: left;
+        }
+    }
+}

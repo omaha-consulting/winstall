@@ -21,10 +21,10 @@ function winstall({ Component, pageProps }) {
     return (
       <SelectedContext.Provider value={selectedAppValue}>
         <PopularContext.Provider value={popularApps}>
-          <>
-            <Nav />
-            <Component {...pageProps} />
-          </>
+            <>
+              <Nav />
+              <Component {...pageProps} />
+            </>
         </PopularContext.Provider>
       </SelectedContext.Provider>
     );

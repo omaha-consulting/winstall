@@ -94,6 +94,14 @@ export let timeAgo = (isoDate) => {
     value = Math.floor(seconds / 60);
     unit = "minute";
   }
+
+  // if it's more than 30 days, we just return the actual date
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "Septeember", "October", "November", "December"];
+
+  if(value > 30){
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  }
+
   if (value != 1) unit = unit + "s";
   return value + " " + unit + " " + direction;
 }
