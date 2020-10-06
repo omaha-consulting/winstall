@@ -6,15 +6,10 @@
 
 What's new 
 ----------
-- You can now view apps without having to individually load them.
-- Apps now display icons where possible.
-- You can now share an app directly ([https://winstall.app/apps/Microsoft.VisualStudioCode](https://winstall.app/apps/Microsoft.VisualStudioCode))
-- Search now lets you search by app name, publisher, tags, or description.
-    - Bonus! You can add a search prefix to target a specific field. Try it out: add "publisher:" before the search query to search for apps by a specific publisher.
-- The homepage now shows a list of recently updated apps.
-- You can now select different versions of an app to install, and even download the installer for the different versions.
-- You can now sort apps by name or last update time on the all apps page.
-- Navigating between different parts of the app is significantly improved, and is almost instantaneous.
+- Introducing Packs: curate and share lists of apps you love and use daily.
+- PWA support
+- Ability to share individual apps 
+- New homepage powered by official winstall packs
 
 How does it work?
 -----------------------
