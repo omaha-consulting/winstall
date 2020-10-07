@@ -24,11 +24,11 @@ function Generate() {
 
       selectedApps.map((app) => {
         installs.push(
-          `winget install --id=${app._id} ${
+          `winget install ${app._id} ${
             app.selectedVersion !== app.latestVersion
               ? `-v "${app.selectedVersion}" `
               : ""
-          }-e`
+          }`
         );
 
         return app;
