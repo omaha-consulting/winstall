@@ -314,19 +314,19 @@ export async function getStaticProps({ params }) {
         }
       }).then(res => res.json())
 
-      const appsList = pack.apps;
+      let appsList = pack.apps;
 
       const getIndividualApps = appsList.map(async (app, index) => {
         return new Promise(async (resolve) => {
-          let appData = await fetch(`https://api.winstall.app/apps/${app._id}`).then(res => res.json());
+          let appData = await fetch(`https://api.winstall.app/apps/${app._id}`).then(res => res.ok ? res.json() : null);
+         
           appsList[index] = appData;
           resolve();
         })
       })
 
       await Promise.all(getIndividualApps).then(() => {
-        pack.apps = appsList;
-
+        pack.apps = appsList.filter(app => app != null);
       })
       
       return { props: pack ? { pack, creator } : {}, revalidate: 600 }
