@@ -37,7 +37,12 @@ export default function Edit({ allApps }) {
     }, [])
 
     const checkPack = async (id, userId) => {
-        let pack = await fetch(`https://api.winstall.app/packs/${id}`).then(res => res.status === 200 ? res.json() : null);
+        let pack = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${id}`, {
+            headers: {
+                'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+                'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+            }
+        }).then(res => res.status === 200 ? res.json() : null);
 
         if(!pack){
             setNotFound(true);
@@ -50,7 +55,12 @@ export default function Edit({ allApps }) {
 
             const getIndividualApps = appsList.map(async (app, index) => {
                 return new Promise(async (resolve) => {
-                    let appData = await fetch(`https://api.winstall.app/apps/${app._id}`).then(res => res.ok ? res.json() : null);
+                    let appData = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${app._id}`, {
+                        headers: {
+                            'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+                            'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+                        }
+                    }).then(res => res.ok ? res.json() : null);
                     appsList[index] = appData;
                     resolve();
                 })
@@ -113,7 +123,12 @@ export default function Edit({ allApps }) {
 }
 
 export async function getStaticProps() {
-    let apps = await fetch(`https://api.winstall.app/apps`).then((res) =>
+    let apps = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps`, {
+        headers: {
+            'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+            'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+        }
+    }).then((res) =>
         res.json()
     );
 

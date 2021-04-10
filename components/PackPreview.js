@@ -18,12 +18,14 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
         if(!auth) return;
 
         await fetch(
-            `https://api.winstall.app/packs/${pack._id}`,
+            `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${pack._id}`,
             {
                 method: "DELETE",
                 headers: {
                     'Authorization': `${auth.accessToken},${auth.refreshToken}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+                    'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
                 },
                 body: JSON.stringify({ creator: pack.creator })
             }

@@ -99,7 +99,12 @@ export default function Packs({ packs }) {
 
 
 export async function getStaticProps() {
-    let packs = await fetch(`https://api.winstall.app/packs`).then((res) =>
+    let packs = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs`, {
+      headers: {
+        'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+        'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+      }
+    }).then((res) =>
         res.json()
     );
 

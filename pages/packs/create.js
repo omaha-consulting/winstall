@@ -110,7 +110,12 @@ function Create({ allApps }) {
 }
 
 export async function getStaticProps() {
-  let apps = await fetch(`https://api.winstall.app/apps`).then((res) =>
+  let apps = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps`, {
+    headers: {
+      'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+      'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+    }
+  }).then((res) =>
       res.json()
   );
 

@@ -138,7 +138,7 @@ const User = () => {
     useEffect(() => {
       getSession().then(async (session) => {
         if(!session) return;
-        await fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`, {
+        await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TWITTER_BEARER}`
