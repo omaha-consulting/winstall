@@ -29,12 +29,14 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
         }
 
         await fetch(
-            editMode ? `https://api.winstall.app/packs/${defaultValues._id}` : `https://api.winstall.app/packs/create`,
+            editMode ? `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${defaultValues._id}` : `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/create`,
             {
                 method: editMode ? 'PATCH' : 'POST',
                 headers: {
                     'Authorization': `${user.accessToken},${user.refreshToken}`,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+                    'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
                 },
                 body: JSON.stringify({
                   title: values.title,

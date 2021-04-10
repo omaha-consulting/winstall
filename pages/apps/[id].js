@@ -83,7 +83,12 @@ export async function getStaticProps({ params }) {
     console.log("Getting content from API")
 
     try{
-        let app = await fetch(`https://api.winstall.app/apps/${params.id}`).then(res => res.json());
+        let app = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${params.id}`, {
+          headers: {
+            'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+            'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+          }
+        }).then(res => res.json());
         return { props: app ? { app } : {} }
     } catch(err) {
         return { props: {} };

@@ -182,12 +182,14 @@ function PackDetail({ pack, creator }) {
       setDeleteLabel("Deleting...");
 
       await fetch(
-          `https://api.winstall.app/packs/${pack._id}`,
+          `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${pack._id}`,
           {
               method: "DELETE",
               headers: {
                   'Authorization': `${user.accessToken},${user.refreshToken}`,
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+                  'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
               },
               body: JSON.stringify({ creator: pack.creator })
           }
@@ -305,7 +307,12 @@ export async function getStaticProps({ params }) {
     console.log("Getting content from API")
 
     try{
-      let pack = await fetch(`https://api.winstall.app/packs/${params.id}`).then(res => res.json());
+      let pack = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${params.id}`, {
+        headers: {
+          'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+          'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+        }
+      }).then(res => res.json());
 
       let creator = await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`, {
         method: "GET",
@@ -318,7 +325,12 @@ export async function getStaticProps({ params }) {
 
       const getIndividualApps = appsList.map(async (app, index) => {
         return new Promise(async (resolve) => {
-          let appData = await fetch(`https://api.winstall.app/apps/${app._id}`).then(res => res.ok ? res.json() : null);
+          let appData = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${app._id}`, {
+            headers: {
+              'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+              'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
+            }
+          }).then(res => res.ok ? res.json() : null);
          
           appsList[index] = appData;
           resolve();

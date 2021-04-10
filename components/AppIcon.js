@@ -52,8 +52,8 @@ const AppIcon = ({id, name, icon}) => {
     return (
       <AppPicture
         name={name}
-        srcSetPng={`https://api.winstall.app/icons/${icon}.png`}
-        srcSetWebp={`https://api.winstall.app/icons/next/${icon}.webp`}
+        srcSetPng={`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/icons/${icon}.png`}
+        srcSetWebp={`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/icons/next/${icon}.webp`}
       />
     );
 }

@@ -39,11 +39,13 @@ function OwnProfile() {
 
   const getPacks = async (user) => {
     await fetch(
-      `https://api.winstall.app/packs/profile/${user.id}`,
+      `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/profile/${user.id}`,
       {
         method: "GET",
         headers: {
-          'Authorization': `${user.accessToken},${user.refreshToken}`
+          'Authorization': `${user.accessToken},${user.refreshToken}`,
+          'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+          'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
         }
       }
     )

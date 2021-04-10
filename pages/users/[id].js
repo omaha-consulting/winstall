@@ -32,10 +32,12 @@ function UserProfile({ uid }) {
     }, [])
 
     const getPacks = async (id, cache=true) => {
-        await fetch(`https://api.winstall.app/packs/${cache ? "users" : "profile"}/${uid}`, {
+        await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${cache ? "users" : "profile"}/${uid}`, {
             method: "GET",
             headers: {
-                "Authorization": process.env.NEXT_PUBLIC_TWITTER_SECRET
+                "Authorization": process.env.NEXT_PUBLIC_TWITTER_SECRET,
+                'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
+                'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
             }
         }).then(data => data.json()).then(data => {
             setPacks(data);
