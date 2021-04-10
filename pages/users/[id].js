@@ -16,7 +16,7 @@ function UserProfile({ uid }) {
     useEffect(() => {
         getSession().then(async (session) => {
 
-            await fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/users/show.json?user_id=${uid}`, {
+            await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${uid}`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TWITTER_BEARER}`
