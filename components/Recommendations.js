@@ -143,7 +143,7 @@ const App = ({data}) => {
   
       <Link href="/apps/[id]" as={`/apps/${data._id}`} prefetch={false}>
         <a>
-          <AppIcon name={data.name} icon={data.icon} />
+          <AppIcon name={data.name} icon={data.icon} id={data._id}/>
           <h4>{data.name}</h4>
         </a>
       </Link>

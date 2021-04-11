@@ -6,12 +6,12 @@ import Link from "next/link";
 import fetchWinstallAPI from "../utils/fetchWinstallAPI";
 
 export default function PackPreview({ pack, hideMeta, showDelete=false, auth, deleted}){
-    const [icons, setIcons] = useState([]);
+    const [appIcons, setIcons] = useState([]);
 
     useEffect(() => {
-        const icons = pack.apps.filter(app => app.icon !== "").map(a => a.icon);
+        const appIcons = pack.apps.map(a => ({ icon: a.icon, _id: a._id })); 
 
-        setIcons([...new Set(icons)].slice(0, 4));
+        setIcons([...appIcons].slice(0, 4));
 
     }, [])
 
@@ -48,12 +48,12 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
         <div className={styles.packCard}>
             <Link href="/packs/[id]" as={`/packs/${pack._id}`} prefetch={false}>
                 <a>
-                    <header className={`${styles.packIcons} ${icons.length <= 2? styles.singleIcon : ""}`} id={pack.accent}>
-                        <ul style={{gridTemplateColumns: `repeat(${icons.length > 4 ? "4": icons.length},1fr)`}}>
+                    <header className={`${styles.packIcons} ${appIcons.length <= 2? styles.singleIcon : ""}`} id={pack.accent}>
+                        <ul style={{gridTemplateColumns: `repeat(${appIcons.length > 4 ? "4": appIcons.length},1fr)`}}>
                             {
-                            icons.map((icon, index) => <li key={index}><AppIcon icon={icon} /></li>)
+                                appIcons.map((app, index) => <li key={index}><AppIcon icon={app.icon} id={app._id}/></li>)
                             }
-                            { icons.length === 0 && (
+                            { appIcons.length === 0 && (
                                 <li><FiPackage/></li>
                             )}
                         </ul>
