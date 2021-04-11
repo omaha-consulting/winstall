@@ -10,6 +10,7 @@ import CreatePackForm from '../../components/CreatePackForm';
 import PackAppsList from '../../components/PackAppsList';
 import Alert from '../../components/Alert';
 import { FiInfo } from 'react-icons/fi';
+import fetchWinstallAPI from '../../utils/fetchWinstallAPI';
 
 export default function Edit({ allApps }) {
     const [user, setUser] = useState()
@@ -37,12 +38,7 @@ export default function Edit({ allApps }) {
     }, [])
 
     const checkPack = async (id, userId) => {
-        let pack = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${id}`, {
-            headers: {
-                'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-                'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-            }
-        }).then(res => res.status === 200 ? res.json() : null);
+        let { response: pack, error } = await fetchWinstallAPI(`/packs/${id}`);
 
         if(!pack){
             setNotFound(true);
@@ -55,12 +51,10 @@ export default function Edit({ allApps }) {
 
             const getIndividualApps = appsList.map(async (app, index) => {
                 return new Promise(async (resolve) => {
-                    let appData = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${app._id}`, {
-                        headers: {
-                            'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-                            'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-                        }
-                    }).then(res => res.ok ? res.json() : null);
+                    let { response: appData, error } = await fetchWinstallAPI(`/apps/${app._id}`);
+
+                    if(error) appData = null;
+
                     appsList[index] = appData;
                     resolve();
                 })
@@ -123,14 +117,7 @@ export default function Edit({ allApps }) {
 }
 
 export async function getStaticProps() {
-    let apps = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps`, {
-        headers: {
-            'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-            'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-        }
-    }).then((res) =>
-        res.json()
-    );
+    let { response: apps } = await fetchWinstallAPI(`/apps`);
 
     return {
         props: {

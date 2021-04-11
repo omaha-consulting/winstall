@@ -17,6 +17,7 @@ import {
 } from "react-icons/fi";
 
 import Router from "next/router";
+import fetchWinstallAPI from "../utils/fetchWinstallAPI";
 
 function Store({ data }) {
     const [apps, setApps] = useState([])
@@ -200,14 +201,7 @@ function Store({ data }) {
 }
 
 export async function getStaticProps() {
-  let apps = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps`, { 
-    headers: {
-      'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-      'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-    }
-  }).then((res) =>
-    res.json()
-  );
+  let { response: apps } = await fetchWinstallAPI(`/apps`);
 
   return {
     props: {
