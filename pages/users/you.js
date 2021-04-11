@@ -8,6 +8,7 @@ import { getSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import Alert from "../../components/Alert";
 import { FiInfo } from "react-icons/fi";
+import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 
 function OwnProfile() {
   const [user, setUser] = useState();
@@ -38,28 +39,22 @@ function OwnProfile() {
   }, []);
 
   const getPacks = async (user) => {
-    await fetch(
-      `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/profile/${user.id}`,
-      {
-        method: "GET",
-        headers: {
-          'Authorization': `${user.accessToken},${user.refreshToken}`,
-          'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-          'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-        }
+    const { response: packs, error } = await fetchWinstallAPI(`/packs/profile/${user.id}`, {
+      headers: {
+        'Authorization': `${user.accessToken},${user.refreshToken}`
       }
-    )
-      .then((data) => data.json())
-      .then((data) => {
-        if(data.error){
-          setStatus(data.error);
-          return;
-        };
+    })
 
-        setPacks(data);
-        setLoading(false);
-        localStorage.setItem("ownPacks", JSON.stringify(data));
-      });
+    if(error){
+      setStatus(error);
+      return;
+    }
+
+    if(packs){
+      setPacks(packs);
+      setLoading(false);
+      localStorage.setItem("ownPacks", JSON.stringify(packs));
+    }
   };
 
   const handleDelete = (id) => {

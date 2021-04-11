@@ -15,6 +15,7 @@ import MetaTags from "../../components/MetaTags";
 import SelectionBar from "../../components/SelectionBar";
 import CreatePackForm from "../../components/CreatePackForm";
 import FeaturePromoter from "../../components/FeaturePromoter";
+import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 
 function Create({ allApps }) {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
@@ -110,14 +111,7 @@ function Create({ allApps }) {
 }
 
 export async function getStaticProps() {
-  let apps = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps`, {
-    headers: {
-      'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-      'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-    }
-  }).then((res) =>
-      res.json()
-  );
+  let { response: apps } = await fetchWinstallAPI(`/apps`);
 
   return {
       props: {

@@ -15,6 +15,7 @@ import { timeAgo } from "../../utils/helpers";
 import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock, FiEdit, FiTrash } from "react-icons/fi";
 import Toggle from "react-toggle";
 import { getSession } from "next-auth/client";
+import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 
 function AppSkeleton() {
     return (
@@ -181,25 +182,20 @@ function PackDetail({ pack, creator }) {
       setDeleting(true);
       setDeleteLabel("Deleting...");
 
-      await fetch(
-          `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${pack._id}`,
-          {
-              method: "DELETE",
-              headers: {
-                  'Authorization': `${user.accessToken},${user.refreshToken}`,
-                  'Content-Type': 'application/json',
-                  'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-                  'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-              },
-              body: JSON.stringify({ creator: pack.creator })
-          }
-      ).then((data) => data.json()).then((data) => {
-          if(data.msg){ // sucessfully deleted
-              setDeleteLabel("Deleted!");
-              localStorage.removeItem("ownPacks");
-              router.push("/packs");
-          }
+      const { response } = await fetchWinstallAPI(`/packs/${pack._id}`, {
+          method: "DELETE",
+          headers: {
+              'Authorization': `${user.accessToken},${user.refreshToken}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ creator: pack.creator })
       });
+
+      if(response && response.msg){
+        setDeleteLabel("Deleted!");
+        localStorage.removeItem("ownPacks");
+        router.push("/packs");
+      }
   }
 
   const handleDelete = async (e) => {
@@ -304,15 +300,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    console.log("Getting content from API")
 
     try{
-      let pack = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${params.id}`, {
-        headers: {
-          'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-          'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-        }
-      }).then(res => res.json());
+      let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
 
       let creator = await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`, {
         method: "GET",
@@ -325,12 +315,9 @@ export async function getStaticProps({ params }) {
 
       const getIndividualApps = appsList.map(async (app, index) => {
         return new Promise(async (resolve) => {
-          let appData = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${app._id}`, {
-            headers: {
-              'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-              'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-            }
-          }).then(res => res.ok ? res.json() : null);
+          let { response: appData, error } = await fetchWinstallAPI(`/apps/${app._id}`);
+
+          if(error) appData = null;
          
           appsList[index] = appData;
           resolve();

@@ -12,6 +12,7 @@ import popularAppsList from "../data/popularApps.json";
 import FeaturePromoter from "../components/FeaturePromoter";
 import Link from "next/link";
 import { FiPlus, FiPackage } from "react-icons/fi";
+import fetchWinstallAPI from "../utils/fetchWinstallAPI";
 
 function Home({ popular, apps, recommended }) {
   return (
@@ -56,19 +57,9 @@ function Home({ popular, apps, recommended }) {
 
 export async function getStaticProps(){
   let popular = shuffleArray(Object.values(popularAppsList));
-  let apps = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps`, {
-    headers: {
-      'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-      'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-    }
-  }).then((res) => res.json());
 
-  let recommended = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`, {
-    headers: {
-      'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-      'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-    }
-  }).then((res) => res.json());
+  let { response: apps } = await fetchWinstallAPI(`/apps`);
+  let { response: recommended } = await fetchWinstallAPI(`/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`);
 
   // get the new pack data, and versions data, etc.
   const getPackData = recommended.map(async (pack) => {
@@ -77,12 +68,10 @@ export async function getStaticProps(){
 
       const getIndividualApps = appsList.map(async (app, index) => {
         return new Promise(async (resolve) => {
-          let appData = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${app._id}`, {
-            headers: {
-              'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-              'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-            }
-          }).then(res => res.ok ? res.json() : null);
+          let { response: appData, error } = await fetchWinstallAPI(`/apps/${app._id}`);
+
+          if(error) appData = null;
+
           appsList[index] = appData;
           resolve();
         })

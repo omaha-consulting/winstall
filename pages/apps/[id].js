@@ -10,6 +10,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { useRouter } from "next/router";
 import MetaTags from "../../components/MetaTags";
+import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 
 function AppSkeleton() {
     return (
@@ -80,15 +81,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    console.log("Getting content from API")
-
     try{
-        let app = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/apps/${params.id}`, {
-          headers: {
-            'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-            'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-          }
-        }).then(res => res.json());
+        let { response: app } = await fetchWinstallAPI(`/apps/${params.id}`);
+
         return { props: app ? { app } : {} }
     } catch(err) {
         return { props: {} };

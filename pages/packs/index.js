@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FiChevronLeft, FiPlus, FiChevronRight, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import FeaturePromoter from "../../components/FeaturePromoter";
 import { useState} from "react";
+import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 
 export default function Packs({ packs }) {
     const [offset, setOffset] = useState(0);
@@ -99,15 +100,7 @@ export default function Packs({ packs }) {
 
 
 export async function getStaticProps() {
-    let packs = await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs`, {
-      headers: {
-        'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-        'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-      }
-    }).then((res) =>
-        res.json()
-    );
-
+    let { response: packs } = await fetchWinstallAPI(`/packs`);
 
     const officialPacks = process.env.NEXT_OFFICIAL_PACKS_CREATOR;
 

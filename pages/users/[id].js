@@ -6,6 +6,7 @@ import PackPreview from "../../components/PackPreview";
 import { useEffect, useState } from "react";
 import { getSession } from "next-auth/client";
 import Error from "../../components/Error";
+import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 
 function UserProfile({ uid }) {
     const [user, setUser] = useState();
@@ -32,18 +33,17 @@ function UserProfile({ uid }) {
     }, [])
 
     const getPacks = async (id, cache=true) => {
-        await fetch(`${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${cache ? "users" : "profile"}/${uid}`, {
-            method: "GET",
+        const { response } = await fetchWinstallAPI(`/packs/${cache ? "users" : "profile"}/${uid}`, {
             headers: {
                 "Authorization": process.env.NEXT_PUBLIC_TWITTER_SECRET,
-                'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-                'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
             }
-        }).then(data => data.json()).then(data => {
-            setPacks(data);
-            if (data.length === 0) setStatus("This user does not have any packs yet.");
-            if(!cache) localStorage.setItem("ownPacks", JSON.stringify(data));
         })
+
+        if(response){
+            setPacks(response);
+            if (response.length === 0) setStatus("This user does not have any packs yet.");
+            if(!cache) localStorage.setItem("ownPacks", JSON.stringify(response));
+        }
     }
 
     return (

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/create.module.scss";
 import Link from "next/link";
+import fetchWinstallAPI from "../utils/fetchWinstallAPI";
 
 const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled }) => {
     const { handleSubmit, register, errors } = useForm({ defaultValues });
@@ -28,43 +29,36 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
           return;
         }
 
-        await fetch(
-            editMode ? `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/${defaultValues._id}` : `${process.env.NEXT_PUBLIC_WINGET_API_BASE}/packs/create`,
-            {
-                method: editMode ? 'PATCH' : 'POST',
-                headers: {
-                    'Authorization': `${user.accessToken},${user.refreshToken}`,
-                    'Content-Type': 'application/json',
-                    'AuthKey': process.env.NEXT_PUBLIC_WINGET_API_KEY,
-                    'AuthSecret': process.env.NEXT_PUBLIC_WINGET_API_SECRET,
-                },
-                body: JSON.stringify({
-                  title: values.title,
-                  desc: values.description,
-                  apps: JSON.stringify(apps),
-                  creator: user.id,
-                  accent: values.accent
-                }),
-                redirect: 'follow'
-            }
-        ).then(async (data) => {
-          if(data.status !== 200){
-              const res = await data.json();
-              setCreating(false);
-              setError(res.error);
-              return;
-          }
+        const requestPath = editMode ? `/packs/${defaultValues._id}` : `/packs/create`;
+        const requestOptions = {
+          method: editMode ? 'PATCH' : 'POST',
+          headers: {
+              'Authorization': `${user.accessToken},${user.refreshToken}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: values.title,
+            desc: values.description,
+            apps: JSON.stringify(apps),
+            creator: user.id,
+            accent: values.accent
+          }),
+          redirect: 'follow'
+        }
 
-          return data.json()
-        }).then(data => {
-            localStorage.removeItem("ownPacks");
-            router.push(`/packs/${data._id}`)
-            setCreated(data)
-        })
-        .catch(error => {
-            setCreating(false);
-            setError(error.message);
-        });
+        const { response, error } = await fetchWinstallAPI(requestPath, requestOptions);
+
+        if(error){
+          setCreating(false);
+          setError(error.message);
+          return;
+        }
+
+        if(response){
+          localStorage.removeItem("ownPacks");
+          router.push(`/packs/${response._id}`);
+          setCreated(response);
+        }
     };
 
     if(created){
