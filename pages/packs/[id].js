@@ -304,10 +304,10 @@ export async function getStaticProps({ params }) {
     try{
       let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
 
-      let creator = await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`, {
+      const { response: creator } = await fetch('/api/twitter/', {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TWITTER_BEARER}`
+          endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`
         }
       }).then(res => res.json())
 

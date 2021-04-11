@@ -16,19 +16,21 @@ function UserProfile({ uid }) {
 
     useEffect(() => {
         getSession().then(async (session) => {
-
-            await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${uid}`, {
+            const { response, error } = await fetch('/api/twitter/', {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TWITTER_BEARER}`
+                  endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${uid}`
                 }
-            }).then(data => data.json()).then(async (data) => {
+            }).then(res => res.json())
+
+            if(!error){
                 if (!session || session.user.id !== parseInt(uid)) {
-                    setTitle(`Packs created by @${data.screen_name}`)
+                    setTitle(`Packs created by @${response.screen_name}`)
                     getPacks(uid);
                 } 
-                setUser(data);
-            })
+                setUser(response);
+            }
+         
         });
     }, [])
 

@@ -138,14 +138,16 @@ const User = () => {
     useEffect(() => {
       getSession().then(async (session) => {
         if(!session) return;
-        // await fetch(`https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`, {
-        //   method: "GET",
-        //   headers: {
-        //     "Authorization": `Bearer ${process.env.NEXT_PUBLIC_TWITTER_BEARER}`
-        //   }
-        // }).then(data => data.json()).then(data => {
-        //   setUser(data);
-        // })
+        const { response, error } = await fetch('/api/twitter/', {
+          method: "GET",
+          headers: {
+            endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`
+          }
+        }).then(res => res.json())
+        
+        if(!error){
+          setUser(response);
+        }
       });
 
     }, [])
