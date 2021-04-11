@@ -49,6 +49,31 @@
             cursor: not-allowed;
         }
     }
+
+    .checkboxContainer{
+        label {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 0px;
+
+            p{
+                margin: 0px;
+                padding-left: 5px;
+            }
+        }
+
+        em{
+            display: block;
+            font-style: normal;
+            text-align: left;
+            margin-left: 25px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        margin-bottom: 30px;
+    }
 }
 
 .button{

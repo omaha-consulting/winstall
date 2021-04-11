@@ -99,11 +99,11 @@ export default function Edit({ allApps }) {
             <div className={styles.content}>
                 <h1>Edit Pack</h1>
 
-                <Alert id="packEditWarn" text="Note: changes to your own packs can take up to 10 minutes to appear due to resource limitations. This will be improved in the future.">
+                {/* <Alert id="packEditWarn" text="Note: changes to your own packs can take up to 10 minutes to appear due to resource limitations. This will be improved in the future.">
                     <FiInfo/>
-                </Alert>
+                </Alert> */}
 
-                <CreatePackForm user={user} packApps={packApps} editMode={true} defaultValues={{ _id: pack._id, title: pack.title, description: pack.desc, accent: pack.accent }} />
+                <CreatePackForm user={user} packApps={packApps} editMode={true} defaultValues={{ _id: pack._id, title: pack.title, description: pack.desc, accent: pack.accent, isUnlisted: pack.isUnlisted }} />
 
                 {/* <p>Note: it may take up to 10 minutes for your changes to apply for you and others on the site.</p> */}
 

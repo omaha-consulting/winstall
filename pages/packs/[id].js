@@ -303,8 +303,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     try{
       let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
-      const { response: creator } = await callTwitterAPI(`https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`);
+      const { response: creator, error } = await callTwitterAPI(`https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`);
 
+      if(error) return { props: { error: error.errors.length > 0 ? error.errors[0].message : "Could not get user data."} }
+      
       let appsList = pack.apps;
 
       const getIndividualApps = appsList.map(async (app, index) => {
@@ -324,8 +326,8 @@ export async function getStaticProps({ params }) {
       
       return { props: pack ? { pack, creator } : {}, revalidate: 600 }
       
-    } catch(err) {
-        return { props: { err } };
+    } catch(error) {
+        return { props: { error } };
     }
 }
 

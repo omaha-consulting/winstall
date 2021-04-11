@@ -41,7 +41,8 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
             desc: values.description,
             apps: JSON.stringify(apps),
             creator: user.id,
-            accent: values.accent
+            accent: values.accent,
+            isUnlisted: values.isUnlisted
           }),
           redirect: 'follow'
         }
@@ -50,7 +51,7 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
 
         if(error){
           setCreating(false);
-          setError(error.message);
+          setError(error);
           return;
         }
 
@@ -98,6 +99,14 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
           />
           {errors.description && <span className={styles.formError}>Please check the description of your pack!</span>}
         </label>
+          
+        <div className={styles.checkboxContainer}>
+          <label>
+            <input type="checkbox" name="isUnlisted" ref={register()} defaultChecked={true}/>
+            <p>Hide this pack from the public directory on winstall.</p>
+          </label>
+          <em>Your pack will still be accessible to anyone with a direct link.</em>
+        </div>
 
         <label>
           Pack accent
@@ -112,6 +121,7 @@ const CreatePackForm = ({ user, packApps, editMode, defaultValues, isDisabled })
 
           {errors.accent && <span className={styles.formError}>Please check the accent of your pack!</span>}
         </label>
+
         <button type="submit" className="button" disabled={creating || created || isDisabled}>
           {creating ? (editMode ? "Updating..." : "Creating...") : (editMode ? "Update Pack" : "Create pack")}
         </button>
