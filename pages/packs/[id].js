@@ -300,16 +300,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-
     try{
       let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
 
-      const { response: creator } = await fetch('/api/twitter/', {
+      const { response: creator } = await fetch(`${process.env.NEXTAUTH_URL}/api/twitter/`, {
         method: "GET",
         headers: {
           endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`
         }
       }).then(res => res.json())
+
+      console.log(creator)
 
       let appsList = pack.apps;
 
@@ -331,7 +332,6 @@ export async function getStaticProps({ params }) {
       return { props: pack ? { pack, creator } : {}, revalidate: 600 }
       
     } catch(err) {
-        console.log(err.message)
         return { props: {} };
     }
 }

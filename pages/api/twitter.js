@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     let response, error;
-    
+
     try {
         const res = await fetch(req.headers.endpoint, {
             method: req.method,

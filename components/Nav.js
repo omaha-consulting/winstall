@@ -144,7 +144,7 @@ const User = () => {
             endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`
           }
         }).then(res => res.json())
-        
+
         if(!error){
           setUser(response);
         }
