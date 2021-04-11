@@ -14,6 +14,10 @@ const AppIcon = ({id, name, icon}) => {
         />
       );
     }
+
+    if(!icon && !name){
+      return null;
+    }
   
     if(!icon){ // if we don't have an icon, we mimmick one with app initials
         const nameParts = name.split(" ");
@@ -30,6 +34,8 @@ const AppIcon = ({id, name, icon}) => {
 
         return <span className={styles.noIcon}>{initials}</span>;
     }
+
+    
     
     if (icon.startsWith("http")) {
       return (
