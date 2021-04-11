@@ -15,10 +15,6 @@ const AppIcon = ({id, name, icon}) => {
       );
     }
 
-    if(!icon && !name){
-      return null;
-    }
-  
     if(!icon){ // if we don't have an icon, we mimmick one with app initials
         const nameParts = name.split(" ");
         let initials = name[0].substr(0, 1).toUpperCase();
@@ -35,8 +31,6 @@ const AppIcon = ({id, name, icon}) => {
         return <span className={styles.noIcon}>{initials}</span>;
     }
 
-    
-    
     if (icon.startsWith("http")) {
       return (
         <LazyLoad height={25} offset={300} once>

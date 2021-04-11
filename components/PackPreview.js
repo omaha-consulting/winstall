@@ -9,7 +9,7 @@ export default function PackPreview({ pack, hideMeta, showDelete=false, auth, de
     const [appIcons, setIcons] = useState([]);
 
     useEffect(() => {
-        const appIcons = pack.apps.map(a => ({ icon: a.icon, _id: a._id })); 
+        const appIcons = pack.apps.filter(a => a.icon != "" ).map(a => ({ icon: a.icon, _id: a._id })); 
 
         setIcons([...appIcons].slice(0, 4));
 
