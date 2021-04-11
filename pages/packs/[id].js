@@ -302,7 +302,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     try{
       let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
-      const { response: creator } = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/witter/`, {
+      const { response: creator } = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/twitter/`, {
         method: "GET",
         headers: {
           endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`
@@ -329,7 +329,7 @@ export async function getStaticProps({ params }) {
       return { props: pack ? { pack, creator } : {}, revalidate: 600 }
       
     } catch(err) {
-        return { props: { error: err.message } };
+        return { props: { error: `${err.message} - ${process.env.NEXT_PUBLIC_VERCEL_URL}/api/twitter/ ` } };
     }
 }
 
