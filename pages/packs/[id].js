@@ -16,6 +16,7 @@ import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock, FiEdit, Fi
 import Toggle from "react-toggle";
 import { getSession } from "next-auth/client";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
+import { callTwitterAPI } from "../api/twitter";
 
 function AppSkeleton() {
     return (
@@ -136,7 +137,7 @@ function ScriptCode({apps}){
   )
 }
 
-function PackDetail({ pack, creator }) {
+function PackDetail({ pack, creator, error }) {
     const router = useRouter();
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
     const [user, setUser] = useState();
@@ -155,7 +156,7 @@ function PackDetail({ pack, creator }) {
 
     const fallbackMessage = {
         title: "Sorry! We could not load this pack.",
-        subtitle: "Unfortunately, this pack could not be loaded. Either it does not exist, or something else went wrong. Please try again later."
+        subtitle: error ? `Recieved error: ${error}` : "Unfortunately, this pack could not be loaded. Either it does not exist, or something else went wrong. Please try again later."
     }
 
     if(!router.isFallback && !pack){
@@ -302,12 +303,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     try{
       let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
-      const { response: creator } = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/twitter/`, {
-        method: "GET",
-        headers: {
-          endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`
-        }
-      }).then(res => res.json())
+      const { response: creator } = await callTwitterAPI(`https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`);
 
       let appsList = pack.apps;
 
@@ -329,7 +325,7 @@ export async function getStaticProps({ params }) {
       return { props: pack ? { pack, creator } : {}, revalidate: 600 }
       
     } catch(err) {
-        return { props: {} };
+        return { props: { err } };
     }
 }
 
