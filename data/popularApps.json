@@ -11,6 +11,18 @@
     "_id": "Discord.Discord",
     "path": "Discord/Discord"
   },
+  "vscode": {
+    "img": "code.webp",
+    "name": "Visual Studio Code",
+    "_id": "Microsoft.VisualStudioCode",
+    "path": "Microsoft/VisualStudioCode"
+  },
+  "vscode-insiders": {
+    "img": "code-insiders.webp",
+    "name": "Visual Studio Code - Insiders",
+    "_id": "Microsoft.VisualStudioCode.Insiders",
+    "path": "Microsoft/VisualStudioCodeInsiders"
+  },
   "chrome": {
     "img": "chrome.webp",
     "name": "Google Chrome",
@@ -62,7 +74,7 @@
   "node": {
     "img": "node.webp",
     "name": "Node.js",
-    "_id": "OpenJS.Nodejs",
+    "_id": "OpenJS.NodeJS",
     "path": "OpenJS/NodeJS"
   },
   "obsstudio": {
