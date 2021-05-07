@@ -32,7 +32,6 @@ function Generate() {
                 Make sure you select some apps first to be able to generate a
                 script :)
               </h3>
-               <ExportApps apps={selectedApps} />
               <Link href="/">
                 <a className="button">
                   <FiHome />

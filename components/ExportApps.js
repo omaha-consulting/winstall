@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import styles from "../styles/exportApps.module.scss";
-import { FiCopy, FiDownload } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiCopy, FiDownload } from "react-icons/fi";
 import generateWingetImport from "../utils/generateWingetImport";
 
 let handleCopy = ( fileContent, setCopyText ) => {
@@ -16,7 +16,7 @@ let handleDownload = ( fileContent, fileExtension ) => {
     dl.click();
 }
 
-const GenericExport = ({ fileContent, fileExtension }) => {
+const GenericExport = ({ fileContent, fileExtension, prioritiseDownload=false }) => {
     const [copyText, setCopyText] = useState("Copy to clipboard");
 
     useEffect(() => {
@@ -31,17 +31,89 @@ const GenericExport = ({ fileContent, fileExtension }) => {
                 onFocus={(e) => e.target.select()}
             />
 
-            <div className="box">
-                <button className="button accent" onClick={() => handleCopy(fileContent, setCopyText)}>
+            <div className={`box ${prioritiseDownload ? styles.reverse : ''}`}>
+                <button className={`button ${!prioritiseDownload ? 'accent' : ''}`} onClick={() => handleCopy(fileContent, setCopyText)}>
                     <FiCopy />
                     {copyText}
                 </button>
 
-                <button className="button dl" onClick={() => handleDownload(fileContent, fileExtension)}>
+                <button className={`button dl ${prioritiseDownload ? 'accent' : ''}`}  onClick={() => handleDownload(fileContent, fileExtension)}>
                     <FiDownload />
                     Download {fileExtension}
                 </button>
             </div>
+        </div>
+    )
+}
+
+const AdvancedConfig = ({ refreshConfig }) => {
+    const [ expanded, setExpnaded ] = useState(false);
+
+    const [ config, setConfig ] = useState({
+        "-i": false,
+        "-h": false,
+        "-o": "",
+        "--override": false,
+        "-l": "",
+        "--force": false
+    });
+
+    const updateConfig = (key, val) => {
+       setConfig(c => {
+        const newConfig = { ...c, [key]: val };;
+
+        refreshConfig(newConfig);
+
+        localStorage.setItem("winstall-advanced-config", JSON.stringify(newConfig));
+
+        return newConfig;
+       });
+    }
+
+    useEffect(() => {
+        const loadExistingConfig = async () => {
+            let previousConfig = await localStorage.getItem("winstall-advanced-config")
+
+            if(previousConfig){
+                previousConfig = JSON.parse(previousConfig);
+                refreshConfig(previousConfig);
+                setConfig(previousConfig);
+            }
+        }
+
+        loadExistingConfig();
+    }, [ config ]);
+
+    return (
+        <div className={styles.expandBlock}>
+            <h3 className={styles.expandHeader} onClick={() => setExpnaded(e => !e)}>
+                <FiChevronDown size={25} className={expanded ? styles.expandedIcon : ''}/>
+                Advanced Options
+            </h3>
+
+            { expanded && (
+                <div>
+                    <label htmlFor="-i">
+                        <input type="checkbox"  id="-i" onChange={(e) => updateConfig("-i", e.target.checked)}/>
+                        <p>Request interactive installation; user input may be needed.</p>
+                    </label>
+                    
+                    <label htmlFor="-h">
+                        <input type="checkbox" id="-h" onChange={(e) => updateConfig("-h", e.target.checked)}/>
+                        <p>Request silent installation.</p>
+                    </label>
+                    
+                    <label htmlFor="--override">
+                        <input type="checkbox" id="--override" onChange={(e) => updateConfig("--override", e.target.checked)}/>
+                        <p>Override arguments to be passed on to the installer.</p>
+                    </label>
+                    
+                    <label htmlFor="--force">
+                        <input type="checkbox" id="--force" onChange={(e) => updateConfig("--force", e.target.checked)}/>
+                        <p>Override the installer hash check.</p>
+                    </label>
+                </div>
+            )}
         </div>
     )
 }
@@ -51,6 +123,7 @@ const ExportApps = ({ apps, title, subtitle }) => {
   const [ batScript, setBatScript ] = useState("");
   const [ psScript, setPsScript ] = useState("");
   const [ wingetScript, setWingetScript ] = useState("");
+  const [ filters, setFilters ] = useState({});
 
   const tabs = useMemo(() => {
         return [
@@ -67,7 +140,7 @@ const ExportApps = ({ apps, title, subtitle }) => {
             {
                 title: "Winget Import",
                 key: ".json",
-                element: <GenericExport fileContent={wingetScript} fileExtension=".json"/>
+                element: <GenericExport fileContent={wingetScript} fileExtension=".json" prioritiseDownload={true}/>
             }
         ]
   }, [ batScript, psScript, wingetScript, apps ])
@@ -76,16 +149,18 @@ const ExportApps = ({ apps, title, subtitle }) => {
 
   let handleScriptChange = async () => {
     if(!apps) return;
-    
+
     let installs = [];
+
+    let advancedFilters = "";
+
+    if(filters){
+        advancedFilters = Object.entries(filters).filter(i => i[1] === true).map(i => i[0]).join(" ");
+    } 
 
     apps.map((app) => {
       installs.push(
-        `winget install --id=${app._id} ${
-        app.selectedVersion !== app.latestVersion
-          ? `-v "${app.selectedVersion}" `
-          : ""
-        }-e`
+        `winget install --id=${app._id} ${app.selectedVersion !== app.latestVersion ? `-v "${app.selectedVersion}"` : ""} -e ${advancedFilters}`
       );
 
       return app;
@@ -120,6 +195,8 @@ const ExportApps = ({ apps, title, subtitle }) => {
                 return <li key={index} className={ tab.key === active ? styles.active : ''} onClick={() => setActive(tab.key)}>{tab.title}</li>
             }) }
         </ul>
+
+        <AdvancedConfig refreshConfig={setFilters}/>
 
         { tabs.map((tab, index) => {
             return <section key={index} className={ tab.key === active ? styles.displaySection : styles.hideSection }>{ tab.element }</section>
