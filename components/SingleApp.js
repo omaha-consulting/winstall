@@ -80,7 +80,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
       setSelectedApps(updatedSelectedApps);
       setSelected(false);
       
-    } else {
+    } else if(app){
       setSelected(true);
 
       if (all) {

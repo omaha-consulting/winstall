@@ -1,6 +1,6 @@
 
 
-.intro, .generate{
+.intro {
     padding-top: 50px;
     margin-bottom: 50px;
     
@@ -10,44 +10,13 @@
     }
 }
 
-.generate{
-    h3{
-        font-size: 25px;
-        opacity: 0.75;
-        max-width: 600px;
-    }
-    p{
-        font-size: 20px;
-        max-width: 700px;
-    }
-
-    textarea{
-        width: 600px;
-        padding: 20px;
-        background-color: var(--card-bg);
-        border: 0px;
-        border-radius: 10px;
-        font-size: 18px;
-        font-family: monospace;
-        outline: 0;
-        resize: none;
-        display: block;
-        margin-bottom: 10px;
-        min-height: 100px;
-        color: var(--textColor);
-        overflow: hidden;
-    }
-
-}
-
-
 
 .selectedApps{
     padding-bottom: 20px;
 }
 
 @media(max-width: 590px){
-    .intro, .generate{
+    .intro{
         padding-top: 0px !important;
 
         textarea{

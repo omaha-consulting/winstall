@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 
 import styles from "../styles/home.module.scss";
@@ -9,47 +9,17 @@ import SelectedContext from "../ctx/SelectedContext";
 
 import Footer from "../components/Footer";
 
-import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
-import Toggle from "react-toggle";
+import { FiHome } from "react-icons/fi";
 import MetaTags from "../components/MetaTags";
-import generateWingetImport from "../utils/generateWingetImport";
+import ExportApps from "../components/ExportApps";
 
 function Generate() {
     const { selectedApps } = useContext(SelectedContext);
-    const [copyText, setCopyText] = useState("Copy to clipboard");
-    const [script, setScript] = useState("");
-    const [showPS, setShowPS] = useState(false);
-    const [wingetImport, setWingetImport] = useState("");
-
-    let handleScriptChange = async () => {
-      let installs = [];
-
-      await selectedApps.map((app) => {
-        installs.push(
-          `winget install ${app._id} ${
-            app.selectedVersion !== app.latestVersion
-              ? `-v "${app.selectedVersion}" `
-              : ""
-          }`
-        );
-
-        return app;
-      });
-
-      let newScript = installs.join(showPS ? " ; " : " && ");
-
-      if (script !== newScript) {
-        setCopyText("Copy to clipboard");
-      }
-
-      setScript(newScript);
-      
-      setWingetImport(await generateWingetImport(selectedApps));
-    };
-
+    const [apps, setApps] = useState([]);
+    
     useEffect(() => {
-      handleScriptChange();
-    }, [handleScriptChange]);
+      setApps(selectedApps);
+    }, [ apps ]);
 
     if(selectedApps.length === 0){
       return (
@@ -62,6 +32,7 @@ function Generate() {
                 Make sure you select some apps first to be able to generate a
                 script :)
               </h3>
+               <ExportApps apps={selectedApps} />
               <Link href="/">
                 <a className="button">
                   <FiHome />
@@ -81,33 +52,6 @@ function Generate() {
       );
     }
 
-    
-
-    let handleCopy = () => {
-        navigator.clipboard.writeText(script).then(() => setCopyText("Copied!")).catch((err) => {
-            document.querySelector("textarea").select();
-        })
-    }
-
-    let handleBat = () => {
-        let dl = document.querySelector("#gsc");
-        dl.setAttribute("download", `winstall${showPS ? ".ps1" : ".bat"}`)
-        dl.href = "data:text/plain;base64," + btoa(script);
-        dl.click();
-    }
-
-    let handleScriptSwitch = () => {
-      setShowPS(!showPS);
-
-      if (!showPS) {
-        setScript(script.replace(/&&/g, ";"));
-      } else {
-        setScript(script.replace(/;/g, "&&"));
-      }
-
-      setCopyText("Copy to clipboard")
-    }
-    
     return (
       <div className="container generate-container">
         <MetaTags title="winstall - GUI for Windows Package Manager" />
@@ -115,39 +59,8 @@ function Generate() {
           <div className={styles.generate}>
             <h1>Your apps are ready to be installed.</h1>
             <h3>Make sure you have Windows Package Manager installed :)</h3>
-            <p>
-              Just copy the command from the textbox below, paste it into
-              Windows Terminal, Command Prompt, or any other terminal on your
-              Windows machine to start installing the apps.
-            </p>
-
-            <div className="switch">
-              <Toggle
-                id="biscuit-status"
-                defaultChecked={showPS}
-                aria-labelledby="biscuit-label"
-                onChange={handleScriptSwitch}
-              />
-              <span id="biscuit-label">Show PowerShell script</span>
-            </div>
-
-            <textarea
-              value={script}
-              onChange={() => {}}
-              onFocus={(e) => e.target.select()}
-            />
-
-            <div className="box">
-              <button className="button accent" onClick={handleCopy}>
-                <FiCopy />
-                {copyText}
-              </button>
-
-              <button className="button" onClick={handleBat}>
-                <FiDownload />
-                Download {showPS ? ".ps1" : ".bat"}
-              </button>
-            </div>
+        
+            <ExportApps apps={apps} />
           </div>
           <div className="art">
             <img src="/assets/dl.svg" draggable={false} alt="download icon" />
@@ -158,7 +71,7 @@ function Generate() {
           <h2>Apps you are downloading ({selectedApps.length})</h2>
           <ListPackages showImg={true}>
             {selectedApps.map((app) => (
-              <SingleApp app={app} key={app._id} onVersionChange={handleScriptChange}/>
+              <SingleApp app={app} key={app._id} onVersionChange={setApps}/>
             ))}
           </ListPackages>
         </div>

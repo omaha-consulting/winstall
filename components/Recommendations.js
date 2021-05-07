@@ -57,11 +57,6 @@ const Recommendations = ({ packs }) => {
         <PackList id="yphy7XItI" title="School" packs={packs}>
           <FiBookOpen />
         </PackList>
-
-
-
-
-      
       </div>
     </div>
   );
@@ -109,7 +104,7 @@ const PackList = ({ children, title, id, packs}) => {
   );
 };
 
-const App = ({data}) => {
+const App = ({ data }) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 
@@ -117,7 +112,7 @@ const App = ({data}) => {
     let found = selectedApps.find((a) => a._id === data._id);
 
     setSelected(found);
-  })
+  }, [ data, selectedApps ])
 
   let handleAppSelect = () => {
     let found = selectedApps.findIndex((a) => a._id === data._id);
@@ -130,7 +125,7 @@ const App = ({data}) => {
       setSelectedApps(updatedSelectedApps);
       setSelected(false);
 
-    } else {
+    } else if(data) {
       setSelected(true);
 
       setSelectedApps([...selectedApps, data]);
