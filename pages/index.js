@@ -13,8 +13,13 @@ import FeaturePromoter from "../components/FeaturePromoter";
 import Link from "next/link";
 import { FiPlus, FiPackage } from "react-icons/fi";
 import fetchWinstallAPI from "../utils/fetchWinstallAPI";
+import Error from "../components/Error";
 
-function Home({ popular, apps, recommended }) {
+function Home({ popular, apps, recommended, error}) {
+  if(error) {
+    return <Error title="Oops!" subtitle={error}/>
+  }
+
   return (
     <div className="container">
       <MetaTags title="winstall - GUI for Windows Package Manager" />
@@ -58,8 +63,13 @@ function Home({ popular, apps, recommended }) {
 export async function getStaticProps(){
   let popular = shuffleArray(Object.values(popularAppsList));
 
-  let { response: apps } = await fetchWinstallAPI(`/apps`);
-  let { response: recommended } = await fetchWinstallAPI(`/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`);
+  let { response: apps, error: appsError } = await fetchWinstallAPI(`/apps`);
+  let { response: recommended, error: recommendedError } = await fetchWinstallAPI(`/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`);
+
+  if(appsError) console.error(appsError);
+  if(recommendedError) console.error(recommendedError);
+ 
+  if(appsError || recommendedError) return { props: { error: `Could not fetch data from Winstall API.`} };
 
   // get the new pack data, and versions data, etc.
   const getPackData = recommended.map(async (pack) => {

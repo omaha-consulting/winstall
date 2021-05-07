@@ -18,8 +18,11 @@ import {
 
 import Router from "next/router";
 import fetchWinstallAPI from "../utils/fetchWinstallAPI";
+import Error from "../components/Error";
 
-function Store({ data }) {
+function Store({ data, error }) {
+    if(error) return <Error title="Oops!" subtitle={error}/>
+    
     const [apps, setApps] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
@@ -201,7 +204,9 @@ function Store({ data }) {
 }
 
 export async function getStaticProps() {
-  let { response: apps } = await fetchWinstallAPI(`/apps`);
+  let { response: apps, error } = await fetchWinstallAPI(`/apps`);
+
+  if(error) return { props: { error }};
 
   return {
     props: {

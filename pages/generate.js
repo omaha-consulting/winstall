@@ -12,17 +12,19 @@ import Footer from "../components/Footer";
 import { FiCopy, FiDownload, FiHome } from "react-icons/fi";
 import Toggle from "react-toggle";
 import MetaTags from "../components/MetaTags";
+import generateWingetImport from "../utils/generateWingetImport";
 
 function Generate() {
     const { selectedApps } = useContext(SelectedContext);
     const [copyText, setCopyText] = useState("Copy to clipboard");
     const [script, setScript] = useState("");
     const [showPS, setShowPS] = useState(false);
+    const [wingetImport, setWingetImport] = useState("");
 
-    let handleScriptChange = () => {
+    let handleScriptChange = async () => {
       let installs = [];
 
-      selectedApps.map((app) => {
+      await selectedApps.map((app) => {
         installs.push(
           `winget install ${app._id} ${
             app.selectedVersion !== app.latestVersion
@@ -41,6 +43,8 @@ function Generate() {
       }
 
       setScript(newScript);
+      
+      setWingetImport(await generateWingetImport(selectedApps));
     };
 
     useEffect(() => {
