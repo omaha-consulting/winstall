@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import styles from "../styles/exportApps.module.scss";
-import { FiChevronDown, FiChevronUp, FiCopy, FiDownload } from "react-icons/fi";
+import { FiChevronDown, FiCopy, FiDownload, FiInfo } from "react-icons/fi";
 import generateWingetImport from "../utils/generateWingetImport";
 
 let handleCopy = ( fileContent, setCopyText ) => {
@@ -58,16 +58,15 @@ const AdvancedConfig = ({ refreshConfig }) => {
         "--force": false
     });
 
-    const updateConfig = (key, val) => {
-       setConfig(c => {
-        const newConfig = { ...c, [key]: val };;
+    const updateConfig = async (key, val) => {
+        const existingConfig = { ...config };
+        const newConfig = { ...existingConfig, [key]: val};
 
+        setConfig(newConfig);
+       
         refreshConfig(newConfig);
 
-        localStorage.setItem("winstall-advanced-config", JSON.stringify(newConfig));
-
-        return newConfig;
-       });
+        await localStorage.setItem("winstall-advanced-config", JSON.stringify(newConfig));
     }
 
     useEffect(() => {
@@ -76,41 +75,54 @@ const AdvancedConfig = ({ refreshConfig }) => {
 
             if(previousConfig){
                 previousConfig = JSON.parse(previousConfig);
+
                 refreshConfig(previousConfig);
                 setConfig(previousConfig);
+                setExpnaded(true);
             }
         }
 
         loadExistingConfig();
-    }, [ config ]);
+    }, [ ]);
 
     return (
         <div className={styles.expandBlock}>
             <h3 className={styles.expandHeader} onClick={() => setExpnaded(e => !e)}>
-                <FiChevronDown size={25} className={expanded ? styles.expandedIcon : ''}/>
+                <FiChevronDown size={22} className={expanded ? styles.expandedIcon : ''}/>
                 Advanced Options
             </h3>
 
             { expanded && (
                 <div>
+                    <p className={styles.center}><FiInfo/> All of the following options are persisted locally in your browser.</p>
                     <label htmlFor="-i">
-                        <input type="checkbox"  id="-i" onChange={(e) => updateConfig("-i", e.target.checked)}/>
-                        <p>Request interactive installation; user input may be needed.</p>
+                        <input type="checkbox" id="-i" defaultChecked={config["-i"]} onChange={(e) => updateConfig("-i", e.target.checked)}/>
+                        <p>Request interactive installation; user input may be needed <code>-i</code></p>
                     </label>
                     
                     <label htmlFor="-h">
-                        <input type="checkbox" id="-h" onChange={(e) => updateConfig("-h", e.target.checked)}/>
-                        <p>Request silent installation.</p>
+                        <input type="checkbox" id="-h" defaultChecked={config["-h"]} onChange={(e) => updateConfig("-h", e.target.checked)}/>
+                        <p>Request silent installation <code>-h</code></p>
                     </label>
                     
                     <label htmlFor="--override">
-                        <input type="checkbox" id="--override" onChange={(e) => updateConfig("--override", e.target.checked)}/>
-                        <p>Override arguments to be passed on to the installer.</p>
+                        <input type="checkbox" id="--override" defaultChecked={config["--override"]} onChange={(e) => updateConfig("--override", e.target.checked)}/>
+                        <p>Override arguments to be passed on to the installer <code>--override</code></p>
                     </label>
                     
                     <label htmlFor="--force">
-                        <input type="checkbox" id="--force" onChange={(e) => updateConfig("--force", e.target.checked)}/>
-                        <p>Override the installer hash check.</p>
+                        <input type="checkbox" id="--force" defaultChecked={config["--force"]}onChange={(e) => updateConfig("--force", e.target.checked)}/>
+                        <p>Override the installer hash check <code>--force</code></p>
+                    </label>
+
+                    <label htmlFor="-o" className={styles.text}>
+                        <p>Log location (if supported) <code>-o</code></p>
+                        <input type="text" id="--override" value={config["-o"]} onChange={(e) => updateConfig("-o", e.target.value)} placeholder="Enter a valid path for your local machine"/>
+                    </label>
+                    
+                    <label htmlFor="-l" className={styles.text}>
+                        <p>Location to install to (if supported) <code>-l</code></p>
+                        <input type="text" id="--override" value={config["-l"]} onChange={(e) => updateConfig("-l", e.target.value)} placeholder="Enter a valid path for your local machine"/>
                     </label>
                 </div>
             )}
@@ -156,11 +168,14 @@ const ExportApps = ({ apps, title, subtitle }) => {
 
     if(filters){
         advancedFilters = Object.entries(filters).filter(i => i[1] === true).map(i => i[0]).join(" ");
+
+        if(filters["-o"]) advancedFilters += ` -o=${filters["-o"]}`;
+        if(filters["-l"]) advancedFilters += ` -l=${filters["-l"]}`;
     } 
 
     apps.map((app) => {
       installs.push(
-        `winget install --id=${app._id} ${app.selectedVersion !== app.latestVersion ? `-v "${app.selectedVersion}"` : ""} -e ${advancedFilters}`
+        `winget install --id=${app._id}${app.selectedVersion !== app.latestVersion ? ` -v "${app.selectedVersion}"` : ""} -e ${advancedFilters}`
       );
 
       return app;

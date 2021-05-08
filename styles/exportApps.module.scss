@@ -82,12 +82,23 @@
 
 .expandBlock{
     margin-bottom: 20px;
+
+    .center{
+        display: flex;
+        align-items: center;
+
+        svg{
+            margin-right: 10px ;
+        }
+    }
     
     .expandHeader{
         display: flex;
         align-items: center;
         cursor: pointer;
         transition: 0.3s all ease-in-out;
+        user-select: none;
+        font-size: 15px;
 
         &:hover{
             opacity: 0.75;
@@ -107,6 +118,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 5px;
+        cursor: pointer;
 
         input{
             margin-right: 10px;
@@ -114,6 +126,34 @@
 
         p{
             margin: 0px;
+        }
+
+        code {
+            background-color: var(--card-bg);
+            padding: 5px;
+            color: var(--error);
+            border-radius: 5px;
+        }
+    }
+
+    label.text{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        input{
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: var(--card-bg);
+            border: 0px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: monospace;
+            outline: 0;
+            margin-bottom: 10px;
+            color: var(--textColor);
+            box-sizing: border-box;
         }
     }
 }

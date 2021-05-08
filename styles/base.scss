@@ -5,6 +5,7 @@
     --altTextColor: #fff;
     --accent: #9b2eff;
     --altAccent: #7214c9;
+    --error: maroon;
 
     .sun{
         display: none;
@@ -17,20 +18,21 @@
     --textColor: rgb(255, 255, 255);
     --altTextColor: #333;
     --accent: #9b2eff;
-     --altAccent: #6b14bd;
+    --altAccent: #6b14bd;
+    --error: rgb(255 149 149);
+    
+    .react-loading-skeleton{
+        background-color: #2d2f30 !important;
+        background-image: linear-gradient( 90deg,#2d2f30,rgb(40, 40, 40),#2d2f30 ) !important;
+    }
 
-     .react-loading-skeleton{
-            background-color: #2d2f30 !important;
-            background-image: linear-gradient( 90deg,#2d2f30,rgb(40, 40, 40),#2d2f30 ) !important;
-     }
+    .moon{
+        display: none;
+    }
 
-     .moon{
-         display: none;
-     }
-
-     select option{
-         color: var(--textColor);
-     }
+    select option{
+        color: var(--textColor);
+    }
 
 }
 
