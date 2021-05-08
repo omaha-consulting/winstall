@@ -87,7 +87,7 @@ const AdvancedConfig = ({ refreshConfig }) => {
 
     return (
         <div className={styles.expandBlock}>
-            <h3 className={styles.expandHeader} onClick={() => setExpnaded(e => !e)}>
+            <h3 className={`${styles.expandHeader} ${ expanded ? styles.expandedHeader : ''}`} onClick={() => setExpnaded(e => !e)}>
                 <FiChevronDown size={22} className={expanded ? styles.expandedIcon : ''}/>
                 Advanced Options
             </h3>
@@ -169,8 +169,8 @@ const ExportApps = ({ apps, title, subtitle }) => {
     if(filters){
         advancedFilters = Object.entries(filters).filter(i => i[1] === true).map(i => i[0]).join(" ");
 
-        if(filters["-o"]) advancedFilters += ` -o=${filters["-o"]}`;
-        if(filters["-l"]) advancedFilters += ` -l=${filters["-l"]}`;
+        if(filters["-o"]) advancedFilters += ` -o "${filters["-o"]}"`;
+        if(filters["-l"]) advancedFilters += ` -l "${filters["-l"]}"`;
     } 
 
     apps.map((app) => {

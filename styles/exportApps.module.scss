@@ -52,13 +52,16 @@
     list-style-type: none;
     padding: 0px;
     display: flex;
-    
+    flex-flow: wrap;
+    margin-bottom: 0px;
+
     li{
         margin-right: 10px;
         border: 3px solid var(--card-bg);
         border-radius: 20px;
         padding: 5px 15px;
         cursor: pointer;
+        margin-bottom: 10px;
     }
 
     li.active{
@@ -99,6 +102,8 @@
         transition: 0.3s all ease-in-out;
         user-select: none;
         font-size: 15px;
+        margin-top: 6px;
+        opacity: 0.65;
 
         &:hover{
             opacity: 0.75;
@@ -114,6 +119,10 @@
         }
     }
 
+    .expandedHeader{
+        opacity: 1;
+    }
+
     label{
         display: flex;
         align-items: center;
@@ -121,11 +130,12 @@
         cursor: pointer;
 
         input{
-            margin-right: 10px;
+            margin: 0px;
         }
 
         p{
             margin: 0px;
+            margin-left: 10px;
         }
 
         code {
@@ -140,6 +150,10 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+
+        p{
+            margin: 0px;
+        }
 
         input{
             margin-top: 10px;

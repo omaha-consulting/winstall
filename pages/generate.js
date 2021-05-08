@@ -19,7 +19,7 @@ function Generate() {
     
     useEffect(() => {
       setApps(selectedApps);
-    }, [ apps ]);
+    }, [ apps, selectedApps ]);
 
     if(selectedApps.length === 0){
       return (
