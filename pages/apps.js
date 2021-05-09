@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/apps.module.scss";
 
-import SelectionBar from "../components/SelectionBar";
-
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
 import ListSort from "../components/ListSort";
@@ -152,7 +150,7 @@ function Store({ data, error }) {
     if(!apps) return <></>;
 
     return (
-      <div className="container">
+      <div>
         <MetaTags title="Apps - winstall"/>
         
 
@@ -198,7 +196,6 @@ function Store({ data, error }) {
         </div>
 
         <Footer />
-        <SelectionBar />
       </div>
     );
 }

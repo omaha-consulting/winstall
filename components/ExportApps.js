@@ -111,18 +111,18 @@ const AdvancedConfig = ({ refreshConfig }) => {
                     </label>
                     
                     <label htmlFor="--force">
-                        <input type="checkbox" id="--force" defaultChecked={config["--force"]}onChange={(e) => updateConfig("--force", e.target.checked)}/>
+                        <input type="checkbox" id="--force" defaultChecked={config["--force"]} onChange={(e) => updateConfig("--force", e.target.checked)}/>
                         <p>Override the installer hash check <code>--force</code></p>
                     </label>
 
                     <label htmlFor="-o" className={styles.text}>
                         <p>Log location (if supported) <code>-o</code></p>
-                        <input type="text" id="--override" value={config["-o"]} onChange={(e) => updateConfig("-o", e.target.value)} placeholder="Enter a valid path for your local machine"/>
+                        <input type="text" id="-o" value={config["-o"]} onChange={(e) => updateConfig("-o", e.target.value)} placeholder="Enter a valid path for your local machine"/>
                     </label>
                     
                     <label htmlFor="-l" className={styles.text}>
                         <p>Location to install to (if supported) <code>-l</code></p>
-                        <input type="text" id="--override" value={config["-l"]} onChange={(e) => updateConfig("-l", e.target.value)} placeholder="Enter a valid path for your local machine"/>
+                        <input type="text" id="-l" value={config["-l"]} onChange={(e) => updateConfig("-l", e.target.value)} placeholder="Enter a valid path for your local machine"/>
                     </label>
                 </div>
             )}

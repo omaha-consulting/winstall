@@ -4,12 +4,9 @@ import Error from "../../components/Error";
 import PageWrapper from '../../components/PageWrapper';
 import MetaTags from '../../components/MetaTags';
 import styles from "../../styles/create.module.scss";
-import SelectionBar from '../../components/SelectionBar';
 import Router from "next/router";
 import CreatePackForm from '../../components/CreatePackForm';
 import PackAppsList from '../../components/PackAppsList';
-import Alert from '../../components/Alert';
-import { FiInfo } from 'react-icons/fi';
 import fetchWinstallAPI from '../../utils/fetchWinstallAPI';
 
 export default function Edit({ allApps }) {
@@ -111,7 +108,6 @@ export default function Edit({ allApps }) {
 
                 <PackAppsList notLoggedIn={user === null} allApps={allApps} providedApps={packApps} reorderEnabled={true} onListUpdate={updatePackApps} />
             </div>
-            <SelectionBar hideCreatePack={true} />
         </PageWrapper>
     )
 }

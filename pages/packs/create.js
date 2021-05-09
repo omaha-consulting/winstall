@@ -12,7 +12,6 @@ import PageWrapper from "../../components/PageWrapper";
 
 import { FiPackage, FiTwitter} from "react-icons/fi";
 import MetaTags from "../../components/MetaTags";
-import SelectionBar from "../../components/SelectionBar";
 import CreatePackForm from "../../components/CreatePackForm";
 import FeaturePromoter from "../../components/FeaturePromoter";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
@@ -101,11 +100,7 @@ function Create({ allApps }) {
             </>
           )}
 
-          
-
         </div>
-
-        <SelectionBar hideCreatePack={true}/>
       </PageWrapper>
     );
 }

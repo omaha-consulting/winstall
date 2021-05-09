@@ -2,7 +2,6 @@ import styles from "../styles/home.module.scss";
 
 import Search from "../components/Search";
 import PopularApps from "../components/PopularApps";
-import SelectionBar from "../components/SelectionBar";
 import MetaTags from "../components/MetaTags";
 import Recommendations from "../components/Recommendations";
 
@@ -21,7 +20,7 @@ function Home({ popular, apps, recommended, error}) {
   }
 
   return (
-    <div className="container">
+    <div>
       <MetaTags title="winstall - GUI for Windows Package Manager" />
       <div className={styles.intro}>
         <div className="illu-box">
@@ -52,8 +51,6 @@ function Home({ popular, apps, recommended, error}) {
                 <Link href="/packs/"><button className="button"><FiPackage/> View packs</button></Link>
             </div>
       </FeaturePromoter>
-
-      <SelectionBar />
 
       <Footer />
     </div>

@@ -2,7 +2,7 @@ import Footer from "./Footer";
 
 function PageWrapper({ children }){
     return (
-        <div className="container">
+        <div>
             {children}
 
             <Footer/>

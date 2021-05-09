@@ -52,7 +52,7 @@ body{
 
 
 header{
-    padding: 50px;
+    padding: 20px 0;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -379,7 +379,7 @@ article{
     .bottomBar .inner button:disabled em{
         font-size: 12px;
         line-height: 13px;
-    }
+    } 
 }
 
 @media(max-width: 790px){

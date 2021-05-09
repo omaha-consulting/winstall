@@ -9,7 +9,6 @@ import MetaTags from "../../components/MetaTags";
 import { useEffect, useState, useContext } from "react";
 import PageWrapper from "../../components/PageWrapper";
 import PackAppsList from "../../components/PackAppsList";
-import SelectionBar from "../../components/SelectionBar";
 import SelectedContext from "../../ctx/SelectedContext";
 import { timeAgo } from "../../utils/helpers";
 import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock, FiEdit, FiTrash } from "react-icons/fi";
@@ -288,7 +287,6 @@ function PackDetail({ pack, creator, error }) {
         {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
       </div>
 
-      <SelectionBar />
     </PageWrapper>
   );
 }

@@ -1,6 +1,5 @@
 import PageWrapper from "../../components/PageWrapper";
 import MetaTags from "../../components/MetaTags";
-import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
 import Link from "next/link";
@@ -96,7 +95,6 @@ export default function Packs({ packs, error }) {
                 </div>
             </div>
 
-            <SelectionBar />
         </PageWrapper>
     )
 }
