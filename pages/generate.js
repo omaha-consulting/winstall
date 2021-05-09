@@ -23,7 +23,7 @@ function Generate() {
 
     if(selectedApps.length === 0){
       return (
-        <div className="container generate-container">
+        <div className="generate-container">
           <MetaTags title="winstall - GUI for Windows Package Manager" />
           <div className="illu-box">
             <div className={styles.generate}>
@@ -52,7 +52,7 @@ function Generate() {
     }
 
     return (
-      <div className="container generate-container">
+      <div className="generate-container">
         <MetaTags title="winstall - GUI for Windows Package Manager" />
         <div className="illu-box">
           <div className={styles.generate}>

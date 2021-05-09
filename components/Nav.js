@@ -85,7 +85,7 @@ function Nav() {
     }
 
     return (
-      <header className={`container ${styles.navContainer}`}>
+      <header>
         <div className={styles.brand}>
           <Link href="/">
             <a>winstall</a>
