@@ -407,3 +407,26 @@
     border-radius: 10px !important;
     box-shadow: 0px 3px 5px #00000026 !important;
 }
+.copy {
+    display: flex;
+    align-items: center;
+    
+    width: 100%;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: monospace;
+    margin-bottom: 10px;
+    color: var(--textColor);
+    overflow: hidden;
+    cursor: pointer;
+    span {
+        user-select: none;
+        padding: 0 10px;
+    }
+    .clipboard {
+        margin-left: auto;
+    }
+    
+}
