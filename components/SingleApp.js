@@ -3,6 +3,7 @@ import styles from "../styles/singleApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import textStyle from "../styles/exportApps.module.scss";
 
 import {
   FiExternalLink,
@@ -257,6 +258,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
 
       {large && app.tags && app.tags.length > 1 && <Tags tags={app.tags} />}
 
+      {large && <Copy id={app._id} />}
       {large && (
         <div className={styles.largeAppButtons}>
           <button className={styles.selectApp} onClick={handleAppSelect}>
@@ -382,6 +384,14 @@ const Tags = ({tags}) => {
       </ul>
     </div>
   )
+}
+
+const Copy = ({id}) => {
+  let str = `winget install --id=${id} -e`
+  return <div className={textStyle.generate}>
+    <textarea readOnly={true} spellCheck={false} value={str} onClick={() => {navigator.clipboard.writeText(str)}}>
+    </textarea>
+  </div>
 }
 
 export default SingleApp;
