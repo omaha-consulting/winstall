@@ -394,17 +394,16 @@ const Copy = ({ id }) => {
   const [showingCheck, setShowingCheck] = useState(false);
   let str = `winget install --id=${id} -e`;
   return (
-    <div className={styles.copy}>
+    <div className={styles.copy}
+    onClick={() => {
+      navigator.clipboard.writeText(str);
+      setShowingCheck(true);
+      setTimeout(() => {
+        setShowingCheck(false);
+      }, 3000);
+    }}>
       <FiTerminal size={20} />
-      <span
-        onClick={() => {
-          navigator.clipboard.writeText(str);
-          setShowingCheck(true);
-          setTimeout(() => {
-            setShowingCheck(false);
-          }, 3000);
-        }}
-      >
+      <span>
         {str}
       </span>
       {showingCheck ? (
