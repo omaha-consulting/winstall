@@ -25,6 +25,7 @@
         outline: 0;
         resize: none;
         display: block;
+        margin-top: 0px;
         margin-right: 0px;
         margin-bottom: 10px;
         min-height: 120px;
@@ -82,7 +83,7 @@
 }
 
 .expandBlock{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     .center{
         display: flex;
@@ -129,11 +130,11 @@
 
         input{
             margin: 0px;
+            margin-right: 10px;
         }
 
         p{
             margin: 0px;
-            margin-left: 10px;
         }
 
         code {
@@ -141,6 +142,25 @@
             padding: 5px;
             color: var(--error);
             border-radius: 5px;
+        }
+    }
+
+    label.radioContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: 5px;
+
+            label{
+                margin-right: 10px;
+            }
         }
     }
 
