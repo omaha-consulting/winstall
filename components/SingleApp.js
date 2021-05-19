@@ -392,25 +392,32 @@ const Tags = ({ tags }) => {
 
 const Copy = ({ id }) => {
   const [showingCheck, setShowingCheck] = useState(false);
+
   let str = `winget install --id=${id} -e`;
+
   return (
-    <div className={styles.copy}>
+    <div
+      className={`${styles.copy} ${showingCheck ? styles.active : ""}`}
+      onClick={() => {
+        navigator.clipboard.writeText(str);
+        setShowingCheck(true);
+        setTimeout(() => {
+          setShowingCheck(false);
+        }, 2000);
+      }}
+    >
       <FiTerminal size={20} />
-      <span
-        onClick={() => {
-          navigator.clipboard.writeText(str);
-          setShowingCheck(true);
-          setTimeout(() => {
-            setShowingCheck(false);
-          }, 3000);
-        }}
-      >
-        {str}
-      </span>
-      {showingCheck ? (
-        <FiCheckCircle className={styles.clipboard} size={16} />
-      ) : (
-        <FiCopy className={styles.clipboard} size={16} />
+      {!showingCheck && (
+        <>
+          <span className={styles.installCommand}>{str}</span>
+          <FiCheckCircle className={styles.clipboard} size={16} />
+        </>
+      )}
+      {showingCheck && (
+        <>
+          <span className={styles.copiedText}>Copied!</span>
+          <FiCopy className={styles.clipboard} size={16} />
+        </>
       )}
     </div>
   );
