@@ -20,7 +20,7 @@
         background-color: var(--card-bg);
         border: 0px;
         border-radius: 10px;
-        font-size: 18px;
+        font-size: 16px;
         font-family: monospace;
         outline: 0;
         resize: none;
@@ -32,6 +32,23 @@
         color: var(--textColor);
         overflow: hidden;
         box-sizing: border-box;
+    }
+}
+
+.tipContainer{
+    display: flex;
+    flex-direction: row;
+    opacity: 0.75;
+
+    svg{
+        flex-shrink: 0;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+
+    p{
+        margin: 0px;
+        font-size: 17px;
     }
 }
 

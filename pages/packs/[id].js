@@ -15,7 +15,7 @@ import { FiCodepen, FiPackage, FiShare2, FiClock, FiEdit, FiTrash } from "react-
 import { getSession } from "next-auth/client";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 import { callTwitterAPI } from "../api/twitter";
-import ExportApps from "../../components/ExportApps";
+import ExportApps from "../../components/AppExport/ExportApps";
 
 function AppSkeleton() {
     return (

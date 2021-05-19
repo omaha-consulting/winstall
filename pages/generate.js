@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 
 import { FiHome } from "react-icons/fi";
 import MetaTags from "../components/MetaTags";
-import ExportApps from "../components/ExportApps";
+import ExportApps from "../components/AppExport/ExportApps";
 
 function Generate() {
     const { selectedApps } = useContext(SelectedContext);
