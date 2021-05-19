@@ -410,13 +410,13 @@ const Copy = ({ id }) => {
       {!showingCheck && (
         <>
           <span className={styles.installCommand}>{str}</span>
-          <FiCheckCircle className={styles.clipboard} size={16} />
+          <FiCopy className={styles.clipboard} size={16} />
         </>
       )}
       {showingCheck && (
         <>
           <span className={styles.copiedText}>Copied!</span>
-          <FiCopy className={styles.clipboard} size={16} />
+          <FiCheckCircle className={styles.clipboard} size={16} />
         </>
       )}
     </div>
