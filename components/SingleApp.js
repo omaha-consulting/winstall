@@ -17,7 +17,10 @@ import {
   FiFileText,
   FiAlertOctagon,
   FiTag,
-  FiShare2
+  FiShare2,
+  FiTerminal,
+  FiCopy,
+  FiCheckCircle
 } from "react-icons/fi";
 
 
@@ -183,6 +186,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
         {!pack && <Description desc={app.desc} id={app._id} full={large} />}
       </div>
 
+      {large && <Copy id={app._id} />}
       <ul className={styles.metaData}>
         {!large && (
           <li>
@@ -325,7 +329,7 @@ const Description = ({ desc, id, full }) => {
   );
 };
 
-const ExtraMetadata = ({app}) => {
+const ExtraMetadata = ({ app }) => {
   return (
     <>
       {
@@ -370,7 +374,7 @@ const ExtraMetadata = ({app}) => {
   )
 }
 
-const Tags = ({tags}) => {
+const Tags = ({ tags }) => {
   return (
     <div className={styles.tags}>
       <ul>
@@ -385,5 +389,31 @@ const Tags = ({tags}) => {
     </div>
   )
 }
+
+const Copy = ({ id }) => {
+  const [showingCheck, setShowingCheck] = useState(false);
+  let str = `winget install --id=${id} -e`;
+  return (
+    <div className={styles.copy}>
+      <FiTerminal size={20} />
+      <span
+        onClick={() => {
+          navigator.clipboard.writeText(str);
+          setShowingCheck(true);
+          setTimeout(() => {
+            setShowingCheck(false);
+          }, 3000);
+        }}
+      >
+        {str}
+      </span>
+      {showingCheck ? (
+        <FiCheckCircle className={styles.clipboard} size={16} />
+      ) : (
+        <FiCopy className={styles.clipboard} size={16} />
+      )}
+    </div>
+  );
+};
 
 export default SingleApp;

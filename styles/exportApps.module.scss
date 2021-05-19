@@ -1,6 +1,4 @@
 .generate{
-    margin-bottom: 50px;
-    
     h1{
         max-width: 600px;
         font-size: 45px;
@@ -169,5 +167,33 @@
             color: var(--textColor);
             box-sizing: border-box;
         }
+    }
+}
+
+.scriptHeader{
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+
+    h3{
+        font-size: 1.5em;
+        margin: 0px;
+        padding: 0px;
+    }
+}
+
+
+@media(max-width: 620px){
+    .scriptHeader{
+        display: block;
+        text-align: left;
+
+        h3{
+            margin-bottom: 5px;
+        }
+    }
+
+    .box{
+        display: grid;
     }
 }
