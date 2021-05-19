@@ -408,6 +408,10 @@
     box-shadow: 0px 3px 5px #00000026 !important;
 }
 .copy {
+    .clipboard {
+        margin-left: auto;
+    }
+
     display: flex;
     align-items: center;
     padding: 20px;
@@ -419,12 +423,40 @@
     color: var(--textColor);
     overflow: hidden;
     cursor: pointer;
+
     span {
         user-select: none;
         padding: 0 10px;
+        opacity: 1;
     }
-    .clipboard {
-        margin-left: auto;
+
+    .copiedText {
+        animation: fadeInOut 2s linear forwards;
     }
     
+    .installCommand {
+        animation: fadeIn 0.5s linear forwards;
+    }
+    
+}
+
+.active.copy {
+    animation: slowBg 2s linear forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+  
+@keyframes slowBg {
+    0% { background-color: var(--card-bg); }
+    50% { background-color: var(--positive-bg); }
+    100% { background-color: var(--card-bg); }
 }
