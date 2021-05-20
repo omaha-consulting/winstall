@@ -7,7 +7,7 @@ const AdvancedConfig = ({ refreshConfig, activeTab }) => {
     const [ expanded, setExpnaded ] = useState(false);
 
     const [ config, setConfig ] = useState({
-        "--scope": "user",
+        "--scope": null,
         "-i": false,
         "-h": false,
         "-o": "",
