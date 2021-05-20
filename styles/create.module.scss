@@ -67,7 +67,7 @@
             display: block;
             font-style: normal;
             text-align: left;
-            margin-left: 25px;
+            margin-left: 30px;
             font-size: 14px;
             opacity: 0.7;
         }
@@ -118,11 +118,12 @@
     input{
         background-color: var(--accent);
         appearance: none;
-        width: 80px;
-        height: 80px;
+        width: 80px !important;
+        height: 80px !important;
         border-radius: 50%;
-        outline: 0;
-        margin: 0 10px;
+        border: 0px !important;
+        outline: 0 !important;
+        margin: 0 10px !important;
         cursor: pointer;
 
         &:checked{
