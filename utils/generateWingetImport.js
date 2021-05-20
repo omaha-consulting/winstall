@@ -2,6 +2,7 @@
 
 let wingetImportSchema = {
 	"$schema": "https://aka.ms/winget-packages.schema.1.0.json",
+    "WinGetVersion": "0.3.11201",
 	"Sources": [
 		{
 			"Packages": [
