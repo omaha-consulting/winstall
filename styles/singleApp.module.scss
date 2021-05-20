@@ -407,6 +407,7 @@
     border-radius: 10px !important;
     box-shadow: 0px 3px 5px #00000026 !important;
 }
+
 .copy {
     .clipboard {
         margin-left: auto;
@@ -436,6 +437,10 @@
     
     .installCommand {
         animation: fadeIn 0.5s linear forwards;
+    }
+
+    svg{
+        flex-shrink: 0;
     }
     
 }
