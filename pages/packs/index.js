@@ -1,6 +1,5 @@
 import PageWrapper from "../../components/PageWrapper";
 import MetaTags from "../../components/MetaTags";
-import SelectionBar from "../../components/SelectionBar";
 import styles from "../../styles/apps.module.scss";
 import PackPreview from "../../components/PackPreview";
 import Link from "next/link";
@@ -8,8 +7,11 @@ import { FiChevronLeft, FiPlus, FiChevronRight, FiArrowLeftCircle, FiArrowRightC
 import FeaturePromoter from "../../components/FeaturePromoter";
 import { useState} from "react";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
+import Error from "../../components/Error";
 
-export default function Packs({ packs }) {
+export default function Packs({ packs, error }) {
+    if(error) return <Error title="Oops!" subtitle={error}/>
+    
     const [offset, setOffset] = useState(0);
 
     const itemsPerPage = 60;
@@ -18,12 +20,12 @@ export default function Packs({ packs }) {
     let handleNext = () => {
         window.scrollTo(0, 0)
         setOffset(offset => offset + itemsPerPage);
-      }
+    }
   
-      let handlePrevious = () => {
+    let handlePrevious = () => {
         window.scrollTo(0, 0)
         setOffset(offset => offset - itemsPerPage);
-      }
+    }
 
     const Pagination = ({ small, disable }) => {
         return (
@@ -50,7 +52,7 @@ export default function Packs({ packs }) {
             </button>
           </div>
         );
-      }
+    }
 
       
     return (
@@ -93,14 +95,18 @@ export default function Packs({ packs }) {
                 </div>
             </div>
 
-            <SelectionBar />
         </PageWrapper>
     )
 }
 
 
 export async function getStaticProps() {
-    let { response: packs } = await fetchWinstallAPI(`/packs`);
+    let { response: packs, error } = await fetchWinstallAPI(`/packs`);
+
+    if(error) {
+      console.error(error);
+      return { props: { error }};
+    }
 
     const officialPacks = process.env.NEXT_OFFICIAL_PACKS_CREATOR;
 

@@ -5,6 +5,7 @@ import SelectedContext from "../ctx/SelectedContext";
 
 import { checkTheme } from "../utils/helpers";
 import Nav from "../components/Nav";
+import SelectionBar from "../components/SelectionBar";
 import PopularContext from "../ctx/PopularContext";
 
 function winstall({ Component, pageProps }) {
@@ -22,8 +23,11 @@ function winstall({ Component, pageProps }) {
       <SelectedContext.Provider value={selectedAppValue}>
         <PopularContext.Provider value={popularApps}>
             <>
-              <Nav />
-              <Component {...pageProps} />
+              <div className="container">
+                <Nav />
+                <Component {...pageProps} />
+              </div>
+              <SelectionBar/>
             </>
         </PopularContext.Provider>
       </SelectedContext.Provider>

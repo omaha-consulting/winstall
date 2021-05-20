@@ -2,13 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import styles from "../styles/prettyApp.module.scss";
 import SelectedContext from "../ctx/SelectedContext";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { FiChevronRight } from "react-icons/fi";
 
 let PrettyApp = ({ app, all }) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
-  const router = useRouter();
   
   useEffect(() => {
     let found = selectedApps.findIndex((a) => a._id === app._id) !== -1;
@@ -18,7 +16,6 @@ let PrettyApp = ({ app, all }) => {
 
   let handleAppSelect = () => {
     let found = selectedApps.findIndex((a) => a._id === app._id);
-
     if (found !== -1) {
       let updatedSelectedApps = selectedApps.filter(
         (a, index) => index !== found
@@ -28,9 +25,10 @@ let PrettyApp = ({ app, all }) => {
       setSelected(false);
     } else {
       setSelected(true);
-
+        
       if (all) {
         app = all.find((i) => app._id == i._id);
+
         setSelectedApps([...selectedApps, app]);
       } else {
         setSelectedApps([...selectedApps, app]);

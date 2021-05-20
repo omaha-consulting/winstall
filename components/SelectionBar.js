@@ -1,11 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from 'next/link'
 import SelectedContext from "../ctx/SelectedContext";
+import { withRouter } from 'next/router'
 
 import { FiTrash, FiCodepen, FiShare } from "react-icons/fi";
 
-export default function SelectionBar({ hideCreatePack }) {
+function SelectionBar({ router }) {
     const { selectedApps, setSelectedApps } = useContext(SelectedContext);
+    const [ hideCreatePack, setHideCreatePack ] = useState(false);
+
+    useEffect(() => {
+      if(router.pathname === "/packs/create"){
+        setHideCreatePack(true);
+      } else{
+        setHideCreatePack(false);
+      };
+    }, [ router ])
 
     if(selectedApps.length === 0) return <></>;
 
@@ -49,3 +59,5 @@ export default function SelectionBar({ hideCreatePack }) {
       </div>
     );
 }
+
+export default withRouter(SelectionBar);

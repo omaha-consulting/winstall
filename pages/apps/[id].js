@@ -1,7 +1,6 @@
 import styles from "../../styles/home.module.scss";
 
 import SingleApp from "../../components/SingleApp";
-import SelectionBar from "../../components/SelectionBar";
 
 import Footer from "../../components/Footer";
 import Error from "../../components/Error";
@@ -42,7 +41,7 @@ function AppDetail({ app, popular}) {
     }
 
     return (
-      <div className="container">
+      <div>
         <div className={styles.intro}>
           <div className="illu-box">
             {router.isFallback ? (
@@ -65,8 +64,6 @@ function AppDetail({ app, popular}) {
             </div>
           </div>
         </div>
-
-        <SelectionBar />
 
         <Footer />
       </div>

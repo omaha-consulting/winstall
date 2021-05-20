@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 export default function Privacy() {
   return (
-    <div className="container">
+    <div>
       <MetaTags title="Privacy Policy - winstall" />
       <article>
         <section>

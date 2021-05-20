@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/apps.module.scss";
 
-import SelectionBar from "../components/SelectionBar";
-
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
 import ListSort from "../components/ListSort";
@@ -18,8 +16,11 @@ import {
 
 import Router from "next/router";
 import fetchWinstallAPI from "../utils/fetchWinstallAPI";
+import Error from "../components/Error";
 
-function Store({ data }) {
+function Store({ data, error }) {
+    if(error) return <Error title="Oops!" subtitle={error}/>
+    
     const [apps, setApps] = useState([])
     const [searchInput, setSearchInput] = useState();
     const [offset, setOffset] = useState(0);
@@ -149,7 +150,7 @@ function Store({ data }) {
     if(!apps) return <></>;
 
     return (
-      <div className="container">
+      <div>
         <MetaTags title="Apps - winstall"/>
         
 
@@ -195,13 +196,14 @@ function Store({ data }) {
         </div>
 
         <Footer />
-        <SelectionBar />
       </div>
     );
 }
 
 export async function getStaticProps() {
-  let { response: apps } = await fetchWinstallAPI(`/apps`);
+  let { response: apps, error } = await fetchWinstallAPI(`/apps`);
+
+  if(error) return { props: { error }};
 
   return {
     props: {

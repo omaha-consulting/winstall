@@ -9,14 +9,13 @@ import MetaTags from "../../components/MetaTags";
 import { useEffect, useState, useContext } from "react";
 import PageWrapper from "../../components/PageWrapper";
 import PackAppsList from "../../components/PackAppsList";
-import SelectionBar from "../../components/SelectionBar";
 import SelectedContext from "../../ctx/SelectedContext";
 import { timeAgo } from "../../utils/helpers";
-import { FiCodepen, FiPackage, FiCopy, FiDownload, FiShare2, FiClock, FiEdit, FiTrash } from "react-icons/fi";
-import Toggle from "react-toggle";
+import { FiCodepen, FiPackage, FiShare2, FiClock, FiEdit, FiTrash } from "react-icons/fi";
 import { getSession } from "next-auth/client";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 import { callTwitterAPI } from "../api/twitter";
+import ExportApps from "../../components/AppExport/ExportApps";
 
 function AppSkeleton() {
     return (
@@ -101,38 +100,7 @@ function ScriptCode({apps}){
   return (
     <div className={styles.getScript} id="packScript">
 
-      <div className={styles.scriptHeader}>
-        <h3>Get the pack script</h3>
-        <div className="switch min">
-          <Toggle
-            id="biscuit-status"
-            defaultChecked={showPS}
-            aria-labelledby="biscuit-label"
-            onChange={handleScriptSwitch}
-          />
-          <span id="biscuit-label">Show PowerShell script</span>
-        </div>
-      </div>
-      
-      <p>You can copy-paste the following script into a terminal window to get all the apps in this pack. Alternatively, you can download the .bat or .ps1 file to quickly install this pack.</p>
-
-      <textarea
-        value={script}
-        onChange={() => { }}
-        onFocus={(e) => e.target.select()}
-      />
-
-      <div className="box">
-        <button className="button accent" onClick={handleCopy}>
-          <FiCopy />
-          {copyText}
-        </button>
-
-        <button className="button dl" onClick={handleBat}>
-          <FiDownload />
-                Download {showPS ? ".ps1" : ".bat"}
-        </button>
-      </div>
+      <ExportApps apps={apps} title='Get the pack' subtitle='You can copy-paste the following script into a terminal window to get all the apps in this pack.' />
     </div>
   )
 }
@@ -288,7 +256,6 @@ function PackDetail({ pack, creator, error }) {
         {/* <PackAppsList providedApps={packApps} reorderEnabled={false}/> */}
       </div>
 
-      <SelectionBar />
     </PageWrapper>
   );
 }

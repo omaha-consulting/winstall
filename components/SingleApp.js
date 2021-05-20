@@ -17,12 +17,16 @@ import {
   FiFileText,
   FiAlertOctagon,
   FiTag,
-  FiShare2
+  FiShare2,
+  FiTerminal,
+  FiCopy,
+  FiCheckCircle
 } from "react-icons/fi";
 
 
 import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
+
 
 let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = false, pack = false, displaySelect = true, preventGlobalSelect, hideBorder=false, preSelected=false}) => {
   const [selected, setSelected] = useState(false);
@@ -80,7 +84,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
       setSelectedApps(updatedSelectedApps);
       setSelected(false);
       
-    } else {
+    } else if(app){
       setSelected(true);
 
       if (all) {
@@ -92,6 +96,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
     }
 
   };
+
 
   if (!app && !app.img || !app.name) return <></>;
 
@@ -181,6 +186,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
         {!pack && <Description desc={app.desc} id={app._id} full={large} />}
       </div>
 
+      {large && <Copy id={app._id} />}
       <ul className={styles.metaData}>
         {!large && (
           <li>
@@ -323,7 +329,7 @@ const Description = ({ desc, id, full }) => {
   );
 };
 
-const ExtraMetadata = ({app}) => {
+const ExtraMetadata = ({ app }) => {
   return (
     <>
       {
@@ -368,7 +374,7 @@ const ExtraMetadata = ({app}) => {
   )
 }
 
-const Tags = ({tags}) => {
+const Tags = ({ tags }) => {
   return (
     <div className={styles.tags}>
       <ul>
@@ -383,5 +389,38 @@ const Tags = ({tags}) => {
     </div>
   )
 }
+
+const Copy = ({ id }) => {
+  const [showingCheck, setShowingCheck] = useState(false);
+
+  let str = `winget install --id=${id} -e`;
+
+  return (
+    <div
+      className={`${styles.copy} ${showingCheck ? styles.active : ""}`}
+      onClick={() => {
+        navigator.clipboard.writeText(str);
+        setShowingCheck(true);
+        setTimeout(() => {
+          setShowingCheck(false);
+        }, 2000);
+      }}
+    >
+      <FiTerminal size={20} />
+      {!showingCheck && (
+        <>
+          <span className={styles.installCommand}>{str}</span>
+          <FiCopy className={styles.clipboard} size={16} />
+        </>
+      )}
+      {showingCheck && (
+        <>
+          <span className={styles.copiedText}>Copied!</span>
+          <FiCheckCircle className={styles.clipboard} size={16} />
+        </>
+      )}
+    </div>
+  );
+};
 
 export default SingleApp;

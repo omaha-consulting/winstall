@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 export default function Explainer() {
   return (
-    <div className="container">
+    <div>
       <MetaTags title="winstall - how does it work?" />
       <article>
         <section>

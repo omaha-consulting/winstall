@@ -5,6 +5,8 @@
     --altTextColor: #fff;
     --accent: #9b2eff;
     --altAccent: #7214c9;
+    --error: maroon;
+    --positive-bg:#afffc9;
 
     .sun{
         display: none;
@@ -17,20 +19,22 @@
     --textColor: rgb(255, 255, 255);
     --altTextColor: #333;
     --accent: #9b2eff;
-     --altAccent: #6b14bd;
+    --altAccent: #6b14bd;
+    --error: rgb(255 149 149);
+    --positive-bg:#19a246;
+    
+    .react-loading-skeleton{
+        background-color: #2d2f30 !important;
+        background-image: linear-gradient( 90deg,#2d2f30,rgb(40, 40, 40),#2d2f30 ) !important;
+    }
 
-     .react-loading-skeleton{
-            background-color: #2d2f30 !important;
-            background-image: linear-gradient( 90deg,#2d2f30,rgb(40, 40, 40),#2d2f30 ) !important;
-     }
+    .moon{
+        display: none;
+    }
 
-     .moon{
-         display: none;
-     }
-
-     select option{
-         color: var(--textColor);
-     }
+    select option{
+        color: var(--textColor);
+    }
 
 }
 
@@ -50,7 +54,7 @@ body{
 
 
 header{
-    padding: 50px;
+    padding: 20px 0;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -377,7 +381,7 @@ article{
     .bottomBar .inner button:disabled em{
         font-size: 12px;
         line-height: 13px;
-    }
+    } 
 }
 
 @media(max-width: 790px){
@@ -806,4 +810,48 @@ button{
 
 .fBox{
     margin-top: auto;
+}
+
+input[type="radio"]{
+    border-radius: 50% !important;
+}
+
+input[type="checkbox"], input[type="radio"]{
+    border: 2px solid var(--textColor) !important;
+    border-radius: 2px;
+    display: inline-block;
+    height: 15px !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+    margin-top: 0px !important;
+    outline: none !important;
+    transition: all 100ms linear !important;
+    vertical-align: middle !important;
+    width: 15px !important;
+    -webkit-appearance: none !important;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:hover {
+        border: 2px solid var(--altAccent) !important;
+    }
+
+    &:focus {
+        border: 2px solid var(--altAccent) !important;
+    }
+
+    &:checked {
+        background-color: var(--main-bg);
+        border: 5px solid var(--accent) !important;
+
+        &:before {
+            display: block;
+        }
+
+        &:hover{
+            border: 5px solid var(--altAccent) !important;
+        }
+    }
+
 }

@@ -14,14 +14,14 @@
   "vscode": {
     "img": "code.webp",
     "name": "Visual Studio Code",
-    "_id": "Microsoft.VisualStudioCode.User-x64",
-    "path": "Microsoft/VisualStudioCode/User-x64"
+    "_id": "Microsoft.VisualStudioCode",
+    "path": "Microsoft/VisualStudioCode"
   },
   "vscode-insiders": {
     "img": "code-insiders.webp",
     "name": "Visual Studio Code - Insiders",
-    "_id": "Microsoft.VisualStudioCodeInsiders.User-x64",
-    "path": "Microsoft/VisualStudioCodeInsiders/User-x64"
+    "_id": "Microsoft.VisualStudioCode.Insiders",
+    "path": "Microsoft/VisualStudioCodeInsiders"
   },
   "chrome": {
     "img": "chrome.webp",
@@ -74,7 +74,7 @@
   "node": {
     "img": "node.webp",
     "name": "Node.js",
-    "_id": "OpenJS.Nodejs",
+    "_id": "OpenJS.NodeJS",
     "path": "OpenJS/NodeJS"
   },
   "obsstudio": {

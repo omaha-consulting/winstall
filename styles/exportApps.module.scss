@@ -1,0 +1,236 @@
+.generate{
+    h1{
+        max-width: 600px;
+        font-size: 45px;
+    }
+
+    h3{
+        font-size: 25px;
+        opacity: 0.75;
+        max-width: 600px;
+    }
+    p{
+        font-size: 20px;
+        max-width: 700px;
+    }
+
+    textarea{
+        width: 100%;
+        padding: 20px;
+        background-color: var(--card-bg);
+        border: 0px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-family: monospace;
+        outline: 0;
+        resize: none;
+        display: block;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+        min-height: 120px;
+        color: var(--textColor);
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+}
+
+.tipContainer{
+    display: flex;
+    flex-direction: row;
+    opacity: 0.75;
+
+    svg{
+        flex-shrink: 0;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+
+    p{
+        margin: 0px;
+        font-size: 17px;
+    }
+}
+
+.hideSection {
+    display: none;
+}
+
+.displaySection {
+    display: block;
+}
+
+.reverse{
+    flex-direction: row-reverse;
+}
+
+.tabHeader{
+    list-style-type: none;
+    padding: 0px;
+    display: flex;
+    flex-flow: wrap;
+    margin-bottom: 0px;
+
+    li{
+        margin-right: 10px;
+        border: 3px solid var(--card-bg);
+        border-radius: 20px;
+        padding: 5px 15px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    li.active{
+        border-color: var(--accent);
+    }
+}
+
+.selectedApps{
+    padding-bottom: 20px;
+}
+
+@media(max-width: 590px){
+    .generate{
+        padding-top: 0px !important;
+
+        textarea{
+            width: auto !important;
+        }
+    }
+}
+
+.expandBlock{
+    margin-bottom: 10px;
+
+    .center{
+        display: flex;
+        align-items: center;
+
+        svg{
+            margin-right: 10px ;
+        }
+    }
+    
+    .expandHeader{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s all ease-in-out;
+        user-select: none;
+        font-size: 15px;
+        margin-top: 6px;
+        opacity: 0.65;
+
+        &:hover{
+            opacity: 0.75;
+        }
+
+        svg{
+            margin-right: 5px;
+            transition: 0.2s all ease-in-out;
+        }
+
+        svg.expandedIcon{
+            transform: rotate(180deg);
+        }
+    }
+
+    .expandedHeader{
+        opacity: 1;
+    }
+
+    label{
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+        cursor: pointer;
+
+        input{
+            margin: 0px;
+            margin-right: 10px;
+        }
+
+        p{
+            margin: 0px;
+        }
+
+        code {
+            background-color: var(--card-bg);
+            padding: 5px;
+            color: var(--error);
+            border-radius: 5px;
+        }
+    }
+
+    label.radioContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 10px;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: 5px;
+
+            label{
+                margin-right: 10px;
+            }
+        }
+    }
+
+    label.text{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        p{
+            margin: 0px;
+        }
+
+        input{
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: var(--card-bg);
+            border: 0px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: monospace;
+            outline: 0;
+            margin-bottom: 10px;
+            color: var(--textColor);
+            box-sizing: border-box;
+        }
+    }
+}
+
+.scriptHeader{
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+
+    h3{
+        font-size: 1.5em;
+        margin: 0px;
+        padding: 0px;
+    }
+}
+
+
+@media(max-width: 620px){
+    .scriptHeader{
+        display: block;
+        text-align: left;
+
+        h3{
+            margin-bottom: 5px;
+        }
+    }
+
+    .box{
+        display: grid;
+    }
+}
