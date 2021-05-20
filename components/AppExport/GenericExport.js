@@ -3,7 +3,9 @@ import { FiCopy, FiDownload, FiInfo } from "react-icons/fi";
 import styles from "../../styles/exportApps.module.scss";
 
 let handleCopy = ( fileContent, setCopyText ) => {
-    navigator.clipboard.writeText(fileContent).then(() => setCopyText("Copied!")).catch((err) => {
+    navigator.clipboard.writeText(fileContent).then(() => {
+        if(setCopyText) setCopyText("Copied!")
+    }).catch(() => {
         document.querySelector("textarea").select();
     })
 }
@@ -30,8 +32,11 @@ const GenericExport = ({ fileContent, displayedCommand, fileExtension, prioritis
         <div className={styles.generate}>
             <textarea
                 value={ textboxContent }
-                onChange={(e) => { setTextboxContent(e.target.value) }}
+                readOnly
                 onFocus={(e) => e.target.select()}
+                onClick={(e) => e.target.select()}
+                spellCheck={false}
+                data-gramm_editor={false} // disable grammarly from showing up
             />
 
             { tip && (
@@ -41,18 +46,24 @@ const GenericExport = ({ fileContent, displayedCommand, fileExtension, prioritis
                 </div>
             )}
 
-            <div className={`box ${prioritiseDownload ? styles.reverse : ''}`}>
-                <button className={`button ${!prioritiseDownload ? 'accent' : ''}`} onClick={() => handleCopy(textboxContent, setCopyText)}>
-                    <FiCopy />
-                    {copyText}
-                </button>
+            <div className={`box`}>
+                { !prioritiseDownload && (
+                    <button className={`button accent`} onClick={() => handleCopy(textboxContent, setCopyText)}>
+                        <FiCopy />
+                        {copyText}
+                    </button>
+                )}
 
                 <button className={`button dl ${prioritiseDownload ? 'accent' : ''}`}  onClick={() => {
                     handleDownload(fileContent, fileExtension, downloadId);
                     setDownloadId(Math.floor(1000 + Math.random() * 9000));
+
+                    if(prioritiseDownload){
+                        handleCopy(textboxContent);
+                    }
                 }}>
                     <FiDownload />
-                    Download {fileExtension}
+                    Download {fileExtension} {prioritiseDownload ? " + Copy to clipboard" : ""}
                 </button>
             </div>
         </div>

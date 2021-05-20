@@ -32,7 +32,7 @@ const ExportApps = ({ apps, title, subtitle }) => {
                             displayedCommand={wingetImportCommand}
                             fileExtension=".json"
                             prioritiseDownload={true}
-                            tip="To install your apps, open a terminal window in the same folder as the downloaded .json file. Then, copy and paste the above command into the terminal window and hit enter."
+                            tip="To install your apps, press the button below. Then, open a terminal window in the same folder as the downloaded .json file, paste the command into the terminal window and hit enter."
                         />
             }
         ]
