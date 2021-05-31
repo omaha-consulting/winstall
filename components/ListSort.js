@@ -16,9 +16,9 @@ const ListSort = ({apps, defaultSort, onSort}) => {
       setSort(sortChoice);
       
       if (sortChoice === "name-asc") {
-        apps.sort((a, b) => b.name.localeCompare(a.name));
-      } else if (sortChoice === "name-desc") {
         apps.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortChoice === "name-desc") {
+        apps.sort((a, b) => b.name.localeCompare(a.name));
       } else if (sortChoice === "update-desc") {
         // because the updatedAt values are in ISO, we can just to lexographical comparison
         apps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
@@ -33,8 +33,8 @@ const ListSort = ({apps, defaultSort, onSort}) => {
       <div className={styles.sort}>
         <label htmlFor="sort">Sort by</label>
         <select id="sort" value={sort} onChange={(e) => handleSort(e)}>
-          <option value="name-desc">Name (Descending)</option>
           <option value="name-asc">Name (Ascending)</option>
+          <option value="name-desc">Name (Descending)</option>
           <option value="update-desc">Recently Updated (Newest First)</option>
           <option value="update-asc">Recently Updated (Oldest First)</option>
         </select>
