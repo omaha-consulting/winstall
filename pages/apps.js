@@ -35,7 +35,7 @@ function Store({ data, error }) {
         setSort(Router.query.sort);
         setApps(data.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)));
       } else {
-        setSort("name-desc");
+        setSort("name-asc");
         setApps(data.sort((a, b) => a.name.localeCompare(b.name)));
       }
 

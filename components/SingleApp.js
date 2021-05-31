@@ -186,7 +186,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
         {!pack && <Description desc={app.desc} id={app._id} full={large} />}
       </div>
 
-      {large && <Copy id={app._id} />}
+      {large && <Copy id={app._id} version={version} latestVersion={app.latestVersion} />}
       <ul className={styles.metaData}>
         {!large && (
           <li>
@@ -390,11 +390,11 @@ const Tags = ({ tags }) => {
   )
 }
 
-const Copy = ({ id }) => {
+const Copy = ({ id, version, latestVersion }) => {
   const [showingCheck, setShowingCheck] = useState(false);
 
-  let str = `winget install --id=${id} -e`;
-
+  let str = `winget install --id=${id} ${version == latestVersion ? "" : `-v "${version}"`} -e`;
+  
   return (
     <div
       className={`${styles.copy} ${showingCheck ? styles.active : ""}`}
