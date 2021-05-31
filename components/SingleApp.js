@@ -394,7 +394,7 @@ const Copy = ({ id, version, latestVersion }) => {
   const [showingCheck, setShowingCheck] = useState(false);
 
   let str = `winget install --id=${id} ${version == latestVersion ? "" : `-v "${version}"`} -e`;
-  console.log(version)
+  
   return (
     <div
       className={`${styles.copy} ${showingCheck ? styles.active : ""}`}
