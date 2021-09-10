@@ -336,7 +336,7 @@ const ExtraMetadata = ({ app }) => {
         app.minOS && (
           <li>
             <FiAlertOctagon/>
-            Minimum OS verison: {app.minOS}
+            Minimum OS version: {app.minOS}
           </li>
         )
       }
