@@ -136,7 +136,6 @@ const User = () => {
   useEffect(() => {
     getSession().then(async (session) => {
       if (!session) return;
-      console.log(session);
       const { response, error } = await fetch("/api/twitter/", {
         method: "GET",
         headers: {

@@ -31,8 +31,8 @@ const options = {
       }
 
       if (account) {
-        token.accessToken = account.accessToken;
-        token.refreshToken = account.refreshToken;
+        token.accessToken = account.oauth_token;
+        token.refreshToken = account.oauth_token_secret;
       }
 
       return Promise.resolve(token);
