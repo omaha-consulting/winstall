@@ -9,13 +9,12 @@ const options = {
     }),
   ],
 
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.SECRET,
 
   session: {
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
-
-  jwt: true,
 
   callbacks: {
     session: async ({ session, token }) => {
