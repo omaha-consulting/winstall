@@ -8,7 +8,8 @@ const options = {
       clientSecret: process.env.TWITTER_SECRET,
     }),
   ],
-  secret: process.env.SECRET,
+
+  secret: process.env.NEXTAUTH_SECRET,
 
   session: {
     maxAge: 30 * 24 * 60 * 60,
