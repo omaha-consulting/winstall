@@ -12,7 +12,7 @@ What's new
 How does it work?
 -----------------------
 
-winstall is powered by Windows Package Manager (aka "winget"), [Microsoft's new package manager](https://devblogs.microsoft.com/commandline/windows-package-manager-preview/) for Windows 10. Windows Package Manager is currently in preview, and it is not available by default in Windows 10.
+winstall is powered by Windows Package Manager (aka "winget"), [Microsoft's new package manager](https://devblogs.microsoft.com/commandline/windows-package-manager-preview/) for Windows 10 and 11. it is available by default in Windows 10 and 11.
 
 Installing Windows Package Manager
 ----------------------------------
