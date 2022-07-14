@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import styles from "../styles/packsAppList.module.scss";
 import SingleApp from "./SingleApp";
+import DonateCard from "./DonateCard";
 
 import { FiPlus, FiPlusCircle, FiXCircle } from "react-icons/fi";
 import Search from "./Search";
