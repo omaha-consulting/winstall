@@ -63,10 +63,14 @@ function PackAppsList({ notLoggedIn = false, providedApps, reorderEnabled, onLis
     if(!reorderEnabled){
         return (
           <ul className={`${styles.appsList} ${styles.noDragList}`}> 
-            {apps.map((app) => (
-              <div className={styles.appCard} key={app._id}>
-                <SingleApp app={app} pack={true} displaySelect={true}/>
-              </div>
+            {apps.map((app, index) => (
+              <React.Fragment>
+                <div className={styles.appCard} key={app._id}>
+                  <SingleApp app={app} pack={true} displaySelect={true}/>
+                </div>
+
+                { index === 3 && <DonateCard />}
+              </React.Fragment>
             ))}
           </ul>
         );

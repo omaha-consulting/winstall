@@ -886,3 +886,14 @@ input[type="radio"] {
     display: inline;
   }
 }
+
+.donate {
+  display: inline-flex;
+  margin: 0px;
+  font-weight: 800;
+
+  svg{
+    margin-top: 0px;
+    
+  }
+}

@@ -1,0 +1,29 @@
+.container{
+    transition: 0.1s all ease-in-out;
+    box-shadow: 0px 3px 5px #00000026;
+    padding: 25px;
+    border-radius: 10px;
+    position: relative;
+    color: #fff;
+    background-color: #2575fc;
+
+    h2 {
+        margin: 0px;
+        font-size: 22px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        a {
+            margin-right: 0px;
+        }
+    }
+
+}
+
+.margin {
+    margin: 20px 0;
+}

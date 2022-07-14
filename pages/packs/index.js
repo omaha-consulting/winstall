@@ -5,9 +5,10 @@ import PackPreview from "../../components/PackPreview";
 import Link from "next/link";
 import { FiChevronLeft, FiPlus, FiChevronRight, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import FeaturePromoter from "../../components/FeaturePromoter";
-import { useState} from "react";
+import React, { useState} from "react";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 import Error from "../../components/Error";
+import DonateCard from "../../components/DonateCard";
 
 export default function Packs({ packs, error }) {
     if(error) return <Error title="Oops!" subtitle={error}/>
@@ -83,7 +84,14 @@ export default function Packs({ packs, error }) {
         
                 
                 <ul className={`${styles.all} ${styles.storeList}`}>
-                    {packs.slice(offset, offset + itemsPerPage).map(pack => <li key={pack._id}><PackPreview pack={pack} /></li>)}
+                    {packs.slice(offset, offset + itemsPerPage).map((pack, index) => (
+                        <React.Fragment key={pack._id}>
+                            <li>
+                                <PackPreview pack={pack} /> 
+                            </li>
+                            { index % 15 === 0 && <DonateCard addMargin={false}/> }
+                        </React.Fragment>
+                    ))}
                 </ul>
 
                 <div className={styles.pagination}>

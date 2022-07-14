@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/apps.module.scss";
 
 import SingleApp from "../components/SingleApp";
@@ -17,6 +17,7 @@ import {
 import Router from "next/router";
 import fetchWinstallAPI from "../utils/fetchWinstallAPI";
 import Error from "../components/Error";
+import DonateCard from "../components/DonateCard";
 
 function Store({ data, error }) {
   if (error) return <Error title="Oops!" subtitle={error} />;
@@ -188,12 +189,15 @@ function Store({ data, error }) {
 
       {!searchInput && (
         <ul className={`${styles.all} ${styles.storeList}`}>
-          {apps.slice(offset, offset + appsPerPage).map((app) => (
-            <SingleApp
-              app={app}
-              key={app._id}
-              showTime={sort.includes("update-") ? true : false}
-            />
+          {apps.slice(offset, offset + appsPerPage).map((app, index) => (
+            <React.Fragment key={app._id}>
+              <SingleApp
+                app={app}
+                showTime={sort.includes("update-") ? true : false}
+              />
+
+              { (index % 15) === 0 && <DonateCard addMargin={false}/>} 
+            </React.Fragment>
           ))}
         </ul>
       )}
