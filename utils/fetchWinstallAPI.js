@@ -19,6 +19,7 @@ const fetchWinstallAPI = async (path, givenOptions) => {
         ...headerOptions,
       },
       ...additionalOptions,
+      redirect: "follow",
     });
 
     if (res.status !== 200) {
