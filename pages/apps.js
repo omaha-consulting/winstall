@@ -196,7 +196,7 @@ function Store({ data, error }) {
                 showTime={sort.includes("update-") ? true : false}
               />
 
-              { (index % 15) === 0 && <DonateCard addMargin={false}/>} 
+              {index % 15 === 0 && <DonateCard addMargin={false} />}
             </React.Fragment>
           ))}
         </ul>
@@ -222,7 +222,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      data: apps,
+      data: apps ?? null,
     },
   };
 }

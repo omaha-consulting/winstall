@@ -108,7 +108,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      allApps: apps,
+      allApps: apps ?? null,
     },
   };
 }
