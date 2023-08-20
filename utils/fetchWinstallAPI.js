@@ -22,13 +22,15 @@ const fetchWinstallAPI = async (path, givenOptions) => {
       redirect: "follow",
     });
 
-    if (res.status !== 200) {
+    if (!res.ok) {
+      throw new Error((await res.json()).error);
       error = (await res.json()).error;
     } else {
       response = await res.json();
     }
   } catch (err) {
     error = err.message;
+    throw new Error(err);
   }
 
   return { response, error };
