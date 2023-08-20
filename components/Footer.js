@@ -35,17 +35,27 @@ export default function Footer() {
   return (
     <div className={styles.footer}>
       <a
-        href="https://builtbymeh.com/"
+        href="https://winget.pro"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.brand}
       >
         <img
-          src={"/assets/meh.png"}
-          alt="builtbymeh.com logo"
+          src={"/assets/winget-pro.svg"}
+          alt="winget.pro logo"
           draggable={false}
         />
-        <p>Built by Mehedi Hassan.</p>
+        <div>
+          <p>Maintained by winget.pro</p>
+          <a
+            href="https://builtbymeh.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.brand}
+          >
+            <em>built by Mehedi Hassan</em>
+          </a>
+        </div>
       </a>
 
       <ul>
@@ -102,9 +112,8 @@ export default function Footer() {
         id="btnTop"
         title="Go to top"
         onClick={topFunction}
-        className={`${styles.backToTop} ${
-          selectedApps.length !== 0 ? styles.selectionOpen : ""
-        }`}
+        className={`${styles.backToTop} ${selectedApps.length !== 0 ? styles.selectionOpen : ""
+          }`}
       >
         <FiChevronUp />
       </span>
