@@ -124,7 +124,7 @@ export default function Explainer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              winget.pro
+              winget.Pro
             </a>{" "}
             - with winget.pro, you can have your own, securely hosted repositories for the Windows Package Manager. Our private winget repository gives you better control over who receives your software.
           </p>

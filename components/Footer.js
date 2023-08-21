@@ -46,7 +46,7 @@ export default function Footer() {
           draggable={false}
         />
         <div>
-          <p>Maintained by winget.pro</p>
+          <p>A service by winget.Pro</p>
           <a
             href="https://builtbymeh.com/"
             target="_blank"
