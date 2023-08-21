@@ -5,14 +5,14 @@ import PackPreview from "../../components/PackPreview";
 import Link from "next/link";
 import { FiChevronLeft, FiPlus, FiChevronRight, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import FeaturePromoter from "../../components/FeaturePromoter";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
 import Error from "../../components/Error";
 import DonateCard from "../../components/DonateCard";
 
 export default function Packs({ packs, error }) {
-    if(error) return <Error title="Oops!" subtitle={error}/>
-    
+    if (error) return <Error title="Oops!" subtitle={error} />
+
     const [offset, setOffset] = useState(0);
 
     const itemsPerPage = 60;
@@ -22,7 +22,7 @@ export default function Packs({ packs, error }) {
         window.scrollTo(0, 0)
         setOffset(offset => offset + itemsPerPage);
     }
-  
+
     let handlePrevious = () => {
         window.scrollTo(0, 0)
         setOffset(offset => offset - itemsPerPage);
@@ -30,32 +30,32 @@ export default function Packs({ packs, error }) {
 
     const Pagination = ({ small, disable }) => {
         return (
-          <div className={small ? styles.minPagination : styles.pagbtn}>
-            <button
-              className={`button ${small ? styles.smallBtn : null}`}
-              id={!small ? "previous": ""}
-              onClick={handlePrevious}
-              title="Previous page of packs"
-              disabled={offset > 0 ? (disable ? "disabled" : null) : "disabled"}
-            >
-              <FiChevronLeft />
-              {!small ? "Previous" : ""}
-            </button>
-            <button
-              className={`button ${small ? styles.smallBtn : null}`}
-              id={!small ? "next" : ""}
-              title="Next page of packs"
-              onClick={handleNext}
-              disabled={offset + itemsPerPage < packs.length ? ( disable ? "disabled" : null ) : "disabled"}
-            >
-              {!small ? "Next" : ""}
-              <FiChevronRight />
-            </button>
-          </div>
+            <div className={small ? styles.minPagination : styles.pagbtn}>
+                <button
+                    className={`button ${small ? styles.smallBtn : null}`}
+                    id={!small ? "previous" : ""}
+                    onClick={handlePrevious}
+                    title="Previous page of packs"
+                    disabled={offset > 0 ? (disable ? "disabled" : null) : "disabled"}
+                >
+                    <FiChevronLeft />
+                    {!small ? "Previous" : ""}
+                </button>
+                <button
+                    className={`button ${small ? styles.smallBtn : null}`}
+                    id={!small ? "next" : ""}
+                    title="Next page of packs"
+                    onClick={handleNext}
+                    disabled={offset + itemsPerPage < packs.length ? (disable ? "disabled" : null) : "disabled"}
+                >
+                    {!small ? "Next" : ""}
+                    <FiChevronRight />
+                </button>
+            </div>
         );
     }
 
-      
+
     return (
         <PageWrapper>
             <MetaTags title="Packs - winstall" desc="Checkout the community's app collections for your new Windows 10 machine." />
@@ -65,11 +65,11 @@ export default function Packs({ packs, error }) {
                     <h3>Introducing Packs</h3>
                     <h1>Curate and share the apps you use daily.</h1>
                     <div className="box2">
-                        <Link href="/packs/create"><button className="button spacer accent" id="starWine"><FiPlus/> Create a pack</button></Link>
+                        <Link href="/packs/create"><button className="button spacer accent" id="starWine"><FiPlus /> Create a pack</button></Link>
                     </div>
                 </FeaturePromoter>
 
-                <div className={styles.controls}> 
+                <div className={styles.controls}>
                     <div>
                         <h1>All packs {`(${packs.length})`}</h1>
                         <p>
@@ -78,24 +78,24 @@ export default function Packs({ packs, error }) {
                             {totalPages}).
                         </p>
                     </div>
-                    <Pagination small/> 
+                    <Pagination small />
                 </div>
 
-        
-                
+
+
                 <ul className={`${styles.all} ${styles.storeList}`}>
                     {packs.slice(offset, offset + itemsPerPage).map((pack, index) => (
                         <React.Fragment key={pack._id}>
                             <li>
-                                <PackPreview pack={pack} /> 
+                                <PackPreview pack={pack} />
                             </li>
-                            { index % 15 === 0 && <DonateCard addMargin={false}/> }
+                            {index % 15 === 0 && <DonateCard addMargin={false} />}
                         </React.Fragment>
                     ))}
                 </ul>
 
                 <div className={styles.pagination}>
-                    <Pagination/>
+                    <Pagination />
                     <em>
                         Hit the <FiArrowLeftCircle /> and <FiArrowRightCircle /> keys
                         on your keyboard to navigate between pages quickly.
@@ -109,11 +109,11 @@ export default function Packs({ packs, error }) {
 
 
 export async function getStaticProps() {
-    let { response: packs, error } = await fetchWinstallAPI(`/packs`);
+    let { response: packs, error } = await fetchWinstallAPI(`/packs`, {}, true);
 
-    if(error) {
-      console.error(error);
-      return { props: { error }};
+    if (error) {
+        console.error(error);
+        return { props: { error } };
     }
 
     const officialPacks = process.env.NEXT_OFFICIAL_PACKS_CREATOR;

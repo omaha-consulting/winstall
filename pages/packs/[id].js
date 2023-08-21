@@ -57,10 +57,9 @@ function ScriptCode({ apps }) {
 
     apps.map((app) => {
       installs.push(
-        `winget install --id=${app._id} ${
-          app.selectedVersion !== app.latestVersion
-            ? `-v "${app.selectedVersion}" `
-            : ""
+        `winget install --id=${app._id} ${app.selectedVersion !== app.latestVersion
+          ? `-v "${app.selectedVersion}" `
+          : ""
         }-e`
       );
 
@@ -307,9 +306,11 @@ export async function getStaticProps({ params }) {
 
     const getIndividualApps = appsList.map(async (app, index) => {
       return new Promise(async (resolve) => {
+
         let { response: appData, error } = await fetchWinstallAPI(
           `/apps/${app._id}`
         );
+
 
         if (error) appData = null;
 
