@@ -35,4 +35,4 @@ The list of popular apps are fetched from a `.json` file with a pre-populated se
 
 History
 ------------
-winstall was originally created by [Mehedi Hassan](https://github.com/MehediH) as a side project, but is now owned and maintained by [winget.Pro](https://winget.pro) - with [winget.pro](https://winget.pro), you can have your own, securely hosted repositories for the Windows Package Manager.
+winstall was originally created by [Mehedi Hassan](https://github.com/MehediH) as a side project, but is now owned and maintained by [winget.Pro](https://winget.pro) - with [winget.Pro](https://winget.pro), you can have your own, securely hosted repositories for the Windows Package Manager.
