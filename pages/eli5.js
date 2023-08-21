@@ -92,22 +92,46 @@ export default function Explainer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              find the source code here. 
+              find the source code here.
             </a>{" "}
             If you run into any issues, please report it{" "}
-              <a
-                href="https://github.com/MehediH/winstall/issues/new"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                using GitHub Issues here.
-           
+            <a
+              href="https://github.com/MehediH/winstall/issues/new"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              using GitHub Issues here.
+
             </a>
           </p>
 
         </section>
+
+        <section>
+          <h2>Project history</h2>
+          <p>
+            winstall was originally created by
+            {" "}<a
+              href="https://builtbymeh.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Mehedi Hassan
+            </a>{" "}
+            as a side project, but is now owned and maintained by{" "}
+            <a
+              href="https://winget.pro"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              winget.Pro
+            </a>{" "}
+            - with winget.Pro, you can have your own, securely hosted repositories for the Windows Package Manager. Our private winget repository gives you better control over who receives your software.
+          </p>
+
+        </section>
       </article>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

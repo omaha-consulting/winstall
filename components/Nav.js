@@ -15,7 +15,6 @@ import {
   FiGrid,
   FiChevronDown,
   FiX,
-  FiHeart,
 } from "react-icons/fi";
 
 import NProgress from "nprogress";
@@ -33,7 +32,6 @@ Router.onRouteChangeError = () => {
 };
 
 function Nav() {
-  const router = useRouter();
   const [ddShown, setDDShown] = useState(false);
   const navRef = useRef(null);
 
@@ -104,7 +102,7 @@ function Nav() {
             <p>Packs</p>
           </a>
         </Link>
-        <a
+        {/* <a
           href="https://ko-fi.com/mehedi"
           target="_blank"
           rel="noopener noreferrer"
@@ -112,7 +110,7 @@ function Nav() {
         >
           <FiHeart />
           <p className={styles.ddOnly}>Support winstall</p>
-        </a>
+        </a> */}
         <span onClick={switchTheme} className={styles.justIcon}>
           <FiMoon className="moon" />
           <FiSun className="sun" />

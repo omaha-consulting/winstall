@@ -2,13 +2,6 @@
 
 ## A web app for browsing Windows Package Manager apps, and create a batch-installation command using an intuitive interface.  
 
-What's new 
-----------
-- Introducing Packs: curate and share lists of apps you love and use daily.
-- PWA support
-- Ability to share individual apps 
-- New homepage powered by official winstall packs
-
 How does it work?
 -----------------------
 
@@ -39,3 +32,7 @@ Popular apps
 ------------
 
 The list of popular apps are fetched from a `.json` file with a pre-populated set of data. On the front-end, a random selection of 6 apps from the list is displayed. If you would like to add an app to the list of popular apps, you can do so by [adding an app here](https://github.com/MehediH/winstall/blob/master/data/popularApps.json) and creating a pull request. You will also have to provide a logo for that app, which needs to have a transparent image, be 80x80px, and in the .webp format. The logo must be [added in this folder.](https://github.com/MehediH/winstall/tree/master/public/assets/apps). And because Safari does not like .webp, you need to also add a .png version of the same image under /apps/fallback.
+
+History
+------------
+winstall was originally created by [Mehedi Hassan](https://github.com/MehediH) as a side project, but is now owned and maintained by [winget.Pro](https://winget.pro) - with [winget.Pro](https://winget.pro), you can have your own, securely hosted repositories for the Windows Package Manager.
