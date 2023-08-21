@@ -108,7 +108,7 @@ export default function Explainer() {
         </section>
 
         <section>
-          <h2>Proeject history</h2>
+          <h2>Project history</h2>
           <p>
             winstall was originally created by
             {" "}<a
@@ -126,7 +126,7 @@ export default function Explainer() {
             >
               winget.Pro
             </a>{" "}
-            - with winget.pro, you can have your own, securely hosted repositories for the Windows Package Manager. Our private winget repository gives you better control over who receives your software.
+            - with winget.Pro, you can have your own, securely hosted repositories for the Windows Package Manager. Our private winget repository gives you better control over who receives your software.
           </p>
 
         </section>
