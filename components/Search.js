@@ -109,7 +109,15 @@ function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPac
             </ul>
           </div>
         </div>
-        {results.length > 0 && searchInput && <p className={styles.searchHint}>Showing {results.length} {results.length === 1 ? "result" : "results"}.</p>}
+        {searchInput && results.length === limit &&
+          <p className={styles.searchHint}>
+            Showing {results.length} result
+            {results.length > 1 && "s"}
+            . {results.length == limit &&
+              <a href={`/apps?q=${searchInput}`}>More</a>
+            }
+          </p>
+        }
       </div>
 
       {searchInput && results.length !== 0 ? (
