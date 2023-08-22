@@ -4,7 +4,7 @@ import ListPackages from "../components/ListPackages";
 
 import PopularContext from "../ctx/PopularContext";
 
-import {FiPackage} from "react-icons/fi";
+import { FiPackage } from "react-icons/fi";
 import { useEffect, useContext } from "react";
 
 let PopularApps = ({ apps, all }) => {
