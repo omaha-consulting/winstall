@@ -80,7 +80,7 @@ function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPac
 
   return (
     <div>
-      <label htmlFor="search" className={styles.searchLabel}>{label || `${Math.floor(apps.length / 50) * 50}+ apps and growing.`}</label>
+      <label htmlFor="search" className={styles.searchLabel}>{label || `${Math.floor(apps.length / 50) * 50}+ packages and growing.`}</label>
       <div className={styles.searchBox}>
         <div className={styles.searchInner}>
           <FiSearch />
