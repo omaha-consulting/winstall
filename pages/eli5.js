@@ -88,7 +88,7 @@ export default function Explainer() {
           <p>
             winstall is completely open-source, and you can{" "}
             <a
-              href="https://github.com/MehediH/winstall"
+              href="https://github.com/omaha-consulting/winstall"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -96,7 +96,7 @@ export default function Explainer() {
             </a>{" "}
             If you run into any issues, please report it{" "}
             <a
-              href="https://github.com/MehediH/winstall/issues/new"
+              href="https://github.com/omaha-consulting/winstall/issues/new"
               target="_blank"
               rel="noopener noreferrer"
             >

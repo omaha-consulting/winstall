@@ -80,7 +80,7 @@ export default function Footer() {
         </li>
         <li>
           <a
-            href="https://github.com/MehediH/winstall"
+            href="https://github.com/omaha-consulting/winstall"
             target="_blank"
             rel="noopener noreferrer"
           >
