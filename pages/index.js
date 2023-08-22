@@ -22,12 +22,12 @@ function Home({ popular, apps, recommended, error}) {
 
   return (
     <div>
-      <MetaTags title="winstall - GUI for Windows Package Manager" />
+      <MetaTags title="Find and install winget packages - winstall" />
       <div className={styles.intro}>
         <div className="illu-box">
           <div>
             <h1>
-              Bulk install Windows apps quickly with Windows Package Manager.
+              Find and install winget packages.
             </h1>
             <Search apps={apps} limit={4}/>
             <DonateCard />
