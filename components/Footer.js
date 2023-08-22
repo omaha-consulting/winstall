@@ -97,15 +97,6 @@ export default function Footer() {
             <a>Help</a>
           </Link>
         </li>
-        <li>
-          <a
-            href="https://ko-fi.com/mehedi"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Donate
-          </a>
-        </li>
       </ul>
 
       <span
