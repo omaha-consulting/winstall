@@ -7,7 +7,7 @@ import Fuse from "fuse.js";
 import SingleApp from "../components/SingleApp";
 import ListPackages from "../components/ListPackages";
 
-import {FiSearch, FiHelpCircle} from "react-icons/fi";
+import { FiSearch, FiHelpCircle } from "react-icons/fi";
 import { forceVisible } from 'react-lazyload';
 import { useRouter } from "next/router";
 
