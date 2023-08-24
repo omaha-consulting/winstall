@@ -50,7 +50,7 @@ function AppDetail({ app, popular}) {
             ) : (
               <div>
                 <MetaTags
-                  title={`winget install ${app.name} - winstall`}
+                  title={`Install ${app.name} with winget - winstall`}
                   desc={app.desc}
                 />
                 <ul className="largeApp"><SingleApp app={app} large={true} displaySelect={false}/></ul>

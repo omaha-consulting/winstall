@@ -161,7 +161,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
           {large ? (
             <>
               <AppIcon id={app._id} name={app.name} icon={app.icon} />
-              {app.name}
+              Install {app.name} with winget
             </>
           ) : (
             <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
