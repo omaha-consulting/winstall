@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 function Search({ apps, onSearch, label, placeholder, preventGlobalSelect, isPackView, alreadySelected=[], limit=-1}) {
   const [results, setResults] = useState([])
   const [searchInput, setSearchInput] = useState();
-  const defaultKeys = [{ name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
+  const defaultKeys = [{ name: "moniker", weight: 2 }, { name: "name", weight: 2 }, "path", "desc", "publisher", "tags"];
   const [keys, setKeys] = useState(defaultKeys);
   const router = useRouter();
   const [urlQuery, setUrlQuery] = useState();
