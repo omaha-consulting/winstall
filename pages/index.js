@@ -22,12 +22,12 @@ function Home({ popular, apps, recommended, error}) {
 
   return (
     <div>
-      <MetaTags title="Find and install winget packages - winstall" />
+      <MetaTags title="Browse the winget repository - winstall" />
       <div className={styles.intro}>
         <div className="illu-box">
           <div>
             <h1>
-              Find and install winget packages.
+              Browse the winget repository.
             </h1>
             <Search apps={apps} limit={4}/>
             <DonateCard />
