@@ -29,6 +29,9 @@ function Home({ popular, apps, recommended, error}) {
             <h1>
               Browse the winget repository.
             </h1>
+            <p className={styles.lead}>
+              Install Windows apps quickly with Windows Package Manager.
+            </p>
             <Search apps={apps} limit={4}/>
             <DonateCard />
           </div>
