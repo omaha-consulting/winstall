@@ -60,6 +60,9 @@ let PrettyApp = ({ app, all }) => {
                   src={`/assets/apps/fallback/${app.img.replace("webp", "png")}`}
                   alt={`Logo for ${app.name}`}
                   draggable={false}
+                  // Specify the size to avoid Cumulative Layout Shift:
+                  width="80"
+                  height="80"
                   />
               </picture>
               </div>

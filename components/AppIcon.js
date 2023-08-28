@@ -40,6 +40,9 @@ const AppIcon = ({id, name, icon}) => {
                 src={icon}
                 draggable={false}
                 alt={`Logo for ${name}`}
+                // Specify the size to avoid Cumulative Layout Shift:
+                width="25"
+                height="25"
               />
             )
           }
@@ -64,7 +67,14 @@ const AppPicture = ({ name, srcSetPng, srcSetWebp }) => {
       <picture>
         <source srcSet={srcSetWebp} type="image/webp" />
         <source srcSet={srcSetPng} type="image/png" />
-        <img src={srcSetPng} alt={`Logo for ${name}`} draggable={false} />
+        <img
+          src={srcSetPng}
+          alt={`Logo for ${name}`}
+          draggable={false}
+          // Specify the size to avoid Cumulative Layout Shift:
+          width="25"
+          height="25"
+        />
       </picture>
     </LazyLoad>
   );
