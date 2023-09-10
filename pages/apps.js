@@ -36,7 +36,9 @@ function Store({ data, error }) {
       setSort(Router.query.sort);
       setApps(data.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)));
     } else {
-      setSort("name-asc");
+      // Show most recently updated first to entice Google to index them, and to
+      // demonstrate to users that the site is being kept up-to-date.
+      setSort("update-desc");
       setApps(data.sort((a, b) => a.name.localeCompare(b.name)));
     }
 

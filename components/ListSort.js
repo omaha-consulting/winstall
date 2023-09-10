@@ -33,10 +33,10 @@ const ListSort = ({apps, defaultSort, onSort}) => {
       <div className={styles.sort}>
         <label htmlFor="sort">Sort by</label>
         <select id="sort" value={sort} onChange={(e) => handleSort(e)}>
-          <option value="name-asc">Name (Ascending)</option>
-          <option value="name-desc">Name (Descending)</option>
           <option value="update-desc">Recently Updated (Newest First)</option>
           <option value="update-asc">Recently Updated (Oldest First)</option>
+          <option value="name-asc">Name (Ascending)</option>
+          <option value="name-desc">Name (Descending)</option>
         </select>
         <FiChevronDown/>
       </div>
