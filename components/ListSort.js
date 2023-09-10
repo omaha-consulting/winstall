@@ -11,28 +11,17 @@ const ListSort = ({apps, defaultSort, onSort}) => {
       }
     })
 
-    let handleSort = (e) => {
+    let onSortSelected = (e) => {
       let sortChoice = e.target.value;
       setSort(sortChoice);
-      
-      if (sortChoice === "name-asc") {
-        apps.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (sortChoice === "name-desc") {
-        apps.sort((a, b) => b.name.localeCompare(a.name));
-      } else if (sortChoice === "update-desc") {
-        // because the updatedAt values are in ISO, we can just to lexographical comparison
-        apps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
-      } else if (sortChoice === "update-asc") {
-        apps.sort((a, b) => a.updatedAt.localeCompare(b.updatedAt));
-      }
-
+      applySort(apps, sortChoice);
       onSort(sortChoice);
     };
 
     return (
       <div className={styles.sort}>
         <label htmlFor="sort">Sort by</label>
-        <select id="sort" value={sort} onChange={(e) => handleSort(e)}>
+        <select id="sort" value={sort} onChange={(e) => onSortSelected(e)}>
           <option value="update-desc">Recently Updated (Newest First)</option>
           <option value="update-asc">Recently Updated (Oldest First)</option>
           <option value="name-asc">Name (Ascending)</option>
@@ -43,4 +32,22 @@ const ListSort = ({apps, defaultSort, onSort}) => {
     );
 }
 
-export default ListSort;
+function applySort(apps, sortChoice) {
+  if (sortChoice === "name-asc") {
+    apps.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortChoice === "name-desc") {
+    apps.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortChoice === "update-desc") {
+    // because the updatedAt values are in ISO, we can just to lexographical comparison
+    apps.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  } else if (sortChoice === "update-asc") {
+    apps.sort((a, b) => a.updatedAt.localeCompare(b.updatedAt));
+  } else {
+    throw new Error("Invalid sortChoice: " + sortChoice);
+  }
+};
+
+module.exports = {
+  ListSort,
+  applySort
+};

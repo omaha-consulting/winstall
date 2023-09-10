@@ -3,7 +3,7 @@ import styles from "../styles/apps.module.scss";
 
 import SingleApp from "../components/SingleApp";
 import Footer from "../components/Footer";
-import ListSort from "../components/ListSort";
+import { ListSort, applySort } from "../components/ListSort";
 import MetaTags from "../components/MetaTags";
 import Search from "../components/Search";
 
@@ -32,15 +32,12 @@ function Store({ data, error }) {
   const totalPages = Math.ceil(apps.length / appsPerPage);
 
   useEffect(() => {
-    if (Router.query.sort && Router.query.sort === "update-desc") {
-      setSort(Router.query.sort);
-      setApps(data.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)));
-    } else {
-      // Show most recently updated first to entice Google to index them, and to
-      // demonstrate to users that the site is being kept up-to-date.
-      setSort("update-desc");
-      setApps(data.sort((a, b) => a.name.localeCompare(b.name)));
-    }
+    // Default to showing most recently updated first to entice Google to index
+    // them, and to demonstrate to users that the site is being kept up-to-date.
+    let sortOrder = Router.query.sort || "update-desc";
+    applySort(data, sortOrder);
+    setSort(sortOrder);
+    setApps(data);
 
     let handlePagination = (e) => {
       if (e.keyCode === 39) {
