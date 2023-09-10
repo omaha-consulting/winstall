@@ -28,7 +28,10 @@ const AppIcon = ({id, name, icon}) => {
             }
         }
 
-        return <span className={styles.noIcon}>{initials}</span>;
+        // Set aria-hidden=true to prevent Google from thinking that the app
+        // detail page title is "GInstall Git with winget" (instead of "Install
+        // Git with winget").
+        return <span className={styles.noIcon} aria-hidden="true">{initials}</span>;
     }
 
     if (icon.startsWith("http")) {
