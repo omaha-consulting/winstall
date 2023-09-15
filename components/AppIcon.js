@@ -28,10 +28,25 @@ const AppIcon = ({id, name, icon}) => {
             }
         }
 
-        // Set aria-hidden=true to prevent Google from thinking that the app
-        // detail page title is "GInstall Git with winget" (instead of "Install
-        // Git with winget").
-        return <span className={styles.noIcon} aria-hidden="true">{initials}</span>;
+        // Instead of rendering the generic icons with SVG, it would be easier
+        // to use a CSS-styled <span> with the initials. However, Google picks
+        // this up as text and displays the page text in search results
+        // as "GInstall Git with winget" (instead of "Install Git with
+        // winget"). So use SVG:
+        return (
+          <svg width="25" height="25">
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="-10%" x2="0%" y2="110%" gradientTransform="rotate(12,.5,.5)">
+                <stop offset="0%" style={{stopColor:"#f138a7", stopOpacity:1}} />
+                <stop offset="100%" style={{stopColor:"#6e1bdc", stopOpacity:1}} />
+              </linearGradient>
+            </defs>
+            <circle cx="12.5" cy="12.5" r="12.5" fill="url(#grad)" />
+            <text x="12.5" y="12.5" fontSize="12" fill="white" textAnchor="middle" alignmentBaseline="central">
+              G
+            </text>
+          </svg>
+        );
     }
 
     if (icon.startsWith("http")) {

@@ -385,21 +385,6 @@
     }
 }
 
-.noIcon{
-    background-image: linear-gradient(12deg, rgb(110, 27, 220), rgb(241, 56, 167) 100%);
-    width: 25px;
-    height: 25px;
-    border-radius: 50px;
-    text-align: center;
-    color: #fff;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    user-select: none;
-}
-
 .noBorder{
     border: 0px;
     padding: 15px !important;
