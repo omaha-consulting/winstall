@@ -43,7 +43,7 @@ const AppIcon = ({id, name, icon}) => {
             </defs>
             <circle cx="12.5" cy="12.5" r="12.5" fill="url(#grad)" />
             <text x="12.5" y="12.5" fontSize="12" fill="white" textAnchor="middle" alignmentBaseline="central">
-              G
+              {initials}
             </text>
           </svg>
         );
