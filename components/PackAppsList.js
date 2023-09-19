@@ -70,7 +70,7 @@ function PackAppsList({ notLoggedIn = false, providedApps, reorderEnabled, onLis
                   <SingleApp app={app} pack={true} displaySelect={true}/>
                 </div>
 
-                { index === 3 && <DonateCard />}
+                { index === 3 && <DonateCard addMargin="" />}
               </React.Fragment>
             ))}
           </ul>
