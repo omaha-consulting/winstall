@@ -291,6 +291,11 @@
         grid-template-columns: 40px 1fr;
     }
 
+    h4{
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
     p{
         font-size: 18px;
         line-height: 28px;
@@ -437,6 +442,10 @@
 
 .active.copy {
     animation: slowBg 2s linear forwards;
+}
+
+.large .copy {
+    margin-top: 10px;
 }
 
 @keyframes fadeInOut {

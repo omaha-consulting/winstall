@@ -183,10 +183,17 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
           )}
         </h3>
 
-        {!pack && <Description desc={app.desc} id={app._id} full={large} />}
       </div>
 
-      {large && <Copy id={app._id} version={version} latestVersion={app.latestVersion} />}
+      {large && (
+        <>
+          <p>
+            To install {app.name} with winget, use the following command:
+          </p>
+          <Copy id={app._id} version={version} latestVersion={app.latestVersion} />
+        </>
+      )}
+      {!pack && <Description name={app.name} desc={app.desc} id={app._id} full={large} />}
       <ul className={styles.metaData}>
 
         {(showTime || large) && (
@@ -273,7 +280,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
   );
 };
 
-const Description = ({ desc, id, full }) => {
+const Description = ({ name, desc, id, full }) => {
   const [descTrimmed, setDescTrimmed] = useState(desc.length > 140);
   const router = useRouter();
 
@@ -293,6 +300,9 @@ const Description = ({ desc, id, full }) => {
 
   return (
     <>
+      {full && (
+        <h4>About {name}</h4>
+      )}
       <p>
         {desc.length > 140
           ? !descTrimmed || full
