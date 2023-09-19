@@ -13,7 +13,6 @@ import {
   FiPlus,
   FiClock,
   FiCode,
-  FiInfo,
   FiFileText,
   FiAlertOctagon,
   FiTag,
@@ -36,7 +35,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
 
   if (!app.selectedVersion) app.selectedVersion = version;
 
-  if (app.versions.length > 1) {
+  if (app.versions && app.versions.length > 1) {
     app.versions = app.versions.sort((a, b) =>
       compareVersion(b.version, a.version)
     );
@@ -101,6 +100,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
   if (!app && !app.img || !app.name) return <></>;
 
   let VersionSelector = () => {
+    console.assert(app.versions);
     return (
       <div className={styles.versions}>
         <select
@@ -188,16 +188,6 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
 
       {large && <Copy id={app._id} version={version} latestVersion={app.latestVersion} />}
       <ul className={styles.metaData}>
-        {!large && (
-          <li>
-            <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
-              <a>
-                <FiInfo />
-                View App
-              </a>
-            </Link>
-          </li>
-        )}
 
         {(showTime || large) && (
           <li>
@@ -207,12 +197,16 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
         )}
 
         {!pack && (
-          <li className={app.versions.length > 1 ? styles.hover : ""}>
+          <li className={app.versions && app.versions.length > 1 ? styles.hover : ""}>
             <FiPackage />
-            {app.versions.length > 1 ? (
+            {large && app.versions && app.versions.length > 1 ? (
               <VersionSelector />
             ) : (
-              <span>v{app.selectedVersion}</span>
+              <Link href="/apps/[id]" as={`/apps/${app._id}`} prefetch={false}>
+                <a>
+                  v{app.selectedVersion}
+                </a>
+              </Link>
             )}
           </li>
         )}
@@ -240,7 +234,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
           </li>
         )}
 
-        {!pack && (
+        {!pack && large && (
           <li>
             <a
               href={`${
