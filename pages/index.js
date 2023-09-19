@@ -33,7 +33,6 @@ function Home({ popular, apps, recommended, error}) {
               Install Windows apps quickly with Windows Package Manager.
             </p>
             <Search apps={apps} limit={4}/>
-            <DonateCard />
           </div>
          
           <div className="art">
@@ -47,6 +46,9 @@ function Home({ popular, apps, recommended, error}) {
        
       
       </div>
+
+      <DonateCard />
+
 
       <PopularApps apps={popular} all={apps} />
 
