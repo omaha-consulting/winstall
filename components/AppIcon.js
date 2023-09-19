@@ -34,7 +34,7 @@ const AppIcon = ({id, name, icon}) => {
         // as "GInstall Git with winget" (instead of "Install Git with
         // winget"). So use SVG:
         return (
-          <svg width="25" height="25">
+          <svg className={styles.noIcon} width="25" height="25">
             <defs>
               <linearGradient id="grad" x1="0%" y1="-10%" x2="0%" y2="110%" gradientTransform="rotate(12,.5,.5)">
                 <stop offset="0%" style={{stopColor:"#f138a7", stopOpacity:1}} />
