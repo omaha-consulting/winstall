@@ -37,7 +37,6 @@ export default function Footer() {
       <a
         href="https://winget.pro"
         target="_blank"
-        rel="noopener noreferrer"
         className={styles.brand}
       >
         <img

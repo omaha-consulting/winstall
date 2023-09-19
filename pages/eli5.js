@@ -122,7 +122,6 @@ export default function Explainer() {
             <a
               href="https://winget.pro"
               target="_blank"
-              rel="noopener noreferrer"
             >
               winget.Pro
             </a>{" "}
