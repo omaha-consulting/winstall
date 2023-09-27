@@ -15,37 +15,15 @@ const AppIcon = ({id, name, icon}) => {
       );
     }
 
-    if(!icon){ // if we don't have an icon, we mimmick one with app initials
-        const nameParts = name.split(" ");
-        let initials = name[0].substr(0, 1).toUpperCase();
-
-        if(nameParts.length > 1){
-            let secondChar = nameParts[nameParts.length-1].substr(0, 1).toUpperCase();
-
-            // make sure the second character we are about to add is alphanumerical 
-            if(secondChar.match(/^[a-z0-9]+$/i)){
-                initials += secondChar;
-            }
-        }
-
-        // Instead of rendering the generic icons with SVG, it would be easier
-        // to use a CSS-styled <span> with the initials. However, Google picks
-        // this up as text and displays the page text in search results
-        // as "GInstall Git with winget" (instead of "Install Git with
-        // winget"). So use SVG:
+    if(!icon) {
         return (
-          <svg className={styles.noIcon} width="25" height="25">
-            <defs>
-              <linearGradient id="grad" x1="0%" y1="-10%" x2="0%" y2="110%" gradientTransform="rotate(12,.5,.5)">
-                <stop offset="0%" style={{stopColor:"#f138a7", stopOpacity:1}} />
-                <stop offset="100%" style={{stopColor:"#6e1bdc", stopOpacity:1}} />
-              </linearGradient>
-            </defs>
-            <circle cx="12.5" cy="12.5" r="12.5" fill="url(#grad)" />
-            <text x="12.5" y="12.5" fontSize="12" fill="white" textAnchor="middle" alignmentBaseline="central">
-              {initials}
-            </text>
-          </svg>
+          <img
+              src="/generic-app-icon.svg"
+              alt="Package icon"
+              // Specify the size to avoid Cumulative Layout Shift:
+              width="25"
+              height="25"
+            />
         );
     }
 
