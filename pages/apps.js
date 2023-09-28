@@ -195,7 +195,7 @@ function Store({ data, error }) {
                 showTime={sort.includes("update-") ? true : false}
               />
 
-              {index % 15 === 0 && <DonateCard addMargin="" />}
+              {index % 15 === 0 && <DonateCard addMargin={false} />}
             </React.Fragment>
           ))}
         </ul>
