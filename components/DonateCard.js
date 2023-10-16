@@ -1,19 +1,15 @@
 import styles from "../styles/donateCard.module.scss";
-import { FiHeart } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { RiPaypalFill } from "react-icons/ri";
 
-const DonateCard = ({ addMargin = true }) => {
-    // temporarily hide the donate cards
-    return null;
-
+const DonateCard = ({ addMargin = "both" }) => {
     return (
-        <div className={`${styles.container} ${addMargin ? styles.margin : null}`}>
-            <h2>Support winstall's development</h2>
-            <p>To help keep winstall free and the servers alive, please contribute towards the project by donating. Every little helps.</p>
+        <div className={`${styles.container} ${addMargin === "both" ? styles.margin : (addMargin === "top" ? styles.marginTop : null)}`}>
+            <h2>Get your own winget repository</h2>
+            <p>This web site is brought to you by <a href="https://winget.pro">winget.Pro</a>. It's a service that gives you your own winget repository. Start uploading and installing your apps today!</p>
 
             <div className={styles.buttons}>
-                <a className="button spacer accent donate" id="starWine" href="https://github.com/sponsors/MehediH?frequency=one-time&sponsor=MehediH" target="_blank" rel="noopener noreferrer"><FiHeart /> Sponsor on GitHub</a>
-                <a className="button spacer accent donate" id="starWine" href="https://www.paypal.com/paypalme/MehediHa/10" target="_blank" rel="noopener noreferrer"><RiPaypalFill /> Donate via PayPal</a>
+                <a className="button spacer accent donate" id="starWine" href="https://winget.pro"><FiPlus /> Create a repository</a>
             </div>
         </div>
     )

@@ -89,7 +89,7 @@ export default function Packs({ packs, error }) {
                             <li>
                                 <PackPreview pack={pack} />
                             </li>
-                            {index % 15 === 0 && <DonateCard addMargin={false} />}
+                            {index % 15 === 0 && <DonateCard addMargin="" />}
                         </React.Fragment>
                     ))}
                 </ul>

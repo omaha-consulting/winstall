@@ -54,7 +54,7 @@ function AppDetail({ app, popular}) {
                   desc={app.desc}
                 />
                 <ul className="largeApp"><SingleApp app={app} large={true} displaySelect={false}/></ul>
-                <DonateCard/>
+                <DonateCard addMargin="top"/>
               </div>
             )}
             <div className="art">
