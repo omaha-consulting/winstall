@@ -7,6 +7,7 @@ import Error from "../../components/Error";
 
 import Skeleton from "react-loading-skeleton";
 
+import Script from 'next/script'
 import { useRouter } from "next/router";
 import MetaTags from "../../components/MetaTags";
 import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
@@ -54,6 +55,11 @@ function AppDetail({ app, popular}) {
                   desc={app.desc}
                 />
                 <ul className="largeApp"><SingleApp app={app} large={true} displaySelect={false}/></ul>
+                <h4 className={styles.commentsHeader}>Comments</h4>
+                <div id="commento"></div>
+                <Script src="https://cdn.commento.io/js/commento.js"
+                  strategy="lazyOnload"
+                  data-css-override="/commento-styles.css"/>
                 <DonateCard addMargin="top"/>
               </div>
             )}

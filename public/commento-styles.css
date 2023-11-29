@@ -1,0 +1,25 @@
+.dark .commento-root {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+.commento-root-font * {
+    font-family: inherit;
+}
+
+.commento-logged-in-as {
+    margin-top: 20px;
+}
+
+.commento-root textarea {
+    border-radius: 10px;
+}
+
+.commento-root .commento-button {
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.commento-logo-container {
+    display: none;
+}
