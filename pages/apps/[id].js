@@ -58,7 +58,6 @@ function AppDetail({ app, popular}) {
                 <h4 className={styles.commentsHeader}>Comments</h4>
                 <div id="commento"></div>
                 <Script src="https://cdn.commento.io/js/commento.js"
-                  strategy="lazyOnload"
                   data-css-override="/commento-styles.css"/>
                 <DonateCard addMargin="top"/>
               </div>
