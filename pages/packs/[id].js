@@ -289,7 +289,7 @@ export async function getStaticProps({ params }) {
   try {
     let { response: pack } = await fetchWinstallAPI(`/packs/${params.id}`);
     const { response: creator, error } = await callTwitterAPI(
-      `https://api.twitter.com/1.1/users/show.json?user_id=${pack.creator}`
+      `https://api.twitter.com/2/users/${pack.creator}`
     );
 
     if (error)
