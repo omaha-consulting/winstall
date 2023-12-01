@@ -137,7 +137,7 @@ const User = () => {
       const { response, error } = await fetch("/api/twitter/", {
         method: "GET",
         headers: {
-          endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${session.user.id}`,
+          endpoint: `https://api.twitter.com/2/users/${session.user.id}`,
         },
       }).then((res) => res.json());
 

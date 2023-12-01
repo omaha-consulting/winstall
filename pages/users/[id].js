@@ -18,7 +18,7 @@ function UserProfile({ uid }) {
       const { response, error } = await fetch("/api/twitter/", {
         method: "GET",
         headers: {
-          endpoint: `https://api.twitter.com/1.1/users/show.json?user_id=${uid}`,
+          endpoint: `https://api.twitter.com/2/users/${uid}`,
         },
       }).then((res) => res.json());
 
