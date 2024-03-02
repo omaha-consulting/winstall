@@ -22,12 +22,9 @@ p.lead {
 @media(max-width: 590px){
     .intro{
         padding-top: 0px !important;
-    }
-}
 
-h4.commentsHeader {
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 5px;
-    opacity: 0.75;
+        textarea{
+            width: auto !important;
+        }
+    }
 }
