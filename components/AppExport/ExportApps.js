@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import styles from "../../styles/exportApps.module.scss";
 import generateWingetImport from "../../utils/generateWingetImport";
 import GenericExport from "./GenericExport";
-import AdvancedConfig from "./AdvancedConfig";
+import {AdvancedConfig, RadioConfig} from "./AdvancedConfig";
 
 const ExportApps = ({ apps, title, subtitle }) => {
   const [ batScript, setBatScript ] = useState("");
@@ -11,6 +11,7 @@ const ExportApps = ({ apps, title, subtitle }) => {
   const [ filters, setFilters ] = useState({});
   const [ wingetImportCommand, setWingetImportCommand ] = useState("");
   const [active, setActive] = useState(".bat");
+  const [showSingleCmd, setShowSingleCmd] = useState(true);
 
   const tabs = useMemo(() => {
         return [
@@ -43,6 +44,7 @@ const ExportApps = ({ apps, title, subtitle }) => {
     if(!apps) return;
 
     let installs = [];
+    let appsIndividualCommands = apps;
 
     let advancedFilters = "";
 
@@ -54,14 +56,24 @@ const ExportApps = ({ apps, title, subtitle }) => {
         if(filters["--scope"]) advancedFilters += ` --scope "${filters["--scope"]}"`;
     } 
 
-    apps.map((app) => {
+    if (showSingleCmd) {
+      let apps_ids = apps
+        .filter((app) => app.selectedVersion === app.latestVersion)
+        .map((app) => app._id)
+      installs.push(`winget install ${apps_ids.join(' ')} -e ${advancedFilters}`)
+      appsIndividualCommands = apps.filter((app) => app.selectedVersion !== app.latestVersion)
+    }
+
+    appsIndividualCommands.map((app) => {
       installs.push(
         `winget install --id=${app._id}${app.selectedVersion !== app.latestVersion ? ` -v "${app.selectedVersion}"` : ""} -e ${advancedFilters}`
       );
 
       return app;
     });
-
+    
+    // Concat command with no version specified (latsest by default), eventually in a single command
+    // with apps with version specified, each on its own command
     let newBatchScript = installs.join(" && ");
     let newPSScript = installs.join(" ; ");
 
@@ -102,6 +114,13 @@ const ExportApps = ({ apps, title, subtitle }) => {
         setFilters(availableConfig);
   }
 
+  
+  const updateSingleCmd = async (key, val) => {
+        const singleCmd = val === 'singleCmd';
+        setShowSingleCmd(singleCmd);
+        await localStorage.setItem("winstall-single-command", singleCmd);
+    }
+
   return (
     <div className={styles.getScript} id="packScript">
 
@@ -118,6 +137,15 @@ const ExportApps = ({ apps, title, subtitle }) => {
                 return <li key={index} className={ tab.key === active ? styles.active : ''} onClick={() => changeTab(tab.key)}>{tab.title}</li>
             }) }
         </ul>
+
+        
+        <RadioConfig
+            id="--singleCommand"
+            defaultChecked={'singleCmd'}
+            options={[{ id: "singleCmd", label: "Single Command for multiple pkgs" }, { id: "multiCmd", label: "One cmd per package" }]}
+            updateConfig={updateSingleCmd}
+            labelText="Single Command"
+        />
 
         <AdvancedConfig refreshConfig={refreshFilters} activeTab={active}/>
 
