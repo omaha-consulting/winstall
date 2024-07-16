@@ -14,7 +14,8 @@ const AdvancedConfig = ({ refreshConfig, activeTab }) => {
         "--override": false,
         "-l": "",
         "--force": false,
-        "--ignore-unavailable": false
+        "--ignore-unavailable": false, 
+        "--singleCommand": true
     });
 
     const [ hiddenOptions, setHiddenOptions ] = useState([]);
@@ -75,6 +76,15 @@ const AdvancedConfig = ({ refreshConfig, activeTab }) => {
                         updateConfig={updateConfig}
                         hiddenOptions={hiddenOptions}
                         labelText="Installation scope"
+                    />
+                    
+                    <RadioConfig
+                        id="--singleCommand"
+                        defaultChecked={config["--singleCommand"]}
+                        options={[{ id: "singleCmd", label: "Single Command for multiple pkgs" }, { id: "multiCmd", label: "One cmd per package" }]}
+                        updateConfig={updateConfig}
+                        labelText="Single Command"
+                        hiddenOptions={[]}
                     />
 
                     <CheckboxConfig id="-i" defaultChecked={config["-i"]} updateConfig={updateConfig} hiddenOptions={hiddenOptions} labelText="Request interactive installation; user input may be needed"/>

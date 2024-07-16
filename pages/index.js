@@ -72,7 +72,7 @@ function Home({ popular, apps, recommended, error}) {
 export async function getStaticProps(){
   let popular = shuffleArray(Object.values(popularAppsList));
 
-  let { response: apps, error: appsError } = await fetchWinstallAPI(`/apps`);
+  let { response: apps, error: appsError } = await fetchWinstallAPI(`/apps.json`);
   let { response: recommended, error: recommendedError } = await fetchWinstallAPI(`/packs/users/${process.env.NEXT_OFFICIAL_PACKS_CREATOR}`);
 
   if(appsError) console.error(appsError);

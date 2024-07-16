@@ -43,6 +43,7 @@ const ExportApps = ({ apps, title, subtitle }) => {
     if(!apps) return;
 
     let installs = [];
+    let appsIndividualCommands = apps;
 
     let advancedFilters = "";
 
@@ -54,14 +55,25 @@ const ExportApps = ({ apps, title, subtitle }) => {
         if(filters["--scope"]) advancedFilters += ` --scope "${filters["--scope"]}"`;
     } 
 
-    apps.map((app) => {
+    const showSingleCmd = (filters["--singleCommand"] ?? 'singleCmd') == 'singleCmd'
+    if (showSingleCmd) {
+      let apps_ids = apps
+        .filter((app) => app.selectedVersion === app.latestVersion)
+        .map((app) => app._id)
+      installs.push(`winget install ${apps_ids.join(' ')} -e ${advancedFilters}`)
+      appsIndividualCommands = apps.filter((app) => app.selectedVersion !== app.latestVersion)
+    }
+
+    appsIndividualCommands.map((app) => {
       installs.push(
         `winget install --id=${app._id}${app.selectedVersion !== app.latestVersion ? ` -v "${app.selectedVersion}"` : ""} -e ${advancedFilters}`
       );
 
       return app;
     });
-
+    
+    // Concat command with no version specified (latsest by default), eventually in a single command
+    // with apps with version specified, each on its own command
     let newBatchScript = installs.join(" && ");
     let newPSScript = installs.join(" ; ");
 

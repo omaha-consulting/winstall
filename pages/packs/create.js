@@ -104,7 +104,7 @@ function Create({ allApps }) {
 }
 
 export async function getStaticProps() {
-  let { response: apps } = await fetchWinstallAPI(`/apps`);
+  let { response: apps } = await fetchWinstallAPI(`/apps.json`);
 
   return {
     props: {
