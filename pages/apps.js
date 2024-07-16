@@ -37,7 +37,8 @@ function Store({ data, error }) {
     let sortOrder = Router.query.sort || "update-desc";
     applySort(data, sortOrder);
     setSort(sortOrder);
-    setApps(data);
+    // setApps(data);
+    setApps(data.pageProps.data);
 
     let handlePagination = (e) => {
       if (e.keyCode === 39) {
