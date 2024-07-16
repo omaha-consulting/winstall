@@ -153,7 +153,7 @@ export default function Edit({ allApps }) {
 }
 
 export async function getStaticProps() {
-  let { response: apps } = await fetchWinstallAPI(`/apps`);
+  let { response: apps } = await fetchWinstallAPI(`/apps.json`);
 
   return {
     props: {

@@ -215,7 +215,7 @@ function Store({ data, error }) {
 }
 
 export async function getStaticProps() {
-  let { response: apps, error } = await fetchWinstallAPI(`/apps`, {}, true);
+  let { response: apps, error } = await fetchWinstallAPI(`/apps.json`, {}, true);
 
   if (error) return { props: { error } };
 
