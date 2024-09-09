@@ -18,6 +18,7 @@ import {
   FiTag,
   FiShare2,
   FiTerminal,
+  FiUser,
   FiCopy,
   FiCheckCircle
 } from "react-icons/fi";
@@ -221,7 +222,7 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
         <li>
           <Link href={`/apps?q=${`publisher: ${app.publisher}`}`}>
             <a>
-              <FiCode />
+              <FiUser />
               Other apps by {app.publisher}
             </a>
           </Link>
@@ -238,6 +239,17 @@ let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = 
               <FiExternalLink />
               View Site
             </a>
+          </li>
+        )}
+
+        {large && (
+          <li>
+            <Link href={`https://github.com/microsoft/winget-pkgs/tree/master/manifests/${app._id.substring(0, 1).toLowerCase()}/${app._id.replaceAll('.', '/')}/`}>
+              <a>
+                <FiCode />
+                Source code for winget package
+              </a>
+            </Link>
           </li>
         )}
 
