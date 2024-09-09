@@ -66,7 +66,7 @@ export async function getServerSideProps({ req, res }) {
   const host = req.headers['host'];
   const urlPrefix = protocol + "://" + host;
 
-  let { response: apps, err1 } = await fetchWinstallAPI(`/apps.json`, {}, true);
+  let { response: apps, err1 } = await fetchWinstallAPI(`/apps`, {}, true);
   if (err1) return { props: { err1 } };
 
   let { response: packs, err2 } = await fetchWinstallAPI(`/packs`, {}, true);

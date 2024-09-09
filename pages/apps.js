@@ -37,8 +37,8 @@ function Store({ data, error }) {
     let sortOrder = Router.query.sort || "update-desc";
     applySort(data, sortOrder);
     setSort(sortOrder);
-    // setApps(data);
-    setApps(data.pageProps.data);
+    setApps(data);
+    // setApps(data.pageProps.data);
 
     let handlePagination = (e) => {
       if (e.keyCode === 39) {
@@ -216,7 +216,7 @@ function Store({ data, error }) {
 }
 
 export async function getStaticProps() {
-  let { response: apps, error } = await fetchWinstallAPI(`/apps.json`, {}, true);
+  let { response: apps, error } = await fetchWinstallAPI(`/apps`, {}, true);
 
   if (error) return { props: { error } };
 
