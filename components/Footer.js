@@ -58,25 +58,6 @@ export default function Footer() {
       </a>
 
       <ul>
-        <li className="powered-by">
-          <a
-            href="https://vercel.com/?utm_source=builtbymeh&utm_campaign=oss"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by
-            <img
-              src="/vercel.svg"
-              className="sun"
-              alt="Powered by Vercel logo"
-            />
-            <img
-              src="/vercel-dark.svg"
-              className="moon"
-              alt="Powered by Vercel logo"
-            />
-          </a>
-        </li>
         <li>
           <a
             href="https://github.com/omaha-consulting/winstall"
