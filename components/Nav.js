@@ -96,12 +96,6 @@ function Nav() {
             <p>Apps</p>
           </a>
         </Link>
-        <Link href="/packs">
-          <a>
-            <FiGrid />
-            <p>Packs</p>
-          </a>
-        </Link>
         {/* <a
           href="https://ko-fi.com/mehedi"
           target="_blank"
