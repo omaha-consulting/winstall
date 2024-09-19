@@ -53,7 +53,6 @@ function Home({ popular, apps, recommended, error}) {
       <PopularApps apps={popular} all={apps} />
 
       {/* <RecentApps apps={recents} /> */}
-      <Recommendations packs={recommended}/>
 
       <FeaturePromoter art="/assets/packsPromo.svg" promoId="packs">
             <h3>Introducing Packs</h3>
