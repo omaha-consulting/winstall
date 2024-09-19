@@ -53,7 +53,7 @@ function AppDetail({ app, popular}) {
                   title={`Install ${app.name} with winget - winstall`}
                   desc={app.desc}
                 />
-                <ul className="largeApp"><SingleApp app={app} large={true} displaySelect={false}/></ul>
+                <ul className="largeApp"><SingleApp app={app} large={true}/></ul>
                 <DonateCard addMargin="top"/>
               </div>
             )}
