@@ -28,7 +28,7 @@ import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
 
 
-let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = false, pack = false, displaySelect = true, preventGlobalSelect, hideBorder=false, preSelected=false}) => {
+let SingleApp = ({ app, all, onVersionChange = false, large = false, showTime = false, pack = false, displaySelect = false, preventGlobalSelect, hideBorder=false, preSelected=false}) => {
   const [selected, setSelected] = useState(false);
   const { selectedApps, setSelectedApps } = useContext(SelectedContext);
 

@@ -142,14 +142,6 @@ const App = ({ data }) => {
           <h4>{data.name}</h4>
         </a>
       </Link>
-
-      <button
-        className={styles.selectApp}
-        onClick={handleAppSelect}
-        aria-label={selected ? "Unselect app" : "Select app"}
-      >
-        <FiPlus/>
-      </button>
     </div>
   )
 }

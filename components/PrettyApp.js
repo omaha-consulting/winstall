@@ -67,14 +67,6 @@ let PrettyApp = ({ app, all }) => {
               </picture>
               </div>
               <h3 className={styles.imgHeader}>{app.name}</h3>
-              <div className={styles.moreInfo}>
-                <span onClick={e => {
-                  e.preventDefault();
-                  handleAppSelect(e);
-                }}>
-                  Add to pack <FiPlus />
-                </span>
-              </div>
           </div>
       </li>
     </Link>
