@@ -147,33 +147,7 @@ const User = () => {
     });
   }, []);
 
-  return (
-    <>
-      {!session && (
-        <a
-          onClick={() => signIn("twitter")}
-          title="Login with Twitter to create and share packs."
-        >
-          <FiTwitter />
-          <p>Login</p>
-        </a>
-      )}
-      {session && (
-        <>
-          <Link href="/users/you">
-            <a title="View your packs" className={styles.user}>
-              <img src={session.user.picture} alt="User profile picture" />
-              <p className={styles.ddOnly}>Your packs</p>
-            </a>
-          </Link>
-          <span onClick={signOut} title="Logout" className={styles.justIcon}>
-            <FiLogOut />
-            <p className={styles.ddOnly}>Logout</p>
-          </span>
-        </>
-      )}
-    </>
-  );
+  return null;
 };
 
 export default Nav;
