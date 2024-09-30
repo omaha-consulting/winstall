@@ -32,7 +32,8 @@ const ListSort = ({apps, defaultSort, onSort}) => {
     );
 }
 
-function applySort(apps, sortChoice) {
+function applySort(apps_, sortChoice) {
+  const apps = apps_.pageProps.data;
   if (sortChoice === "name-asc") {
     apps.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortChoice === "name-desc") {

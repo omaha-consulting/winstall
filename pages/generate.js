@@ -59,7 +59,7 @@ function Generate() {
             <h1>Your apps are ready to be installed.</h1>
             <h3>Make sure you have Windows Package Manager installed :)</h3>
         
-            <ExportApps apps={apps} />
+            <ExportApps apps={selectedApps} />
           </div>
           <div className="art">
             <img src="/assets/dl.svg" draggable={false} alt="download icon" />
