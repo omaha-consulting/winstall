@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { FiClock, FiLock, FiGlobe } from "react-icons/fi";
 import AppIcon from "./AppIcon";
+import AppListCounts from "./appListCounts";
 import styles from "../styles/packsIndex.module.scss";
+import countStyles from "../styles/appListCounts.module.scss";
 
 const MAX_VISIBLE_ICONS = 6;
 
@@ -53,6 +55,11 @@ export default function PackCard({ pack, href, showVisibility = true }) {
           <span className={styles.iconOverflow}>+{overflowCount}</span>
         )}
       </div>
+
+      <AppListCounts
+        app={pack}
+        className={`${countStyles.inline} ${styles.packCounts}`}
+      />
 
       <div className={styles.packFooter}>
         <FiClock aria-hidden="true" />

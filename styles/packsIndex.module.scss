@@ -108,7 +108,12 @@
   align-items: center;
   gap: 8px;
   min-height: 32px;
-  margin-bottom: 4px;
+  margin-bottom: 0;
+}
+
+.packCounts {
+  margin: 8px 0 0;
+  flex-shrink: 0;
 }
 
 .iconWrap {
@@ -146,7 +151,7 @@
   align-items: center;
   gap: 6px;
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 15px;
   color: var(--textColor);
