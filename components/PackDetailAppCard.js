@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   FiClock,
   FiPackage,
-  FiThumbsUp,
   FiMoreVertical,
   FiSettings,
   FiTrash2,
@@ -12,15 +11,6 @@ import {
 import AppIcon from "./AppIcon";
 import { compareVersion, timeAgo } from "../utils/helpers";
 import styles from "../styles/packDetail.module.scss";
-
-function formatLikeCount(count) {
-  if (count == null || Number.isNaN(Number(count))) return null;
-  const value = Number(count);
-  if (value >= 1000) {
-    return `${(value / 1000).toFixed(1).replace(/\.0$/, "")}K`;
-  }
-  return String(value);
-}
 
 export default function PackDetailAppCard({
   app,
@@ -35,7 +25,6 @@ export default function PackDetailAppCard({
   const menuRef = useRef(null);
 
   const unavailable = Boolean(app.unavailable);
-  const likeLabel = formatLikeCount(app.likeCount ?? app.likes);
 
   const versions = useMemo(() => {
     if (!app.versions?.length) return [];
@@ -160,12 +149,6 @@ export default function PackDetailAppCard({
           <li className={canSelectVersion ? styles.appMetaVersionRow : undefined}>
             <FiPackage aria-hidden="true" />
             {versionContent}
-          </li>
-        )}
-        {!unavailable && likeLabel && (
-          <li>
-            <FiThumbsUp aria-hidden="true" />
-            <span>{likeLabel}</span>
           </li>
         )}
       </ul>

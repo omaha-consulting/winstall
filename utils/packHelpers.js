@@ -8,20 +8,21 @@ function getAppId(app) {
   return app?.appId || app?._id;
 }
 
-export function isAppUnavailable({ response, status, error } = {}) {
-  if (status === 404 || status === 410) {
-    return true;
-  }
+export function normalizePackDetailApps(apps = []) {
+  return (apps || []).map((app) => {
+    const appId = getAppId(app);
+    const pinnedVersion =
+      app.selectedVersion ?? app.appVersion ?? app.latestVersion ?? "";
+    const { likeCount, likes, ...rest } = app;
 
-  if (response?.deleted === true || response?.status === "deleted") {
-    return true;
-  }
-
-  if (error && /could not find app|not found/i.test(String(error))) {
-    return true;
-  }
-
-  return false;
+    return {
+      ...rest,
+      _id: appId || app._id,
+      unavailable: app.available === false || Boolean(app.unavailable),
+      selectedVersion: pinnedVersion,
+      appVersion: pinnedVersion,
+    };
+  });
 }
 
 export function toAppSnapshot(app) {

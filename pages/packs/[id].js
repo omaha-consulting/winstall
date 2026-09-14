@@ -32,13 +32,11 @@ import { copyPack, deletePack, fetchPackById, updatePack } from "../../utils/fet
 import {
   formatAppsForPatch,
   invalidateOwnPacksCache,
-  isAppUnavailable,
   mergeAppsWithEnrichedData,
+  normalizePackDetailApps,
   removeAppFromPack,
   syncOwnPacksCacheEntry,
 } from "../../utils/packHelpers";
-import fetchWinstallAPI from "../../utils/fetchWinstallAPI";
-import { compareVersion } from "../../utils/helpers";
 import { getIconBase } from "../../utils/runtimeConfig";
 import { trackPackStats } from "../../utils/trackPackStats";
 import {
@@ -79,60 +77,16 @@ function formatCreatedDate(isoDate) {
   });
 }
 
-async function enrichApps(apps) {
-  if (!apps?.length) return [];
+function normalizeDetailPack(pack, apiBase) {
+  const transformed = transformPackIcons(pack, apiBase);
+  if (!transformed) return transformed;
 
-  const enriched = await Promise.all(
-    apps.map(async (app) => {
-      const appId = app.appId || app._id;
-      if (!appId) return app;
-
-      const { response, status, error } = await fetchWinstallAPI(`/apps/${appId}`);
-
-      if (isAppUnavailable({ response, status, error })) {
-        return { ...app, _id: appId, unavailable: true };
-      }
-
-      if (!response) return app;
-
-      const appData = response?.data && !response._id ? response.data : response;
-
-      let versions = appData.versions ?? app.versions ?? [];
-      if (versions.length > 1) {
-        versions = [...versions].sort((a, b) =>
-          compareVersion(b.version, a.version)
-        );
-      }
-
-      const latestVersion =
-        versions[0]?.version ??
-        appData.latestVersion ??
-        app.latestVersion ??
-        app.appVersion ??
-        "";
-      const savedVersion = app.appVersion || app.latestVersion || latestVersion;
-      const selectedVersion = versions.some((entry) => entry.version === savedVersion)
-        ? savedVersion
-        : latestVersion;
-
-      return {
-        ...app,
-        _id: appId,
-        unavailable: false,
-        desc: appData.desc ?? app.desc,
-        updatedAt: appData.updatedAt ?? app.updatedAt,
-        latestVersion,
-        versions,
-        appVersion: selectedVersion,
-        likeCount: appData.likeCount ?? appData.likes ?? app.likeCount,
-        publisher: appData.publisher ?? app.publisher,
-        selectedVersion,
-      };
-    })
-  );
-
-  return enriched;
+  return {
+    ...transformed,
+    apps: normalizePackDetailApps(transformed.apps || []),
+  };
 }
+
 
 export default function PackDetailPage() {
   const router = useRouter();
@@ -225,7 +179,7 @@ export default function PackDetailPage() {
       }
 
       const apiBase = getIconBase();
-      transformed = transformPackIcons(response, apiBase);
+      transformed = normalizeDetailPack(response, apiBase);
       setPack(transformed);
       setApps(transformed.apps || []);
       setDefaultFilters(toDefaultInstallFilters(transformed.defaultInstallOptions));
@@ -246,13 +200,43 @@ export default function PackDetailPage() {
     if (transformed.visibility === "public" || transformed.visibility === "unlisted") {
       trackPackStats(packId, "view");
     }
+  }, []);
 
-    try {
-      const enriched = await enrichApps(transformed.apps || []);
-      setApps(enriched);
-    } catch (err) {
-      console.error("Failed to enrich pack apps", err);
+  const refreshSeqRef = useRef(0);
+
+  const refreshPackAfterWrite = useCallback(async (packId, writebackPack) => {
+    if (!packId) return;
+
+    const seq = ++refreshSeqRef.current;
+    const { response, error: refreshError } = await fetchPackById(packId);
+
+    if (seq !== refreshSeqRef.current) return;
+
+    if (response) {
+      const normalized = normalizeDetailPack(response, getIconBase());
+      setPack(normalized);
+      setApps(normalized.apps || []);
+      setDefaultFilters(toDefaultInstallFilters(normalized.defaultInstallOptions));
+      syncOwnPacksCacheEntry(normalized);
+      return;
     }
+
+    if (writebackPack) {
+      const transformed = transformPackIcons(writebackPack, getIconBase());
+      const thinApps = normalizePackDetailApps(transformed.apps || []);
+      setPack((current) => ({
+        ...current,
+        ...transformed,
+        apps: mergeAppsWithEnrichedData(current?.apps, thinApps),
+      }));
+      setApps((current) => mergeAppsWithEnrichedData(current || [], thinApps));
+      syncOwnPacksCacheEntry(transformed);
+    }
+
+    setToast({
+      type: "error",
+      message: refreshError || "Saved, but failed to refresh pack details.",
+    });
   }, []);
 
   useEffect(() => {
@@ -353,19 +337,11 @@ export default function PackDetailPage() {
     setToast({ type: "success", message: "Pack is now public." });
   };
 
-  const handlePackUpdated = (updatedPack) => {
-    const apiBase = getIconBase();
-    const transformed = transformPackIcons(updatedPack, apiBase);
-    setPack((current) => ({
-      ...current,
-      ...transformed,
-      apps: mergeAppsWithEnrichedData(current?.apps, transformed.apps ?? []),
-    }));
-    setApps((current) =>
-      mergeAppsWithEnrichedData(current, transformed.apps ?? [])
-    );
+  const handlePackUpdated = async (updatedPack) => {
     setEditingPack(null);
-    syncOwnPacksCacheEntry(transformed);
+    if (pack?._id) {
+      await refreshPackAfterWrite(pack._id, updatedPack);
+    }
     setToast({ type: "success", message: "Pack updated." });
   };
 
@@ -382,19 +358,9 @@ export default function PackDetailPage() {
     }
 
     if (response) {
-      const apiBase = getIconBase();
-      const transformed = transformPackIcons(response, apiBase);
-      setPack((current) => ({
-        ...current,
-        ...transformed,
-        apps: mergeAppsWithEnrichedData(current?.apps, transformed.apps),
-      }));
-      setApps((currentApps) =>
-        mergeAppsWithEnrichedData(currentApps, transformed.apps)
-      );
-      syncOwnPacksCacheEntry(transformed);
+      await refreshPackAfterWrite(pack._id, response);
     }
-  }, [pack?._id]);
+  }, [pack?._id, refreshPackAfterWrite]);
 
   const persistPackDefaultOptions = useCallback(
     async (filters) => {
@@ -413,17 +379,18 @@ export default function PackDetailPage() {
       if (response) {
         const apiBase = getIconBase();
         const transformed = transformPackIcons(response, apiBase);
-        // Keep optimistic UI filters — don't reset from the response payload.
+        // Keep optimistic UI filters and hydrated apps — don't refetch or replace apps.
         setPack((current) => ({
           ...current,
           ...transformed,
-          apps: mergeAppsWithEnrichedData(current?.apps, transformed.apps),
+          apps: current?.apps ?? transformed.apps,
           defaultInstallOptions: hasInstallOptions(storedOptions)
             ? storedOptions
             : undefined,
         }));
         syncOwnPacksCacheEntry({
           ...transformed,
+          apps: pack?.apps ?? transformed.apps,
           defaultInstallOptions: hasInstallOptions(storedOptions)
             ? storedOptions
             : undefined,
@@ -538,19 +505,9 @@ export default function PackDetailPage() {
   };
 
   const handleAppsAdded = async (updatedPack) => {
-    if (!updatedPack) return;
+    if (!updatedPack || !pack?._id) return;
 
-    const apiBase = getIconBase();
-    const transformed = transformPackIcons(updatedPack, apiBase);
-    setPack((current) => ({
-      ...current,
-      ...transformed,
-      apps: transformed.apps ?? current.apps,
-    }));
-
-    const enriched = await enrichApps(transformed.apps || []);
-    setApps(enriched);
-    syncOwnPacksCacheEntry(transformed);
+    await refreshPackAfterWrite(pack._id, updatedPack);
     setToast({ type: "success", message: "Apps added to pack." });
   };
 
@@ -579,17 +536,7 @@ export default function PackDetailPage() {
     }
 
     if (response) {
-      const apiBase = getIconBase();
-      const transformed = transformPackIcons(response, apiBase);
-      setPack((current) => ({
-        ...current,
-        ...transformed,
-        apps: transformed.apps ?? current.apps,
-      }));
-
-      const enriched = await enrichApps(transformed.apps || []);
-      setApps(enriched);
-      syncOwnPacksCacheEntry(transformed);
+      await refreshPackAfterWrite(pack._id, response);
       setToast({ type: "success", message: "App removed from pack." });
     }
   };
